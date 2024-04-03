@@ -20,7 +20,8 @@ const field = document.getElementById('zero-field');
 field.addEventListener('input', ( e ) => {
     console.log('field save...')
     const value = e.currentTarget.value;
-    postData("http://zero1.local/wp-json/zero/v1/field/value", { value }).then((data) => {
+    const name = e.currentTarget.getAttribute('z-name');
+    postData("http://zero1.local/wp-json/zero/v1/field/value", { value, name }).then((data) => {
         console.log(data);
     });
 });

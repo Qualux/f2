@@ -15,14 +15,18 @@ class Routes {
 
                     $params = $req->get_json_params();
                     $title  = $params['title'];
+                    $name  = $params['name'];
 
-                    wp_insert_post(
+                    $post_id = wp_insert_post(
                         [
                             'post_type'    => 'field',
                             'post_title'   => $title,
-                            'post_content' => $params['test'],
+                            'post_content' => '',
+                            'post_status'  => 'publish',
                         ]
                     );
+
+                    update_post_meta( $post_id, 'z-name', $name );
 
                     return new \WP_REST_Response(
                         array(
@@ -52,8 +56,11 @@ class Routes {
 
                     $params = $req->get_json_params();
                     $value  = $params['value'];
+                    $name   = $params['name'];
 
-                    update_option( 'zero_field_value', $value );
+                    $option = 'z_'.$name;
+
+                    update_option( $option, $value );
 
                     return new \WP_REST_Response(
                         array(

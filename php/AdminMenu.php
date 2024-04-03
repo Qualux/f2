@@ -29,11 +29,11 @@ class AdminMenu {
         echo '<button>Add Field</button>';
 
         $f = new Field\Field();
-        $f->load(42);
+        $f->load(43);
         $f->render();
 
         $fi = new Field\FieldInstance();
-        $fi->value = 493;
+        $fi->load(43);
         $fi->render();
 
     }

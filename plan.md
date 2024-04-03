@@ -52,3 +52,9 @@ Pods
 JetEngine
 Meta Box
 Bricks
+
+# Features
+
+## Audit History 
+
+For options saved values, we store an audit history post type for each save up until the audit history limit setting. For example we store 3 changes with the value before change along with the user who made the change and the timestamp. 

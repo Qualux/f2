@@ -13,6 +13,14 @@ class FieldInstance {
     public $field;
     public $value;
 
+    public function load( $id ) {
+        $f = new Field();
+        $f->load( $id );
+        $this->field = $f;
+        $option = 'z_'.$f->name;
+        $this->value = get_option( $option );
+    }
+
     public function render() {
         echo '<h3>' . $this->value . '</h3>';
     }

@@ -9,6 +9,9 @@
         "type": "number",
         "description": "Unique identifier for a field."
       },
+      "name": {
+        "type": "string"
+      },
       "title": {
         "type": "string"
       },
