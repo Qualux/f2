@@ -35,6 +35,9 @@ class Plugin {
         require_once( ZERO_PATH . '/php/Field/Routes.php' );
         $r = new Field\Routes();
 
+        require_once( ZERO_PATH . '/php/Field/Metabox.php' );
+        $m = new Field\Metabox();
+
     }
 
     public static function activate() {

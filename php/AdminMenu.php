@@ -28,12 +28,9 @@ class AdminMenu {
         echo '<h1>Admin Page Title</h1>';
         echo '<button>Add Field</button>';
 
-        $f = new Field\Field();
-        $f->load(43);
-        $f->render();
-
         $fi = new Field\FieldInstance();
-        $fi->load(43);
+        $fi->load(50);
+        var_dump($fi);
         $fi->render();
 
     }

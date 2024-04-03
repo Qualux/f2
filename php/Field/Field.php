@@ -15,9 +15,14 @@ class Field {
         $this->name  = get_post_meta( $id, 'z-name', 1 );
     }
 
-    public function render() {
+    public function render( $value = null ) {
+        if($value) {
+            $render_value = $value;
+        } else {
+            $render_value = '';
+        }
         $c = '';
-        $c .= '<input id="zero-field" name="zero-field" type="text" value="" placeholder="'. $this->title .'" z-name="' . $this->name . '"/>';
+        $c .= '<input id="zero-field" name="zero-field" type="text" value="'.$render_value.'" placeholder="'. $this->title .'" z-name="' . $this->name . '"/>';
         echo $c;
     }
 

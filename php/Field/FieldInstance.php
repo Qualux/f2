@@ -21,8 +21,12 @@ class FieldInstance {
         $this->value = get_option( $option );
     }
 
-    public function render() {
+    public function value() {
         echo '<h3>' . $this->value . '</h3>';
+    }
+
+    public function render() {
+        $this->field->render( $this->value );
     }
 
 }
