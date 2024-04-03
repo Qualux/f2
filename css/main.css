@@ -1,0 +1,23 @@
+.flex {
+    display: flex;
+}
+
+.gap-1 {
+    gap: 1px;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-12 {
+    gap: 12px;
+}
+
+.items-center {
+    align-items: center;
+}
