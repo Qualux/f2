@@ -45,7 +45,29 @@ class Routes {
                 'permission_callback' => '__return_true',
             ));
 
-        });
+            // Save value endpoint.
+            register_rest_route( 'zero/v1', '/field/value', array(
+                'methods' => 'POST',
+                'callback' => function( $req ) {
+
+                    $params = $req->get_json_params();
+                    $value  = $params['value'];
+
+                    update_option( 'zero_field_value', $value );
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status'  => 200,
+                            'message' => 'value saved',
+                            'params'  => $params,
+                        )
+                    );
+
+                },
+                'permission_callback' => function() { return true; },
+            ));
+
+        });  
 
     }
 

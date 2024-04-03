@@ -29,6 +29,7 @@ class AdminMenu {
         echo '<button>Add Field</button>';
 
         $f = new Field\Field();
+        $f->load(42);
         $f->render();
 
         $fi = new Field\FieldInstance();
