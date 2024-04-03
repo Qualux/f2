@@ -24,6 +24,10 @@ class Metabox {
         $fi = new FieldInstance();
         $fi->load(50);
         $fi->render();
+
+        $fi2 = new FieldInstance();
+        $fi2->load(58);
+        $fi2->render();
     }
 
 }

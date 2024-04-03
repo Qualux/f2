@@ -13,9 +13,10 @@ class Routes {
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 
-                    $params = $req->get_json_params();
-                    $title  = $params['title'];
-                    $name  = $params['name'];
+                    $params  = $req->get_json_params();
+                    $title   = $params['title'];
+                    $name    = $params['name'];
+                    $storage = $params['storage'];
 
                     $post_id = wp_insert_post(
                         [
@@ -27,6 +28,7 @@ class Routes {
                     );
 
                     update_post_meta( $post_id, 'z-name', $name );
+                    update_post_meta( $post_id, 'z-storage', $storage );
 
                     return new \WP_REST_Response(
                         array(
