@@ -1,0 +1,52 @@
+<?php 
+
+namespace Zero\Field;
+
+class Routes {
+    
+    public function __construct() {
+
+        add_action( 'rest_api_init', function () {
+
+            // Create endpoint.
+            register_rest_route( 'zero/v1', '/field', array(
+                'methods' => 'POST',
+                'callback' => function( $req ) {
+
+                    $params = $req->get_json_params();
+                    $title  = $params['title'];
+
+                    wp_insert_post(
+                        [
+                            'post_type'    => 'field',
+                            'post_title'   => $title,
+                            'post_content' => $params['test'],
+                        ]
+                    );
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status'  => 200,
+                            'message' => 'hello people',
+                            'params'  => $params,
+                        )
+                    );
+
+                },
+                'permission_callback' => function() { return true; },
+            ));
+
+            // Fetch one endpoint.
+            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+                'methods' => 'GET',
+                'callback' => function() {
+
+                },
+                'permission_callback' => '__return_true',
+            ));
+
+        });
+
+    }
+
+}

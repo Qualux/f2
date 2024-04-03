@@ -9,7 +9,7 @@ class Field {
 
     public function render() {
         $c = '';
-        $c .= '<input type="text" value=""/>';
+        $c .= '<input id="zero-field" name="zero-field" type="text" value=""/>';
         echo $c;
     }
 

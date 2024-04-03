@@ -25,9 +25,7 @@ class AdminMenu {
 
     public function page() {
 
-        $f = new Field\Field();
         echo '<h1>Admin Page Title</h1>';
-        $f->render();
         echo '<button>Add Field</button>';
 
         $f = new Field\Field();
