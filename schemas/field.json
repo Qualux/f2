@@ -9,16 +9,16 @@
         "type": "number",
         "description": "Unique identifier for a field."
       },
-      "name": {
-        "type": "string"
-      },
-      "storage": {
+      "type": {
         "type": "string"
       },
       "title": {
         "type": "string"
       },
-      "type": {
+      "name": {
+        "type": "string"
+      },
+      "storage": {
         "type": "string"
       }
     }

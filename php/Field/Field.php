@@ -15,6 +15,7 @@ class Field {
         $this->title   = $post->post_title;
         $this->name    = get_post_meta( $id, 'z_field_name', 1 );
         $this->storage = get_post_meta( $id, 'z_field_storage', 1 );
+        $this->type    = get_post_meta( $id, 'z_field_type', 1 );
     }
 
     public function render( $value = null ) {

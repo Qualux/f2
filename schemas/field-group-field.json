@@ -1,0 +1,22 @@
+{
+    "$id": "https://zeroeditor.io/field-group-field.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "A bridge model that relates a single field to a single field group. This object allows for override properties to be attached to change field handling",
+    "type": "object",
+    "required": ["id", "field", "field-group"],
+    "properties": {
+      "id": {
+        "type": "number",
+        "description": "Unique identifier for a field group field."
+      },
+      "field": {
+        "type": "object",
+        "description": "A single structured data field object."
+      },
+      "field-group": {
+        "type": "object",
+        "description": "A single structured data field object."
+      }
+    }
+  }
+  

@@ -14,6 +14,7 @@ class Routes {
                 'callback' => function( $req ) {
 
                     $params  = $req->get_json_params();
+                    $type    = $params['type'];
                     $title   = $params['title'];
                     $name    = $params['name'];
                     $storage = $params['storage'];
@@ -27,8 +28,45 @@ class Routes {
                         ]
                     );
 
+                    update_post_meta( $post_id, 'z_field_type', $type );
                     update_post_meta( $post_id, 'z_field_name', $name );
                     update_post_meta( $post_id, 'z_field_storage', $storage );
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status'  => 200,
+                            'message' => 'Saved field with ID='.$post_id,
+                            'params'  => $params,
+                        )
+                    );
+
+                },
+                'permission_callback' => function() { return true; },
+            ));
+
+            // Update endpoint.
+            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+                'methods' => 'POST',
+                'callback' => function( \WP_REST_Request $request ) {
+
+                    $id      = $request->get_param( 'id' );
+                    $params  = $request->get_json_params();
+                    $type    = $params['type'];
+                    $title   = $params['title'];
+                    $name    = $params['name'];
+                    $storage = $params['storage'];
+
+                    wp_update_post(
+                        [
+                            'ID'           => $id,
+                            'post_title'   => $title,
+                            'post_status'  => 'publish',
+                        ]
+                    );
+
+                    update_post_meta( $id, 'z_field_type', $type );
+                    update_post_meta( $id, 'z_field_name', $name );
+                    update_post_meta( $id, 'z_field_storage', $storage );
 
                     return new \WP_REST_Response(
                         array(
@@ -45,8 +83,57 @@ class Routes {
             // Fetch one endpoint.
             register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
                 'methods' => 'GET',
-                'callback' => function() {
+                'callback' => function( \WP_REST_Request $request ) {
+                    $id = $request->get_param( 'id' );
+                    $f = new Field();
+                    $f->load( $id );
+                    return new \WP_REST_Response(
+                        array(
+                            'status' => 200,
+                            'field'  => $f,
+                        )
+                    );
+                },
+                'permission_callback' => '__return_true',
+            ));
 
+            // Fetch many endpoint.
+            register_rest_route( 'zero/v1', '/field', array(
+                'methods' => 'GET',
+                'callback' => function( \WP_REST_Request $request ) {
+
+                    $field_posts = get_posts([
+                        'post_type'   => 'field',
+                        'numberposts' => -1,
+                    ]);
+
+                    if( empty( $field_posts ) ) {
+                        return new \WP_REST_Response(
+                            array(
+                                'status'  => 200,
+                                'fields'  => [],
+                                'count'   => 0,
+                                'message' => 'No fields found.'
+                            )
+                        );
+                    }
+
+                    $fields = [];
+                    foreach( $field_posts as $fp ) {
+                        $f = new Field();
+                        $f->load( $fp->ID );
+                        $fields[] = $f;
+                    }
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status'  => 200,
+                            'fields'  => $fields,
+                            'count'   => count($field_posts),
+                            'message' => 'Fields loaded.'
+                        )
+                    );
+                    
                 },
                 'permission_callback' => '__return_true',
             ));
@@ -72,8 +159,7 @@ class Routes {
                         update_post_meta( $post_id, $storage_key, $value );
                     } else {
                         update_option( $storage_key, $value );
-                    }
-                    
+                    }    
 
                     return new \WP_REST_Response(
                         array(
