@@ -24,19 +24,7 @@ class AdminMenu {
     }
 
     public function page() {
-
-        echo '<h1>Admin Page Title</h1>';
-        echo '<button>Add Field</button>';
-
-        $fi = new Field\FieldInstance();
-        $fi->load(50);
-
-        echo '<pre>';
-        var_dump( $fi );
-        echo '</pre>';
-
-        $fi->render();
-
+        echo '<div id="root"></div>';
     }
 
 }
