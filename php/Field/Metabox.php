@@ -21,6 +21,7 @@ class Metabox {
     }
 
     public function content() {
+
         $fi = new FieldInstance();
         $fi->load(50);
         $fi->render();
@@ -28,6 +29,7 @@ class Metabox {
         $fi2 = new FieldInstance();
         $fi2->load(58);
         $fi2->render();
+        
     }
 
 }

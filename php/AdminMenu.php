@@ -29,7 +29,7 @@ class AdminMenu {
         echo '<button>Add Field</button>';
 
         $fi = new Field\FieldInstance();
-        $fi->load(61);
+        $fi->load(50);
 
         echo '<pre>';
         var_dump( $fi );

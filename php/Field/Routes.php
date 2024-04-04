@@ -27,13 +27,13 @@ class Routes {
                         ]
                     );
 
-                    update_post_meta( $post_id, 'z-name', $name );
-                    update_post_meta( $post_id, 'z-storage', $storage );
+                    update_post_meta( $post_id, 'z_field_name', $name );
+                    update_post_meta( $post_id, 'z_field_storage', $storage );
 
                     return new \WP_REST_Response(
                         array(
                             'status'  => 200,
-                            'message' => 'hello people',
+                            'message' => 'Saved field with ID='.$post_id,
                             'params'  => $params,
                         )
                     );
@@ -56,19 +56,32 @@ class Routes {
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 
-                    $params = $req->get_json_params();
-                    $value  = $params['value'];
-                    $name   = $params['name'];
+                    global $post;
 
-                    $option = 'z_'.$name;
+                    $params   = $req->get_json_params();
+                    $value    = $params['value'];
+                    $name     = $params['name'];
+                    $field_id = $params['id'];
+                    $post_id  = (int) $params['post_id'];
 
-                    update_option( $option, $value );
+                    $f = new Field();
+                    $f->load( $field_id );
+                    $storage_key = 'z_'.$name;
+
+                    if( $f->storage === 'post_meta' ) {
+                        update_post_meta( $post_id, $storage_key, $value );
+                    } else {
+                        update_option( $storage_key, $value );
+                    }
+                    
 
                     return new \WP_REST_Response(
                         array(
                             'status'  => 200,
                             'message' => 'value saved',
                             'params'  => $params,
+                            'post_id' => $post_id,
+                            'field'   => $f,
                         )
                     );
 
