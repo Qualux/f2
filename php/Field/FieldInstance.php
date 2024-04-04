@@ -14,11 +14,21 @@ class FieldInstance {
     public $value;
 
     public function load( $id ) {
+
         $f = new Field();
         $f->load( $id );
         $this->field = $f;
-        $option = 'z_'.$f->name;
-        $this->value = get_option( $option );
+        $storage_key = 'z_'.$f->name;
+
+        if( $f->storage === 'option') {
+            $this->value = get_option( $storage_key );
+        }
+
+        if( $f->storage === 'post_meta') {
+            global $post;
+            $this->value = get_post_meta( $post->ID, $storage_key, 1 );
+        }
+        
     }
 
     public function value() {
