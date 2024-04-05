@@ -2,8 +2,6 @@
 
 namespace Zero\FieldGroup;
 
-use Zero\Field\Field;
-
 class FieldGroupShortcodes {
 
     public function __construct() {
@@ -21,16 +19,7 @@ class FieldGroupShortcodes {
 
             $fg = new FieldGroup();
             $fg->load( $v['id'] );
-
-            $c = '<ul>';
-            foreach( $fg->fields as $fid ) {
-                $f = new Field();
-                $f->load( $fid );
-                $c .= '<li>';
-                $c .= $f->render( null, true );
-                $c .= '</li>';
-            }
-            $c .= '</ul>';
+            $c = $fg->render( null, true );
 
             return '
                 <div>

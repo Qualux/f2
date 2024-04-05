@@ -1,6 +1,7 @@
 <?php 
 
 namespace Zero\FieldGroup;
+use Zero\Field\Field;
 
 class FieldGroup {
 
@@ -15,10 +16,31 @@ class FieldGroup {
         $this->fields  = get_post_meta( $id, 'z_fg_fields', 1 );
     }
 
-    public function render( $values = null ) {
+    public function render( $values = null, $return = false ) {
         $c = '';
-        $c .= '<input id="z-'.$this->name.'" name="z-'.$this->name.'" type="text" value="'.$render_value.'" placeholder="'. $this->title .'" z-id="' . $this->id . '" z-name="' . $this->name . '" z-storage="' . $this->storage . '"/>';
+        $c = '<div>';
+        foreach( $this->fields as $fid ) {
+            $f = new Field();
+            $f->load( $fid );
+            $c .= '<div>';
+            $c .= $f->render( null, true );
+            $c .= '</div>';
+        }
+
+        // Save button. 
+        $c .= '<div>';
+        $c .= '<button>';
+        $c .= 'Save';
+        $c .= '</button>';
+        $c .= '</div>';
+
+        $c .= '</div>';
+
+        if( $return ) {
+            return $c;
+        }
         echo $c;
+        return;
     }
 
 }

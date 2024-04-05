@@ -1,0 +1,10 @@
+[
+    {
+        "name": "text",
+        "class": "\\Zero\\FieldType\\FieldTypeText"
+    },
+    {
+        "name": "select",
+        "class": "\\Zero\\FieldType\\FieldTypeSelect"
+    }
+]

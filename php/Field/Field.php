@@ -1,6 +1,7 @@
 <?php 
 
 namespace Zero\Field;
+use \Zero\FieldType\FieldType;
 
 class Field {
 
@@ -9,6 +10,7 @@ class Field {
     public $title;
     public $name;
     public $storage;
+    public $label;
 
     public function load( $id ) {
 
@@ -18,25 +20,14 @@ class Field {
         $this->name    = get_post_meta( $id, 'z_field_name', 1 );
         $this->storage = get_post_meta( $id, 'z_field_storage', 1 );
         $this->type    = get_post_meta( $id, 'z_field_type', 1 );
+        $this->label   = 'Field Label 1';
 
     }
 
     public function render( $value = null, $return = false ) {
 
-        if($value) {
-            $render_value = $value;
-        } else {
-            $render_value = '';
-        }
-        $c = '';
-        $c .= '<input id="z-'.$this->name.'" name="z-'.$this->name.'" type="text" value="'.$render_value.'" placeholder="'. $this->title .'" z-id="' . $this->id . '" z-name="' . $this->name . '" z-storage="' . $this->storage . '"/>';
-        
-        if( $return ) {
-            return $c;
-        }
-        
-        echo $c;
-        return;
+        $ft = new FieldType( $this );
+        return $ft->render( $value, $return );
 
     }
 
