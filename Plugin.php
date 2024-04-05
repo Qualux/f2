@@ -38,6 +38,19 @@ class Plugin {
         require_once( ZERO_PATH . '/php/Field/Metabox.php' );
         $m = new Field\Metabox();
 
+        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroup.php' );
+        $fgpt = new FieldGroup\FieldGroup();
+
+        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupPostType.php' );
+        $fgpt = new FieldGroup\FieldGroupPostType();
+
+        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupShortcodes.php' );
+        $fgs = new FieldGroup\FieldGroupShortcodes();
+
+        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupRoutes.php' );
+        $fgr = new FieldGroup\FieldGroupRoutes();
+        
+
     }
 
     public static function activate() {
