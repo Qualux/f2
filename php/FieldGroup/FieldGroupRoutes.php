@@ -76,16 +76,16 @@ class FieldGroupRoutes {
             ));
 
             // Fetch one endpoint.
-            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+            register_rest_route( 'zero/v1', '/field-group/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
                     $id = $request->get_param( 'id' );
-                    $f = new Field();
-                    $f->load( $id );
+                    $fg = new FieldGroup();
+                    $fg->load( $id );
                     return new \WP_REST_Response(
                         array(
                             'status' => 200,
-                            'field'  => $f,
+                            'field_group'  => $fg,
                         )
                     );
                 },
@@ -93,39 +93,39 @@ class FieldGroupRoutes {
             ));
 
             // Fetch many endpoint.
-            register_rest_route( 'zero/v1', '/field', array(
+            register_rest_route( 'zero/v1', '/field-group', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
 
-                    $field_posts = get_posts([
-                        'post_type'   => 'field',
+                    $fg_posts = get_posts([
+                        'post_type'   => 'field-group',
                         'numberposts' => -1,
                     ]);
 
-                    if( empty( $field_posts ) ) {
+                    if( empty( $fg_posts ) ) {
                         return new \WP_REST_Response(
                             array(
                                 'status'  => 200,
                                 'fields'  => [],
                                 'count'   => 0,
-                                'message' => 'No fields found.'
+                                'message' => 'No field groups found.'
                             )
                         );
                     }
 
-                    $fields = [];
-                    foreach( $field_posts as $fp ) {
-                        $f = new Field();
-                        $f->load( $fp->ID );
-                        $fields[] = $f;
+                    $fgs = [];
+                    foreach( $fg_posts as $fgp ) {
+                        $fg = new FieldGroup();
+                        $fg->load( $fgp->ID );
+                        $fgs[] = $fg;
                     }
 
                     return new \WP_REST_Response(
                         array(
-                            'status'  => 200,
-                            'fields'  => $fields,
-                            'count'   => count($field_posts),
-                            'message' => 'Fields loaded.'
+                            'status'        => 200,
+                            'field_groups'  => $fgs,
+                            'count'         => count($fgs),
+                            'message'       => 'Fields loaded.'
                         )
                     );
                     
@@ -133,36 +133,27 @@ class FieldGroupRoutes {
                 'permission_callback' => '__return_true',
             ));
 
-            // Save value endpoint.
-            register_rest_route( 'zero/v1', '/field/value', array(
-                'methods' => 'POST',
-                'callback' => function( $req ) {
+            // Delete field group endpoint.
+            register_rest_route( 'zero/v1', '/field-group/(?P<id>\d+)', array(
+
+                'methods' => 'DELETE',
+                'callback' => function( \WP_REST_Request $request ) {
 
                     global $post;
 
-                    $params   = $req->get_json_params();
-                    $value    = $params['value'];
-                    $name     = $params['name'];
-                    $field_id = $params['id'];
-                    $post_id  = (int) $params['post_id'];
+                    $id = $request->get_param( 'id' );
 
-                    $f = new Field();
-                    $f->load( $field_id );
-                    $storage_key = 'z_'.$name;
-
-                    if( $f->storage === 'post_meta' ) {
-                        update_post_meta( $post_id, $storage_key, $value );
-                    } else {
-                        update_option( $storage_key, $value );
-                    }    
+                    $fg = new FieldGroup();
+                    $fg->load( $id );
+                    
+                    $result = \wp_delete_post( $id, 1 );
 
                     return new \WP_REST_Response(
                         array(
-                            'status'  => 200,
-                            'message' => 'value saved',
-                            'params'  => $params,
-                            'post_id' => $post_id,
-                            'field'   => $f,
+                            'status'      => 200,
+                            'message'     => 'Field group deleted.',
+                            'field_group' => $fg,
+                            'result'      => $result,
                         )
                     );
 

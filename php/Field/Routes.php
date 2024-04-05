@@ -186,14 +186,14 @@ class Routes {
                     $id = $request->get_param( 'id' );
 
                     $f = new Field();
-                    $f->load( $field_id );
+                    $f->load( $id );
                     
                     $result = \wp_delete_post( $id, 1 );
 
                     return new \WP_REST_Response(
                         array(
                             'status'  => 200,
-                            'message' => 'Field group deleted.',
+                            'message' => 'Field deleted.',
                             'field'   => $f,
                             'result'  => $result,
                         )
