@@ -175,7 +175,35 @@ class Routes {
                 'permission_callback' => function() { return true; },
             ));
 
-        });  
+            // Delete field group endpoint.
+            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+
+                'methods' => 'DELETE',
+                'callback' => function( \WP_REST_Request $request ) {
+
+                    global $post;
+
+                    $id = $request->get_param( 'id' );
+
+                    $f = new Field();
+                    $f->load( $field_id );
+                    
+                    $result = \wp_delete_post( $id, 1 );
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status'  => 200,
+                            'message' => 'Field group deleted.',
+                            'field'   => $f,
+                            'result'  => $result,
+                        )
+                    );
+
+                },
+                'permission_callback' => function() { return true; },
+            ));
+
+        });
 
     }
 

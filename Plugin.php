@@ -30,7 +30,6 @@ class Plugin {
         $e = new Enqueue();
 
         require_once( ZERO_PATH . '/php/Field/Field.php' );
-        require_once( ZERO_PATH . '/php/Field/FieldInstance.php' );
 
         require_once( ZERO_PATH . '/php/Field/Routes.php' );
         $r = new Field\Routes();

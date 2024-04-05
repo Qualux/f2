@@ -170,7 +170,7 @@ class FieldGroupRoutes {
                 'permission_callback' => function() { return true; },
             ));
 
-        });  
+        });
 
     }
 
