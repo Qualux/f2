@@ -8,15 +8,15 @@ class Enqueue {
 
         add_action( 'wp_enqueue_scripts', function() {
             wp_enqueue_style( 'zero-main', ZERO_URL . 'css/main.css', array(), '1.0.0', 'all' );
-        });
+            wp_enqueue_script( 'zero-fields-save-form', ZERO_URL . 'js/save_form.js', array(), '1.0.0', 1 );
 
-        add_action( 'admin_enqueue_scripts', function() {
-            wp_enqueue_script( 'zero-main', ZERO_URL . 'js/main.js', array(), '1.0.0', 1 );
         });
 
         // App fields. 
 
         add_action( 'admin_enqueue_scripts', function() {
+
+            wp_enqueue_script( 'zero-main', ZERO_URL . 'js/main.js', array(), '1.0.0', 1 );
 
             $screen = \get_current_screen();
             if( $screen->base !== 'toplevel_page_zero' ) {

@@ -161,6 +161,86 @@ class FieldGroupRoutes {
                 'permission_callback' => function() { return true; },
             ));
 
+
+            /*
+            * Save Values 
+            * 
+            * Save post meta or option values. 
+            * If field group assigned to post type, either update or create the post. 
+            */
+            register_rest_route( 'zero/v1', '/field-group/values/(?P<id>\d+)', array(
+
+                'methods' => 'POST',
+                'callback' => function( \WP_REST_Request $request ) {
+
+                    $id        = $request->get_param( 'id' );
+                    $params    = $request->get_json_params();
+                    $post_type = $params['post_type'];
+                    $post_id   = $params['post_id'];
+                    $values    = $params['values'];
+
+                    $fg = new FieldGroup();
+                    $fg->load( $id );
+
+                    $mode = null;
+
+                    if( $post_id ) {
+
+                        $mode = 'update';
+                        $result = wp_update_post(
+                            [
+                                'ID' => $post_id,
+                            ]
+                        );
+
+                        update_post_meta( $post_id, 'z_fg_value', 'Six83' );
+
+                    }
+
+                    if( ! $post_id ) {
+
+                        $mode = 'create';
+                        $result = wp_insert_post(
+                            [
+                                'post_type'    => $post_type,
+                                'post_title'   => 'New post ' . time(),
+                                'post_content' => '',
+                                'post_status'  => 'publish',
+                            ]
+                        );
+
+                        // If post created... 
+                        // Loop over fields keyed by name and find matching values... 
+                        // If matching values found, do meta save.
+                        if( $result ) {
+                            $created_post_id = $result;
+                            foreach( $fg->fields_name as $field ) {
+                                if( array_key_exists( $field->name, $values ) ) {
+                                    $meta_value = $values[$field->name];
+                                    update_post_meta( $created_post_id, $field->name, $meta_value );
+                                }   
+                            }  
+                        }
+                        
+                    }
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status'      => 200,
+                            'message'     => 'Saved field group value with ID='.$id.'.',
+                            'id'          => $id,
+                            'params'      => $params,
+                            'mode'        => $mode,
+                            'result'      => $result,
+                            'field_group' => $fg,
+                            'values'      => $values,
+                        )
+                    );
+
+                },
+                'permission_callback' => function() { return true; },
+            ));
+
         });
 
     }
