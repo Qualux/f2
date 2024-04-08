@@ -106,7 +106,7 @@ class FieldGroupRoutes {
                         return new \WP_REST_Response(
                             array(
                                 'status'  => 200,
-                                'fields'  => [],
+                                'field_groups'  => [],
                                 'count'   => 0,
                                 'message' => 'No field groups found.'
                             )

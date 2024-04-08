@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 export function useFieldGroupCollection() {
 
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [fieldGroups, setFieldGroups] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [fieldGroups, setFieldGroups] = useState(null);
 
   useEffect(() => {
 

@@ -1,6 +1,14 @@
 import { useFieldGroupCollection } from '../../lib/useFieldGroupCollection';
 import { NavLink } from "react-router-dom";
 
+function EmptyMessage() {
+    return(
+        <p className="text-xl font-semibold text-zinc-500 bg-zinc-100 py-8 px-10 rounded">
+            No field groups.
+        </p>
+    )
+}
+
 function FieldGroup({fieldGroup, index, setMode}) {
     return(
         <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
@@ -38,6 +46,7 @@ export default function FieldGroupList({setMode}) {
 
     return(
         <ul className="flex flex-col gap-2 justify-stretch">
+            {!fieldGroups.length && <EmptyMessage />}
             {fieldGroups.map( ( fieldGroup, index ) =>
                 <FieldGroup key={index} fieldGroup={fieldGroup} index={index} setMode={setMode} />
             )}

@@ -24,6 +24,20 @@ export function useFieldGroup(id) {
 
   }, [id]);
 
-  return { fieldGroup, isLoaded };
+  const deleteFieldGroup = async () => {
+    try {
+      const response = await fetch(
+        `http://zero1.local/wp-json/zero/v1/field/${id}`,
+        {
+          method: 'DELETE'
+        }
+      );
+      return await response.json();
+    } catch (error) {
+      console.error("Error deleting field group:", error);
+    }
+  }
+
+  return { fieldGroup, isLoaded, deleteFieldGroup };
 
 }
