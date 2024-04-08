@@ -3,14 +3,11 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
 
-export default function FieldGroupForm({field, fieldLoaded}) {
+export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
 
     const [valuesInit, setValuesInit] = useState(false);
     const [id, setId] = useState(0);
-    const [type, setType] = useState('text');
     const [title, setTitle] = useState('');
-    const [name, setName] = useState('');
-    const [storage, setStorage] = useState('');
     const [complete, setComplete] = useState(false);
 
     const { fieldTypeList } = useFieldType();
@@ -18,22 +15,20 @@ export default function FieldGroupForm({field, fieldLoaded}) {
 
     useEffect(() => {
 
-        if(fieldLoaded && !valuesInit) {
-            console.log('setting vals FG form...')
-            setId(field.id);
-            setType(field.type);
-            setTitle(field.title);
-            console.log(field.title)
-            setName(field.name);
-            setStorage(field.storage);
+        if(fieldGroupLoaded && !valuesInit) {
+            setId(fieldGroup.id);
+            setTitle(fieldGroup.title);
             setValuesInit(true);
         }
 
-    }, [fieldLoaded])
+    }, [fieldGroupLoaded])
 
     const process = () => {
 
         let url = 'http://zero1.local/wp-json/zero/v1/field-group';
+        if(id) {
+            url += '/'+id;
+        }
 
         const data = {
             title,
