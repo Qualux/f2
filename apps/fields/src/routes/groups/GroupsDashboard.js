@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import FieldGroupList from '../components/groups/FieldGroupList';
-import FieldGroupForm from '../components/groups/FieldGroupForm';
-import { useFieldType } from '../lib/useFieldType';
-import { useField } from '../lib/useField';
+import FieldGroupList from '../../components/groups/FieldGroupList';
+import FieldGroupForm from '../../components/groups/FieldGroupForm';
+import { useFieldType } from '../../lib/useFieldType';
+import { useField } from '../../lib/useField';
 import { useLocation, Outlet, NavLink } from "react-router-dom";
 
 function FieldGroupFormEdit( { setMode, mode } ) {
@@ -16,7 +16,7 @@ function FieldGroupFormEdit( { setMode, mode } ) {
     )
 }
 
-export default function Groups() {
+export default function GroupsDashboard() {
 
     const [mode, setMode] = useState('list');
 

@@ -3,11 +3,15 @@ import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
 import Dashboard from './routes/Dashboard';
-import Fields from './routes/Fields';
-import CreateField from './routes/fields/CreateField';
 
-// Field Groups.
-import Groups from './routes/Groups';
+// Field Routes.
+import FieldsDashboard from './routes/fields/FieldsDashboard';
+import CreateField from './routes/fields/CreateField';
+import EditField from './routes/fields/EditField';
+import DeleteField from './routes/fields/DeleteField';
+
+// Field Group Routes.
+import GroupsDashboard from './routes/groups/GroupsDashboard';
 import CreateFieldGroup from './routes/groups/CreateFieldGroup';
 import EditFieldGroup from './routes/groups/EditFieldGroup';
 import DeleteFieldGroup from './routes/groups/DeleteFieldGroup';
@@ -29,17 +33,25 @@ const router = createHashRouter([
       },
       {
         path: "fields",
-        element: <Fields />,
+        element: <FieldsDashboard />,
         children: [
           {
             path: "create",
             element: <CreateField />,
           },
+          {
+            path: "edit/:fieldId",
+            element: <EditField />,
+          },
+          {
+            path: "delete/:fieldId",
+            element: <DeleteField />,
+          },
         ],
       },
       {
         path: "groups",
-        element: <Groups />,
+        element: <GroupsDashboard />,
         children: [
           {
             path: "create",

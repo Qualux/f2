@@ -2,6 +2,6 @@ import FieldGroupForm from '../../components/groups/FieldGroupForm';
 
 export default function CreateFieldGroup() {
     return(
-        <FieldGroupForm field={false} />
+        <FieldGroupForm fieldGroup={false} />
     )
 }

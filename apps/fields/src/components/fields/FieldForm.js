@@ -1,21 +1,9 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet } from "react-router-dom";
-import FieldList from '../components/fields/FieldList';
-import { useFieldType } from '../lib/useFieldType';
-import { useField } from '../lib/useField';
+import { useFieldType } from '../../lib/useFieldType';
+import { useFetch } from '../../lib/useFetch';
+import { NavLink } from "react-router-dom";
 
-function FieldFormEdit( { setMode, mode } ) {
-
-    const { field, isLoaded } = useField(85);
-
-    console.log(field)
-
-    return(
-        <FieldForm mode={mode} setMode={setMode} field={field} fieldLoaded={isLoaded} />
-    )
-}
-
-function FieldForm({mode, setMode, field, fieldLoaded}) {
+export default function FieldForm({field, fieldLoaded}) {
 
     const [valuesInit, setValuesInit] = useState(false);
     const [id, setId] = useState(0);
@@ -23,8 +11,10 @@ function FieldForm({mode, setMode, field, fieldLoaded}) {
     const [title, setTitle] = useState('');
     const [name, setName] = useState('');
     const [storage, setStorage] = useState('');
+    const [complete, setComplete] = useState(false);
 
     const { fieldTypeList } = useFieldType();
+    const { postData } = useFetch();
 
     useEffect(() => {
 
@@ -44,8 +34,8 @@ function FieldForm({mode, setMode, field, fieldLoaded}) {
     const process = () => {
 
         let url = 'http://zero1.local/wp-json/zero/v1/field';
-        if( mode === 'edit' ) {
-            url += '/' + id;
+        if(id) {
+            url += '/'+id;
         }
 
         const data = {
@@ -57,6 +47,7 @@ function FieldForm({mode, setMode, field, fieldLoaded}) {
 
         postData(url, data).then((data) => {
             console.log(data);
+            setComplete(true);
         });
 
     }
@@ -126,71 +117,14 @@ function FieldForm({mode, setMode, field, fieldLoaded}) {
                     SAVE FIELD
                 </button>
             </div>
-            <div className="mt-6">
-                <button 
-                    className="text-zinc-400 font-semibold"
-                    onClick={() => { setMode('list')}}
-                >
+            <div className="mt-12">
+                <NavLink
+                    to="/fields"
+                    className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
+                    >
                     Cancel
-                </button>
+                </NavLink>
             </div>
         </div>
     )
-}
-
-async function postData( url = "", data = {} ) {
-
-    const response = await fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
-    });
-
-    return response.json();
-
-}
-
-export default function Fields() {
-
-    const [mode, setMode] = useState('list');
-
-    if( mode === 'list' ) {
-        return(
-            <main>
-                <h2 className="font-bold text-zinc-400 mb-6 text-lg">
-                    FIELDS
-                </h2>
-                <NavLink
-                    to="/fields/create"
-                    className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "bg-sky-800 text-white" : ""
-                    }
-                    >
-                    FIELDS
-                </NavLink>
-                <FieldList setMode={setMode} />
-                <Outlet />
-            </main>
-        )
-    }
-
-
-    if( mode === 'edit' ) {
-        return(
-            <header>
-                <h2 className="font-bold text-zinc-400 mb-6 text-lg">
-                    FIELDS
-                </h2>
-                <FieldFormEdit mode={mode} setMode={setMode} />
-            </header>
-        )
-    }
-    
 }

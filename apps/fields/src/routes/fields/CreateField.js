@@ -1,5 +1,7 @@
-export default function CreateField() {
+import FieldForm from '../../components/fields/FieldForm';
+
+export default function CreateFieldGroup() {
     return(
-        <main>CREATE FIELD!</main>
+        <FieldForm field={false} />
     )
 }

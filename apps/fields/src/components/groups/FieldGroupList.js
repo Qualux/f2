@@ -9,7 +9,7 @@ function EmptyMessage() {
     )
 }
 
-function FieldGroup({fieldGroup, index, setMode}) {
+function FieldGroup({fieldGroup, index}) {
     return(
         <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
             <h2 className="basis-10 font-bold text-zinc-400 mb-6 !my-0">
