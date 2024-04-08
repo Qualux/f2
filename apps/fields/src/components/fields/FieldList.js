@@ -1,4 +1,4 @@
-import { useFieldCollection } from './lib/useFieldCollection';
+import { useFieldCollection } from '../../lib/useFieldCollection';
 
 function Field({field, index, setMode}) {
     return(

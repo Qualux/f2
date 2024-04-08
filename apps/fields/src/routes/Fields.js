@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet } from "react-router-dom";
-import FieldList from '../FieldList';
+import FieldList from '../components/fields/FieldList';
 import { useFieldType } from '../lib/useFieldType';
 import { useField } from '../lib/useField';
 

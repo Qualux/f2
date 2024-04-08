@@ -46,11 +46,11 @@ const router = createHashRouter([
             element: <CreateFieldGroup />,
           },
           {
-            path: "edit",
+            path: "edit/:groupId",
             element: <EditFieldGroup />,
           },
           {
-            path: "delete",
+            path: "delete/:groupId",
             element: <DeleteFieldGroup />,
           },
         ],

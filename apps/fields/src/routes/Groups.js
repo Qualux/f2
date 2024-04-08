@@ -27,7 +27,7 @@ export default function Groups() {
 
     if( isMainRoute ) {
         return(
-            <main>
+            <main className="grow">
                 <h2 className="mt-8 font-bold text-zinc-300 mb-6 text-lg">
                     FIELD GROUPS
                 </h2>
