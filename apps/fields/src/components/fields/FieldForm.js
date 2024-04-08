@@ -60,7 +60,7 @@ export default function FieldForm({field, fieldLoaded}) {
                     Type
                 </label>
                 <select
-                    className="border border-zinc-200 border-solid"
+                    className="w-64 border border-solid border-zinc-200"
                     onChange={ (e) => { setType(e.target.value) } }
                     value={type}
                 >
@@ -71,33 +71,36 @@ export default function FieldForm({field, fieldLoaded}) {
                     )}
                 </select>
             </div>
-            <div>
+            <div className="my-4">
                 <label className="block">
                     Title
                 </label>
                 <input 
+                    className="w-64 border border-solid border-zinc-200"
                     type="text"
                     value={title}
                     onInput={ (e) => { setTitle(e.target.value) } }
                     placeholder="Field display title..."
                 />
             </div>
-            <div className="mt-6">
+            <div className="my-4">
                 <label className="block">
                     Name
                 </label>
                 <input 
+                    className="w-64 border border-solid border-zinc-200"
                     type="text"
                     value={name}
                     onInput={ (e) => { setName(e.target.value) } }
                     placeholder="Field unique name..."
                 />
             </div>
-            <div className="mt-6">
+            <div className="my-4">
                 <label className="block">
                     Storage
                 </label>
                 <select 
+                    className="w-64 border border-solid border-zinc-200"
                     value={storage}
                     onChange={ (e) => { setStorage(e.target.value) } }
                 >
@@ -109,7 +112,7 @@ export default function FieldForm({field, fieldLoaded}) {
                     </option>
                 </select>
             </div>
-            <div className="mt-6">
+            <div className="my-4">
                 <button 
                     className="bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800"
                     onClick={process}
