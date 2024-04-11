@@ -9,7 +9,7 @@ function EmptyMessage() {
     )
 }
 
-function FieldGroup({fieldGroup, index}) {
+function FieldGroup({fieldGroup, index, editButton = true}) {
     return(
         <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
             <h2 className="basis-10 font-bold text-zinc-400 mb-6 !my-0">
@@ -19,12 +19,14 @@ function FieldGroup({fieldGroup, index}) {
                 {fieldGroup.title}
             </div>
             <div className="flex justify-end grow gap-6 items-center">
-                <NavLink
-                    to={`/groups/edit/${fieldGroup.id}`}
-                    className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
-                    >
-                    EDIT
-                </NavLink>
+                {editButton &&
+                    <NavLink
+                        to={`/groups/edit/${fieldGroup.id}`}
+                        className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
+                        >
+                        EDIT
+                    </NavLink>
+                }
                 <NavLink
                     to={`/groups/delete/${fieldGroup.id}`}
                     className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
@@ -36,7 +38,7 @@ function FieldGroup({fieldGroup, index}) {
     )
 }
 
-export default function FieldGroupList({setMode}) {
+export default function FieldGroupList({setMode, editButton=true}) {
 
     const { fieldGroups, isLoaded } = useFieldGroupCollection();
 
@@ -48,7 +50,13 @@ export default function FieldGroupList({setMode}) {
         <ul className="flex flex-col gap-2 justify-stretch">
             {!fieldGroups.length && <EmptyMessage />}
             {fieldGroups.map( ( fieldGroup, index ) =>
-                <FieldGroup key={index} fieldGroup={fieldGroup} index={index} setMode={setMode} />
+                <FieldGroup 
+                    key={index} 
+                    fieldGroup={fieldGroup} 
+                    index={index} 
+                    setMode={setMode} 
+                    editButton={editButton}
+                />
             )}
         </ul>
     )

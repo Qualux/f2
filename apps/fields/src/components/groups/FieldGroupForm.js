@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react';
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
+import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
+
 
 export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
 
     const [valuesInit, setValuesInit] = useState(false);
     const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
+    const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
+    const [processResponse, setProcessResponse] = useState(null);
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
@@ -34,17 +38,49 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
             title,
         }
 
-        postData(url, data).then((data) => {
-            console.log(data);
+        const resp = postData(url, data).then((data) => {
             setComplete(true);
+            setProcessResponse(data);
         });
 
     }
 
+    const resetForm = () => {
+        setComplete(false);
+        setProcessResponse(null);
+        setTitle('');
+    }
+
     if( complete ) {
+        console.log('process resp...')
+        console.log(processResponse)
         return(
             <main>
-                Create complete.
+                <h1 className="mb-6 text-zinc-500 text-xl font-bold">
+                    Create complete.
+                </h1>
+                <p className="text-zinc-500 text-lg">
+                    {processResponse.message}
+                </p>
+                <div className="flex gap-6 items-center">
+                    <button
+                        onClick={resetForm}
+                    >
+                        Create another field group
+                    </button>
+                    <NavLink
+                        to="/fields/edit/"
+                        className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
+                        >
+                        Edit created field group
+                    </NavLink>
+                    <NavLink
+                        to="/fields"
+                        className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
+                        >
+                        Return to manage field groups
+                    </NavLink>
+                </div>
             </main>
         )
     }
@@ -64,6 +100,7 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
                     placeholder="Field display title..."
                 />
             </div>
+            <ChildFieldEditor />
             <div className="mt-6">
                 <button 
                     className="w-64 bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800 rounded"
