@@ -15,8 +15,11 @@ function Field({field, index}) {
             <h2 className="basis-10 font-bold text-zinc-400 mb-6 !my-0">
                 {field.id}
             </h2>
-            <div>
+            <div className="w-40 font-bold">
                 {field.title}
+            </div>
+            <div className="font-medium text-zinc-500 text-sm">
+                {field.type}
             </div>
             <div className="flex justify-end grow gap-6 items-center">
                 <NavLink
@@ -46,6 +49,12 @@ export default function FieldList() {
 
     return(
         <ul>
+            <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
+                <div>ID</div>
+                <div className="w-40">Title</div>
+                <div>Type</div>
+                <div>&nbsp;</div>
+            </li>
             {fields.map( ( field, index ) =>
                 <Field key={index} field={field} index={index} />
             )}
