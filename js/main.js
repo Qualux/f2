@@ -30,7 +30,6 @@ field.addEventListener('input', ( e ) => {
 
 const field2 = document.getElementById('z-field_storage');
 field2.addEventListener('input', ( e ) => {
-    console.log('field 2 save...')
     const postId = document.getElementById('post_ID').value;
     const value  = e.currentTarget.value;
     const name   = e.currentTarget.getAttribute('z-name');

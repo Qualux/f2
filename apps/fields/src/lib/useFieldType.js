@@ -8,6 +8,10 @@ export function useFieldType() {
         {
             name: 'select',
             label: 'Select',
+        },
+        {
+            name: 'number',
+            label: 'Number',
         }
     ];
 

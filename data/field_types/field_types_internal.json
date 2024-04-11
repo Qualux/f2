@@ -6,5 +6,9 @@
     {
         "name": "select",
         "class": "\\Zero\\FieldType\\FieldTypeSelect"
+    },
+    {
+        "name": "number",
+        "class": "\\Zero\\FieldType\\FieldTypeNumber"
     }
 ]

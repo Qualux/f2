@@ -49,6 +49,7 @@ class Plugin {
         require_once( ZERO_PATH . '/php/FieldType/FieldType.php' );
         require_once( ZERO_PATH . '/php/FieldType/FieldTypeText.php' );
         require_once( ZERO_PATH . '/php/FieldType/FieldTypeSelect.php' );
+        require_once( ZERO_PATH . '/php/FieldType/FieldTypeNumber.php' );
 
     }
 
