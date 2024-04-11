@@ -2,7 +2,9 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
+
 import Dashboard from './routes/Dashboard';
+import Settings from './routes/Settings';
 
 // Field Routes.
 import FieldsDashboard from './routes/fields/FieldsDashboard';
@@ -66,6 +68,10 @@ const router = createHashRouter([
             element: <DeleteFieldGroup />,
           },
         ],
+      },
+      {
+        path: "settings",
+        element: <Settings />
       },
     ],
   },

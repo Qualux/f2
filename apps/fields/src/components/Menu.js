@@ -37,14 +37,6 @@ export default function Menu() {
             </li>
             <li className="flex items-center justify-stretch">
                 <NavLink
-                        to="/forms"
-                        className={itemClasses}
-                        >
-                        FORMS
-                </NavLink>
-            </li>
-            <li className="flex items-center justify-stretch">
-                <NavLink
                         to="/settings"
                         className={itemClasses}
                         >
