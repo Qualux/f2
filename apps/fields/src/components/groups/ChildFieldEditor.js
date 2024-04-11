@@ -15,11 +15,10 @@ function SelectExistingField({open, setOpen}) {
     )
 }
 
-export default function ChildFieldEditor() {
+export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds}) {
 
     const [existingField, setExistingField] = useState(false);
-    const [selectedChildIds, setSelectedChildIds] = useState([]);
-
+    
     const handleSelectChild = (childId) => {
         setSelectedChildIds((prevIds) => [...prevIds, childId]);
     };

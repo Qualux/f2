@@ -4,6 +4,7 @@ import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
 import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
 
+/* We need access to the child field data. */
 
 export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
 
@@ -13,6 +14,7 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
     const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
     const [processResponse, setProcessResponse] = useState(null);
+    const [selectedChildIds, setSelectedChildIds] = useState([]);
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
@@ -36,6 +38,7 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
 
         const data = {
             title,
+            fields: selectedChildIds,
         }
 
         const resp = postData(url, data).then((data) => {
@@ -100,7 +103,10 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
                     placeholder="Field display title..."
                 />
             </div>
-            <ChildFieldEditor />
+            <ChildFieldEditor
+                selectedChildIds={selectedChildIds}
+                setSelectedChildIds={setSelectedChildIds}
+            />
             <div className="mt-6">
                 <button 
                     className="w-64 bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800 rounded"

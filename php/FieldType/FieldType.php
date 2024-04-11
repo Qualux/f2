@@ -15,6 +15,11 @@ class FieldType {
     public function render( $value = null, $return = false ) {
 
         $types = $this->get_field_type_list();
+
+        if ( ! property_exists($types, $this->field->type) ) {
+            return 'Property type does not exist.';
+        }
+
         $type_def = $types->{$this->field->type};
         $type = new $type_def['class']($this->field);
         return $type->render( $value, $return );
