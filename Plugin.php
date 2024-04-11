@@ -23,9 +23,6 @@ class Plugin {
         require_once( ZERO_PATH . '/php/PostTypeFieldType.php' );
         $f = new PostTypeFieldType();
 
-        require_once( ZERO_PATH . '/php/Shortcodes.php' );
-        $s = new Shortcodes();
-
         require_once( ZERO_PATH . '/php/Enqueue.php' );
         $e = new Enqueue();
 

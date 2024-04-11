@@ -1,23 +1,24 @@
-.flex {
+.z-field-group {
+    max-width: 580px;
+    margin: 3rem 0;
+    background-color: rgb(0,0,0,0.05);
+    padding: 2rem;
+}
+
+.z-field-group-wrap {
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.gap-1 {
-    gap: 1px;
+.z-form-submit-wrap {
+    background-color: rgb(0,0,0,0.06);
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
 }
 
-.gap-4 {
-    gap: 4px;
-}
-
-.gap-8 {
-    gap: 8px;
-}
-
-.gap-12 {
-    gap: 12px;
-}
-
-.items-center {
-    align-items: center;
+.z-field-group label {
+    color: rgb(0,0,0,0.65);
+    font-weight: 600;
 }

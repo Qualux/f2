@@ -23,7 +23,7 @@ class FieldTypeSelect {
         $c = '';
         $c .= '<label for='.$field_id.'>';
         $c .= $this->field->label;
-        $c .= ' SELECT</label>';
+        $c .= '</label>';
 
         $c .= '<select id="'.$field_id.'" name="'.$field_id.'" >';
         $c .= '<option>Option 1</option>';

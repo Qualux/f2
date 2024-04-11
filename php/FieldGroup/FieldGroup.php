@@ -30,8 +30,8 @@ class FieldGroup {
 
     public function render( $values = null, $return = false ) {
         $c = '';
-        $c = '<div>';
-        $c = '<form id="zero-form" method="POST">';
+        $c .= '<div class="z-field-group">';
+        $c .= '<form class="z-field-group-wrap id="zero-form" method="POST">';
         foreach( $this->fields as $fid ) {
             $f = new Field();
             $f->load( $fid );
@@ -41,9 +41,9 @@ class FieldGroup {
         }
 
         // Save button. 
-        $c .= '<div>';
+        $c .= '<div class="z-form-submit-wrap">';
         $c .= '<button type="submit" id="zero-save-button">';
-        $c .= 'Save';
+        $c .= 'Save 123';
         $c .= '</button>';
         $c .= '</div>';
 
