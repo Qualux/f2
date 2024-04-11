@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useFieldCollection } from '../../lib/useFieldCollection';
 import { NavLink } from "react-router-dom";
+import useChildFieldContext from '../groups/child-fields/useChildFieldContext';
 
 function EmptyMessage() {
     return(
@@ -9,7 +11,10 @@ function EmptyMessage() {
     )
 }
 
-function Field({field, index}) {
+function Field({field, index, setOpen}) {
+
+    const { selectedChildIds, handleSelectChild, handleDeselectChild } = useChildFieldContext();
+
     return(
         <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
             <h2 className="basis-10 font-bold text-zinc-400 mb-6 !my-0">
@@ -21,7 +26,10 @@ function Field({field, index}) {
             <div className="flex justify-end grow gap-6 items-center">
                 <button
                     className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
-                    onClick={() => {console.log('selected')}}
+                    onClick={() => { 
+                        handleSelectChild(field.id); 
+                        setOpen(false); 
+                    }}
                 >
                     SELECT
                 </button>
@@ -30,20 +38,32 @@ function Field({field, index}) {
     )
 }
 
-export default function FieldSelectionList() {
+export default function FieldSelectionList({setOpen}) {
 
     const { fields, isLoaded } = useFieldCollection();
+    const [ selectionId, setSelectionId ] = useState(0);
 
     if( !isLoaded ) {
         return <main>Loading fields....</main>
     }
 
     return(
-        <ul>
-            {fields.map( ( field, index ) =>
-                <Field key={index} field={field} index={index} />
-            )}
-        </ul>
+        <section>
+            <p>
+                {selectionId}
+            </p>
+            <ul>
+                {fields.map( ( field, index ) =>
+                    <Field 
+                        key={index} 
+                        field={field} 
+                        index={index} 
+                        setSelectionId={setSelectionId}
+                        setOpen={setOpen}
+                    />
+                )}
+            </ul>
+        </section>
     )
 
 }
