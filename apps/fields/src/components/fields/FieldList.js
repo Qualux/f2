@@ -23,6 +23,12 @@ function Field({field, index}) {
             </div>
             <div className="flex justify-end grow gap-6 items-center">
                 <NavLink
+                    to={`/fields/view/${field.id}`}
+                    className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
+                    >
+                    VIEW
+                </NavLink>
+                <NavLink
                     to={`/fields/edit/${field.id}`}
                     className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
                     >
