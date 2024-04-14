@@ -1,39 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink, Outlet } from "react-router-dom";
 import FieldList from '../../components/fields/FieldList';
-import FieldForm from '../../components/fields/FieldForm';
 import { useFieldType } from '../../lib/useFieldType';
 import { useField } from '../../lib/useField';
-
-function FieldFormEdit( { setMode, mode } ) {
-
-    const { field, isLoaded } = useField(85);
-
-    console.log(field)
-
-    return(
-        <FieldForm mode={mode} setMode={setMode} field={field} fieldLoaded={isLoaded} />
-    )
-}
-
-async function postData( url = "", data = {} ) {
-
-    const response = await fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
-    });
-
-    return response.json();
-
-}
 
 export default function FieldsDashboard() {
 
@@ -66,37 +35,5 @@ export default function FieldsDashboard() {
     return(
         <Outlet />
     )
-
-    if( mode === 'list' ) {
-        return(
-            <main>
-                <h2 className="font-bold text-zinc-400 mb-6 text-lg">
-                    FIELDS
-                </h2>
-                <NavLink
-                    to="/fields/create"
-                    className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "bg-sky-800 text-white" : ""
-                    }
-                    >
-                    FIELDS
-                </NavLink>
-                <FieldList setMode={setMode} />
-                <Outlet />
-            </main>
-        )
-    }
-
-
-    if( mode === 'edit' ) {
-        return(
-            <header>
-                <h2 className="font-bold text-zinc-400 mb-6 text-lg">
-                    FIELDS
-                </h2>
-                <FieldFormEdit mode={mode} setMode={setMode} />
-            </header>
-        )
-    }
     
 }
