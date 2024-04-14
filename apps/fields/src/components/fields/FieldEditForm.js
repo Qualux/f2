@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
@@ -27,30 +27,30 @@ const CompleteScreen = ({createdFieldData, resetForm}) => {
     return(
         <main>
             <h2>
-                Congrats. You have made a field. Yippee yay motherfucker.
+                Congrats. The field was successfully edited.
             </h2>
             <p>
                 {createdFieldData.message}
             </p>
             <div>
                 <NavLink
-                    to="/fields/edit/192"
+                    to="/fields"
                     className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
                     >
-                    Edit Field
+                    Manage fields
                 </NavLink>
                 <button
                     onClick={resetForm}
                     className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
                     >
-                    Make Another Field
+                    Continue editing
                 </button>
             </div>
         </main>
     )
 }
 
-export default function FieldCreateForm() {
+export default function FieldEditForm({field, fieldLoaded}) {
 
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
@@ -67,6 +67,17 @@ export default function FieldCreateForm() {
     const { postData } = useFetch();
     const { systemFields } = useSystemFields();
 
+    useEffect(() => {
+        if (fieldLoaded && field) {
+            reset({
+                field_type: field.type, // Set default values for each field
+                field_title: field.title,
+                field_name: field.name,
+                field_storage: field.storage,
+            });
+        }
+    }, [fieldLoaded, field, reset]);
+
     const onSubmit = (data) => {
 
         const preparedData = {
@@ -76,7 +87,7 @@ export default function FieldCreateForm() {
             storage: data.field_storage,
         }
 
-        const url = 'http://zero1.local/wp-json/zero/v1/field';
+        const url = 'http://zero1.local/wp-json/zero/v1/field/'+field.id;
         postData(url, preparedData).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);

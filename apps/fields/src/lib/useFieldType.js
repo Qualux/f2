@@ -12,6 +12,14 @@ export function useFieldType() {
         {
             name: 'number',
             label: 'Number',
+        },
+        {
+            name: 'email',
+            label: 'Email',
+        },
+        {
+            name: 'url',
+            label: 'URL',
         }
     ];
 
