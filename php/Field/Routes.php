@@ -18,6 +18,7 @@ class Routes {
                     $title   = $params['title'];
                     $name    = $params['name'];
                     $storage = $params['storage'];
+                    $choices = $params['choices'];
 
                     $post_id = wp_insert_post(
                         [
@@ -32,6 +33,10 @@ class Routes {
                     update_post_meta( $post_id, 'z_field_name', $name );
                     update_post_meta( $post_id, 'z_field_storage', $storage );
 
+                    if( $type === 'select' ) {
+                        update_post_meta( $post_id, 'z_field_choices', $choices );
+                    }
+                    
                     return new \WP_REST_Response(
                         array(
                             'status'  => 200,
@@ -55,6 +60,7 @@ class Routes {
                     $title   = $params['title'];
                     $name    = $params['name'];
                     $storage = $params['storage'];
+                    $choices = $params['choices'];
 
                     wp_update_post(
                         [
@@ -67,6 +73,10 @@ class Routes {
                     update_post_meta( $id, 'z_field_type', $type );
                     update_post_meta( $id, 'z_field_name', $name );
                     update_post_meta( $id, 'z_field_storage', $storage );
+
+                    if( $type === 'select' ) {
+                        update_post_meta( $post_id, 'z_field_choices', $choices );
+                    }
 
                     return new \WP_REST_Response(
                         array(

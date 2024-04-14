@@ -55,6 +55,21 @@ export function useSystemFields() {
                 },
             ]
         },
+        field_choices: {
+            type: 'collection',
+            name: 'ield_choices',
+            title: 'Field Choices',
+            label: 'Field Choices',
+            storage: 'post_meta',
+        },
+        field_group_title: {
+            type: 'text',
+            name: 'field_group_title',
+            title: 'Field Group Title',
+            label: 'Field Group Title',
+            storage: 'post_meta',
+            placeholder: 'Enter title for display...',
+        },
     };
 
     return { systemFields };

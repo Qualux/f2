@@ -1,31 +1,32 @@
+import useSystemFields from './useSystemFields';
+
 export function useSystemFieldGroups() {
+
+    const { systemFields } = useSystemFields();
 
     const systemFieldGroups = {
         field: {
             title: 'Field Editor',
             fields: [
-                {
-                    type: 'text',
-                    name: 'field_name',
-                    title: 'Field Name',
-                    label: 'Field Name',
-                    storage: 'post_meta',
-                    placeholder: 'Unique lowercase system name...',
-                }
-            ]
+                systemFields.field_type,
+                systemFields.field_title,
+                systemFields.field_name,
+                systemFields.field_storage,
+            ],
+            storage: {
+                type: 'post_meta',
+                post_type: 'field'
+            }
         },
         fieldGroup: {
             title: 'Field Group Editor',
             fields: [
-                {
-                    type: 'text',
-                    name: 'field_group_name',
-                    title: 'Field Group Name',
-                    label: 'Field Group Name',
-                    storage: 'post_meta',
-                    placeholder: 'Unique lowercase system name...',
-                }
-            ]
+                systemFields.field_group_title,
+            ],
+            storage: {
+                type: 'post_meta',
+                post_type: 'field-group'
+            }
         }
     };
 

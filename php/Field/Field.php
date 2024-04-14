@@ -11,6 +11,7 @@ class Field {
     public $name;
     public $storage;
     public $label;
+    public $choices;
 
     public function load( $id ) {
 
@@ -21,6 +22,7 @@ class Field {
         $this->storage = get_post_meta( $id, 'z_field_storage', 1 );
         $this->type    = get_post_meta( $id, 'z_field_type', 1 );
         $this->label   = 'Field Label 1';
+        $this->choices = get_post_meta( $id, 'z_field_choices', 1 );
 
     }
 

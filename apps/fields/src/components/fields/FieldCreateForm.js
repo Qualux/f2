@@ -5,6 +5,7 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import SystemField from './SystemField';
+import CollectionField from '../field-types/collection/CollectionField';
 
 const CancelButton = () => {
     return(
@@ -60,7 +61,9 @@ export default function FieldCreateForm() {
         handleSubmit,
         watch,
         formState: { errors },
-        reset
+        reset,
+        setValue, 
+        getValues,
     } = useForm()
 
     const { fieldTypeList } = useFieldType();
@@ -74,6 +77,7 @@ export default function FieldCreateForm() {
             title: data.field_title,
             name: data.field_name,
             storage: data.field_storage,
+            choices: getValues('choices'),
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field';
@@ -121,6 +125,16 @@ export default function FieldCreateForm() {
                     field={systemFields.field_storage}
                     register={register}
                     errors={errors}
+                />
+
+                <CollectionField 
+                    field={
+                        {
+                            title: 'Choices',
+                            name: 'choices',
+                        }
+                    }
+                    setValue={setValue}
                 />
                 
                 <button 

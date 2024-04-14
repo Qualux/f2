@@ -21,6 +21,11 @@ export function useFieldType() {
             name: 'url',
             label: 'URL',
         }
+        ,
+        {
+            name: 'collection',
+            label: 'Collection',
+        }
     ];
 
     return { fieldTypeList };
