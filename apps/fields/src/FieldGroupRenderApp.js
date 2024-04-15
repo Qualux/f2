@@ -40,6 +40,40 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
         console.log('submit data:')
         console.log(data)
 
+        let postId;
+        try {
+            if (window.wp !== 'undefined') {
+                const { select } = window.wp.data;
+                postId = select('core/editor').getCurrentPostId();
+            } else {
+                console.error('wp is undefined. Check if it is properly loaded in your environment.');
+            }
+        } catch (error) {
+            console.error('An error occurred while accessing wp:', error);
+        }
+
+        if (!postId) {
+            console.error('Error: Post ID not found.');
+            return;
+        }
+
+        const preparedData = {
+            post_id: postId,
+            post_type: 'page',
+            values: {
+                test123: 'test123',
+                test234: 'test234',
+            }
+        }
+
+        const url = 'http://zero1.local/wp-json/zero/v1/field-group/values/'+fieldGroupId;
+        postData(url, preparedData).then((data) => {
+            console.log('values save resp:')
+            console.log(data)
+            //setCreatedFieldData(data);
+            //setComplete(true);
+        });
+
     }
 
     if( complete ) {
