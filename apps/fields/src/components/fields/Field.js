@@ -1,4 +1,4 @@
-export default function Field({field}) {
+export default function Field( {field, register} ) {
 
     switch( field.type ) {
 
@@ -12,6 +12,7 @@ export default function Field({field}) {
                         className="border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
                         type="text"
                         placeholder={field.placeholder}
+                        {...register(field.name, { required: true })}
                     />
                 </div>
             );
@@ -24,6 +25,7 @@ export default function Field({field}) {
                     </label>
                     <select
                         className="border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
+                        {...register(field.name, { required: true })}
                     >
                         {field.choices.map((choice, index) => (
                             <option key={index} value={choice.value}>
