@@ -14,11 +14,11 @@ class FieldGroup {
     public $storage_post_type = null;
 
     public function load( $id ) {
-        $post          = get_post( $id );
-        $this->id      = $id;
-        $this->title   = $post->post_title;
-        $this->fields  = get_post_meta( $id, 'z_fg_fields', 1 );
-        $this->fields  = get_post_meta( $id, 'z_fg_storage_post_type', 1 );
+        $post                     = get_post( $id );
+        $this->id                 = $id;
+        $this->title              = $post->post_title;
+        $this->fields             = get_post_meta( $id, 'z_fg_fields', 1 );
+        $this->storage_post_type  = get_post_meta( $id, 'z_fg_storage_post_type', 1 );
         if( ! empty( $this->fields ) ) {
             foreach( $this->fields as $fid ) {
                 $f = new Field();

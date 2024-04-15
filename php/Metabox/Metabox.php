@@ -28,6 +28,13 @@ class Metabox {
             $fgs = get_posts([
                 'post_type'   => 'field-group',
                 'numberposts' => -1,
+                'meta_query' => [
+                    [
+                        'key'     => 'z_fg_storage_post_type',
+                        'value'   => $post_type,
+                        'compare' => '=',
+                    ]
+                ]
             ]);
 
             if( empty( $fgs )) { return; }
