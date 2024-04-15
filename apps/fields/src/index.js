@@ -19,6 +19,9 @@ import CreateFieldGroup from './routes/groups/CreateFieldGroup';
 import EditFieldGroup from './routes/groups/EditFieldGroup';
 import DeleteFieldGroup from './routes/groups/DeleteFieldGroup';
 
+// Form Route.
+import FormRoute from './routes/FormRoute';
+
 import {
   createHashRouter,
   RouterProvider,
@@ -33,6 +36,10 @@ const router = createHashRouter([
       {
         index: true,
         element: <Dashboard />
+      },
+      {
+        path: 'form',
+        element: <FormRoute />
       },
       {
         path: "fields",
