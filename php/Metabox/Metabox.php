@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\Field;
+namespace Zero\Metabox;
 
 class Metabox {
 
