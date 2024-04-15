@@ -179,7 +179,6 @@ class FieldGroupRoutes {
 
                     $id        = $request->get_param( 'id' );
                     $params    = $request->get_json_params();
-                    $post_type = $params['post_type'];
                     $post_id   = $params['post_id'];
                     $values    = $params['values'];
 
@@ -197,14 +196,21 @@ class FieldGroupRoutes {
                             ]
                         );
 
-                        update_post_meta( $post_id, 'z_fg_value', 'Six83' );
+                        if( ! empty( $fg->fields_name ) ) {
+                            foreach( $fg->fields_name as $field ) {
+                                if( array_key_exists( $field->name, $values ) ) {
+                                    $meta_value = $values[$field->name];
+                                    update_post_meta( $post_id, $field->name, $meta_value );
+                                }   
+                            } 
+                        }
 
                     }
 
                     if( ! $post_id ) {
 
                         $mode = 'create';
-                        $result = wp_insert_post(
+                        $post_id = wp_insert_post(
                             [
                                 'post_type'    => $post_type,
                                 'post_title'   => 'New post ' . time(),
@@ -216,8 +222,7 @@ class FieldGroupRoutes {
                         // If post created... 
                         // Loop over fields keyed by name and find matching values... 
                         // If matching values found, do meta save.
-                        if( $result ) {
-                            $created_post_id = $result;
+                        if( $post_id && ! empty( $fg->fields_name ) ) {
                             foreach( $fg->fields_name as $field ) {
                                 if( array_key_exists( $field->name, $values ) ) {
                                     $meta_value = $values[$field->name];
@@ -231,13 +236,12 @@ class FieldGroupRoutes {
                     return new \WP_REST_Response(
                         array(
                             'status'      => 200,
-                            'message'     => 'Saved field group value with ID='.$id.'.',
-                            'id'          => $id,
-                            'params'      => $params,
+                            'message'     => 'Saved field group.',
                             'mode'        => $mode,
-                            'result'      => $result,
+                            'post_id'     => $post_id,
                             'field_group' => $fg,
                             'values'      => $values,
+                            'params'      => $params,
                         )
                     );
 
