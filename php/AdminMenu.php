@@ -25,7 +25,7 @@ class AdminMenu {
 
     public function page() {
         echo '<div id="root"></div>';
-        echo '<div id="zero-fg"></div>';
+        echo '<div id="zero-fg" data-field-group="218"></div>';
     }
 
 }

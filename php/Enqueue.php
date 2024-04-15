@@ -31,6 +31,15 @@ class Enqueue {
             wp_enqueue_script( 'zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
         });
 
+        add_action('enqueue_block_editor_assets', function() {
+
+            $json = file_get_contents(ZERO_PATH . '/apps/fields/build/asset-manifest.json');
+            $build = json_decode($json, true);
+        
+            wp_enqueue_style('zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all');
+            wp_enqueue_script('zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', true);
+        });
+
     }
 
 }

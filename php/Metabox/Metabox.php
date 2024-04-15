@@ -60,16 +60,8 @@ class Metabox {
 
     public function content( $post, $box ) {
 
-        echo 'Metabox content...';
-        echo $post->post_type;
-        
-        echo $box['args']['field_group_id'];
-
-        /*
-        $fi = new FieldInstance();
-        $fi->load(50);
-        $fi->render();
-        */
+        $field_group_id = $box['args']['field_group_id'];
+        echo '<div id="zero-fg" data-field-group="'.$field_group_id.'"></div>';
         
     }
 

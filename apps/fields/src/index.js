@@ -94,11 +94,7 @@ const router = createHashRouter([
 
 /* Rendering */
 
-const elementExists = (selector) => {
-  return document.querySelector(selector) !== null;
-};
-
-if (elementExists('#zero-fg')) {
+if ( document.getElementById("root") ) {
   createRoot(document.getElementById("root")).render(
     <RouterProvider router={router}>
       <Outlet />
@@ -106,8 +102,10 @@ if (elementExists('#zero-fg')) {
   );
 }
 
-if (elementExists('#zero-fg')) {
+if ( document.getElementById("zero-fg") ) {
+  const tag = document.getElementById("zero-fg");
+  const fieldGroupId = tag.getAttribute('data-field-group');
   createRoot(document.getElementById("zero-fg")).render(
-    <FieldGroupRenderApp />
+    <FieldGroupRenderApp fieldGroupId={fieldGroupId} />
   );
 }

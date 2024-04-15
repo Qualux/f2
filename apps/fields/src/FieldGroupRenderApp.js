@@ -18,11 +18,10 @@ const CompleteScreen = () => {
     )
 }
 
-export default function FieldGroupRenderApp() {
+export default function FieldGroupRenderApp( {fieldGroupId} ) {
 
     const [complete, setComplete] = useState(false);
 
-    const fieldGroupId = 218;
     const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId );
     const { postData } = useFetch();
 
@@ -59,7 +58,7 @@ export default function FieldGroupRenderApp() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     {fieldGroup.fields_numeric.map( ( field, index ) =>
-                        <div className="my-6">
+                        <div key={index} className="my-6">
                             <Field field={field} register={register} />
                         </div>
                     )}
