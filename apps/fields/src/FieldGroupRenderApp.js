@@ -117,10 +117,15 @@ function Render( {fieldGroupId, postId} ) {
 }
 
 export default function FieldGroupRenderApp( {fieldGroupId} ) {
+
     const [postId, setPostId] = useState(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
+
+            if( ! window.wp ) {
+                return;
+            }
             const id = window.wp.data.select('core/editor').getCurrentPostId();
 
             console.log('id: ' + id);
@@ -141,4 +146,5 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
     }
 
     return <Render fieldGroupId={fieldGroupId} postId={postId} />;
+
 }

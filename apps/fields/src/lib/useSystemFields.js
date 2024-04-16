@@ -57,7 +57,7 @@ export function useSystemFields() {
         },
         field_choices: {
             type: 'collection',
-            name: 'ield_choices',
+            name: 'field_choices',
             title: 'Field Choices',
             label: 'Field Choices',
             storage: 'post_meta',

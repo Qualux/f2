@@ -3,6 +3,9 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
 import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
+import { useForm } from "react-hook-form";
+import { useSystemFields } from '../../lib/useSystemFields';
+import SystemField from '../fields/SystemField';
 
 /* We need access to the child field data. */
 
@@ -13,11 +16,21 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
     const [title, setTitle] = useState('');
     const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
-    const [processResponse, setProcessResponse] = useState(null);
     const [selectedChildIds, setSelectedChildIds] = useState([]);
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
+    const { systemFields } = useSystemFields();
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        reset,
+        setValue, 
+        getValues,
+    } = useForm();
 
     useEffect(() => {
 
@@ -29,41 +42,37 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
 
     }, [fieldGroupLoaded])
 
-    const process = () => {
+    const onSubmit = (data) => {
 
-        let url = 'http://zero1.local/wp-json/zero/v1/field-group';
-        if(id) {
-            url += '/'+id;
+        const preparedData = {
+            type: data.field_type,
+            title: data.field_title,
+            name: data.field_name,
+            storage: data.field_storage,
+            choices: getValues('choices'),
         }
 
-        const data = {
-            title,
-            fields: selectedChildIds,
-        }
-
-        const resp = postData(url, data).then((data) => {
+        const url = 'http://zero1.local/wp-json/zero/v1/field-group';
+        postData(url, preparedData).then((data) => {
             setComplete(true);
-            setProcessResponse(data);
         });
+
 
     }
 
     const resetForm = () => {
-        setComplete(false);
-        setProcessResponse(null);
-        setTitle('');
+        reset('');
     }
 
     if( complete ) {
-        console.log('process resp...')
-        console.log(processResponse)
+
         return(
             <main>
                 <h1 className="mb-6 text-zinc-500 text-xl font-bold">
                     Create complete.
                 </h1>
                 <p className="text-zinc-500 text-lg">
-                    {processResponse.message}
+                    Processing response message...
                 </p>
                 <div className="flex gap-6 items-center">
                     <button
@@ -90,31 +99,32 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
 
     return(
         <div>
-            <input type="hidden" value={id} />
-            <div className="my-4">
-                <label className="block text-zinc-500 text-sm">
-                    Title
-                </label>
-                <input 
-                    className="w-64 border border-solid border-zinc-300 rounded py-2 px-2 font-semibold font-lg"
-                    type="text"
-                    value={title}
-                    onInput={ (e) => { setTitle(e.target.value) } }
-                    placeholder="Field display title..."
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+
+                <input type="hidden" value={id} />
+
+                <SystemField 
+                    field={systemFields.field_group_title}
+                    register={register}
+                    errors={errors}
                 />
-            </div>
-            <ChildFieldEditor
-                selectedChildIds={selectedChildIds}
-                setSelectedChildIds={setSelectedChildIds}
-            />
-            <div className="mt-6">
-                <button 
-                    className="w-64 bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800 rounded"
-                    onClick={process}
-                >
-                    SAVE FIELD GROUP
-                </button>
-            </div>
+
+                <ChildFieldEditor
+                    selectedChildIds={selectedChildIds}
+                    setSelectedChildIds={setSelectedChildIds}
+                />
+                <div className="mt-6">
+                    <button 
+                        type="submit"
+                        className="w-64 bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800 rounded"
+                    >
+                        SAVE FIELD GROUP
+                    </button>
+                </div>
+
+            </form>
+            
             <div className="mt-12">
                 <NavLink
                     to="/groups"
@@ -123,6 +133,7 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
                     Cancel
                 </NavLink>
             </div>
+
         </div>
     )
 }
