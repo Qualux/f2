@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useFieldGroup(id) {
+export function useFieldGroup( id, post_id ) {
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [fieldGroup, setFieldGroup] = useState(null);
@@ -10,7 +10,7 @@ export function useFieldGroup(id) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://zero1.local/wp-json/zero/v1/field-group/${id}`
+          `http://zero1.local/wp-json/zero/v1/field-group/${id}?post_id=${post_id}`
         );
         const data = await response.json();
         setFieldGroup(data.field_group);

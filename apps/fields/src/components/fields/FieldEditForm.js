@@ -22,8 +22,6 @@ const CancelButton = () => {
 // @TODO we need updates to the API to return the field data including ID.
 const CompleteScreen = ({createdFieldData, resetForm}) => {
 
-    console.log(createdFieldData)
-
     return(
         <main>
             <h2>

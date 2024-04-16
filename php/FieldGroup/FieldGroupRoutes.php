@@ -85,8 +85,7 @@ class FieldGroupRoutes {
                 'callback' => function( \WP_REST_Request $request ) {
 
                     $id      = $request->get_param( 'id' );
-                    $params  = $request->get_json_params();
-                    $post_id = $params['post_id'];
+                    $post_id = $request->get_param( 'post_id' );
 
                     $fg = new FieldGroup();
                     $fg->load( $id, $post_id );

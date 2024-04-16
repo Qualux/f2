@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFieldGroup } from './lib/useFieldGroup';
 import Field from './components/fields/Field';
 import { useForm } from "react-hook-form";
@@ -18,11 +18,10 @@ const CompleteScreen = () => {
     )
 }
 
-export default function FieldGroupRenderApp( {fieldGroupId} ) {
+function Render( {fieldGroupId, postId} ) {
 
     const [complete, setComplete] = useState(false);
-
-    const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId );
+    const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId, postId );
     const { postData } = useFetch();
 
     const {
@@ -34,6 +33,16 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
         setValue, 
         getValues,
     } = useForm();
+
+    useEffect(() => {
+        if (isLoaded && fieldGroup) {
+
+            console.log('fieldGroup.values:')
+            console.log(fieldGroup.values)
+
+            reset(fieldGroup.values);
+        }
+    }, [isLoaded, fieldGroup, reset]);
 
     const onSubmit = (data) => {
 
@@ -105,4 +114,31 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
         </main>
     )
 
+}
+
+export default function FieldGroupRenderApp( {fieldGroupId} ) {
+    const [postId, setPostId] = useState(null);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const id = window.wp.data.select('core/editor').getCurrentPostId();
+
+            console.log('id: ' + id);
+
+            if (id) {
+                clearInterval(interval); // Stop the interval
+                setPostId(id);
+            }
+        }, 1000); // Check every second
+
+        return () => clearInterval(interval); // Cleanup on unmount
+    }, []);
+
+    if (!postId) {
+        return (
+            <main>Waiting for postId...</main>
+        );
+    }
+
+    return <Render fieldGroupId={fieldGroupId} postId={postId} />;
 }
