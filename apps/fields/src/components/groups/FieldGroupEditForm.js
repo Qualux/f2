@@ -9,7 +9,7 @@ import SystemField from '../fields/SystemField';
 
 /* We need access to the child field data. */
 
-export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
+export default function FieldGroupEditForm() {
 
     const [valuesInit, setValuesInit] = useState(false);
     const [id, setId] = useState(0);
@@ -32,24 +32,14 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
         getValues,
     } = useForm();
 
-    useEffect(() => {
-
-        if(fieldGroupLoaded && !valuesInit) {
-            setId(fieldGroup.id);
-            setTitle(fieldGroup.title);
-            setValuesInit(true);
-        }
-
-    }, [fieldGroupLoaded])
-
     const onSubmit = (data) => {
 
+        console.log('submit data:')
+        console.log(data)
+
         const preparedData = {
-            type: data.field_type,
-            title: data.field_title,
-            name: data.field_name,
-            storage: data.field_storage,
-            choices: getValues('choices'),
+            title: data.field_group_title,
+            fields: getValues('fields'),
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field-group';
@@ -76,6 +66,7 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
                 </p>
                 <div className="flex gap-6 items-center">
                     <button
+                        type="button"
                         onClick={resetForm}
                     >
                         Create another field group
@@ -113,7 +104,9 @@ export default function FieldGroupForm({fieldGroup, fieldGroupLoaded}) {
                 <ChildFieldEditor
                     selectedChildIds={selectedChildIds}
                     setSelectedChildIds={setSelectedChildIds}
+                    setValue={setValue}
                 />
+
                 <div className="mt-6">
                     <button 
                         type="submit"

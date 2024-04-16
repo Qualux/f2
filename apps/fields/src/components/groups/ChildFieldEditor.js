@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import Modal from '../Modal';
 import FieldList from '../fields/FieldSelectionList';
 import ChildFieldContext from './child-fields/ChildFieldContext';
@@ -15,7 +15,7 @@ function SelectExistingField({open, setOpen}) {
     )
 }
 
-export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds}) {
+export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds, setValue}) {
 
     const [existingField, setExistingField] = useState(false);
     
@@ -26,6 +26,10 @@ export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds}
     const handleDeselectChild = (childId) => {
         setSelectedChildIds((prevIds) => prevIds.filter((id) => id !== childId));
     };
+
+    useEffect(() => {
+        setValue('fields', selectedChildIds);
+    }, [setValue, selectedChildIds]);
 
     return(
         <ChildFieldContext.Provider
@@ -41,11 +45,14 @@ export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds}
                 </h2>
                 <div className="flex gap-6">
                     <button
+                        type="button"
                         onClick={ () => { setExistingField(true)} }
                     >
                         Existing Field
                     </button>
-                    <button>
+                    <button
+                        type="button"
+                    > 
                         New Field
                     </button>
                 </div>

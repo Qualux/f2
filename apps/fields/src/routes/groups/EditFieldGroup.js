@@ -1,4 +1,4 @@
-import FieldGroupForm from '../../components/groups/FieldGroupForm';
+import FieldGroupEditForm from '../../components/groups/FieldGroupEditForm';
 import { useParams } from 'react-router-dom';
 import { useFieldGroup } from '../../lib/useFieldGroup';
 
@@ -8,6 +8,6 @@ export default function EditFieldGroup() {
     const { fieldGroup, isLoaded } = useFieldGroup( groupId );
 
     return(
-        <FieldGroupForm fieldGroup={fieldGroup} fieldGroupLoaded={isLoaded} />
+        <FieldGroupEditForm fieldGroup={fieldGroup} fieldGroupLoaded={isLoaded} />
     )
 }

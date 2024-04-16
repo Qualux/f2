@@ -1,20 +1,8 @@
 import { useState } from 'react';
 import FieldGroupList from '../../components/groups/FieldGroupList';
-import FieldGroupForm from '../../components/groups/FieldGroupForm';
 import { useFieldType } from '../../lib/useFieldType';
 import { useField } from '../../lib/useField';
 import { useLocation, Outlet, NavLink } from "react-router-dom";
-
-function FieldGroupFormEdit( { setMode, mode } ) {
-
-    const { field, isLoaded } = useField(85);
-
-    console.log(field)
-
-    return( 
-        <FieldGroupForm mode={mode} setMode={setMode} field={field} fieldLoaded={isLoaded} />
-    )
-}
 
 export default function GroupsDashboard() {
 
