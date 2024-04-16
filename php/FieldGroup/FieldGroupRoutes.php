@@ -83,15 +83,20 @@ class FieldGroupRoutes {
             register_rest_route( 'zero/v1', '/field-group/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
-                    $id = $request->get_param( 'id' );
+
+                    $id      = $request->get_param( 'id' );
+                    $params  = $request->get_json_params();
+                    $post_id = $params['post_id'];
+
                     $fg = new FieldGroup();
-                    $fg->load( $id );
+                    $fg->load( $id, $post_id );
                     return new \WP_REST_Response(
                         array(
                             'status' => 200,
                             'field_group'  => $fg,
                         )
                     );
+
                 },
                 'permission_callback' => '__return_true',
             ));
