@@ -1,4 +1,8 @@
+import { useFieldType } from './useFieldType';
+
 export function useSystemFields() {
+
+    const { fieldTypeList } = useFieldType();
 
     const systemFields = {
         field_type: {
@@ -7,20 +11,7 @@ export function useSystemFields() {
             title: 'Field Type',
             label: 'Field Type',
             storage: 'post_meta',
-            choices: [
-                {
-                    value: 'text',
-                    label: 'Text',
-                },
-                {
-                    value: 'select',
-                    label: 'Select',
-                },
-                {
-                    value: 'number',
-                    label: 'Number',
-                },
-            ]
+            choices: fieldTypeList,
         },
         field_title: {
             type: 'text',

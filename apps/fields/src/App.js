@@ -7,7 +7,7 @@ import {
 
 function App() {
   return (
-    <div className="min-h-screen flex gap-4">
+    <div className="min-h-screen flex gap-0">
       <Menu />
       <Outlet />
     </div>
