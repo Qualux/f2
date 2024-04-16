@@ -9,7 +9,7 @@ import SystemField from '../fields/SystemField';
 
 /* We need access to the child field data. */
 
-export default function FieldGroupEditForm() {
+export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
 
     const [valuesInit, setValuesInit] = useState(false);
     const [id, setId] = useState(0);
@@ -32,6 +32,23 @@ export default function FieldGroupEditForm() {
         getValues,
     } = useForm();
 
+    useEffect(() => {
+
+        console.log(fieldGroupLoaded)
+        console.log(fieldGroup)
+
+        if (fieldGroupLoaded && fieldGroup) {
+
+            console.log('fieldgroup:')
+            console.log(fieldGroup)
+
+            reset({
+                field_group_title: fieldGroup.title,
+                fields: fieldGroup.fields,
+            });
+        }
+    }, [fieldGroupLoaded, fieldGroup, reset]);
+
     const onSubmit = (data) => {
 
         console.log('submit data:')
@@ -42,7 +59,7 @@ export default function FieldGroupEditForm() {
             fields: getValues('fields'),
         }
 
-        const url = 'http://zero1.local/wp-json/zero/v1/field-group';
+        const url = 'http://zero1.local/wp-json/zero/v1/field-group/' + fieldGroup.id;
         postData(url, preparedData).then((data) => {
             setComplete(true);
         });
