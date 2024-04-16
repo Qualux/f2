@@ -60,10 +60,7 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
         const preparedData = {
             post_id: postId,
             post_type: 'page',
-            values: {
-                test123: 'test123',
-                test234: 'test234',
-            }
+            values: data
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field-group/values/'+fieldGroupId;
