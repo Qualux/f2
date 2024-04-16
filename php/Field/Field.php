@@ -33,4 +33,8 @@ class Field {
 
     }
 
+    public static function value( $name, $post_id ) {
+        return get_post_meta( $post_id, $name, 1 );
+    }
+
 }

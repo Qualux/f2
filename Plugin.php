@@ -28,6 +28,9 @@ class Plugin {
 
         require_once( ZERO_PATH . '/php/Field/Field.php' );
 
+        require_once( ZERO_PATH . '/php/Field/FieldShortcodes.php' );
+        $fs = new Field\FieldShortcodes();
+
         require_once( ZERO_PATH . '/php/Field/Routes.php' );
         $r = new Field\Routes();
 
