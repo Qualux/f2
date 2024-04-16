@@ -70,6 +70,14 @@ export function useSystemFields() {
             storage: 'post_meta',
             placeholder: 'Enter title for display...',
         },
+        field_group_post_type: {
+            type: 'text',
+            name: 'field_group_post_type',
+            title: 'Post Type',
+            label: 'Post Type',
+            storage: 'post_meta',
+            placeholder: 'Enter post type to assign field group...',
+        },
     };
 
     return { systemFields };

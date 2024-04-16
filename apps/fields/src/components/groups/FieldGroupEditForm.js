@@ -60,6 +60,7 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
         const preparedData = {
             title: data.field_group_title,
             fields: getValues('fields'),
+            storage_post_type: data.field_group_post_type,
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field-group/' + fieldGroup.id;
@@ -125,6 +126,12 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
                     selectedChildIds={selectedChildIds}
                     setSelectedChildIds={setSelectedChildIds}
                     setValue={setValue}
+                />
+
+                <SystemField 
+                    field={systemFields.field_group_post_type}
+                    register={register}
+                    errors={errors}
                 />
 
                 <div className="mt-6">
