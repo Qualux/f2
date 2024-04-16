@@ -34,19 +34,22 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
 
     useEffect(() => {
 
-        console.log(fieldGroupLoaded)
-        console.log(fieldGroup)
-
         if (fieldGroupLoaded && fieldGroup) {
 
             console.log('fieldgroup:')
             console.log(fieldGroup)
 
+            // Set form values.
             reset({
                 field_group_title: fieldGroup.title,
                 fields: fieldGroup.fields,
             });
+
+            // Special handling to set child field data. 
+            setSelectedChildIds(fieldGroup.fields);
+
         }
+
     }, [fieldGroupLoaded, fieldGroup, reset]);
 
     const onSubmit = (data) => {
