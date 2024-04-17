@@ -12,7 +12,7 @@ import Settings from './routes/Settings';
 // Field Routes.
 import FieldDashboardRoute from './routes/fields/FieldDashboardRoute';
 import CreateFieldRoute from './routes/fields/CreateFieldRoute';
-import ViewField from './routes/fields/ViewField';
+import ViewFieldRoute from './routes/fields/ViewFieldRoute';
 import EditFieldRoute from './routes/fields/EditFieldRoute';
 import DeleteFieldRoute from './routes/fields/DeleteFieldRoute';
 
@@ -54,7 +54,7 @@ const router = createHashRouter([
           },
           {
             path: "view/:fieldId",
-            element: <ViewField />,
+            element: <ViewFieldRoute />,
           },
           {
             path: "edit/:fieldId",

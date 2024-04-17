@@ -1,17 +1,10 @@
 import { useState } from 'react';
-
-const Label = ({text}) => {
-    return(
-        <label className="block text-zinc-300 font-semibold text-sm mt-4 mb-1">
-            {text}
-        </label>
-    )
-}
+import Label from './Label';
 
 const Input = ({placeholder, name, value, setFieldValue}) => {
     return(
         <input 
-            className="border border-solid border-zinc-300 rounded py-2 px-2"
+            className="w-full border border-solid border-zinc-300 rounded py-2 px-2"
             name={name}
             id={name}
             type="text"
@@ -38,8 +31,6 @@ const SelectField = ({name, value}) => {
 }
 
 const FieldType = ({field, fieldValue, setFieldValue}) => {
-
-    console.log(field.type)
 
     if(field.type === 'text') {
         return(
@@ -71,14 +62,14 @@ const FieldValue = ({fieldValue}) => {
     }
 
     return(
-        <div className="my-8">
-            <h5 className="text-lg font-semibold text-zinc-700 mb-4">
+        <div className="my-12 shadow-xl p-8">
+            <h5 className="text-xl font-bold text-zinc-700 mb-1">
                 Field Value Preview
             </h5>
-            <p className="text-zinc-300 text-sm">
+            <p className="text-zinc-500 text-lg">
                 Enter values into the field to test it out. Values will not be saved.
             </p>
-            <h4 className="text-2xl font-bold text-zinc-700">
+            <h4 className="mt-4 text-xl font-bold text-zinc-600">
                 {renderValue()}
             </h4>
         </div>  
@@ -88,10 +79,6 @@ const FieldValue = ({fieldValue}) => {
 
 
 export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue}) {
-
-    console.log('field:')
-    console.log(field)
-
     if( ! fieldLoaded ) {
         return(
             <div>Field loading...</div>
@@ -100,9 +87,6 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
 
     return(
         <div className="bg-zinc-100 p-12">
-            <main>
-                {field.type}
-            </main>
             <Label text={field.label} />
             <FieldType field={field} fieldValue={fieldValue} setFieldValue={setFieldValue} />
             <FieldValue fieldValue={fieldValue} />
