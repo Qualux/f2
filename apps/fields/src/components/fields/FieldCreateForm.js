@@ -75,6 +75,7 @@ export default function FieldCreateForm() {
         const preparedData = {
             type: data.field_type,
             title: data.field_title,
+            label: data.field_label,
             name: data.field_name,
             storage: data.field_storage,
             choices: getValues('choices'),
@@ -111,6 +112,12 @@ export default function FieldCreateForm() {
 
                 <SystemField 
                     field={systemFields.field_title}
+                    register={register}
+                    errors={errors}
+                />
+
+                <SystemField 
+                    field={systemFields.field_label}
                     register={register}
                     errors={errors}
                 />

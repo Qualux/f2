@@ -21,6 +21,14 @@ export function useSystemFields() {
             storage: 'post_meta',
             placeholder: 'Enter title for display...',
         },
+        field_label: {
+            type: 'text',
+            name: 'field_label',
+            title: 'Field Label',
+            label: 'Field Label',
+            storage: 'post_meta',
+            placeholder: 'Enter label for display, leave blank to turn off label rendering...',
+        },
         field_name: {
             type: 'text',
             name: 'field_name',

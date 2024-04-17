@@ -16,6 +16,7 @@ class Routes {
                     $params  = $req->get_json_params();
                     $type    = $params['type'];
                     $title   = $params['title'];
+                    $label   = $params['label'];
                     $name    = $params['name'];
                     $storage = $params['storage'];
                     $choices = $params['choices'];
@@ -30,6 +31,7 @@ class Routes {
                     );
 
                     update_post_meta( $post_id, 'z_field_type', $type );
+                    update_post_meta( $post_id, 'z_field_label', $label );
                     update_post_meta( $post_id, 'z_field_name', $name );
                     update_post_meta( $post_id, 'z_field_storage', $storage );
 
@@ -58,6 +60,7 @@ class Routes {
                     $params  = $request->get_json_params();
                     $type    = $params['type'];
                     $title   = $params['title'];
+                    $label   = $params['label'];
                     $name    = $params['name'];
                     $storage = $params['storage'];
                     $choices = $params['choices'];
@@ -72,6 +75,7 @@ class Routes {
 
                     update_post_meta( $id, 'z_field_type', $type );
                     update_post_meta( $id, 'z_field_name', $name );
+                    update_post_meta( $post_id, 'z_field_label', $label );
                     update_post_meta( $id, 'z_field_storage', $storage );
 
                     if( $type === 'select' ) {
@@ -150,6 +154,7 @@ class Routes {
 
             // Save value endpoint.
             register_rest_route( 'zero/v1', '/field/value', array(
+
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 

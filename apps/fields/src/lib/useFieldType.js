@@ -2,31 +2,31 @@ export function useFieldType() {
 
     const fieldTypeList = [
         {
-            name: 'text',
+            value: 'text',
             label: 'Text',
         },
         {
-            name: 'select',
+            value: 'select',
             label: 'Select',
         },
         {
-            name: 'number',
+            value: 'number',
             label: 'Number',
         },
         {
-            name: 'email',
+            value: 'email',
             label: 'Email',
         },
         {
-            name: 'url',
+            value: 'url',
             label: 'URL',
         },
         {
-            name: 'collection',
+            value: 'collection',
             label: 'Collection',
         },
         {
-            name: 'autogen',
+            value: 'autogen',
             label: 'Automatic Generated',
         }
     ];

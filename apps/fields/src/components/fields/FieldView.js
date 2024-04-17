@@ -39,9 +39,11 @@ const SelectField = ({name, value}) => {
 
 const FieldType = ({field, fieldValue, setFieldValue}) => {
 
+    console.log(field.type)
+
     if(field.type === 'text') {
         return(
-            <Input name={field.name} placeholder="Enter first name..." value={fieldValue} setFieldValue={setFieldValue} />
+            <Input name={field.name} placeholder={field.placeholder} value={fieldValue} setFieldValue={setFieldValue} />
         )
     }
 
@@ -87,7 +89,10 @@ const FieldValue = ({fieldValue}) => {
 
 export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue}) {
 
-    if( !fieldLoaded ) {
+    console.log('field:')
+    console.log(field)
+
+    if( ! fieldLoaded ) {
         return(
             <div>Field loading...</div>
         );
@@ -95,7 +100,10 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
 
     return(
         <div className="bg-zinc-100 p-12">
-            <Label text="Field Label" />
+            <main>
+                {field.type}
+            </main>
+            <Label text={field.label} />
             <FieldType field={field} fieldValue={fieldValue} setFieldValue={setFieldValue} />
             <FieldValue fieldValue={fieldValue} />
         </div>

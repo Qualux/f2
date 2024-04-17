@@ -21,7 +21,7 @@ class Field {
         $this->name    = get_post_meta( $id, 'z_field_name', 1 );
         $this->storage = get_post_meta( $id, 'z_field_storage', 1 );
         $this->type    = get_post_meta( $id, 'z_field_type', 1 );
-        $this->label   = 'Field Label 1';
+        $this->label   = get_post_meta( $id, 'z_field_label', 1 );
         $this->choices = get_post_meta( $id, 'z_field_choices', 1 );
 
     }
