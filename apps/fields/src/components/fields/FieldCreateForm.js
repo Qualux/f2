@@ -5,7 +5,7 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import SystemField from './SystemField';
-import CollectionField from '../field-types/collection/CollectionField';
+import CollectionField from './types/CollectionField';
 
 const CancelButton = () => {
     return(

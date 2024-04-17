@@ -31,8 +31,8 @@ class Plugin {
         require_once( ZERO_PATH . '/php/Field/FieldShortcodes.php' );
         $fs = new Field\FieldShortcodes();
 
-        require_once( ZERO_PATH . '/php/Field/Routes.php' );
-        $r = new Field\Routes();
+        require_once( ZERO_PATH . '/php/Field/FieldRoutes.php' );
+        $r = new Field\FieldRoutes();
 
         require_once( ZERO_PATH . '/php/Metabox/Metabox.php' );
         $m = new Metabox\Metabox();

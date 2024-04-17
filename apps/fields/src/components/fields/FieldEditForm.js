@@ -5,6 +5,7 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import SystemField from './SystemField';
+import CollectionField from './types/CollectionField';
 
 const CancelButton = () => {
     return(
@@ -50,6 +51,7 @@ const CompleteScreen = ({createdFieldData, resetForm}) => {
 
 export default function FieldEditForm({field, fieldLoaded}) {
 
+    const [valuesInit, setValuesInit] = useState(false);
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
 
@@ -58,7 +60,9 @@ export default function FieldEditForm({field, fieldLoaded}) {
         handleSubmit,
         watch,
         formState: { errors },
-        reset
+        reset,
+        setValue, 
+        getValues,
     } = useForm()
 
     const { fieldTypeList } = useFieldType();
@@ -72,7 +76,9 @@ export default function FieldEditForm({field, fieldLoaded}) {
                 field_title: field.title,
                 field_name: field.name,
                 field_storage: field.storage,
+                choices: field.choices
             });
+            setValuesInit(true);
         }
     }, [fieldLoaded, field, reset]);
 
@@ -84,6 +90,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
             label: data.field_label,
             name: data.field_name,
             storage: data.field_storage,
+            choices: getValues('choices'),
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field/'+field.id;
@@ -137,6 +144,18 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     field={systemFields.field_storage}
                     register={register}
                     errors={errors}
+                />
+
+                <CollectionField 
+                    field={
+                        {
+                            title: 'Choices',
+                            name: 'choices',
+                        }
+                    }
+                    valuesInit={valuesInit}
+                    setValue={setValue}
+                    getValues={getValues}
                 />
                 
                 <button 

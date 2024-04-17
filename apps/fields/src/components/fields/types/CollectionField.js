@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const AddScreen = ({ addItem }) => {
+
     const [itemId, setItemId] = useState('');
     const [itemLabel, setItemLabel] = useState('');
 
@@ -59,11 +60,24 @@ const ItemsList = ({ items, removeItem }) => {
     );
 };
 
-export default function CollectionField({field, setValue}) {
-
+export default function CollectionField({field, valuesInit, setValue, getValues}) {
 
     const [mode, setMode] = useState('view');
     const [items, setItems] = useState([]);
+
+    useEffect(() => {
+
+        if(valuesInit) {
+
+            const choicesList = getValues('choices');
+            console.log(choicesList)
+            if( typeof choicesList !== 'undefined' && choicesList.length ) {
+                setItems(choicesList);
+            }
+
+        }
+
+    }, [valuesInit])
 
     const addItem = (newItem) => {
         setItems([...items, newItem]);

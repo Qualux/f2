@@ -2,7 +2,7 @@
 
 namespace Zero\Field;
 
-class Routes {
+class FieldRoutes {
     
     public function __construct() {
 
@@ -53,10 +53,11 @@ class Routes {
 
             // Update endpoint.
             register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+
                 'methods' => 'POST',
                 'callback' => function( \WP_REST_Request $request ) {
 
-                    $id      = $request->get_param( 'id' );
+                    $post_id = $request->get_param( 'id' );
                     $params  = $request->get_json_params();
                     $type    = $params['type'];
                     $title   = $params['title'];
@@ -73,10 +74,10 @@ class Routes {
                         ]
                     );
 
-                    update_post_meta( $id, 'z_field_type', $type );
-                    update_post_meta( $id, 'z_field_name', $name );
+                    update_post_meta( $post_id, 'z_field_type', $type );
+                    update_post_meta( $post_id, 'z_field_name', $name );
                     update_post_meta( $post_id, 'z_field_label', $label );
-                    update_post_meta( $id, 'z_field_storage', $storage );
+                    update_post_meta( $post_id, 'z_field_storage', $storage );
 
                     if( $type === 'select' ) {
                         update_post_meta( $post_id, 'z_field_choices', $choices );
@@ -84,9 +85,10 @@ class Routes {
 
                     return new \WP_REST_Response(
                         array(
-                            'status'  => 200,
-                            'message' => 'Saved field with ID='.$post_id,
-                            'params'  => $params,
+                            'status'   => 200,
+                            'message'  => 'Saved field with ID '. $post_id . '.',
+                            'field_id' => $post_id,
+                            'params'   => $params,
                         )
                     );
 
