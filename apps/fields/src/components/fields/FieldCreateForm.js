@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
@@ -53,6 +53,7 @@ export default function FieldCreateForm() {
 
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
+    const [conditionPlaceholder, setConditionPlaceholder] = useState(false);
 
     const {
         register,
@@ -95,6 +96,17 @@ export default function FieldCreateForm() {
         reset();
     }
 
+    useEffect(() => {
+
+        const fieldType = getValues('field_type');
+        if( fieldType === 'text' ) {
+            setConditionPlaceholder(true);
+            return;
+        }
+        setConditionPlaceholder(false);
+
+    }, [watch('field_type')])
+
     if( complete ) {
         return <CompleteScreen createdFieldData={createdFieldData} resetForm={resetForm} />
     }
@@ -133,21 +145,25 @@ export default function FieldCreateForm() {
                     errors={errors}
                 />
 
-                <SystemField 
-                    field={systemFields.field_placeholder}
-                    register={register}
-                    errors={errors}
-                />
+                {conditionPlaceholder &&
+                    <SystemField 
+                        field={systemFields.field_placeholder}
+                        register={register}
+                        errors={errors}
+                    />
+                }
 
-                <CollectionField 
-                    field={
-                        {
-                            title: 'Choices',
-                            name: 'choices',
+                {watch('field_type') === 'select' && 
+                    <CollectionField 
+                        field={
+                            {
+                                title: 'Choices',
+                                name: 'choices',
+                            }
                         }
-                    }
-                    setValue={setValue}
-                />
+                        setValue={setValue}
+                    />
+                }
                 
                 <button 
                     className="bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800"
