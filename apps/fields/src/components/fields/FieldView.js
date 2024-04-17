@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Label from './Label';
+import SelectField from './types/SelectField';
 
 const Input = ({placeholder, name, value, setFieldValue}) => {
     return(
@@ -12,21 +13,6 @@ const Input = ({placeholder, name, value, setFieldValue}) => {
             value={value}
             onInput={(e) => {setFieldValue(e.target.value)}}
         />
-    )
-}
-
-const SelectField = ({name, value}) => {
-    return(
-        <select 
-            className="border border-solid border-zinc-300 rounded py-2 px-2"
-            name={name}
-            id={name}
-            value={value}
-        >
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
     )
 }
 
@@ -46,7 +32,7 @@ const FieldType = ({field, fieldValue, setFieldValue}) => {
 
     if(field.type === 'select') {
         return(
-            <SelectField name={field.name} value={fieldValue} setFieldValue={setFieldValue} />
+            <SelectField field={field} />
         )
     }
 

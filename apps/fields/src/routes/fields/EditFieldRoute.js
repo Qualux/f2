@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AppTemplate from '../../components/global/AppTemplate';
 import FieldEditForm from '../../components/fields/FieldEditForm';
 import FieldView from '../../components/fields/FieldView';
 import { useParams } from 'react-router-dom';
@@ -11,15 +12,9 @@ export default function EditFieldRoute() {
     const [fieldValue, setFieldValue] = useState(null);
 
     return(
-        <main className="flex gap-8">
+        <AppTemplate title="Edit Field">
             <FieldEditForm field={field} fieldLoaded={isLoaded} />
-            <FieldView 
-                field={field} 
-                fieldLoaded={isLoaded} 
-                fieldValue={fieldValue}
-                setFieldValue={setFieldValue}
-            />
-        </main>
+        </AppTemplate>
         
     )
 }

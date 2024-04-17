@@ -8,6 +8,7 @@
  */
 
 namespace Zero\Metabox;
+use Zero\FieldGroup\FieldGroup;
 
 class Metabox {
 
@@ -16,8 +17,6 @@ class Metabox {
      * Reference: https://developer.wordpress.org/reference/functions/add_meta_box/
      */
     public function __construct() {
-
-        
 
         add_action( 'add_meta_boxes', function( $post_type ) {
 
@@ -39,16 +38,19 @@ class Metabox {
 
             if( empty( $fgs )) { return; }
 
-            foreach( $fgs as $fg ) {
+            foreach( $fgs as $fg_post ) {
+
+                $fg = new FieldGroup();
+                $fg->load( $fg_post->ID );
 
                 add_meta_box( 
-                    'zero_metabox_' . $fg->ID, 
-                    'Zero Metabox for FG ' . $fg->ID, 
+                    'zero_metabox_' . $fg->id, 
+                    'Zero Metabox for FG ' . $fg->id, 
                     [ $this, 'content' ], 
-                    'page', 
+                    $fg->storage_post_type, 
                     'advanced', 
                     'default',
-                    [ 'field_group_id' => $fg->ID ],
+                    [ 'field_group_id' => $fg->id ],
                 );
 
             }

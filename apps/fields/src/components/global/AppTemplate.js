@@ -1,4 +1,5 @@
 import AppHeader from './AppHeader';
+import AppFooter from './AppFooter';
 
 export default function AppTemplate( {title, children} ) {
 
@@ -8,9 +9,7 @@ export default function AppTemplate( {title, children} ) {
             <div className="grow m-6">
                 {children}
             </div>
-            <footer>
-                FOOTER
-            </footer>
+            <AppFooter />
         </main>
     );
 

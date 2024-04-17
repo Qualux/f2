@@ -25,13 +25,13 @@ const CompleteScreen = ({createdFieldData, resetForm}) => {
 
     return(
         <main>
-            <h2>
+            <h2 className="font-bold text-2xl text-zinc-700">
                 Field Created!
             </h2>
-            <p>
+            <p className="mt-4 mb-12 font-semibold text-xl text-zinc-700">
                 {createdFieldData.message}
             </p>
-            <div>
+            <div className="flex gap-6">
                 <NavLink
                     to="/fields/edit/192"
                     className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
