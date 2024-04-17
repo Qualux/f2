@@ -76,6 +76,8 @@ export default function FieldEditForm({field, fieldLoaded}) {
                 field_title: field.title,
                 field_name: field.name,
                 field_storage: field.storage,
+                field_label: field.label,
+                field_placeholder: field.placeholder,
                 choices: field.choices
             });
             setValuesInit(true);
@@ -91,6 +93,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
             name: data.field_name,
             storage: data.field_storage,
             choices: getValues('choices'),
+            placeholder: data.field_placeholder,
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field/'+field.id;
@@ -142,6 +145,12 @@ export default function FieldEditForm({field, fieldLoaded}) {
 
                 <SystemField 
                     field={systemFields.field_storage}
+                    register={register}
+                    errors={errors}
+                />
+
+                <SystemField 
+                    field={systemFields.field_placeholder}
                     register={register}
                     errors={errors}
                 />

@@ -13,13 +13,14 @@ class FieldRoutes {
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 
-                    $params  = $req->get_json_params();
-                    $type    = $params['type'];
-                    $title   = $params['title'];
-                    $label   = $params['label'];
-                    $name    = $params['name'];
-                    $storage = $params['storage'];
-                    $choices = $params['choices'];
+                    $params      = $req->get_json_params();
+                    $type        = $params['type'];
+                    $title       = $params['title'];
+                    $label       = $params['label'];
+                    $name        = $params['name'];
+                    $storage     = $params['storage'];
+                    $choices     = $params['choices'];
+                    $placeholder = $params['placeholder'];
 
                     $post_id = wp_insert_post(
                         [
@@ -34,6 +35,7 @@ class FieldRoutes {
                     update_post_meta( $post_id, 'z_field_label', $label );
                     update_post_meta( $post_id, 'z_field_name', $name );
                     update_post_meta( $post_id, 'z_field_storage', $storage );
+                    update_post_meta( $post_id, 'z_field_placeholder', $placeholder );
 
                     if( $type === 'select' ) {
                         update_post_meta( $post_id, 'z_field_choices', $choices );
@@ -65,6 +67,7 @@ class FieldRoutes {
                     $name    = $params['name'];
                     $storage = $params['storage'];
                     $choices = $params['choices'];
+                    $placeholder = $params['placeholder'];
 
                     wp_update_post(
                         [
@@ -78,6 +81,7 @@ class FieldRoutes {
                     update_post_meta( $post_id, 'z_field_name', $name );
                     update_post_meta( $post_id, 'z_field_label', $label );
                     update_post_meta( $post_id, 'z_field_storage', $storage );
+                    update_post_meta( $post_id, 'z_field_placeholder', $placeholder );
 
                     if( $type === 'select' ) {
                         update_post_meta( $post_id, 'z_field_choices', $choices );

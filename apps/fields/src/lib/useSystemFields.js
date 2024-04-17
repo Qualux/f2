@@ -54,6 +54,14 @@ export function useSystemFields() {
                 },
             ]
         },
+        field_placeholder: {
+            type: 'text',
+            name: 'field_placeholder',
+            title: 'Field Placeholder',
+            label: 'Field Placeholder',
+            placeholder: 'Enter placeholder text...',
+            storage: 'post_meta',
+        },
         field_choices: {
             type: 'collection',
             name: 'field_choices',

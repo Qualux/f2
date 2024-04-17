@@ -23,12 +23,10 @@ const CancelButton = () => {
 // @TODO we need updates to the API to return the field data including ID.
 const CompleteScreen = ({createdFieldData, resetForm}) => {
 
-    console.log(createdFieldData)
-
     return(
         <main>
             <h2>
-                Congrats. You have made a field. Yippee yay motherfucker.
+                Field Created!
             </h2>
             <p>
                 {createdFieldData.message}
@@ -79,6 +77,7 @@ export default function FieldCreateForm() {
             name: data.field_name,
             storage: data.field_storage,
             choices: getValues('choices'),
+            placeholder: data.field_placeholder,
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field';
@@ -130,6 +129,12 @@ export default function FieldCreateForm() {
 
                 <SystemField 
                     field={systemFields.field_storage}
+                    register={register}
+                    errors={errors}
+                />
+
+                <SystemField 
+                    field={systemFields.field_placeholder}
                     register={register}
                     errors={errors}
                 />
