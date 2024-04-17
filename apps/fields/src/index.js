@@ -14,7 +14,7 @@ import FieldDashboardRoute from './routes/fields/FieldDashboardRoute';
 import CreateFieldRoute from './routes/fields/CreateFieldRoute';
 import ViewField from './routes/fields/ViewField';
 import EditFieldRoute from './routes/fields/EditFieldRoute';
-import DeleteField from './routes/fields/DeleteField';
+import DeleteFieldRoute from './routes/fields/DeleteFieldRoute';
 
 // Field Group Routes.
 import GroupsDashboard from './routes/groups/GroupsDashboard';
@@ -62,7 +62,7 @@ const router = createHashRouter([
           },
           {
             path: "delete/:fieldId",
-            element: <DeleteField />,
+            element: <DeleteFieldRoute />,
           },
         ],
       },

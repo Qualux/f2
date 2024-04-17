@@ -9,7 +9,7 @@ export default function SystemField({field, register, errors}) {
                         {field.label}
                     </label>
                     <input 
-                        className="border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
+                        className="w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
                         type="text"
                         placeholder={field.placeholder}
                         {...register(field.name, { required: true })}
@@ -25,7 +25,7 @@ export default function SystemField({field, register, errors}) {
                         {field.label}
                     </label>
                     <select
-                        className="border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
+                        className="w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
                         {...register(field.name, { required: true })}
                     >
                         {field.choices.map((choice, index) => (

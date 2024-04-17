@@ -11,37 +11,37 @@ function EmptyMessage() {
 
 function Field({field, index}) {
     return(
-        <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
-            <h2 className="basis-10 font-bold text-zinc-400 mb-6 !my-0">
+        <>
+            <div className="font-medium text-sm text-zinc-800 px-2 py-1">
                 {field.id}
-            </h2>
-            <div className="w-40 font-bold">
+            </div>
+            <div className="font-medium px-2 py-1">
                 {field.title}
             </div>
-            <div className="font-medium text-zinc-500 text-sm">
+            <div className="font-medium text-sm px-2 py-1">
                 {field.type}
             </div>
-            <div className="flex justify-end grow gap-6 items-center">
+            <div className="flex justify-end grow gap-3 items-center">
                 <NavLink
                     to={`/fields/view/${field.id}`}
-                    className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
+                    className="font-semibold text-zinc-100 text-sm bg-sky-600 py-1 px-6 rounded transition-colors hover:bg-sky-700"
                     >
                     VIEW
                 </NavLink>
                 <NavLink
                     to={`/fields/edit/${field.id}`}
-                    className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
+                    className="font-semibold text-zinc-100 text-sm bg-sky-600 py-1 px-6 rounded transition-colors hover:bg-sky-700"
                     >
                     EDIT
                 </NavLink>
                 <NavLink
                     to={`/fields/delete/${field.id}`}
-                    className="font-bold text-zinc-100 bg-sky-800 py-2 px-6 rounded"
+                    className="font-semibold text-zinc-100 text-sm bg-sky-600 py-1 px-6 rounded transition-colors hover:bg-sky-700"
                     >
                     DELETE
                 </NavLink>
             </div>
-        </li>
+        </>
     )
 }
 
@@ -54,17 +54,21 @@ export default function FieldList() {
     }
 
     return(
-        <ul>
-            <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
-                <div>ID</div>
-                <div className="w-40">Title</div>
-                <div>Type</div>
-                <div>&nbsp;</div>
-            </li>
+        <div className="grid grid-cols-4 gap-1 bg-zinc-200">
+            <div className="font-bold text-sm text-zinc-800 px-2 py-1">
+                ID
+            </div>
+            <div className="font-bold text-sm text-zinc-800 px-2 py-1">
+                Title
+            </div>
+            <div className="font-bold text-sm text-zinc-800 px-2 py-1">
+                Type
+            </div>
+            <div>&nbsp;</div>
             {fields.map( ( field, index ) =>
                 <Field key={index} field={field} index={index} />
             )}
-        </ul>
+        </div>
     )
 
 }
