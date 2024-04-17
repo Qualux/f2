@@ -10,7 +10,7 @@ import Dashboard from './routes/Dashboard';
 import Settings from './routes/Settings';
 
 // Field Routes.
-import FieldsDashboard from './routes/fields/FieldsDashboard';
+import FieldDashboardRoute from './routes/fields/FieldDashboardRoute';
 import CreateFieldRoute from './routes/fields/CreateFieldRoute';
 import ViewField from './routes/fields/ViewField';
 import EditFieldRoute from './routes/fields/EditFieldRoute';
@@ -46,7 +46,7 @@ const router = createHashRouter([
       },
       {
         path: "fields",
-        element: <FieldsDashboard />,
+        element: <FieldDashboardRoute />,
         children: [
           {
             path: "create",

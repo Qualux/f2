@@ -1,15 +1,10 @@
+import AppHeader from '../components/global/AppHeader';
+
 export default function Dashboard() {
 
     return(
         <main className="grow flex flex-col">
-            <header className="flex items-center justify-between bg-sky-800 mb-6 text-zinc-200 font-semibold p-3">
-                <div>
-                    DASHBOARD
-                </div>
-                <span>
-                    F2 | Fields and Forms 
-                </span>
-            </header>
+            <AppHeader title="Dashboard" />
             <div className="grow">
                 <section className="px-4 py-6 text-zinc-700">
                     <h2 className="font-bold text-3xl">
