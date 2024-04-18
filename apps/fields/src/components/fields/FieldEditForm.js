@@ -26,6 +26,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
     const [valuesInit, setValuesInit] = useState(false);
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
+    const [conditionPlaceholder, setConditionPlaceholder] = useState(false);
 
     const {
         register,
@@ -43,37 +44,18 @@ export default function FieldEditForm({field, fieldLoaded}) {
 
     useEffect(() => {
         if (fieldLoaded && field) {
-            reset({
-                field_type: field.type, // Set default values for each field
-                field_title: field.title,
-                field_name: field.name,
-                field_storage: field.storage,
-                field_label: field.label,
-                field_placeholder: field.placeholder,
-                choices: field.choices
-            });
+            reset(field);
             setValuesInit(true);
         }
     }, [fieldLoaded, field, reset]);
 
     const onSubmit = (data) => {
 
-        const preparedData = {
-            type: data.field_type,
-            title: data.field_title,
-            label: data.field_label,
-            name: data.field_name,
-            storage: data.field_storage,
-            choices: getValues('choices'),
-            placeholder: data.field_placeholder,
-        }
-
         const url = 'http://zero1.local/wp-json/zero/v1/field/'+field.id;
-        postData(url, preparedData).then((data) => {
+        postData(url, data).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);
         });
-
 
     }
 
@@ -82,6 +64,17 @@ export default function FieldEditForm({field, fieldLoaded}) {
         setCreatedFieldData(null);
         reset();
     }
+
+    useEffect(() => {
+
+        const fieldType = getValues('field_type');
+        if( fieldType === 'text' ) {
+            setConditionPlaceholder(true);
+            return;
+        }
+        setConditionPlaceholder(false);
+
+    }, [watch('field_type')])
 
     if( complete ) {
         return <CompleteScreen createdFieldData={createdFieldData} resetForm={resetForm} />
@@ -121,11 +114,13 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     errors={errors}
                 />
 
-                <Field
-                    field={systemFields.field_placeholder}
-                    register={register}
-                    errors={errors}
-                />
+                {conditionPlaceholder &&
+                    <Field 
+                        field={systemFields.field_placeholder}
+                        register={register}
+                        errors={errors}
+                    />
+                }
 
                 {watch('field_type') === 'select' && 
                     <CollectionField 

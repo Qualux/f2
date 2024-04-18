@@ -14,38 +14,22 @@ class FieldRoutes {
                 'callback' => function( $req ) {
 
                     $params      = $req->get_json_params();
-                    $type        = $params['type'];
-                    $title       = $params['title'];
-                    $label       = $params['label'];
-                    $name        = $params['name'];
-                    $storage     = $params['storage'];
-                    $choices     = $params['choices'];
-                    $placeholder = $params['placeholder'];
 
-                    $post_id = wp_insert_post(
-                        [
-                            'post_type'    => 'field',
-                            'post_title'   => $title,
-                            'post_content' => '',
-                            'post_status'  => 'publish',
-                        ]
-                    );
-
-                    update_post_meta( $post_id, 'z_field_type', $type );
-                    update_post_meta( $post_id, 'z_field_label', $label );
-                    update_post_meta( $post_id, 'z_field_name', $name );
-                    update_post_meta( $post_id, 'z_field_storage', $storage );
-                    update_post_meta( $post_id, 'z_field_placeholder', $placeholder );
-
-                    if( $type === 'select' ) {
-                        update_post_meta( $post_id, 'z_field_choices', $choices );
-                    }
+                    $f                    = new Field();
+                    $f->field_title       = $params['field_title'];
+                    $f->field_name        = $params['field_name'];
+                    $f->field_type        = $params['field_type'];
+                    $f->field_label       = $params['field_label'];
+                    $f->field_storage     = $params['field_storage'];
+                    $f->field_placeholder = $params['field_placeholder'];
+                    $f->field_choices     = $params['field_choices'];
+                    $f->save();
                     
                     return new \WP_REST_Response(
                         array(
                             'status'   => 200,
-                            'message'  => __( 'Saved field with ID '. $post_id . '.', 'f2' ),
-                            'field_id' => $post_id,
+                            'message'  => __( 'Saved field with ID '. $f->id . '.', 'f2' ),
+                            'field_id' => $f->id,
                             'params'   => $params,
                         )
                     );
@@ -65,14 +49,13 @@ class FieldRoutes {
 
                     $f                    = new Field();
                     $f->id                = $field_id;
-                    $f->field_name        = $params['name'];
+                    $f->title             = $params['title'];
+                    $f->field_name        = $params['field_name'];
                     $f->field_type        = $params['field_type'];
-                    $f->field_title       = $params['field_title'];
                     $f->field_label       = $params['field_label'];
                     $f->field_storage     = $params['field_storage'];
                     $f->field_placeholder = $params['field_placeholder'];
                     $f->field_choices     = $params['field_choices'];
-
                     $f->save();
 
                     return new \WP_REST_Response(
