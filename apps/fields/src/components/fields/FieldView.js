@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Label from './Label';
 import SelectField from './types/SelectField';
+import Field from './Field';
 
 const Input = ({placeholder, name, value, setFieldValue}) => {
     return(

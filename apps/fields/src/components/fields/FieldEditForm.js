@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
-import SystemField from './SystemField';
+import Field from './Field';
 import CollectionField from './types/CollectionField';
 
 const CancelButton = () => {
@@ -119,37 +119,37 @@ export default function FieldEditForm({field, fieldLoaded}) {
         <main>
             <form onSubmit={handleSubmit(onSubmit)}>
 
-                <SystemField 
+                <Field
                     field={systemFields.field_type}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field
                     field={systemFields.field_title}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field
                     field={systemFields.field_label}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field
                     field={systemFields.field_name}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field
                     field={systemFields.field_storage}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field
                     field={systemFields.field_placeholder}
                     register={register}
                     errors={errors}

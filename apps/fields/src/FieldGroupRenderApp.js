@@ -99,7 +99,11 @@ function Render( {fieldGroupId, postId} ) {
                 <div>
                     {fieldGroup.fields_numeric.map( ( field, index ) =>
                         <div key={index} className="my-6">
-                            <Field field={field} register={register} />
+                            <Field 
+                                field={field} 
+                                register={register}
+                                errors={errors} 
+                            />
                         </div>
                     )}
                 </div>

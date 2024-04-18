@@ -43,9 +43,10 @@ class FieldRoutes {
                     
                     return new \WP_REST_Response(
                         array(
-                            'status'  => 200,
-                            'message' => __( 'Saved field with ID '. $post_id . '.', 'f2' ),
-                            'params'  => $params,
+                            'status'   => 200,
+                            'message'  => __( 'Saved field with ID '. $post_id . '.', 'f2' ),
+                            'field_id' => $post_id,
+                            'params'   => $params,
                         )
                     );
 

@@ -5,7 +5,9 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import SystemField from './SystemField';
+import Field from './Field';
 import CollectionField from './types/CollectionField';
+import CreateComplete from './create/CreateComplete';
 
 const CancelButton = () => {
     return(
@@ -20,34 +22,7 @@ const CancelButton = () => {
     )
 }
 
-// @TODO we need updates to the API to return the field data including ID.
-const CompleteScreen = ({createdFieldData, resetForm}) => {
-
-    return(
-        <main>
-            <h2 className="font-bold text-2xl text-zinc-700">
-                Field Created!
-            </h2>
-            <p className="mt-4 mb-12 font-semibold text-xl text-zinc-700">
-                {createdFieldData.message}
-            </p>
-            <div className="flex gap-6">
-                <NavLink
-                    to="/fields/edit/192"
-                    className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                    >
-                    Edit Field
-                </NavLink>
-                <button
-                    onClick={resetForm}
-                    className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                    >
-                    Make Another Field
-                </button>
-            </div>
-        </main>
-    )
-}
+// @TODO we need updates to the API to return the field data including ID
 
 export default function FieldCreateForm() {
 
@@ -108,45 +83,45 @@ export default function FieldCreateForm() {
     }, [watch('field_type')])
 
     if( complete ) {
-        return <CompleteScreen createdFieldData={createdFieldData} resetForm={resetForm} />
+        return <CreateComplete createdFieldData={createdFieldData} resetForm={resetForm} />
     }
 
     return(
         <main>
             <form onSubmit={handleSubmit(onSubmit)}>
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_type}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_title}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_label}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_name}
                     register={register}
                     errors={errors}
                 />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_storage}
                     register={register}
                     errors={errors}
                 />
 
                 {conditionPlaceholder &&
-                    <SystemField 
+                    <Field 
                         field={systemFields.field_placeholder}
                         register={register}
                         errors={errors}
