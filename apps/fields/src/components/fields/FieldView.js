@@ -2,42 +2,8 @@ import { useState } from 'react';
 import Label from './Label';
 import SelectField from './types/SelectField';
 import Field from './Field';
+import { useForm } from "react-hook-form";
 
-const Input = ({placeholder, name, value, setFieldValue}) => {
-    return(
-        <input 
-            className="w-full border border-solid border-zinc-300 rounded py-2 px-2"
-            name={name}
-            id={name}
-            type="text"
-            placeholder={placeholder}
-            value={value}
-            onInput={(e) => {setFieldValue(e.target.value)}}
-        />
-    )
-}
-
-const FieldType = ({field, fieldValue, setFieldValue}) => {
-
-    if(field.type === 'text') {
-        return(
-            <Input name={field.name} placeholder={field.placeholder} value={fieldValue} setFieldValue={setFieldValue} />
-        )
-    }
-
-    if(field.type === 'number') {
-        return(
-            <Input name={field.name} placeholder="Enter first name..." value={fieldValue} setFieldValue={setFieldValue} />
-        )
-    }
-
-    if(field.type === 'select') {
-        return(
-            <SelectField field={field} />
-        )
-    }
-
-}
 
 const FieldValue = ({fieldValue}) => {
 
@@ -66,6 +32,17 @@ const FieldValue = ({fieldValue}) => {
 
 
 export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue}) {
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        reset,
+        setValue, 
+        getValues,
+    } = useForm();
+
     if( ! fieldLoaded ) {
         return(
             <div>Field loading...</div>
@@ -74,8 +51,13 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
 
     return(
         <div className="bg-zinc-100 p-12">
-            <Label text={field.label} />
-            <FieldType field={field} fieldValue={fieldValue} setFieldValue={setFieldValue} />
+            <Field 
+                field={field} 
+                register={register}
+                errors={errors}
+                fieldValue={fieldValue} 
+                setFieldValue={setFieldValue} 
+            />
             <FieldValue fieldValue={fieldValue} />
         </div>
     )

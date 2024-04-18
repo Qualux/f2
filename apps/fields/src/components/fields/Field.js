@@ -1,5 +1,7 @@
 import Label from './Label';
 import SelectField from './types/SelectField';
+import EmailField from './types/EmailField';
+import UrlField from './types/UrlField';
 
 export default function Field( {field, register, errors} ) {
 
@@ -34,6 +36,12 @@ export default function Field( {field, register, errors} ) {
                     {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
                 </div>
             );
+            break;
+        case 'email':
+            return <EmailField field={field} register={register} errors={errors} />
+            break;
+        case 'url':
+            return <UrlField field={field} register={register} errors={errors} />
             break;
         default:
             return(
