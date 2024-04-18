@@ -5,7 +5,8 @@ import { NavLink } from "react-router-dom";
 import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
 import { useForm } from "react-hook-form";
 import { useSystemFields } from '../../lib/useSystemFields';
-import SystemField from '../fields/SystemField';
+import Field from '../fields/Field';
+import CreateComplete from './create/CreateComplete';
 
 /* We need access to the child field data. */
 
@@ -40,6 +41,7 @@ export default function FieldGroupCreateForm() {
         const preparedData = {
             title: data.field_group_title,
             fields: getValues('fields'),
+            storage_post_type: data.field_group_post_type,
         }
 
         const url = 'http://zero1.local/wp-json/zero/v1/field-group';
@@ -51,40 +53,14 @@ export default function FieldGroupCreateForm() {
     }
 
     const resetForm = () => {
-        reset('');
+        reset();
+        setComplete(false);
     }
 
     if( complete ) {
 
         return(
-            <main>
-                <h1 className="mb-6 text-zinc-500 text-xl font-bold">
-                    Create complete.
-                </h1>
-                <p className="text-zinc-500 text-lg">
-                    Processing response message...
-                </p>
-                <div className="flex gap-6 items-center">
-                    <button
-                        type="button"
-                        onClick={resetForm}
-                    >
-                        Create another field group
-                    </button>
-                    <NavLink
-                        to="/fields/edit/"
-                        className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                        >
-                        Edit created field group
-                    </NavLink>
-                    <NavLink
-                        to="/fields"
-                        className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                        >
-                        Return to manage field groups
-                    </NavLink>
-                </div>
-            </main>
+            <CreateComplete resetForm={resetForm} />
         )
     }
 
@@ -95,7 +71,7 @@ export default function FieldGroupCreateForm() {
 
                 <input type="hidden" value={id} />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_group_title}
                     register={register}
                     errors={errors}
@@ -105,6 +81,12 @@ export default function FieldGroupCreateForm() {
                     selectedChildIds={selectedChildIds}
                     setSelectedChildIds={setSelectedChildIds}
                     setValue={setValue}
+                />
+
+                <Field 
+                    field={systemFields.field_group_post_type}
+                    register={register}
+                    errors={errors}
                 />
 
                 <div className="mt-6">
