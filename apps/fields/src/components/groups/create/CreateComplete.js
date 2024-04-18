@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-export default function CreateComplete({resetForm}) {
+export default function CreateComplete({resetForm, response}) {
+
+    const editLink = '/groups/edit/'+response.save_id;
 
     return(
         <main>
@@ -8,7 +10,7 @@ export default function CreateComplete({resetForm}) {
                 Create complete.
             </h1>
             <p className="text-zinc-500 text-lg">
-                Processing response message...
+                {response.message}
             </p>
             <div className="flex gap-6 items-center">
                 <button
@@ -18,7 +20,7 @@ export default function CreateComplete({resetForm}) {
                     Create another field group
                 </button>
                 <NavLink
-                    to="/fields/edit/"
+                    to={editLink}
                     className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
                     >
                     Edit created field group

@@ -8,8 +8,6 @@ import { useSystemFields } from '../../lib/useSystemFields';
 import Field from '../fields/Field';
 import CreateComplete from './create/CreateComplete';
 
-/* We need access to the child field data. */
-
 export default function FieldGroupCreateForm() {
 
     const [valuesInit, setValuesInit] = useState(false);
@@ -18,6 +16,7 @@ export default function FieldGroupCreateForm() {
     const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
     const [selectedChildIds, setSelectedChildIds] = useState([]);
+    const [response, setResponse] = useState(null);
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
@@ -47,6 +46,7 @@ export default function FieldGroupCreateForm() {
         const url = 'http://zero1.local/wp-json/zero/v1/field-group';
         postData(url, preparedData).then((data) => {
             setComplete(true);
+            setResponse(data);
         });
 
 
@@ -60,7 +60,7 @@ export default function FieldGroupCreateForm() {
     if( complete ) {
 
         return(
-            <CreateComplete resetForm={resetForm} />
+            <CreateComplete resetForm={resetForm} response={response} />
         )
     }
 

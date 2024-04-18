@@ -2,6 +2,7 @@ import { useState, createContext, useEffect } from 'react';
 import Modal from '../Modal';
 import FieldList from '../fields/FieldSelectionList';
 import ChildFieldContext from './child-fields/ChildFieldContext';
+import Label from '../fields/Label';
 
 function SelectExistingField({open, setOpen}) {
 
@@ -39,28 +40,24 @@ export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds,
                 handleDeselectChild,
             }}
         >
-            <main>
-                <h2>
-                    Fields
-                </h2>
+            <main className="my-8">
+                <Label text="Fields" />
                 <div className="flex gap-6">
                     <button
+                        className="bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800"
                         type="button"
                         onClick={ () => { setExistingField(true)} }
                     >
-                        Existing Field
-                    </button>
-                    <button
-                        type="button"
-                    > 
-                        New Field
+                        Choose Field
                     </button>
                 </div>
                 <div>
                     {existingField && <SelectExistingField open={existingField} setOpen={setExistingField} />}
                 </div>
-                <div>
-                    <h4>Selected Fields</h4>
+                <div className="mt-6 shadow-lg p-8">
+                    <h4 className="font-semibold text-zinc-600">
+                        Selected Fields
+                    </h4>
                     {selectedChildIds.map( ( fieldId, index ) =>
                         <main>{fieldId}</main>
                     )}

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
-import SystemField from './SystemField';
 import Field from './Field';
 import CollectionField from './types/CollectionField';
 import CreateComplete from './create/CreateComplete';

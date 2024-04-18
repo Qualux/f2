@@ -33,8 +33,8 @@ class FieldGroupRoutes {
                     return new \WP_REST_Response(
                         array(
                             'status'  => 200,
-                            'message' => 'Saved field group with ID='.$post_id,
-                            'id'      => $post_id,
+                            'message' => 'Saved field group with ID '. $post_id . '.',
+                            'save_id' => $post_id,
                             'params'  => $params,
                         )
                     );

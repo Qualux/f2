@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AppTemplate from '../../components/global/AppTemplate';
 import { useParams } from 'react-router-dom';
 import { useFieldGroup } from '../../lib/useFieldGroup';
 import Button from '../../components/Button';
@@ -18,20 +19,22 @@ export default function DeleteFieldGroup() {
 
     if( !isLoaded ) {
         return(
-            <main>Loading field group.</main>
+            <AppTemplate title="Field Group Manager">
+                Loading field group.
+            </AppTemplate>
         )
     }
 
     if(complete) {
         return(
-            <main>
+            <AppTemplate title="Field Group Manager">
                 Deleted!
-            </main>
+            </AppTemplate>
         )
     }
 
     return(
-        <main>
+        <AppTemplate title="Field Group Manager">
             <h1 className="mt-8 font-bold text-lg text-zinc-300">
                 Delete Field Group
             </h1>
@@ -42,6 +45,6 @@ export default function DeleteFieldGroup() {
                 label="Confirm Delete"
                 handler={handleDelete}
             />
-        </main>
+        </AppTemplate>
     )
 }
