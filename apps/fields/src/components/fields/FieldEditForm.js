@@ -6,6 +6,7 @@ import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import Field from './Field';
 import CollectionField from './types/CollectionField';
+import CompleteScreen from './edit/CompleteScreen';
 
 const CancelButton = () => {
     return(
@@ -17,35 +18,6 @@ const CancelButton = () => {
                 Cancel
             </NavLink>
         </div>
-    )
-}
-
-// @TODO we need updates to the API to return the field data including ID.
-const CompleteScreen = ({createdFieldData, resetForm}) => {
-
-    return(
-        <main>
-            <h2>
-                Congrats. The field was successfully edited.
-            </h2>
-            <p>
-                {createdFieldData.message}
-            </p>
-            <div>
-                <NavLink
-                    to="/fields"
-                    className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                    >
-                    Manage fields
-                </NavLink>
-                <button
-                    onClick={resetForm}
-                    className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                    >
-                    Continue editing
-                </button>
-            </div>
-        </main>
     )
 }
 
@@ -155,17 +127,21 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     errors={errors}
                 />
 
-                <CollectionField 
-                    field={
-                        {
-                            title: 'Choices',
-                            name: 'choices',
+                {watch('field_type') === 'select' && 
+                    <CollectionField 
+                        field={
+                            {
+                                title: 'Choices',
+                                name: 'choices',
+                            }
                         }
-                    }
-                    valuesInit={valuesInit}
-                    setValue={setValue}
-                    getValues={getValues}
-                />
+                        setValue={setValue}
+                        getValues={getValues}
+                        register={register}
+                        errors={errors}
+                        valuesInit={valuesInit}
+                    />
+                }
                 
                 <button 
                     className="bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800"

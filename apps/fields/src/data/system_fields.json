@@ -1,0 +1,47 @@
+{
+    "field_type": {
+        "type": "select",
+        "name": "field_type",
+        "title": "Field Type",
+        "label": "Field Type",
+        "storage": "post_meta",
+        "field_choices": [
+            {
+                "value": "text",
+                "label": "Text"
+            },
+            {
+                "value": "select",
+                "label": "Select"
+            },
+            {
+                "value": "number",
+                "label": "Number"
+            },
+            {
+                "value": "email",
+                "label": "Email"
+            },
+            {
+                "value": "url",
+                "label": "URL"
+            },
+            {
+                "value": "collection",
+                "label": "Collection"
+            },
+            {
+                "value": "autogen",
+                "label": "Automatic Generated"
+            }
+        ]
+    },
+    "field_title": {
+        "type": "text",
+        "name": "field_title",
+        "title": "Field Title",
+        "label": "Field Title",
+        "storage": "post_meta",
+        "placeholder": "Enter title for display..."
+    }
+}

@@ -2,8 +2,9 @@ import Label from './Label';
 import SelectField from './types/SelectField';
 import EmailField from './types/EmailField';
 import UrlField from './types/UrlField';
+import CollectionField from './types/CollectionField';
 
-export default function Field( {field, register, errors} ) {
+export default function Field( {field, register, errors, getValues, setValue, valuesInit} ) {
 
     switch( field.type ) {
         case 'text':

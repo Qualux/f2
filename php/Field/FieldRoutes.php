@@ -60,39 +60,26 @@ class FieldRoutes {
                 'methods' => 'POST',
                 'callback' => function( \WP_REST_Request $request ) {
 
-                    $post_id = $request->get_param( 'id' );
-                    $params  = $request->get_json_params();
-                    $type    = $params['type'];
-                    $title   = $params['title'];
-                    $label   = $params['label'];
-                    $name    = $params['name'];
-                    $storage = $params['storage'];
-                    $choices = $params['choices'];
-                    $placeholder = $params['placeholder'];
+                    $field_id = $request->get_param( 'id' );
+                    $params   = $request->get_json_params();
 
-                    wp_update_post(
-                        [
-                            'ID'           => $id,
-                            'post_title'   => $title,
-                            'post_status'  => 'publish',
-                        ]
-                    );
+                    $f                    = new Field();
+                    $f->id                = $field_id;
+                    $f->field_name        = $params['name'];
+                    $f->field_type        = $params['field_type'];
+                    $f->field_title       = $params['field_title'];
+                    $f->field_label       = $params['field_label'];
+                    $f->field_storage     = $params['field_storage'];
+                    $f->field_placeholder = $params['field_placeholder'];
+                    $f->field_choices     = $params['field_choices'];
 
-                    update_post_meta( $post_id, 'z_field_type', $type );
-                    update_post_meta( $post_id, 'z_field_name', $name );
-                    update_post_meta( $post_id, 'z_field_label', $label );
-                    update_post_meta( $post_id, 'z_field_storage', $storage );
-                    update_post_meta( $post_id, 'z_field_placeholder', $placeholder );
-
-                    if( $type === 'select' ) {
-                        update_post_meta( $post_id, 'z_field_choices', $choices );
-                    }
+                    $f->save();
 
                     return new \WP_REST_Response(
                         array(
                             'status'   => 200,
-                            'message'  => 'Saved field with ID '. $post_id . '.',
-                            'field_id' => $post_id,
+                            'message'  => 'Saved field with ID '. $f->id . '.',
+                            'field_id' => $f->id,
                             'params'   => $params,
                         )
                     );

@@ -1,78 +1,21 @@
 import { useState, useEffect } from 'react';
+import ItemsList from './CollectionField/ItemsList';
+import AddScreen from './CollectionField/AddScreen';
 
-const AddScreen = ({ addItem }) => {
-
-    const [itemId, setItemId] = useState('');
-    const [itemLabel, setItemLabel] = useState('');
-
-    const saveItemHandler = () => {
-        addItem({ id: itemId, label: itemLabel });
-        setItemId(''); // Clear the input after saving
-        setItemLabel('');
-    };
-
-    return (
-        <div>
-            <h2>Add New Choice</h2>
-            <div>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Value"
-                        value={itemId}
-                        onChange={(e) => setItemId(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Label"
-                        value={itemLabel}
-                        onChange={(e) => setItemLabel(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <button type="button" onClick={saveItemHandler}>
-                        SAVE
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const ItemsList = ({ items, removeItem }) => {
-    return (
-        <div>
-            {items.map((item, index) => (
-                <div key={index} className="flex gap-6 items-center">
-                    <span>{item.id}</span>
-                    <span>{item.label}</span>
-                    <button 
-                        type="button"addItem
-                        onClick={() => removeItem(index)}
-                    >
-                        Remove
-                    </button>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-export default function CollectionField({field, valuesInit, setValue, getValues}) {
+export default function CollectionField({field, valuesInit, setValue, getValues, register, errors}) {
 
     const [mode, setMode] = useState('view');
     const [items, setItems] = useState([]);
+
+    register( field.name, { required: 'Collection field is required.' } );
 
     useEffect(() => {
 
         if(valuesInit) {
 
-            const choicesList = getValues('choices');
-            console.log(choicesList)
-            if( typeof choicesList !== 'undefined' && choicesList.length ) {
-                setItems(choicesList);
+            const collectionList = getValues( field.name );
+            if( typeof collectionList !== 'undefined' && collectionList.length ) {
+                setItems( collectionList );
             }
 
         }
@@ -81,7 +24,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues}
 
     const addItem = (newItem) => {
         setItems([...items, newItem]);
-        setValue(field.name, [...items, newItem]);
+        setValue(field.name, [...items, newItem], { shouldValidate: true });
     };
 
     const removeItem = (index) => {
@@ -113,6 +56,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues}
             </button>
             {mode === 'add' && <AddScreen addItem={addItem} />}
             <ItemsList items={items} removeItem={removeItem} />
+            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field is required</span>}
         </main>
     )
 }

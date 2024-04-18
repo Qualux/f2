@@ -11,7 +11,7 @@ export function useSystemFields() {
             title: 'Field Type',
             label: 'Field Type',
             storage: 'post_meta',
-            choices: fieldTypeList,
+            field_choices: fieldTypeList,
         },
         field_title: {
             type: 'text',
@@ -43,7 +43,7 @@ export function useSystemFields() {
             title: 'Field Storage',
             label: 'Field Storage',
             storage: 'post_meta',
-            choices: [
+            field_choices: [
                 {
                     value: 'post_meta',
                     label: 'Post Meta',
