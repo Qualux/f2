@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
 import { useForm } from "react-hook-form";
 import { useSystemFields } from '../../lib/useSystemFields';
-import SystemField from '../fields/SystemField';
+import Field from '../fields/Field';
 
 /* We need access to the child field data. */
 
@@ -43,6 +43,7 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
             reset({
                 field_group_title: fieldGroup.title,
                 fields: fieldGroup.fields,
+                field_group_post_type: fieldGroup.storage_post_type,
             });
 
             // Special handling to set child field data. 
@@ -116,7 +117,7 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
 
                 <input type="hidden" value={id} />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_group_title}
                     register={register}
                     errors={errors}
@@ -128,7 +129,7 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
                     setValue={setValue}
                 />
 
-                <SystemField 
+                <Field 
                     field={systemFields.field_group_post_type}
                     register={register}
                     errors={errors}
