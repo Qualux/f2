@@ -1,17 +1,13 @@
+import AppTemplate from '../components/global/AppTemplate';
+
 export default function Settings() {
     return(
-        <main>
-            <header>
-                SETTINGS HEADER
-            </header>
+        <AppTemplate title="Settings">
             <div>
                 <section>
                     DASHBOARD
                 </section>
             </div>
-            <footer>
-                FOOTER
-            </footer>
-        </main>
+        </AppTemplate>
     )
 }

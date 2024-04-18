@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AppTemplate from '../../components/global/AppTemplate';
 import FieldGroupList from '../../components/groups/FieldGroupList';
 import { useFieldType } from '../../lib/useFieldType';
 import { useField } from '../../lib/useField';
@@ -15,7 +16,7 @@ export default function GroupsDashboard() {
 
     if( isMainRoute ) {
         return(
-            <main className="grow">
+            <AppTemplate title="Field Group Manager">
                 <h2 className="mt-8 font-bold text-zinc-300 mb-6 text-lg">
                     FIELD GROUPS
                 </h2>
@@ -28,7 +29,7 @@ export default function GroupsDashboard() {
                     </NavLink>
                 </div>
                 <FieldGroupList setMode={setMode} />
-            </main>
+            </AppTemplate>
         )
     }
 

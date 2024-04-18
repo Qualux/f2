@@ -1,10 +1,9 @@
-import AppHeader from '../components/global/AppHeader';
+import AppTemplate from '../components/global/AppTemplate';
 
 export default function Dashboard() {
 
     return(
-        <main className="grow flex flex-col">
-            <AppHeader title="Dashboard" />
+        <AppTemplate title="Dashboard">
             <div className="grow">
                 <section className="px-4 py-6 text-zinc-700">
                     <h2 className="font-bold text-3xl">
@@ -73,10 +72,7 @@ export default function Dashboard() {
                     </div>
                 </section>
             </div>
-            <footer className="bg-sky-800 text-right text-zinc-200 px-4">
-                F2 | Developed by SaberWP
-            </footer>
-        </main>
+        </AppTemplate>
     );
 
 }
