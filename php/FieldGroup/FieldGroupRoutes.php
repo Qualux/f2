@@ -194,20 +194,6 @@ class FieldGroupRoutes {
                     if( $post_id ) {
 
                         $mode = 'update';
-                        $result = wp_update_post(
-                            [
-                                'ID' => $post_id,
-                            ]
-                        );
-
-                        if( ! empty( $fg->fields_name ) ) {
-                            foreach( $fg->fields_name as $field ) {
-                                if( array_key_exists( $field->name, $values ) ) {
-                                    $meta_value = $values[$field->name];
-                                    update_post_meta( $post_id, $field->name, $meta_value );
-                                }   
-                            } 
-                        }
 
                     }
 
@@ -216,31 +202,39 @@ class FieldGroupRoutes {
                         $mode = 'create';
                         $post_id = wp_insert_post(
                             [
-                                'post_type'    => $post_type,
+                                'post_type'    => $fg->post_type,
                                 'post_title'   => 'New post ' . time(),
                                 'post_content' => '',
                                 'post_status'  => 'publish',
                             ]
                         );
-
-                        // If post created... 
-                        // Loop over fields keyed by name and find matching values... 
-                        // If matching values found, do meta save.
-                        if( $post_id && ! empty( $fg->fields_name ) ) {
-                            foreach( $fg->fields_name as $field ) {
-                                if( array_key_exists( $field->name, $values ) ) {
-                                    $meta_value = $values[$field->name];
-                                    update_post_meta( $created_post_id, $field->name, $meta_value );
-                                }   
-                            }  
-                        }
                         
+                    }
+
+                    // Setup result logging.
+                    $result = [
+                        'field_save_count' => 0,
+                        'field_save_log'   => [],
+                    ];
+
+                    if( $post_id && ! empty( $fg->fields_name ) ) {
+                        foreach( $fg->fields_name as $field ) {
+                            if( array_key_exists( $field->field_name, $values ) ) {
+                                
+                                $meta_value = $values[$field->field_name];
+                                update_post_meta( $post_id, $field->field_name, $meta_value );
+
+                                $result['field_save_count']++;
+                                $result['field_save_log'][] = 'Save attempt for field name ' . $field->field_name . ' with value ' . $meta_value . ' saved to post ID ' . $post_id . '.';
+                            }   
+                        }  
                     }
 
                     return new \WP_REST_Response(
                         array(
                             'status'      => 200,
                             'message'     => 'Saved field group.',
+                            'result'      => $result,
                             'mode'        => $mode,
                             'post_id'     => $post_id,
                             'field_group' => $fg,

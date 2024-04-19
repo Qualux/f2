@@ -26,7 +26,7 @@ class FieldGroup {
                 $f = new Field();
                 $f->load( $fid );
                 $this->fields_numeric[] = $f;
-                $this->fields_name[$f->name] = $f;
+                $this->fields_name[$f->field_name] = $f;
                 $this->fields_id[$fid] = $f;
             }
         }
@@ -37,42 +37,13 @@ class FieldGroup {
             $this->values = new \stdClass;
             if( ! empty( $this->fields_name ) ) {
                 foreach( $this->fields_name as $field ) {
-                    $this->values->{$field->name} = get_post_meta( $post_id, $field->name, 1 );
+                    $this->values->{$field->field_name} = get_post_meta( $post_id, $field->field_name, 1 );
                 } 
             }
 
         }
         
 
-    }
-
-    public function render( $values = null, $return = false ) {
-        $c = '';
-        $c .= '<div class="z-field-group">';
-        $c .= '<form class="z-field-group-wrap id="zero-form" method="POST">';
-        foreach( $this->fields as $fid ) {
-            $f = new Field();
-            $f->load( $fid );
-            $c .= '<div>';
-            $c .= $f->render( null, true );
-            $c .= '</div>';
-        }
-
-        // Save button. 
-        $c .= '<div class="z-form-submit-wrap">';
-        $c .= '<button type="submit" id="zero-save-button">';
-        $c .= 'Save 123';
-        $c .= '</button>';
-        $c .= '</div>';
-
-        $c .= '</form>';
-        $c .= '</div>';
-
-        if( $return ) {
-            return $c;
-        }
-        echo $c;
-        return;
     }
 
 }
