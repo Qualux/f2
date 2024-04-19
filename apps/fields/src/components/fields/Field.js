@@ -44,6 +44,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
         case 'url':
             return <UrlField field={field} register={register} errors={errors} />
             break;
+        case 'collection':
+            return <CollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            break;
         default:
             return(
                 'Invalid or missing field type.'

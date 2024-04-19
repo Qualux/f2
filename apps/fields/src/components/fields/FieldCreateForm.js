@@ -12,9 +12,6 @@ import systemFieldsJson from '../../data/system_fields.json';
 
 export default function FieldCreateForm() {
 
-    console.log('json system fields:')
-    console.log( systemFieldsJson )
-
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
     const [conditionPlaceholder, setConditionPlaceholder] = useState(false);
@@ -111,11 +108,13 @@ export default function FieldCreateForm() {
                 }
 
                 {watch('field_type') === 'select' && 
-                    <CollectionField 
+                    <Field 
                         field={systemFields.field_choices}
-                        setValue={setValue}
                         register={register}
                         errors={errors}
+                        setValue={setValue}
+                        getValues={getValues}
+                        valuesInit={true}
                     />
                 }
                 

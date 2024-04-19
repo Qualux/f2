@@ -5,21 +5,9 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import Field from './Field';
-import CollectionField from './types/CollectionField';
 import CompleteScreen from './edit/CompleteScreen';
-
-const CancelButton = () => {
-    return(
-        <div className="mt-12">
-            <NavLink
-                to="/fields"
-                className="underline font-bold text-zinc-400 transition-colors hover:text-zinc-600"
-                >
-                Cancel
-            </NavLink>
-        </div>
-    )
-}
+import CancelButton from './edit/CancelButton';
+import systemFieldsJson from '../../data/system_fields.json';
 
 export default function FieldEditForm({field, fieldLoaded}) {
 
@@ -85,13 +73,13 @@ export default function FieldEditForm({field, fieldLoaded}) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <Field
-                    field={systemFields.field_type}
+                    field={systemFieldsJson.field_type}
                     register={register}
                     errors={errors}
                 />
 
                 <Field
-                    field={systemFields.field_title}
+                    field={systemFieldsJson.field_title}
                     register={register}
                     errors={errors}
                 />
@@ -123,17 +111,12 @@ export default function FieldEditForm({field, fieldLoaded}) {
                 }
 
                 {watch('field_type') === 'select' && 
-                    <CollectionField 
-                        field={
-                            {
-                                title: 'Choices',
-                                name: 'choices',
-                            }
-                        }
-                        setValue={setValue}
-                        getValues={getValues}
+                    <Field 
+                        field={systemFields.field_choices}
                         register={register}
                         errors={errors}
+                        setValue={setValue}
+                        getValues={getValues}
                         valuesInit={valuesInit}
                     />
                 }
