@@ -56,7 +56,10 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
                 register={register}
                 errors={errors}
                 fieldValue={fieldValue} 
-                setFieldValue={setFieldValue} 
+                setFieldValue={setFieldValue}
+                setValue={setValue}
+                getValues={getValues}
+                valuesInit={true} 
             />
             <FieldValue fieldValue={fieldValue} />
         </div>
