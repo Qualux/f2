@@ -23,7 +23,7 @@ class Field {
         $this->field_type        = get_post_meta( $id, 'field_type', 1 );
         $this->field_storage     = get_post_meta( $id, 'field_storage', 1 );
         $this->field_label       = get_post_meta( $id, 'field_label', 1 );
-        $this->field_choices     = get_post_meta( $id, 'field_choices', 1 );
+        $this->field_choices     = json_decode( get_post_meta( $id, 'field_choices', 1 ) );
         $this->field_placeholder = get_post_meta( $id, 'field_placeholder', 1 );
 
     }

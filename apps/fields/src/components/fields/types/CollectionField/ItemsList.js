@@ -1,5 +1,14 @@
 export default function ItemsList({ items, removeItem }) {
 
+    if( ! items.length ) {
+        return(
+            <p>No items.</p>
+        )
+    }
+
+    console.log(items)
+    console.log(items.length)
+
     return (
         <div>
             {items.map((item, index) => (

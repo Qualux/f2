@@ -14,6 +14,8 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
         if(valuesInit) {
 
             const collectionList = getValues( field.name );
+            console.log('cl:')
+            console.log(collectionList)
             if( typeof collectionList !== 'undefined' && collectionList.length ) {
                 setItems( collectionList );
             }
