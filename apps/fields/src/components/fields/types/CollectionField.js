@@ -13,10 +13,8 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
 
         if(valuesInit) {
 
-            const collectionList = getValues( field.name );
-            console.log('cl:')
-            console.log(collectionList)
-            if( typeof collectionList !== 'undefined' && collectionList.length ) {
+            const collectionList = getValues( field.field_name );
+            if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
                 setItems( collectionList );
             }
 
@@ -26,7 +24,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
 
     const addItem = (newItem) => {
         setItems([...items, newItem]);
-        setValue(field.name, [...items, newItem], { shouldValidate: true });
+        setValue(field.field_name, [...items, newItem], { shouldValidate: true });
     };
 
     const removeItem = (index) => {
@@ -37,7 +35,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
         const updatedItems = [...items];
         updatedItems.splice(index, 1);
         setItems(updatedItems);
-        setValue(field.name, JSON.stringify(updatedItems));
+        setValue(field.field_name, JSON.stringify(updatedItems));
     };
 
     const addChoiceHandler = () => {
@@ -47,7 +45,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
     return(
         <main className="my-6">
             <h2 className="font-semibold text-zinc-400">
-                {field.title}
+                {field.field_title}
             </h2>
             <button
                 type="button"
@@ -58,7 +56,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
             </button>
             {mode === 'add' && <AddScreen addItem={addItem} />}
             <ItemsList items={items} removeItem={removeItem} />
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field is required</span>}
+            {errors[field.field_name] && <span className="text-rose-700 text-sm font-bold">Field is required</span>}
         </main>
     )
 }

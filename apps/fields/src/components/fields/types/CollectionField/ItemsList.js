@@ -6,9 +6,6 @@ export default function ItemsList({ items, removeItem }) {
         )
     }
 
-    console.log(items)
-    console.log(items.length)
-
     return (
         <div>
             {items.map((item, index) => (
@@ -16,7 +13,7 @@ export default function ItemsList({ items, removeItem }) {
                     <span>{item.id}</span>
                     <span>{item.label}</span>
                     <button 
-                        type="button"addItem
+                        type="button"
                         onClick={() => removeItem(index)}
                     >
                         Remove

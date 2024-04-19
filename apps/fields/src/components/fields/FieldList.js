@@ -16,10 +16,10 @@ function Field({field, index}) {
                 {field.id}
             </div>
             <div className="font-medium px-2 py-1">
-                {field.title}
+                {field.field_title}
             </div>
             <div className="font-medium text-sm px-2 py-1">
-                {field.type}
+                {field.field_type}
             </div>
             <div className="flex justify-end grow gap-3 items-center">
                 <NavLink

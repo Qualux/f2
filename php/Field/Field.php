@@ -77,7 +77,7 @@ class Field {
         update_post_meta( $this->id, 'field_placeholder', $this->field_placeholder );
 
         if( $this->field_type === 'select' ) {
-            update_post_meta( $this->id, 'field_choices', $this->field_choices );
+            update_post_meta( $this->id, 'field_choices', json_encode($this->field_choices) );
         }
 
     }

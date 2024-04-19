@@ -8,8 +8,6 @@ import NumberField from './types/NumberField';
 
 export default function Field( {field, register, errors, getValues, setValue, valuesInit} ) {
 
-    console.log('calling Field with type: ' + field.field_type)
-
     switch( field.field_type ) {
         case 'text': 
             return <TextField field={field} register={register} errors={errors} /> 
