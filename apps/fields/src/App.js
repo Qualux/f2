@@ -1,3 +1,5 @@
+import { createContext } from 'react';
+import { DomainContext } from './contexts';
 import Menu from './components/Menu';
 import {
   createHashRouter,
@@ -5,13 +7,42 @@ import {
   Outlet,
 } from "react-router-dom";
 
+function domainContextValues() {
+
+  let isLocal = false;
+  if( window.location.hostname === 'localhost' ) {
+    isLocal = true;
+  }
+
+  let url = window.location.origin;
+  if( isLocal ) {
+    url = 'http://zero1.local/';
+  } else {
+    url = window.location.origin;
+  }
+
+  const val = {
+    url,
+    api: url + '/wp-json'
+  }
+
+  return val;
+
+}
+
 function App() {
+
+  const domainContextValue = domainContextValues();  
+
   return (
-    <div className="min-h-screen flex gap-0">
-      <Menu />
-      <Outlet />
-    </div>
+    <DomainContext.Provider value={domainContextValue}>
+      <div className="min-h-screen flex gap-0">
+        <Menu />
+        <Outlet />
+      </div>
+    </DomainContext.Provider>
   );
+
 }
 
 export default App;

@@ -1,9 +1,14 @@
+import { useContext } from 'react';
+import { DomainContext } from '../contexts';
 import AppTemplate from '../components/global/AppTemplate';
 
 export default function Dashboard() {
 
+    const domain = useContext(DomainContext);
+
     return(
         <AppTemplate title="Dashboard">
+            <h1 className="text-4xl">{domain.api}</h1>
             <div className="grow">
                 <section className="px-4 py-6 text-zinc-700">
                     <h2 className="font-bold text-3xl">
