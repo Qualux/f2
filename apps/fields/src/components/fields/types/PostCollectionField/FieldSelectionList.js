@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useFieldCollection } from '../../lib/useFieldCollection';
+import { useFieldCollection } from '../../../../lib/useFieldCollection';
 import { NavLink } from "react-router-dom";
-import useChildFieldContext from '../groups/child-fields/useChildFieldContext';
+import useChildFieldContext from './useChildFieldContext';
 
 function EmptyMessage() {
     return(

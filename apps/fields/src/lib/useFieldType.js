@@ -25,10 +25,6 @@ export function useFieldType() {
             value: 'collection',
             label: 'Collection',
         },
-        {
-            value: 'autogen',
-            label: 'Automatic Generated',
-        }
     ];
 
     return { fieldTypeList };

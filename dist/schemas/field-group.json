@@ -1,0 +1,24 @@
+{
+    "$id": "https://zeroeditor.io/field-group.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "A representation of a group of structured data fields.",
+    "type": "object",
+    "required": ["id", "fields"],
+    "properties": {
+      "id": {
+        "type": "number",
+        "description": "Unique identifier for a field group."
+      },
+      "fields": {
+        "type": "array",
+        "description": "Array of field-group-field models which is a data model that bridges a single field with the given field group.",
+        "field_key": "z_fg_fields"
+      },
+      "storage_post_type": {
+        "type": "string",
+        "description": "Assigns field group to a post type for storage.",
+        "field_key": "z_fg_storage_post_type"
+      }
+    }
+  }
+  

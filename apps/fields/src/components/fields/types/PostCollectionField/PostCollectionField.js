@@ -1,8 +1,8 @@
 import { useState, createContext, useEffect } from 'react';
-import Modal from '../Modal';
-import FieldList from '../fields/FieldSelectionList';
-import ChildFieldContext from './child-fields/ChildFieldContext';
-import Label from '../fields/Label';
+import Modal from '../../../Modal';
+import FieldList from './FieldSelectionList';
+import ChildFieldContext from './ChildFieldContext';
+import Label from '../../Label';
 
 function SelectExistingField({open, setOpen}) {
 
@@ -16,9 +16,10 @@ function SelectExistingField({open, setOpen}) {
     )
 }
 
-export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds, setValue}) {
+export default function PostCollectionField({field, setValue, getValues, valuesInit}) {
 
     const [existingField, setExistingField] = useState(false);
+    const [selectedChildIds, setSelectedChildIds] = useState([]);
     
     const handleSelectChild = (childId) => {
         setSelectedChildIds((prevIds) => [...prevIds, childId]);
@@ -29,7 +30,29 @@ export default function ChildFieldEditor({selectedChildIds, setSelectedChildIds,
     };
 
     useEffect(() => {
-        setValue('fields', selectedChildIds);
+
+        console.log('check values init...')
+        console.log(valuesInit)
+
+        if(valuesInit) {
+
+            console.log('values init...')
+
+            const collectionList = getValues( field.field_name );
+
+            console.log(collectionList)
+
+            if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
+                setSelectedChildIds( collectionList );
+            }
+
+        }
+
+    }, [valuesInit])
+
+
+    useEffect(() => {
+        setValue( field.field_name, selectedChildIds );
     }, [setValue, selectedChildIds]);
 
     return(

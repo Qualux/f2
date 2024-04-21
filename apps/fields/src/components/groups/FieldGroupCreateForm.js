@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
-import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
 import { useForm } from "react-hook-form";
 import { useSystemFields } from '../../lib/useSystemFields';
 import Field from '../fields/Field';
@@ -15,7 +14,6 @@ export default function FieldGroupCreateForm() {
     const [title, setTitle] = useState('');
     const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
-    const [selectedChildIds, setSelectedChildIds] = useState([]);
     const [response, setResponse] = useState(null);
 
     const { fieldTypeList } = useFieldType();
@@ -39,7 +37,7 @@ export default function FieldGroupCreateForm() {
 
         const preparedData = {
             title: data.field_group_title,
-            fields: getValues('fields'),
+            fields: getValues('field_group_fields'),
             storage_post_type: data.field_group_post_type,
         }
 
@@ -77,9 +75,10 @@ export default function FieldGroupCreateForm() {
                     errors={errors}
                 />
 
-                <ChildFieldEditor
-                    selectedChildIds={selectedChildIds}
-                    setSelectedChildIds={setSelectedChildIds}
+                <Field
+                    field={systemFields.field_group_fields}
+                    register={register}
+                    errors={errors}
                     setValue={setValue}
                 />
 

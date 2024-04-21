@@ -5,7 +5,6 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { useSystemFields } from '../../lib/useSystemFields';
 import Field from './Field';
-import CollectionField from './types/CollectionField';
 import CreateComplete from './create/CreateComplete';
 import CancelButton from './create/CancelButton';
 import systemFieldsJson from '../../data/system_fields.json';
@@ -32,15 +31,11 @@ export default function FieldCreateForm() {
 
     const onSubmit = (data) => {
 
-        console.log('Form Submit Data:')
-        console.log(data)
-
         const url = 'http://zero1.local/wp-json/zero/v1/field';
         postData(url, data).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);
         });
-
 
     }
 

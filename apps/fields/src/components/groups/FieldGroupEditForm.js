@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react';
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
-import ChildFieldEditor from '../../components/groups/ChildFieldEditor';
 import { useForm } from "react-hook-form";
 import { useSystemFields } from '../../lib/useSystemFields';
 import Field from '../fields/Field';
-
-/* We need access to the child field data. */
 
 export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
 
@@ -16,7 +13,6 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
     const [title, setTitle] = useState('');
     const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
-    const [selectedChildIds, setSelectedChildIds] = useState([]);
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
@@ -36,18 +32,14 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
 
         if (fieldGroupLoaded && fieldGroup) {
 
-            console.log('fieldgroup:')
-            console.log(fieldGroup)
-
             // Set form values.
             reset({
                 field_group_title: fieldGroup.title,
-                fields: fieldGroup.fields,
+                field_group_fields: fieldGroup.fields,
                 field_group_post_type: fieldGroup.storage_post_type,
             });
 
-            // Special handling to set child field data. 
-            setSelectedChildIds(fieldGroup.fields);
+            setValuesInit(true);
 
         }
 
@@ -55,12 +47,9 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
 
     const onSubmit = (data) => {
 
-        console.log('submit data:')
-        console.log(data)
-
         const preparedData = {
             title: data.field_group_title,
-            fields: getValues('fields'),
+            fields: getValues('field_group_fields'),
             storage_post_type: data.field_group_post_type,
         }
 
@@ -73,7 +62,7 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
     }
 
     const resetForm = () => {
-        reset('');
+        reset();
     }
 
     if( complete ) {
@@ -123,10 +112,13 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
                     errors={errors}
                 />
 
-                <ChildFieldEditor
-                    selectedChildIds={selectedChildIds}
-                    setSelectedChildIds={setSelectedChildIds}
+                <Field
+                    field={systemFields.field_group_fields}
+                    register={register}
+                    errors={errors}
                     setValue={setValue}
+                    valuesInit={valuesInit}
+                    getValues={getValues}
                 />
 
                 <Field 

@@ -3,8 +3,9 @@ import TextField from './types/TextField';
 import SelectField from './types/SelectField';
 import EmailField from './types/EmailField';
 import UrlField from './types/UrlField';
-import CollectionField from './types/CollectionField';
+import CollectionField from './types/CollectionField/CollectionField';
 import NumberField from './types/NumberField';
+import PostCollectionField from './types/PostCollectionField/PostCollectionField';
 
 export default function Field( {field, register, errors, getValues, setValue, valuesInit} ) {
 
@@ -26,6 +27,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
             break;
         case 'collection':
             return <CollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            break;
+        case 'post_collection':
+            return <PostCollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
             break;
         default:
             return(

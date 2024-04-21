@@ -77,6 +77,13 @@ export function useSystemFields() {
             field_storage: 'post_meta',
             field_placeholder: 'Enter title for display...',
         },
+        field_group_fields: {
+            field_type: 'post_collection',
+            field_name: 'field_group_fields',
+            field_title: 'Fields',
+            field_label: 'Fields',
+            field_storage: 'post_meta',
+        },
         field_group_post_type: {
             field_type: 'text',
             field_name: 'field_group_post_type',

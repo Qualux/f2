@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import ItemsList from './CollectionField/ItemsList';
-import AddScreen from './CollectionField/AddScreen';
+import ItemsList from './ItemsList';
+import AddScreen from './AddScreen';
 
 export default function CollectionField({field, valuesInit, setValue, getValues, register, errors}) {
 
