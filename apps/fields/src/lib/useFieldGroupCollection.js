@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { DomainContext } from '../contexts';
 
 export function useFieldGroupCollection() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [fieldGroups, setFieldGroups] = useState(null);
+  const domain = useContext(DomainContext);
 
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'http://zero1.local/wp-json/zero/v1/field-group'
+          `${domain.api}/zero/v1/field-group`
         );
         const data = await response.json();
         setFieldGroups(data.field_groups);

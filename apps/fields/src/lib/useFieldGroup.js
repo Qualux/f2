@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { DomainContext } from '../contexts';
 
 export function useFieldGroup( id, post_id ) {
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [fieldGroup, setFieldGroup] = useState(null);
+    const domain = useContext(DomainContext);
 
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://zero1.local/wp-json/zero/v1/field-group/${id}?post_id=${post_id}`
+          `${domain.api}/zero/v1/field-group/${id}?post_id=${post_id}`
         );
         const data = await response.json();
         setFieldGroup(data.field_group);
@@ -27,7 +29,7 @@ export function useFieldGroup( id, post_id ) {
   const deleteFieldGroup = async () => {
     try {
       const response = await fetch(
-        `http://zero1.local/wp-json/zero/v1/field/${id}`,
+        `${domain.api}/zero/v1/field-group/${id}`,
         {
           method: 'DELETE'
         }

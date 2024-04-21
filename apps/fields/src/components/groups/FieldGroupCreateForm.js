@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSystemFields } from '../../lib/useSystemFields';
 import Field from '../fields/Field';
 import CreateComplete from './create/CreateComplete';
+import { DomainContext } from '../../contexts';
 
 export default function FieldGroupCreateForm() {
 
@@ -19,6 +20,7 @@ export default function FieldGroupCreateForm() {
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
     const { systemFields } = useSystemFields();
+    const domain = useContext(DomainContext);
 
     const {
         register,
@@ -41,8 +43,7 @@ export default function FieldGroupCreateForm() {
             storage_post_type: data.field_group_post_type,
         }
 
-        const url = 'http://zero1.local/wp-json/zero/v1/field-group';
-        postData(url, preparedData).then((data) => {
+        postData(domain.api + '/zero/v1/field-group', data).then((data) => {
             setComplete(true);
             setResponse(data);
         });

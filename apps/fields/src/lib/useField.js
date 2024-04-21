@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { DomainContext } from '../contexts';
 
 export function useField(id) {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [field, setField] = useState(null);
+  const domain = useContext(DomainContext);
 
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://zero1.local/wp-json/zero/v1/field/${id}`
+          `${domain.api}/zero/v1/field/${id}`
         );
         const data = await response.json();
         setField(data.field);
@@ -27,7 +29,7 @@ export function useField(id) {
   const deleteField = async () => {
     try {
       const response = await fetch(
-        `http://zero1.local/wp-json/zero/v1/field/${id}`,
+          `${domain.api}/zero/v1/field/${id}`,
         {
           method: 'DELETE'
         }

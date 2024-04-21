@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
+import { DomainContext } from '../../contexts';
 
 const CancelButton = () => {
     return(
@@ -20,6 +21,7 @@ const CancelButton = () => {
 export default function FieldCreateForm({field, fieldLoaded}) {
 
     const [complete, setComplete] = useState(false);
+    const domain = useContext(DomainContext);
 
     const {
         register,
@@ -33,7 +35,7 @@ export default function FieldCreateForm({field, fieldLoaded}) {
 
     const onSubmit = (data) => {
 
-        const url = 'http://zero1.local/wp-json/zero/v1/field';
+        const url = `${domain.api}/zero/v1/field`;
         postData(url, data).then((data) => {
             console.log(data);
             setComplete(true);

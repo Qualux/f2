@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
@@ -8,6 +8,7 @@ import Field from './Field';
 import CompleteScreen from './edit/CompleteScreen';
 import CancelButton from './edit/CancelButton';
 import systemFieldsJson from '../../data/system_fields.json';
+import { DomainContext } from '../../contexts';
 
 export default function FieldEditForm({field, fieldLoaded}) {
 
@@ -29,6 +30,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
     const { systemFields } = useSystemFields();
+    const domain = useContext(DomainContext);
 
     useEffect(() => {
         if (fieldLoaded && field) {
@@ -39,8 +41,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
 
     const onSubmit = (data) => {
 
-        const url = 'http://zero1.local/wp-json/zero/v1/field/'+field.id;
-        postData(url, data).then((data) => {
+        postData(domain.api + '/zero/v1/field/' + field.id, data).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);
         });

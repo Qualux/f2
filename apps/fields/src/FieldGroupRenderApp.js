@@ -1,8 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useFieldGroup } from './lib/useFieldGroup';
 import Field from './components/fields/Field';
 import { useForm } from "react-hook-form";
 import { useFetch } from './lib/useFetch';
+import { DomainContext } from './contexts';
+
+function domainContextValues() {
+
+    let isLocal = false;
+    if( window.location.hostname === 'localhost' ) {
+      isLocal = true;
+    }
+  
+    let url = window.location.origin;
+    if( isLocal ) {
+      url = 'http://zero1.local/';
+    } else {
+      url = window.location.origin;
+    }
+  
+    const val = {
+      url,
+      api: url + '/wp-json'
+    }
+  
+    return val;
+  
+  }
 
 const CompleteScreen = () => {
 
@@ -23,6 +47,7 @@ function Render( {fieldGroupId, postId} ) {
     const [complete, setComplete] = useState(false);
     const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId, postId );
     const { postData } = useFetch();
+    const domain = useContext(DomainContext);
 
     const {
         register,
@@ -36,18 +61,11 @@ function Render( {fieldGroupId, postId} ) {
 
     useEffect(() => {
         if (isLoaded && fieldGroup) {
-
-            console.log('fieldGroup.values:')
-            console.log(fieldGroup.values)
-
             reset(fieldGroup.values);
         }
     }, [isLoaded, fieldGroup, reset]);
 
     const onSubmit = (data) => {
-
-        console.log('submit data:')
-        console.log(data)
 
         let postId;
         try {
@@ -72,12 +90,8 @@ function Render( {fieldGroupId, postId} ) {
             values: data
         }
 
-        const url = 'http://zero1.local/wp-json/zero/v1/field-group/values/'+fieldGroupId;
-        postData(url, preparedData).then((data) => {
-            console.log('values save resp:')
-            console.log(data)
-            //setCreatedFieldData(data);
-            //setComplete(true);
+        postData(`${domain.api}/zero/v1/field-group/values/${fieldGroupId}`, preparedData).then((data) => {
+            
         });
 
     }
@@ -123,7 +137,7 @@ function Render( {fieldGroupId, postId} ) {
 export default function FieldGroupRenderApp( {fieldGroupId} ) {
 
     const [postId, setPostId] = useState(null);
-
+    
     useEffect(() => {
         const interval = setInterval(() => {
 
@@ -131,8 +145,6 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
                 return;
             }
             const id = window.wp.data.select('core/editor').getCurrentPostId();
-
-            console.log('id: ' + id);
 
             if (id) {
                 clearInterval(interval); // Stop the interval
@@ -143,12 +155,18 @@ export default function FieldGroupRenderApp( {fieldGroupId} ) {
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
+    const domainContextValue = domainContextValues(); 
+
     if (!postId) {
         return (
             <main>Waiting for postId...</main>
         );
     }
 
-    return <Render fieldGroupId={fieldGroupId} postId={postId} />;
+    return(
+        <DomainContext.Provider value={domainContextValue}>
+            <Render fieldGroupId={fieldGroupId} postId={postId} />
+        </DomainContext.Provider>
+    )
 
 }

@@ -33,8 +33,7 @@ export default function FieldCreateForm() {
 
     const onSubmit = (data) => {
 
-        const url = domain.api + '/zero/v1/field';
-        postData(url, data).then((data) => {
+        postData(domain.api + '/zero/v1/field', data).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);
         });
