@@ -1,0 +1,16 @@
+{
+  "name": "zero",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build-script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "adm-zip": "^0.5.12",
+    "fs-extra": "^11.2.0"
+  }
+}
