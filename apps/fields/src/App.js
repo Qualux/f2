@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { DomainContext } from './contexts';
-import Menu from './components/Menu';
+import AppHeader from './components/global/AppHeader';
+import Menu from './components/global/Menu';
 import {
   createHashRouter,
   RouterProvider,
@@ -36,9 +37,12 @@ function App() {
 
   return (
     <DomainContext.Provider value={domainContextValue}>
-      <div className="min-h-screen flex gap-0">
-        <Menu />
-        <Outlet />
+      <div className="min-h-screen flex flex-col">
+        <AppHeader />
+        <div className="flex gap-0">
+          <Menu />
+          <Outlet />
+        </div>
       </div>
     </DomainContext.Provider>
   );

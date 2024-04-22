@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink, Outlet } from "react-router-dom";
-import AppHeader from '../../components/global/AppHeader';
+import AppTemplate from '../../components/global/AppTemplate';
 import FieldList from '../../components/fields/FieldList';
 import { useFieldType } from '../../lib/useFieldType';
 import { useField } from '../../lib/useField';
@@ -16,8 +16,7 @@ export default function FieldDashboardRoute() {
 
     if( isMainRoute ) {
         return(
-            <main className="grow">
-                <AppHeader title="Fields" />
+            <AppTemplate>
                 <div className="m-8">
                     <div className="">
                         <div className="mb-10">
@@ -31,7 +30,7 @@ export default function FieldDashboardRoute() {
                     </div>
                     <FieldList setMode={setMode} />
                 </div>
-            </main>
+            </AppTemplate>
         )
     }
 
