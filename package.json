@@ -1,12 +1,12 @@
 {
-  "name": "zero",
+  "name": "f2wp",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "node build-script.js"
   },
-  "keywords": [],
+  "keywords": ["f2", "wordpress", "fields"],
   "author": "",
   "license": "ISC",
   "devDependencies": {

@@ -1,7 +1,10 @@
 <?php 
 
 /*
- * Plugin Name: Zero
+ * Plugin Name: F2
+ * Description: WordPress Fields System.
+ * Author: SaberWP 
+ * Version: 0.0.1
  */
 
 namespace Zero;

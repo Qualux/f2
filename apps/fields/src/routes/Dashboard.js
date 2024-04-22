@@ -8,17 +8,16 @@ export default function Dashboard() {
 
     return(
         <AppTemplate title="Dashboard">
-            <h1 className="text-4xl">{domain.api}</h1>
-            <div className="grow">
-                <section className="px-4 py-6 text-zinc-700">
-                    <h2 className="font-bold text-3xl">
+            <div className="grow max-w-3xl">
+                <section className="text-zinc-800">
+                    <h2 className="font-bold text-4xl mb-5">
                         Thanks for trying out the F2 plugin for WordPress.
                     </h2>
                     <p className="my-5">
                         Our goal is to deliver the most modern approach to field management for the WordPress CMS.
                     </p>
                     <div>
-                        <h3 className="font-bold text-xl">
+                        <h3 className="font-bold text-2xl mb-4">
                             F2 Versus ACF Comparison
                         </h3>
                         <h4>

@@ -11,6 +11,10 @@
                 "label": "Text"
             },
             {
+                "value": "textarea",
+                "label": "Text Area"
+            },
+            {
                 "value": "select",
                 "label": "Select"
             },
@@ -25,10 +29,6 @@
             {
                 "value": "url",
                 "label": "URL"
-            },
-            {
-                "value": "collection",
-                "label": "Collection"
             }
         ]
     },
@@ -39,5 +39,13 @@
         "field_label": "Field Title",
         "field_storage": "post_meta",
         "field_placeholder": "Enter title for display..."
+    },
+    "field_label": {
+        "field_type": "text",
+        "field_name": "field_label",
+        "field_title": "Field Label",
+        "field_label": "Field Label",
+        "field_storage": "post_meta",
+        "field_placeholder": "Enter label for display, leave blank to turn off label rendering..."
     }
 }

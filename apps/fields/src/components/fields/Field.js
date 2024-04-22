@@ -1,5 +1,6 @@
 import Label from './Label';
 import TextField from './types/TextField';
+import TextAreaField from './types/TextAreaField';
 import SelectField from './types/SelectField';
 import EmailField from './types/EmailField';
 import UrlField from './types/UrlField';
@@ -12,6 +13,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
     switch( field.field_type ) {
         case 'text': 
             return <TextField field={field} register={register} errors={errors} /> 
+            break
+        case 'textarea': 
+            return <TextAreaField field={field} register={register} errors={errors} /> 
             break
         case 'select':
             return <SelectField field={field} register={register} errors={errors} />

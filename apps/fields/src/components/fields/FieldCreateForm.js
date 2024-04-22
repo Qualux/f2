@@ -78,7 +78,7 @@ export default function FieldCreateForm() {
                 />
 
                 <Field 
-                    field={systemFields.field_label}
+                    field={systemFieldsJson.field_label}
                     register={register}
                     errors={errors}
                 />
