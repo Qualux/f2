@@ -89,12 +89,6 @@ export default function FieldCreateForm() {
                     errors={errors}
                 />
 
-                <Field 
-                    field={systemFields.field_storage}
-                    register={register}
-                    errors={errors}
-                />
-
                 {conditionPlaceholder &&
                     <Field 
                         field={systemFields.field_placeholder}

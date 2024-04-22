@@ -37,23 +37,6 @@ export function useSystemFields() {
             field_storage: 'post_meta',
             field_placeholder: 'Unique lowercase system name...',
         },
-        field_storage: {
-            field_type: 'select',
-            field_name: 'field_storage',
-            field_title: 'Field Storage',
-            field_label: 'Field Storage',
-            field_storage: 'post_meta',
-            field_choices: [
-                {
-                    value: 'post_meta',
-                    label: 'Post Meta',
-                },
-                {
-                    value: 'option',
-                    label: 'Options',
-                },
-            ]
-        },
         field_placeholder: {
             field_type: 'text',
             field_name: 'field_placeholder',

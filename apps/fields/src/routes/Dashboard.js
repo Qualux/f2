@@ -1,6 +1,19 @@
 import { useContext } from 'react';
 import { DomainContext } from '../contexts';
 import AppTemplate from '../components/global/AppTemplate';
+import Select from 'react-select';
+
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+  
+const SelectField = () => {
+    return(
+        <Select options={options} />
+    );    
+};
 
 export default function Dashboard() {
 
@@ -8,7 +21,11 @@ export default function Dashboard() {
 
     return(
         <AppTemplate title="Dashboard">
+            
             <div className="grow max-w-3xl">
+                <SelectField
+                    isSearchable={true}
+                />
                 <section className="text-zinc-800">
                     <h2 className="font-bold text-4xl mb-5">
                         Thanks for trying out the F2 plugin for WordPress.

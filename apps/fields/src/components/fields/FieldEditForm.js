@@ -97,12 +97,6 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     errors={errors}
                 />
 
-                <Field
-                    field={systemFields.field_storage}
-                    register={register}
-                    errors={errors}
-                />
-
                 {conditionPlaceholder &&
                     <Field 
                         field={systemFields.field_placeholder}

@@ -47,5 +47,13 @@
         "field_label": "Field Label",
         "field_storage": "post_meta",
         "field_placeholder": "Enter label for display, leave blank to turn off label rendering..."
+    },
+    "field_name": {
+        "field_type": "text",
+        "field_name": "field_name",
+        "field_title": "Field Name",
+        "field_label": "Field Name",
+        "field_storage": "post_meta",
+        "field_placeholder": "Unique lowercase system name..."
     }
 }
