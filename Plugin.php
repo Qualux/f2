@@ -16,12 +16,6 @@ class Plugin {
 
         require_once( ZERO_PATH . '/php/AdminMenu.php' );
         $c = new AdminMenu();
-        
-        require_once( ZERO_PATH . '/php/PostTypes.php' );
-        $p = new PostTypes();
-
-        require_once( ZERO_PATH . '/php/PostTypeFieldType.php' );
-        $f = new PostTypeFieldType();
 
         require_once( ZERO_PATH . '/php/Enqueue.php' );
         $e = new Enqueue();

@@ -34,20 +34,16 @@ export default function FieldGroupCreateForm() {
 
     const onSubmit = (data) => {
 
-        console.log('submit data:')
-        console.log(data)
-
         const preparedData = {
             title: data.field_group_title,
             fields: getValues('field_group_fields'),
             storage_post_type: data.field_group_post_type,
         }
 
-        postData(domain.api + '/zero/v1/field-group', data).then((data) => {
+        postData(domain.api + '/zero/v1/field-group', preparedData).then((data) => {
             setComplete(true);
             setResponse(data);
         });
-
 
     }
 
