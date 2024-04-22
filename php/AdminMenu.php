@@ -9,8 +9,8 @@ class AdminMenu {
         add_action('admin_menu', function() {
 
             add_menu_page(
-                'Zero Editor', // Page title
-                'Zero Editor',    // Menu title
+                'F2', // Page title
+                'F2',    // Menu title
                 'manage_options', // Capability
                 'zero', // Menu slug
                 [ $this, 'page' ], // Callback function

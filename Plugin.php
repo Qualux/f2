@@ -2,7 +2,7 @@
 
 /*
  * Plugin Name: F2
- * Description: WordPress Fields System.
+ * Description: F2 is a fields system for WordPress that enables you to create structured data.
  * Author: SaberWP 
  * Version: 0.0.1
  */

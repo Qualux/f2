@@ -45,7 +45,7 @@ class Metabox {
 
                 add_meta_box( 
                     'zero_metabox_' . $fg->id, 
-                    'Zero Metabox for FG ' . $fg->id, 
+                    $fg->title, 
                     [ $this, 'content' ], 
                     $fg->storage_post_type, 
                     'advanced', 

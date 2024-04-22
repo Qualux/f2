@@ -36,14 +36,6 @@ export default function Menu() {
                             GROUPS
                     </NavLink>
                 </li>
-                <li className="flex items-center justify-stretch m-0">
-                    <NavLink
-                            to="/settings"
-                            className={itemClasses}
-                            >
-                            SETTINGS
-                    </NavLink>
-                </li>
             </ul>
         </main>   
     )

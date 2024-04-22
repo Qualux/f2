@@ -7,7 +7,6 @@ import FieldGroupRenderApp from './FieldGroupRenderApp';
 /* Standard App. */
 
 import Dashboard from './routes/Dashboard';
-import Settings from './routes/Settings';
 
 // Field Routes.
 import FieldDashboardRoute from './routes/fields/FieldDashboardRoute';
@@ -21,9 +20,6 @@ import GroupsDashboard from './routes/groups/GroupsDashboard';
 import CreateFieldGroup from './routes/groups/CreateFieldGroup';
 import EditFieldGroup from './routes/groups/EditFieldGroup';
 import DeleteFieldGroup from './routes/groups/DeleteFieldGroup';
-
-// Form Route.
-import FormRoute from './routes/FormRoute';
 
 import {
   createHashRouter,
@@ -39,10 +35,6 @@ const router = createHashRouter([
       {
         index: true,
         element: <Dashboard />
-      },
-      {
-        path: 'form',
-        element: <FormRoute />
       },
       {
         path: "fields",
@@ -83,11 +75,7 @@ const router = createHashRouter([
             element: <DeleteFieldGroup />,
           },
         ],
-      },
-      {
-        path: "settings",
-        element: <Settings />
-      },
+      }
     ],
   },
 ]);

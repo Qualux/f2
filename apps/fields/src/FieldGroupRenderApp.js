@@ -65,36 +65,48 @@ function Render( {fieldGroupId, postId} ) {
         }
     }, [isLoaded, fieldGroup, reset]);
 
-    const onSubmit = (data) => {
+    useEffect(() => {
 
-        let postId;
-        try {
-            if (window.wp !== 'undefined') {
-                const { select } = window.wp.data;
-                postId = select('core/editor').getCurrentPostId();
-            } else {
-                console.error('wp is undefined. Check if it is properly loaded in your environment.');
-            }
-        } catch (error) {
-            console.error('An error occurred while accessing wp:', error);
+        if (window.wp !== 'undefined') {
+
+            window.wp.data.subscribe(function () {
+                var isSavingPost = window.wp.data.select('core/editor').isSavingPost();
+                var isAutosavingPost = window.wp.data.select('core/editor').isAutosavingPost();
+                
+                if (isSavingPost && !isAutosavingPost) {
+
+                    let postId;
+                    try {
+                        if (window.wp !== 'undefined') {
+                            const { select } = window.wp.data;
+                            postId = select('core/editor').getCurrentPostId();
+                        } else {
+                            console.error('wp is undefined. Check if it is properly loaded in your environment.');
+                        }
+                    } catch (error) {
+                        console.error('An error occurred while accessing wp:', error);
+                    }
+
+                    if (!postId) {
+                        console.error('Error: Post ID not found.');
+                        return;
+                    }
+
+                    const preparedData = {
+                        post_id: postId,
+                        post_type: 'page',
+                        values: getValues()
+                    }
+
+                    postData(`${domain.api}/zero/v1/field-group/values/${fieldGroupId}`, preparedData).then((data) => {
+                        console.log(data)
+                    });
+                
+                }
+            });
         }
 
-        if (!postId) {
-            console.error('Error: Post ID not found.');
-            return;
-        }
-
-        const preparedData = {
-            post_id: postId,
-            post_type: 'page',
-            values: data
-        }
-
-        postData(`${domain.api}/zero/v1/field-group/values/${fieldGroupId}`, preparedData).then((data) => {
-            
-        });
-
-    }
+    }, [window.wp]);
 
     if( complete ) {
         return <CompleteScreen />
@@ -108,8 +120,7 @@ function Render( {fieldGroupId, postId} ) {
 
     return(
         <main>
-            {fieldGroup.id} {fieldGroup.title}
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form>
                 <div>
                     {fieldGroup.fields_numeric.map( ( field, index ) =>
                         <div key={index} className="my-6">
@@ -120,13 +131,6 @@ function Render( {fieldGroupId, postId} ) {
                             />
                         </div>
                     )}
-                </div>
-                <div>
-                    <button 
-                        className="bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800"
-                    >
-                        SAVE FORM
-                    </button>
                 </div>
             </form>
         </main>
