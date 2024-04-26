@@ -41,6 +41,7 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
         reset,
         setValue, 
         getValues,
+        control
     } = useForm();
 
     if( ! fieldLoaded ) {
@@ -60,6 +61,7 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
                 setValue={setValue}
                 getValues={getValues}
                 valuesInit={true} 
+                control={control}
             />
             <FieldValue fieldValue={fieldValue} />
         </div>

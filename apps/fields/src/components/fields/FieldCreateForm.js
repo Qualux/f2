@@ -15,6 +15,7 @@ export default function FieldCreateForm() {
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
     const [conditionPlaceholder, setConditionPlaceholder] = useState(false);
+    const [conditionChoices, setConditionChoices] = useState(false);
 
     const {
         register,
@@ -24,6 +25,7 @@ export default function FieldCreateForm() {
         reset,
         setValue, 
         getValues,
+        control,
     } = useForm()
 
     const { fieldTypeList } = useFieldType();
@@ -32,6 +34,8 @@ export default function FieldCreateForm() {
     const domain = useContext(DomainContext);
 
     const onSubmit = (data) => {
+
+        data.field_type = data.field_type.value;
 
         postData(domain.api + '/zero/v1/field', data).then((data) => {
             setCreatedFieldData(data);
@@ -49,11 +53,22 @@ export default function FieldCreateForm() {
     useEffect(() => {
 
         const fieldType = getValues('field_type');
-        if( fieldType === 'text' ) {
-            setConditionPlaceholder(true);
+
+        if( typeof fieldType === 'undefined' ) {
             return;
         }
-        setConditionPlaceholder(false);
+        
+        if( fieldType.value === 'text' ) {
+            setConditionPlaceholder(true);
+        } else {
+            setConditionPlaceholder(false);
+        }
+
+        if( fieldType.value === 'select' || fieldType.value === 'searchable_select' ) {
+            setConditionChoices(true);
+        } else {
+            setConditionChoices(false);
+        }
 
     }, [watch('field_type')])
 
@@ -69,6 +84,7 @@ export default function FieldCreateForm() {
                     field={systemFieldsJson.field_type}
                     register={register}
                     errors={errors}
+                    control={control}
                 />
 
                 <Field 
@@ -97,7 +113,7 @@ export default function FieldCreateForm() {
                     />
                 }
 
-                {watch('field_type') === 'select' && 
+                {conditionChoices && 
                     <Field 
                         field={systemFields.field_choices}
                         register={register}

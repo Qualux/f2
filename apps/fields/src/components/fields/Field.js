@@ -7,8 +7,9 @@ import UrlField from './types/UrlField';
 import CollectionField from './types/CollectionField/CollectionField';
 import NumberField from './types/NumberField';
 import PostCollectionField from './types/PostCollectionField/PostCollectionField';
+import SearchableSelectField from './types/SearchableSelectField/SearchableSelectField';
 
-export default function Field( {field, register, errors, getValues, setValue, valuesInit} ) {
+export default function Field( {field, register, errors, getValues, setValue, valuesInit, control} ) {
 
     switch( field.field_type ) {
         case 'text': 
@@ -19,6 +20,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
             break
         case 'select':
             return <SelectField field={field} register={register} errors={errors} />
+            break;
+        case 'searchable_select':
+            return <SearchableSelectField field={field} register={register} errors={errors} control={control} />
             break;
         case 'number':
             return <NumberField field={field} register={register} errors={errors} />;

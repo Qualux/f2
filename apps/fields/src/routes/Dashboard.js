@@ -11,7 +11,7 @@ const options = [
   
 const SelectField = () => {
     return(
-        <Select options={options} />
+        <Select options={options} value={{ value: 'vanilla', label: 'Vanilla' }} />
     );    
 };
 

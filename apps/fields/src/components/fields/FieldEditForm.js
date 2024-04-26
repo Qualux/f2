@@ -10,12 +10,23 @@ import CancelButton from './edit/CancelButton';
 import systemFieldsJson from '../../data/system_fields.json';
 import { DomainContext } from '../../contexts';
 
+const findOptionByValue = (valueToFind, choices) => {
+    for (const group of choices) {
+        const foundOption = group.options.find(option => option.value === valueToFind);
+        if (foundOption) {
+            return foundOption;
+        }
+    }
+    return null; // Return null if option is not found
+};
+
 export default function FieldEditForm({field, fieldLoaded}) {
 
     const [valuesInit, setValuesInit] = useState(false);
     const [complete, setComplete] = useState(false);
     const [createdFieldData, setCreatedFieldData] = useState(null);
     const [conditionPlaceholder, setConditionPlaceholder] = useState(false);
+    const [conditionChoices, setConditionChoices] = useState(false);
 
     const {
         register,
@@ -25,6 +36,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
         reset,
         setValue, 
         getValues,
+        control,
     } = useForm()
 
     const { fieldTypeList } = useFieldType();
@@ -34,6 +46,9 @@ export default function FieldEditForm({field, fieldLoaded}) {
 
     useEffect(() => {
         if (fieldLoaded && field) {
+
+            field.field_type = findOptionByValue(  field.field_type, systemFieldsJson.field_type.field_choices );
+
             reset(field);
             setValuesInit(true);
         }
@@ -57,11 +72,22 @@ export default function FieldEditForm({field, fieldLoaded}) {
     useEffect(() => {
 
         const fieldType = getValues('field_type');
-        if( fieldType === 'text' ) {
-            setConditionPlaceholder(true);
+
+        if( typeof fieldType === 'undefined' ) {
             return;
         }
-        setConditionPlaceholder(false);
+        
+        if( fieldType.value === 'text' ) {
+            setConditionPlaceholder(true);
+        } else {
+            setConditionPlaceholder(false);
+        }
+
+        if( fieldType.value === 'select' || fieldType.value === 'searchable_select' ) {
+            setConditionChoices(true);
+        } else {
+            setConditionChoices(false);
+        }
 
     }, [watch('field_type')])
 
@@ -77,6 +103,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     field={systemFieldsJson.field_type}
                     register={register}
                     errors={errors}
+                    control={control}
                 />
 
                 <Field
@@ -105,7 +132,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     />
                 }
 
-                {watch('field_type') === 'select' && 
+                {conditionChoices && 
                     <Field 
                         field={systemFields.field_choices}
                         register={register}
