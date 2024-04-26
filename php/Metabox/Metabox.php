@@ -18,11 +18,14 @@ class Metabox {
      */
     public function __construct() {
 
+        $this->add_metaboxes();
+        $this->add_metaboxes_system();
+
+    }
+
+    public function add_metaboxes() {
+
         add_action( 'add_meta_boxes', function( $post_type ) {
-
-
-            // @TODO query field-group by meta key storage_post_type to match current post_type.
-            // @TODO pass args to metabox callback to indicate which field group to render.
 
             $fgs = get_posts([
                 'post_type'   => 'field-group',
@@ -54,8 +57,36 @@ class Metabox {
                 );
 
             }
+ 
+        });
 
-            
+    }
+
+    public function add_metaboxes_system() {
+
+        add_action( 'add_meta_boxes', function( $post_type ) {
+
+            $fgs = [
+                [
+                    'name'      => 'f2_post_type', 
+                    'post_type' => 'f2-post-type',
+                ]
+            ];
+
+            foreach( $fgs as $fg ) {
+
+                add_meta_box( 
+                    'zero_metabox_' . $fg['name'], 
+                    $fg['name'], 
+                    [ $this, 'content' ], 
+                    $fg['post_type'], 
+                    'advanced', 
+                    'default',
+                    [ 'field_group_id' => $fg['name'] ],
+                );
+
+            }
+ 
         });
 
     }

@@ -1,8 +1,20 @@
 {
-    "field": {
+    "f2_field": {
 
     },
-    "field_group": {
+    "f2_field_group": {
         
+    },
+    "f2_post_type": {
+        "post_type": "f2-post-type",
+        "fields": [
+            {
+                "field_type": "text",
+                "field_name": "name_plural",
+                "field_title": "Plural Name",
+                "field_label": "Plural Name",
+                "field_placeholder": "Enter plural name for display..."
+            }
+        ]
     }
 }
