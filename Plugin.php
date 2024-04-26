@@ -51,6 +51,9 @@ class Plugin {
         require_once( ZERO_PATH . '/php/FieldType/FieldTypeSelect.php' );
         require_once( ZERO_PATH . '/php/FieldType/FieldTypeNumber.php' );
 
+        require_once( ZERO_PATH . '/php/DataStructure/F2_PostType.php' );
+        $ds = new DataStructure\F2_PostType();
+
     }
 
     public static function activate() {
