@@ -94,7 +94,6 @@ function Render( {fieldGroupId, postId} ) {
 
                     const preparedData = {
                         post_id: postId,
-                        post_type: 'page',
                         values: getValues()
                     }
 

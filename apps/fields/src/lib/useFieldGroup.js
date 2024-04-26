@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { DomainContext } from '../contexts';
+import systemFieldGroups from '../data/system_field_groups.json';
 
 export function useFieldGroup( id, post_id ) {
 
@@ -8,6 +9,13 @@ export function useFieldGroup( id, post_id ) {
     const domain = useContext(DomainContext);
 
   useEffect(() => {
+
+    // Handle system field groups. 
+    if(id === '003') {
+      setFieldGroup(systemFieldGroups['003']);
+      setIsLoaded(true);
+      return;
+    }
 
     const fetchData = async () => {
       try {

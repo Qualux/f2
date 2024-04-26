@@ -68,6 +68,7 @@ class Metabox {
 
             $fgs = [
                 [
+                    'id'        => '003',
                     'name'      => 'f2_post_type', 
                     'post_type' => 'f2-post-type',
                 ]
@@ -76,13 +77,13 @@ class Metabox {
             foreach( $fgs as $fg ) {
 
                 add_meta_box( 
-                    'zero_metabox_' . $fg['name'], 
+                    'zero_metabox_' . $fg['id'], 
                     $fg['name'], 
                     [ $this, 'content' ], 
                     $fg['post_type'], 
                     'advanced', 
                     'default',
-                    [ 'field_group_id' => $fg['name'] ],
+                    [ 'field_group_id' => $fg['id'] ],
                 );
 
             }

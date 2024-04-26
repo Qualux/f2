@@ -5,9 +5,10 @@
     "f2_field_group": {
         
     },
-    "f2_post_type": {
+    "003": {
+        "id": "003",
         "post_type": "f2-post-type",
-        "fields": [
+        "fields_numeric": [
             {
                 "field_type": "text",
                 "field_name": "name_plural",
