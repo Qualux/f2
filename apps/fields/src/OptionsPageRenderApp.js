@@ -42,10 +42,12 @@ const CompleteScreen = () => {
     )
 }
 
-function Render( {fieldGroupId, postId} ) {
+function Render( {fieldGroupId} ) {
+
+    console.log('Render running...')
 
     const [complete, setComplete] = useState(false);
-    const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId, postId );
+    const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId, 'option' );
     const { postData } = useFetch();
     const domain = useContext(DomainContext);
 
@@ -69,40 +71,8 @@ function Render( {fieldGroupId, postId} ) {
 
         if (window.wp !== 'undefined') {
 
-            window.wp.data.subscribe(function () {
-                var isSavingPost = window.wp.data.select('core/editor').isSavingPost();
-                var isAutosavingPost = window.wp.data.select('core/editor').isAutosavingPost();
-                
-                if (isSavingPost && !isAutosavingPost) {
+            // @TODO replace save handling...
 
-                    let postId;
-                    try {
-                        if (window.wp !== 'undefined') {
-                            const { select } = window.wp.data;
-                            postId = select('core/editor').getCurrentPostId();
-                        } else {
-                            console.error('wp is undefined. Check if it is properly loaded in your environment.');
-                        }
-                    } catch (error) {
-                        console.error('An error occurred while accessing wp:', error);
-                    }
-
-                    if (!postId) {
-                        console.error('Error: Post ID not found.');
-                        return;
-                    }
-
-                    const preparedData = {
-                        post_id: postId,
-                        values: getValues()
-                    }
-
-                    postData(`${domain.api}/zero/v1/field-group/values/${fieldGroupId}`, preparedData).then((data) => {
-                        console.log(data)
-                    });
-                
-                }
-            });
         }
 
     }, [window.wp]);
@@ -137,38 +107,20 @@ function Render( {fieldGroupId, postId} ) {
 
 }
 
-export default function FieldGroupRenderApp( {fieldGroupId} ) {
+export default function OptionsPageRenderApp( {fieldGroupId} ) {
 
-    const [postId, setPostId] = useState(null);
-    
+    console.log('OptionsPageRenderApp running...')
+
+
     useEffect(() => {
-        const interval = setInterval(() => {
-
-            if( ! window.wp ) {
-                return;
-            }
-            const id = window.wp.data.select('core/editor').getCurrentPostId();
-
-            if (id) {
-                clearInterval(interval); // Stop the interval
-                setPostId(id);
-            }
-        }, 1000); // Check every second
-
-        return () => clearInterval(interval); // Cleanup on unmount
+        
     }, []);
 
     const domainContextValue = domainContextValues(); 
 
-    if (!postId) {
-        return (
-            <main>Waiting for postId...</main>
-        );
-    }
-
     return(
         <DomainContext.Provider value={domainContextValue}>
-            <Render fieldGroupId={fieldGroupId} postId={postId} />
+            <Render fieldGroupId={fieldGroupId} />
         </DomainContext.Provider>
     )
 

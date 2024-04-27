@@ -11,8 +11,8 @@ export function useFieldGroup( id, post_id ) {
   useEffect(() => {
 
     // Handle system field groups. 
-    if(id === '003') {
-      setFieldGroup(systemFieldGroups['003']);
+    if (id.startsWith('00')) {
+      setFieldGroup(systemFieldGroups[id]);
       setIsLoaded(true);
       return;
     }

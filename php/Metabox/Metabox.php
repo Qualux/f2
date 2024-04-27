@@ -71,6 +71,11 @@ class Metabox {
                     'id'        => '003',
                     'name'      => 'f2_post_type', 
                     'post_type' => 'f2-post-type',
+                ],
+                [
+                    'id'        => '004',
+                    'name'      => 'f2_options_page', 
+                    'post_type' => 'f2-options-page',
                 ]
             ];
 

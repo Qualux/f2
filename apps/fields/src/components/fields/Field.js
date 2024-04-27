@@ -8,6 +8,7 @@ import CollectionField from './types/CollectionField/CollectionField';
 import NumberField from './types/NumberField';
 import PostCollectionField from './types/PostCollectionField/PostCollectionField';
 import SearchableSelectField from './types/SearchableSelectField/SearchableSelectField';
+import CheckboxField from './types/CheckboxField/CheckboxField';
 
 export default function Field( {field, register, errors, getValues, setValue, valuesInit, control} ) {
 
@@ -20,6 +21,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
             break
         case 'select':
             return <SelectField field={field} register={register} errors={errors} />
+            break;
+        case 'checkbox':
+            return <CheckboxField field={field} register={register} errors={errors} />
             break;
         case 'searchable_select':
             return <SearchableSelectField field={field} register={register} errors={errors} control={control} />

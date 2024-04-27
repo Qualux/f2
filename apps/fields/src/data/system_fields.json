@@ -18,6 +18,12 @@
                 ]
             },
             {
+                "label": "Choice Fields",
+                "options": [
+                    { "value": "checkbox", "label": "Checkbox" }
+                ]
+            },
+            {
                 "label": "Advanced Fields",
                 "options": [
                     { "value": "searchable_select", "label": "Searchable Select" }

@@ -17,5 +17,25 @@
                 "field_placeholder": "Enter plural name for display..."
             }
         ]
+    },
+    "004": {
+        "id": "004",
+        "post_type": "f2-options-page",
+        "fields_numeric": [
+            {
+                "field_type": "text",
+                "field_name": "menu_title",
+                "field_title": "Menu Title",
+                "field_label": "Menu Title",
+                "field_placeholder": "Enter menu title..."
+            },
+            {
+                "field_type": "text",
+                "field_name": "page_slug",
+                "field_title": "Page Slug",
+                "field_label": "Page Slug",
+                "field_placeholder": "Options page slug..."
+            }
+        ]
     }
 }

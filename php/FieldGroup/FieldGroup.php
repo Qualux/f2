@@ -16,7 +16,7 @@ class FieldGroup {
 
     public function load( $id, $post_id = 0 ) {
 
-        if( $id === '003' ) {
+        if (substr($id, 0, 2) === '00') {
             $this->system_load( $id );
         } else {
             $this->database_load( $id );
@@ -47,7 +47,7 @@ class FieldGroup {
             $data = json_decode( $contents );
 
             if ( $data !== null ) {
-                $fg = $data->{'003'};
+                $fg = $data->{$id};
                 $this->id                = $fg->id;
                 $this->title             = 'F2 Post Types Field Group';
                 $this->storage_post_type = 'f2-post-type';

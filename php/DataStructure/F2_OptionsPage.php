@@ -58,17 +58,18 @@ class F2_OptionsPage {
 
         foreach( $f2_options_pages as $op ) {
 
-            $taxonomy_key  = $tax->post_name;
-            $name_plural   = get_post_meta( $pt->ID, 'name_plural', 1 );
+            $menu_title    = get_post_meta( $op->ID, 'menu_title', 1 );
+            $slug          = get_post_meta( $op->ID, 'page_slug', 1 );
 
             // @TODO use WP core menu/submenu add functions.
             add_menu_page( 
-                'Test 123', 
-                'Test 123', 
+                $menu_title, 
+                $menu_title, 
                 'manage_options', 
-                'test-123', 
+                $slug, 
                 function() {
-                    echo 'Options page registered with F2.';
+                    $field_group_id = 34;
+                    echo '<div id="f2-options-fields" data-field-group="'.$field_group_id.'"></div>';
                 },
             );
     

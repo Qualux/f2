@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
 import FieldGroupRenderApp from './FieldGroupRenderApp';
+import OptionsPageRenderApp from './OptionsPageRenderApp';
 
 /* Standard App. */
 
@@ -95,5 +96,13 @@ if ( document.getElementById("zero-fg") ) {
   const fieldGroupId = tag.getAttribute('data-field-group');
   createRoot(document.getElementById("zero-fg")).render(
     <FieldGroupRenderApp fieldGroupId={fieldGroupId} />
+  );
+}
+
+if ( document.getElementById("f2-options-fields") ) {
+  const tag = document.getElementById("f2-options-fields");
+  const fieldGroupId = tag.getAttribute('data-field-group');
+  createRoot(document.getElementById("f2-options-fields")).render(
+    <OptionsPageRenderApp fieldGroupId={fieldGroupId} />
   );
 }
