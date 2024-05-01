@@ -3,11 +3,10 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
-import { useSystemFields } from '../../lib/useSystemFields';
 import Field from './Field';
 import CompleteScreen from './edit/CompleteScreen';
 import CancelButton from './edit/CancelButton';
-import systemFieldsJson from '../../data/system_fields.json';
+import systemFields from '../../data/system_fields.json';
 import { DomainContext } from '../../contexts';
 
 const findOptionByValue = (valueToFind, choices) => {
@@ -41,13 +40,12 @@ export default function FieldEditForm({field, fieldLoaded}) {
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
-    const { systemFields } = useSystemFields();
     const domain = useContext(DomainContext);
 
     useEffect(() => {
         if (fieldLoaded && field) {
 
-            field.field_type = findOptionByValue(  field.field_type, systemFieldsJson.field_type.field_choices );
+            field.field_type = findOptionByValue(  field.field_type, systemFields.field_type.field_choices );
 
             reset(field);
             setValuesInit(true);
@@ -105,14 +103,14 @@ export default function FieldEditForm({field, fieldLoaded}) {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <Field
-                    field={systemFieldsJson.field_type}
+                    field={systemFields.field_type}
                     register={register}
                     errors={errors}
                     control={control}
                 />
 
                 <Field
-                    field={systemFieldsJson.field_title}
+                    field={systemFields.field_title}
                     register={register}
                     errors={errors}
                 />

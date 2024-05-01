@@ -3,11 +3,10 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
-import { useSystemFields } from '../../lib/useSystemFields';
 import Field from './Field';
 import CreateComplete from './create/CreateComplete';
 import CancelButton from './create/CancelButton';
-import systemFieldsJson from '../../data/system_fields.json';
+import systemFields from '../../data/system_fields.json';
 import { DomainContext } from '../../contexts';
 
 export default function FieldCreateForm() {
@@ -30,7 +29,6 @@ export default function FieldCreateForm() {
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
-    const { systemFields } = useSystemFields();
     const domain = useContext(DomainContext);
 
     const onSubmit = (data) => {
@@ -86,20 +84,20 @@ export default function FieldCreateForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <Field 
-                    field={systemFieldsJson.field_type}
+                    field={systemFields.field_type}
                     register={register}
                     errors={errors}
                     control={control}
                 />
 
                 <Field 
-                    field={systemFieldsJson.field_title}
+                    field={systemFields.field_title}
                     register={register}
                     errors={errors}
                 />
 
                 <Field 
-                    field={systemFieldsJson.field_label}
+                    field={systemFields.field_label}
                     register={register}
                     errors={errors}
                 />

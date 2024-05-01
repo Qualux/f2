@@ -3,7 +3,7 @@ import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useSystemFields } from '../../lib/useSystemFields';
+import systemFields from '../../data/system_fields.json';
 import Field from '../fields/Field';
 import CreateComplete from './create/CreateComplete';
 import { DomainContext } from '../../contexts';
@@ -19,7 +19,6 @@ export default function FieldGroupCreateForm() {
 
     const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
-    const { systemFields } = useSystemFields();
     const domain = useContext(DomainContext);
 
     const {

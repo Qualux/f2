@@ -1,7 +1,8 @@
-import Label from './Label';
+import systemFieldsJson from '../../data/system_fields.json';
 import TextField from './types/TextField';
 import TextAreaField from './types/TextAreaField';
 import SelectField from './types/SelectField';
+import TrueFalseField from './types/TrueFalseField/TrueFalseField';
 import EmailField from './types/EmailField';
 import UrlField from './types/UrlField';
 import CollectionField from './types/CollectionField/CollectionField';
@@ -12,8 +13,28 @@ import SearchableSelectField from './types/SearchableSelectField/SearchableSelec
 import CheckboxField from './types/CheckboxField/CheckboxField';
 import RadioGroupField from './types/RadioGroupField/RadioGroupField';
 import ImageField from './types/ImageField/ImageField';
+import FileField from './types/FileField/FileField';
 
-export default function Field( {field, register, errors, getValues, setValue, valuesInit, control} ) {
+function fieldDefinitionTypeCheck(field) {
+    if (typeof field === 'object') {
+        return 'object';
+    } else if (typeof field === 'string') {
+        return 'string';
+    console.log('Variable "field" is a string.');
+    } else {
+        return 'invalid';
+    }
+}
+
+export default function Field( {field:fieldReference, register, errors, getValues, setValue, valuesInit, control} ) {
+
+    let field = fieldReference;
+    const fieldDefinitionType = fieldDefinitionTypeCheck( fieldReference );
+    if( fieldDefinitionType === 'string' ) {
+        field = systemFieldsJson[fieldReference];
+    }
+
+    console.log(field)
 
     switch( field.field_type ) {
         case 'text': 
@@ -27,6 +48,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
             break;
         case 'checkbox':
             return <CheckboxField field={field} register={register} errors={errors} />
+            break;
+        case 'true_false':
+            return <TrueFalseField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
             break;
         case 'searchable_select':
             return <SearchableSelectField field={field} register={register} errors={errors} control={control} />
@@ -54,6 +78,9 @@ export default function Field( {field, register, errors, getValues, setValue, va
             break;
         case 'image':
             return <ImageField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            break;
+        case 'file':
+            return <FileField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
             break;
         default:
             return(
