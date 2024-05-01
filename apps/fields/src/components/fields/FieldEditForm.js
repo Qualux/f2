@@ -83,7 +83,12 @@ export default function FieldEditForm({field, fieldLoaded}) {
             setConditionPlaceholder(false);
         }
 
-        if( fieldType.value === 'select' || fieldType.value === 'searchable_select' ) {
+        if( 
+            fieldType.value === 'select' || 
+            fieldType.value === 'searchable_select' || 
+            fieldType.value === 'checkbox' ||
+            fieldType.value === 'radio_group' 
+        ) {
             setConditionChoices(true);
         } else {
             setConditionChoices(false);

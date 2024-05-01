@@ -64,7 +64,12 @@ export default function FieldCreateForm() {
             setConditionPlaceholder(false);
         }
 
-        if( fieldType.value === 'select' || fieldType.value === 'searchable_select' || fieldType.value === 'checkbox' ) {
+        if( 
+            fieldType.value === 'select' || 
+            fieldType.value === 'searchable_select' || 
+            fieldType.value === 'checkbox' ||
+            fieldType.value === 'radio_group' 
+        ) {
             setConditionChoices(true);
         } else {
             setConditionChoices(false);

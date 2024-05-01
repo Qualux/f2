@@ -76,7 +76,12 @@ class Field {
         update_post_meta( $this->id, 'field_storage', $this->field_storage );
         update_post_meta( $this->id, 'field_placeholder', $this->field_placeholder );
 
-        if( $this->field_type === 'select' || $this->field_type === 'searchable_select' || $this->field_type === 'checkbox' ) {
+        if( 
+            $this->field_type === 'select' || 
+            $this->field_type === 'searchable_select' || 
+            $this->field_type === 'checkbox' || 
+            $this->field_type === 'radio_group'  
+        ) {
             update_post_meta( $this->id, 'field_choices', json_encode($this->field_choices) );
         }
 

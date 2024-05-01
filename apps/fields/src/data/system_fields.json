@@ -11,16 +11,24 @@
                 "options": [
                     { "value": "text", "label": "Text" },
                     { "value": "textarea", "label": "Text Area" },
-                    { "value": "select", "label": "Select" },
                     { "value": "number", "label": "Number" },
+                    { "value": "range", "label": "Range" },
                     { "value": "email", "label": "Email" },
                     { "value": "url", "label": "URL" }
                 ]
             },
             {
+                "label": "Content Fields",
+                "options": [
+                    { "value": "image", "label": "Image" }
+                ]
+            },
+            {
                 "label": "Choice Fields",
                 "options": [
-                    { "value": "checkbox", "label": "Checkbox" }
+                    { "value": "select", "label": "Select" },
+                    { "value": "checkbox", "label": "Checkbox" },
+                    { "value": "radio_group", "label": "Radio Group" }
                 ]
             },
             {
