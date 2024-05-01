@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -14,8 +13,6 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
     const [title, setTitle] = useState('');
     const [fields, setFields] = useState([]);
     const [complete, setComplete] = useState(false);
-
-    const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
     const domain = useContext(DomainContext);
 

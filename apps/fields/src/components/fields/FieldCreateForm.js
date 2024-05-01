@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
-import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import Field from './Field';
 import CreateComplete from './create/CreateComplete';
@@ -27,7 +26,6 @@ export default function FieldCreateForm() {
         control,
     } = useForm()
 
-    const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
     const domain = useContext(DomainContext);
 

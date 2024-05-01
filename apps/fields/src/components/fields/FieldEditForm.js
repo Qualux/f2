@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
-import { useFieldType } from '../../lib/useFieldType';
 import { useFetch } from '../../lib/useFetch';
 import Field from './Field';
 import CompleteScreen from './edit/CompleteScreen';
@@ -38,7 +37,6 @@ export default function FieldEditForm({field, fieldLoaded}) {
         control,
     } = useForm()
 
-    const { fieldTypeList } = useFieldType();
     const { postData } = useFetch();
     const domain = useContext(DomainContext);
 

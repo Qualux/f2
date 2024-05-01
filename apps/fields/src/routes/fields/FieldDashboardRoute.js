@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLocation, NavLink, Outlet } from "react-router-dom";
 import AppTemplate from '../../components/global/AppTemplate';
 import FieldList from '../../components/fields/FieldList';
-import { useFieldType } from '../../lib/useFieldType';
 import { useField } from '../../lib/useField';
 
 export default function FieldDashboardRoute() {

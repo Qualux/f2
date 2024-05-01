@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import AppTemplate from '../../components/global/AppTemplate';
 import FieldGroupList from '../../components/groups/FieldGroupList';
-import { useFieldType } from '../../lib/useFieldType';
 import { useField } from '../../lib/useField';
 import { useLocation, Outlet, NavLink } from "react-router-dom";
 
