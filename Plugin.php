@@ -4,6 +4,7 @@
  * Plugin Name: F2
  * Description: F2 is a fields system for WordPress that enables you to create structured data.
  * Author: SaberWP 
+ * Author URL: https://saberwp.com 
  * Version: 0.0.1
  */
 
@@ -12,6 +13,10 @@ namespace Zero;
 define( 'ZERO_URL', plugin_dir_url( __FILE__ ) );
 define( 'ZERO_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ZERO_VERSION', '0.0.1' );
+
+define( 'F2_URL', plugin_dir_url( __FILE__ ) );
+define( 'F2_PATH', plugin_dir_path( __FILE__ ) );
+define( 'F2_VERSION', '0.0.1' );
 
 class Plugin {
 
