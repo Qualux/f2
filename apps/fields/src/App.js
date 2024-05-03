@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import { DomainContext } from './contexts';
 import AppHeader from './components/global/AppHeader';
-import Menu from './components/global/Menu';
 import {
   createHashRouter,
   RouterProvider,
@@ -40,7 +39,6 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <AppHeader />
         <div className="flex gap-0">
-          <Menu />
           <Outlet />
         </div>
       </div>

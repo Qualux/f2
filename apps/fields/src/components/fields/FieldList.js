@@ -12,31 +12,31 @@ function EmptyMessage() {
 function Field({field, index}) {
     return(
         <>
-            <div className="font-medium text-sm text-zinc-800 px-2 py-1">
+            <div className="font-medium text-xs text-zinc-800 px-2 py-1">
                 {field.id}
             </div>
-            <div className="font-medium px-2 py-1">
+            <div className="font-medium text-xs px-2 py-1">
                 {field.field_title}
             </div>
-            <div className="font-medium text-sm px-2 py-1">
+            <div className="font-medium text-xs px-2 py-1">
                 {field.field_type}
             </div>
             <div className="flex justify-end grow gap-3 items-center">
                 <NavLink
                     to={`/fields/view/${field.id}`}
-                    className="font-semibold text-zinc-100 text-sm bg-sky-600 py-1 px-6 rounded transition-colors hover:bg-sky-700"
+                    className="font-semibold text-zinc-100 text-xs bg-neutral-900 py-1 px-6 rounded transition-colors hover:bg-sky-700"
                     >
                     VIEW
                 </NavLink>
                 <NavLink
                     to={`/fields/edit/${field.id}`}
-                    className="font-semibold text-zinc-100 text-sm bg-sky-600 py-1 px-6 rounded transition-colors hover:bg-sky-700"
+                    className="font-semibold text-zinc-100 text-xs bg-neutral-900 py-1 px-6 rounded transition-colors hover:bg-sky-700"
                     >
                     EDIT
                 </NavLink>
                 <NavLink
                     to={`/fields/delete/${field.id}`}
-                    className="font-semibold text-zinc-100 text-sm bg-sky-600 py-1 px-6 rounded transition-colors hover:bg-sky-700"
+                    className="font-semibold text-zinc-100 text-xs bg-neutral-900 py-1 px-6 rounded transition-colors hover:bg-sky-700"
                     >
                     DELETE
                 </NavLink>
@@ -54,14 +54,14 @@ export default function FieldList() {
     }
 
     return(
-        <div className="grid grid-cols-4 gap-1 bg-zinc-200">
-            <div className="font-bold text-sm text-zinc-800 px-2 py-1">
+        <div className="max-w-3xl grid grid-cols-4 gap-2">
+            <div className="font-bold text-sm text-neutral-800 px-2 py-1">
                 ID
             </div>
-            <div className="font-bold text-sm text-zinc-800 px-2 py-1">
+            <div className="font-bold text-sm text-neutral-800 px-2 py-1">
                 Title
             </div>
-            <div className="font-bold text-sm text-zinc-800 px-2 py-1">
+            <div className="font-bold text-sm text-neutral-800 px-2 py-1">
                 Type
             </div>
             <div>&nbsp;</div>

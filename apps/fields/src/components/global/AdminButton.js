@@ -1,4 +1,4 @@
-export default function Button( {label, handler} ) {
+export default function AdminButton( {label, handler} ) {
     
     return(
         <button 

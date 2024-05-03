@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom";
 export default function Logo() {
 
     return(
-        <div className="font-bold text-3xl flex items-center justify-center pb-2">
+        <div className="font-bold text-3xl flex items-center justify-center">
             <NavLink
                 to="/"
                 className=""
                 >
-                    <span className="leading-none text-zinc-400 transition-colors hover:text-zinc-100">
+                    <span className="leading-none text-neutral-200 transition-colors hover:text-neutral-100">
                         F2
                     </span>
             </NavLink>
