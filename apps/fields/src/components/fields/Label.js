@@ -1,6 +1,6 @@
-export default function Label( {text} ) {
+export default function Label( {text, fieldName} ) {
     return(
-        <label className="block text-zinc-600 font-semibold text-sm mt-4 mb-1">
+        <label htmlFor={fieldName} className="block text-sm font-medium leading-6 text-gray-900">
             {text}
         </label>
     )

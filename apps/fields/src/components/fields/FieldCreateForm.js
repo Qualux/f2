@@ -78,8 +78,11 @@ export default function FieldCreateForm() {
     }
 
     return(
-        <main>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <main className="px-6 sm:px-4">
+            <form 
+                onSubmit={handleSubmit(onSubmit)}
+                className="sm:max-w-lg sm:mx-auto"
+            >
 
                 <Field 
                     field={systemFields.field_type}
@@ -104,6 +107,22 @@ export default function FieldCreateForm() {
                     field={systemFields.field_name}
                     register={register}
                     errors={errors}
+                />
+
+                <Field 
+                    field={systemFields.field_conditions}
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                    getValues={getValues}
+                />
+
+                <Field 
+                    field={systemFields.field_condition_rules}
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                    getValues={getValues}
                 />
 
                 {conditionPlaceholder &&

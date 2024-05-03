@@ -82,6 +82,30 @@
         "field_label": "Field Name",
         "field_placeholder": "Unique lowercase system name..."
     },
+    "field_conditions": {
+        "field_type": "true_false",
+        "field_name": "field_conditions",
+        "field_title": "Render Conditionally",
+        "field_label": "Render Conditionally",
+        "field_placeholder": "Unique lowercase system name..."
+    },
+    "field_condition_rules": {
+        "field_type": "text",
+        "field_name": "field_condition_rules",
+        "field_title": "Configure Condition Rules",
+        "field_label": "Configure Condition Rules",
+        "field_placeholder": "Condition rules...",
+        "field_conditions": true,
+        "field_condition_rules": [
+            [
+                {
+                    "field": "field_conditions",
+                    "operator": "=",
+                    "value": true
+                }
+            ]
+        ]
+    },
     "field_placeholder": {
         "field_type": "text",
         "field_name": "field_placeholder",
