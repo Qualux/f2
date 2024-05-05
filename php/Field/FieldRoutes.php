@@ -93,9 +93,17 @@ class FieldRoutes {
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
 
+                    // Explictly set limit with default no limit applied. 
+                    $limit_param = $request->get_param( 'limit' );
+                    $limit = $limit_param;
+                    if( ! $limit_param ) {
+                        $limit = -1;
+                    } 
+
+                    // @TODO Add paging.
                     $field_posts = get_posts([
                         'post_type'   => 'field',
-                        'numberposts' => -1,
+                        'numberposts' => $limit,
                     ]);
 
                     if( empty( $field_posts ) ) {
