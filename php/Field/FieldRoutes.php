@@ -100,10 +100,17 @@ class FieldRoutes {
                         $limit = -1;
                     } 
 
-                    // @TODO Add paging.
+                    // Parse page request, default 0. 
+                    $page_param = $request->get_param( 'page' );
+                    $page = $page_param;
+                    if( ! $page_param ) {
+                        $page = 0;
+                    } 
+
                     $field_posts = get_posts([
-                        'post_type'   => 'field',
-                        'numberposts' => $limit,
+                        'post_type'      => 'field',
+                        'posts_per_page' => $limit,
+                        'paged'          => $page
                     ]);
 
                     if( empty( $field_posts ) ) {

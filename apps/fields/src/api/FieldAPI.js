@@ -9,7 +9,7 @@ export const FieldAPI = {
     get: async function (id, cancel = false) {
       const response = await api.request({
         // url: `/field/:id`,
-        url: '/field?limit=4',
+        url: '/field?limit=3&page=2',
         method: "GET",
       })
   

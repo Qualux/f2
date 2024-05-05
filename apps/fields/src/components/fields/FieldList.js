@@ -1,5 +1,16 @@
+import { useState } from 'react';
 import { useFieldCollection } from '../../lib/useFieldCollection';
 import { NavLink } from "react-router-dom";
+import {
+    useQuery,
+    useMutation,
+    useQueryClient,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query';
+import { FieldAPI } from '../../api/FieldAPI';
+
+const queryClient = new QueryClient();
 
 function EmptyMessage() {
     return(
@@ -10,6 +21,21 @@ function EmptyMessage() {
 }
 
 function Field({field, index}) {
+
+    if( field.field_type?.value ) {
+        return(
+            <>
+                <div>
+                Skipped {field.id} due to field type invalidation.
+                </div>
+                <div>
+                    {field.field_title}
+                </div>
+                <div></div>
+                <div></div>
+            </>
+        );
+    }
 
     return(
         <>
@@ -48,6 +74,7 @@ function Field({field, index}) {
 }
 
 function FieldListFilters() {
+
     return(
         <div className="my-8">
             <h5 className="text-xs mb-6">
@@ -63,16 +90,49 @@ function FieldListFilters() {
                     </div>
                 </div>
                 <div>
-
+                    
                 </div>
             </div>
         </div>
-    )
+    );
+
 }
 
-export default function FieldList() {
+export default function FieldLIst() {
+    return(
+        <QueryClientProvider client={queryClient}>
+            <FieldListOutput />
+        </QueryClientProvider>
+    );
+}
+
+function FieldListOutput() {
+
+    const [page, setPage] = useState(0);
 
     const { fields, isLoaded } = useFieldCollection();
+
+    const {
+        isLoading,
+        isError,
+        error,
+        data,
+        isFetching,
+        isPreviousData,
+      } = useQuery({
+        queryKey: ['fields', page],
+        queryFn: () => FieldAPI.get(page),
+        keepPreviousData : true
+    });
+
+    if( isLoading ) {
+        return(
+            <div>
+                IS LOADING
+            </div>
+        )
+    }
+    
 
     if( !isLoaded ) {
         return <main>Loading fields....</main>
@@ -101,7 +161,29 @@ export default function FieldList() {
                     Load more (23 available)
                 </button>
             </div>
+            <h2>NEW PAGED LIST BELOW</h2>
+            <PagedFields data={data} />
         </div>
     );
 
 }
+
+function PagedFields({data}) {
+    return(
+        <main>
+            <ul>{data.data.fields?.map((field) => <li key={field.id}>{field.field_title}</li>)}</ul>
+        </main>
+    )
+}
+
+
+/* 
+
+PHP WP QUERY PAGING SUPPORT 
+
+posts_per_page
+"paged"
+
+
+
+*/
