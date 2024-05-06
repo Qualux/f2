@@ -107,20 +107,31 @@ class FieldRoutes {
                         $page = 1;
                     } 
 
-                    $field_posts = get_posts([
-                        'post_type'      => 'field',
-                        'posts_per_page' => $limit,
-                        'paged'          => $page
-                    ]);
+                    // Parse orderby.
+                    $orderby_param = $request->get_param( 'orderby' );
+                    $orderby = $orderby_param;
+                    if( ! $orderby ) {
+                        $orderby = 'ID';
+                    } 
+
+                    // Parse order.
+                    $order_param = $request->get_param( 'order' );
+                    $order = $order_param;
+                    if( ! $order ) {
+                        $order = 'ASC';
+                    } 
 
                     $query_params = [
                         'post_type'      => 'field',
                         'posts_per_page' => $limit,
                         'paged'          => $page,
+                        'orderby'        => $orderby, // meta_value, meta_value_num
+                        'order'          => $order,
+                        // 'meta_key'    => 'field_name',
                     ];
                     $query = new \WP_Query( $query_params );
 
-                    if( empty( $field_posts ) ) {
+                    if( empty( $query->posts ) ) {
                         return new \WP_REST_Response(
                             array(
                                 'status'  => 200,
@@ -132,7 +143,7 @@ class FieldRoutes {
                     }
 
                     $fields = [];
-                    foreach( $field_posts as $fp ) {
+                    foreach( $query->posts as $fp ) {
                         $f = new Field();
                         $f->load( $fp->ID );
                         $fields[] = $f;
@@ -143,7 +154,6 @@ class FieldRoutes {
                             'status'  => 200,
                             'query'   => $query,
                             'fields'  => $fields,
-                            'count'   => count($field_posts),
                             'message' => 'Fields loaded.',
                             'max_num_pages' => $query->max_num_pages,
                             'found_posts'   => $query->found_posts,
