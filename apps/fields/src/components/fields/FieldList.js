@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useFieldCollection } from '../../lib/useFieldCollection';
 import { NavLink } from "react-router-dom";
 import {
     useQuery,
@@ -22,19 +21,9 @@ function EmptyMessage() {
 
 function Field({field, index}) {
 
+    /* Invalid field_type property. @TODO this property should be valid prior to response from API P/R. */
     if( field.field_type?.value ) {
-        return(
-            <>
-                <div>
-                Skipped {field.id} due to field type invalidation.
-                </div>
-                <div>
-                    {field.field_title}
-                </div>
-                <div></div>
-                <div></div>
-            </>
-        );
+        return null;
     }
 
     return(
@@ -108,9 +97,7 @@ export default function FieldLIst() {
 
 function FieldListOutput() {
 
-    const [page, setPage] = useState(0);
-
-    const { fields, isLoaded } = useFieldCollection();
+    const [page, setPage] = useState(1);
 
     const {
         isLoading,
@@ -119,23 +106,18 @@ function FieldListOutput() {
         data,
         isFetching,
         isPreviousData,
-      } = useQuery({
+    } = useQuery({
         queryKey: ['fields', page],
         queryFn: () => FieldAPI.get(page),
-        keepPreviousData : true
+        keepPreviousData: true,
     });
 
-    if( isLoading ) {
+    if (isLoading && !data) {
         return(
             <div>
                 IS LOADING
             </div>
         )
-    }
-    
-
-    if( !isLoaded ) {
-        return <main>Loading fields....</main>
     }
 
     return(
@@ -152,29 +134,80 @@ function FieldListOutput() {
                     Type
                 </div>
                 <div>&nbsp;</div>
-                {fields.map( ( field, index ) =>
+                {data.fields.map( ( field, index ) =>
                     <Field key={index} field={field} index={index} />
                 )}
             </div>
-            <div className="my-6 flex items-center justify-center">
-                <button className="inline-block bg-neutral-300 text-neutral-600 py-2 px-6">
-                    Load more (23 available)
-                </button>
+            <Pager 
+                pageCount={data.max_num_pages}
+                page={page}
+                setPage={setPage}
+            />
+            <div className="flex gap-6 text-xs text-neutral-400">
+                <div>
+                    Pages Found: {data.max_num_pages}
+                </div>
+                <div>
+                    Total Records: {data.found_posts}
+                </div>
             </div>
-            <h2>NEW PAGED LIST BELOW</h2>
-            <PagedFields data={data} />
         </div>
     );
 
 }
 
-function PagedFields({data}) {
-    return(
-        <main>
-            <ul>{data.data.fields?.map((field) => <li key={field.id}>{field.field_title}</li>)}</ul>
-        </main>
-    )
+function PagerLink({ pageNum, handleClick, active }) {
+
+    let classes = 'px-2 py-1 rounded-sm';
+    if(active) {
+        classes += ' bg-sky-200';
+    } else {
+        classes += ' cursor-pointer bg-neutral-200';
+    }
+    
+    const handleClickWrapper = () => {
+        handleClick(pageNum);
+    };
+
+    return (
+        <li 
+            className={classes}
+            onClick={handleClickWrapper}
+        >
+           {pageNum}
+        </li>
+    );
 }
+
+function Pager({ pageCount, page, setPage }) {
+    const handleClick = (pageNum) => {
+        setPage(pageNum);
+    };
+
+    // Generate dynamic page links up to the pageCount
+    const pageLinks = [];
+    for (let i = 1; i <= pageCount; i++) {
+        
+        pageLinks.push(
+            <PagerLink
+                key={i}
+                pageNum={i}
+                handleClick={handleClick}
+                active={i === page}
+            />
+        );
+    }
+
+    return (
+        <main className="my-8 bg-neutral-100 p-6 flex justify-center">
+            <ul className="flex items-center gap-1">
+                {pageLinks}
+            </ul>
+        </main>
+    );
+}
+
+
 
 
 /* 

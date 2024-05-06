@@ -6,14 +6,14 @@ import { api } from './config/axiosConfig';
 
 export const FieldAPI = {
 
-    get: async function (id, cancel = false) {
+    get: async function ( page ) {
+
       const response = await api.request({
-        // url: `/field/:id`,
-        url: '/field?limit=3&page=2',
+        url: `/field?limit=3&page=${page}`,
         method: "GET",
       })
   
-      return response;
+      return response.data;
 
     }
 

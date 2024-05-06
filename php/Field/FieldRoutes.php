@@ -104,7 +104,7 @@ class FieldRoutes {
                     $page_param = $request->get_param( 'page' );
                     $page = $page_param;
                     if( ! $page_param ) {
-                        $page = 0;
+                        $page = 1;
                     } 
 
                     $field_posts = get_posts([
@@ -112,6 +112,13 @@ class FieldRoutes {
                         'posts_per_page' => $limit,
                         'paged'          => $page
                     ]);
+
+                    $query_params = [
+                        'post_type'      => 'field',
+                        'posts_per_page' => $limit,
+                        'paged'          => $page,
+                    ];
+                    $query = new \WP_Query( $query_params );
 
                     if( empty( $field_posts ) ) {
                         return new \WP_REST_Response(
@@ -134,9 +141,12 @@ class FieldRoutes {
                     return new \WP_REST_Response(
                         array(
                             'status'  => 200,
+                            'query'   => $query,
                             'fields'  => $fields,
                             'count'   => count($field_posts),
-                            'message' => 'Fields loaded.'
+                            'message' => 'Fields loaded.',
+                            'max_num_pages' => $query->max_num_pages,
+                            'found_posts'   => $query->found_posts,
                         )
                     );
                     
