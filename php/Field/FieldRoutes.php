@@ -134,6 +134,24 @@ class FieldRoutes {
                         'orderby'        => $orderby, // meta_value, meta_value_num
                         'meta_key'       => $meta_key,
                     ];
+
+                    // Field type filter.
+                    $field_type_param = $request->get_param( 'field_type' );
+                    if( $field_type_param ) {
+                        $query_params['meta_query'] = array(
+                            array(
+                                'key'   => 'field_type',
+                                'value' => $field_type_param
+                            ),
+                        );
+                    } 
+
+                    // Search filter. 
+                    $search_param = $request->get_param( 'search' );
+                    if( $search_param ) {
+                        $query_params['s'] = $search_param;
+                    } 
+
                     $query = new \WP_Query( $query_params );
 
                     if( empty( $query->posts ) ) {
