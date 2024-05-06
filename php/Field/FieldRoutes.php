@@ -94,10 +94,10 @@ class FieldRoutes {
                 'callback' => function( \WP_REST_Request $request ) {
 
                     // Explictly set limit with default no limit applied. 
-                    $limit_param = $request->get_param( 'limit' );
-                    $limit = $limit_param;
-                    if( ! $limit_param ) {
-                        $limit = -1;
+                    $records_per_page_param = $request->get_param( 'records_per_page' );
+                    $records_per_page = $records_per_page_param;
+                    if( ! $records_per_page ) {
+                        $records_per_page = 10;
                     } 
 
                     // Parse page request, default 0. 
@@ -108,11 +108,16 @@ class FieldRoutes {
                     } 
 
                     // Parse orderby.
+                    $meta_key = null;
                     $orderby_param = $request->get_param( 'orderby' );
                     $orderby = $orderby_param;
                     if( ! $orderby ) {
                         $orderby = 'ID';
                     } 
+                    if( $orderby !== 'ID' && $orderby !== 'title' ) {
+                        $meta_key = $orderby;
+                        $orderby  = 'meta_value';
+                    }
 
                     // Parse order.
                     $order_param = $request->get_param( 'order' );
@@ -123,11 +128,11 @@ class FieldRoutes {
 
                     $query_params = [
                         'post_type'      => 'field',
-                        'posts_per_page' => $limit,
+                        'posts_per_page' => $records_per_page,
                         'paged'          => $page,
-                        'orderby'        => $orderby, // meta_value, meta_value_num
                         'order'          => $order,
-                        // 'meta_key'    => 'field_name',
+                        'orderby'        => $orderby, // meta_value, meta_value_num
+                        'meta_key'       => $meta_key,
                     ];
                     $query = new \WP_Query( $query_params );
 

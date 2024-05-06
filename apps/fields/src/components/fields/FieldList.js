@@ -8,6 +8,7 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query';
 import { FieldAPI } from '../../api/FieldAPI';
+import { useCrudible } from '../../lib/useCrudible';
 
 const queryClient = new QueryClient();
 
@@ -87,7 +88,7 @@ function FieldListFilters() {
 
 }
 
-export default function FieldLIst() {
+export default function FieldList() {
     return(
         <QueryClientProvider client={queryClient}>
             <FieldListOutput />
@@ -97,7 +98,10 @@ export default function FieldLIst() {
 
 function FieldListOutput() {
 
+    const [recordsPerPage, setRecordsPerPage] = useState(10);
     const [page, setPage] = useState(1);
+    const [sortColumn, setSortColumn] = useState('ID');
+    const [sortOrder, setSortOrder] = useState('DESC');
 
     const {
         isLoading,
@@ -107,10 +111,12 @@ function FieldListOutput() {
         isFetching,
         isPreviousData,
     } = useQuery({
-        queryKey: ['fields', page],
-        queryFn: () => FieldAPI.get(page),
+        queryKey: ['fields', page, sortOrder],
+        queryFn: () => FieldAPI.get(page, sortColumn, sortOrder, recordsPerPage ),
         keepPreviousData: true,
     });
+
+    const { SortableHeader } = useCrudible();
 
     if (isLoading && !data) {
         return(
@@ -124,15 +130,30 @@ function FieldListOutput() {
         <div className="max-w-3xl">
             <FieldListFilters />
             <div className="grid grid-cols-4 gap-2">
-                <div className="font-bold text-sm text-neutral-800 px-2 py-1">
-                    ID
-                </div>
-                <div className="font-bold text-sm text-neutral-800 px-2 py-1">
-                    Title
-                </div>
-                <div className="font-bold text-sm text-neutral-800 px-2 py-1">
-                    Type
-                </div>
+                <SortableHeader 
+                    label="ID"
+                    columnKey="ID"
+                    sortColumn={sortColumn}
+                    setSortColumn={setSortColumn}
+                    sortOrder={sortOrder}
+                    setSortOrder={setSortOrder}
+                />
+                <SortableHeader 
+                    label="Title"
+                    columnKey="title"
+                    sortColumn={sortColumn}
+                    setSortColumn={setSortColumn}
+                    sortOrder={sortOrder}
+                    setSortOrder={setSortOrder}
+                />
+                <SortableHeader 
+                    label="Type"
+                    columnKey="field_type"
+                    sortColumn={sortColumn}
+                    setSortColumn={setSortColumn}
+                    sortOrder={sortOrder}
+                    setSortOrder={setSortOrder}
+                />
                 <div>&nbsp;</div>
                 {data.fields.map( ( field, index ) =>
                     <Field key={index} field={field} index={index} />

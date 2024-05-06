@@ -6,10 +6,10 @@ import { api } from './config/axiosConfig';
 
 export const FieldAPI = {
 
-    get: async function ( page ) {
+    get: async function ( page, sortColumn = 'ID', sortOrder = 'DESC', recordsPerPage = 10 ) {
 
       const response = await api.request({
-        url: `/field?limit=3&page=${page}`,
+        url: `/field?page=${page}&order=${sortOrder}&orderby=${sortColumn}&records_per_page=${recordsPerPage}`,
         method: "GET",
       })
   
