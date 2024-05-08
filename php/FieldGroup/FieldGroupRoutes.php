@@ -131,7 +131,7 @@ class FieldGroupRoutes {
                     return new \WP_REST_Response(
                         array(
                             'status'        => 200,
-                            'field_groups'  => $fgs,
+                            'records'       => $fgs,
                             'count'         => count($fgs),
                             'message'       => 'Fields loaded.'
                         )

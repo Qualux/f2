@@ -3,8 +3,8 @@ import {
     useQuery,
     keepPreviousData,
 } from '@tanstack/react-query';
-import { FieldAPI } from '../../../api/FieldAPI';
-import { useCrudible } from '../../../lib/useCrudible/useCrudible';
+import { FieldAPI } from '../../api/FieldAPI';
+import { useCrudible } from '../../lib/useCrudible/useCrudible';
 
 // @TODO set the routes for view, edit, delete, create and pass these into Grid/Crudible.
 

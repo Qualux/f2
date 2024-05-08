@@ -158,7 +158,7 @@ class FieldRoutes {
                         return new \WP_REST_Response(
                             array(
                                 'status'  => 200,
-                                'fields'  => [],
+                                'records'  => [],
                                 'count'   => 0,
                                 'message' => 'No fields found.'
                             )
@@ -174,10 +174,10 @@ class FieldRoutes {
 
                     return new \WP_REST_Response(
                         array(
-                            'status'  => 200,
-                            'query'   => $query,
-                            'fields'  => $fields,
-                            'message' => 'Fields loaded.',
+                            'status'        => 200,
+                            'query'         => $query,
+                            'records'       => $fields,
+                            'message'       => 'Fields loaded.',
                             'max_num_pages' => $query->max_num_pages,
                             'found_posts'   => $query->found_posts,
                         )

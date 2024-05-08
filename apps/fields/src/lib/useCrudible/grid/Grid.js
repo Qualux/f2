@@ -40,7 +40,7 @@ export default function Grid(
                         setSortOrder={setSortOrder}
                     />
                 ))}
-                {data.fields.map( ( field, index ) =>
+                {data.records.map( ( field, index ) =>
                     <GridRow key={index} field={field} index={index} routes={routes} />
                 )}
             </ul>
