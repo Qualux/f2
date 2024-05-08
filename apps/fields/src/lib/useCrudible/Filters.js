@@ -1,25 +1,4 @@
-import { useState } from 'react';
-
-const filters = [
-    { key: 'field_type', label: 'FIELD TYPE', type: 'select', options: [
-        { value: 'text', label: 'Text' },
-        { value: 'select', label: 'Select' },
-        { value: 'number', label: 'Number' },
-    ]},
-    { key: 'search', label: 'SEARCH', type: 'text' },
-    { key: 'recordsPerPage', label: 'RECORDS PER PAGE', type: 'select', options: [
-        { value: '10', label: '10' },
-        { value: '25', label: '25' },
-        { value: '50', label: '50' },
-        { value: '100', label: '100' },
-    ]},
-];
-
-const initialFilterValues = Object.fromEntries(filters.map(filter => [filter.key, ''])); // Initialize all filters to empty string
-
-export default function Filters() {
-
-    const [filterValues, setFilterValues] = useState(initialFilterValues);
+export default function Filters({filters, filterValues, setFilterValues}) {
 
     const setFilterValue = (key, value) => {
         setFilterValues(prevValues => ({
@@ -29,14 +8,13 @@ export default function Filters() {
     };
 
     return(
-        <div className="my-8 bg-neutral-50 p-6">
-            <h5 className="text-xs mb-6 pb-1 border-b border-solid text-neutral-400">
-                RECORD FILTERS
-            </h5>
-            <div className="filters">
+        <div className="my-8 bg-neutral-50 py-3 px-2">
+            <div className="flex items-center gap-8 flex-wrap">
                 {filters.map(filter => (
-                    <div key={filter.key}>
-                        <h4 className="text-neutral-500 text-sm">{filter.label}</h4>
+                    <div 
+                        key={filter.key}
+                        className="basis-1/4"
+                    >
                         <Filter
                             filter={filter}
                             value={filterValues[filter.key]}
@@ -51,33 +29,40 @@ export default function Filters() {
 }
 
 
-
 // Define TextFilter and SelectFilter components
-const TextFilter = ({ value, onChange }) => (
-    <input
-        type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder="Search by text..."
-    />
+const TextFilter = ({ label, placeholder, value, onChange }) => (
+    <div>
+        <h4 className="text-neutral-400 text-xs text-medium">{label}</h4>
+        <input
+            className="w-full max-w-52 border border-neutral-800 border-solid py-1 px-1 text-sm text-medium placeholder:text-neutral-300"
+            type="text"
+            value={value}
+            onChange={e => onChange(e.target.value)}
+            placeholder={placeholder}
+        />
+    </div>
 );
 
-const SelectFilter = ({ value, options, onChange }) => (
-    <select
-        value={value}
-        onChange={e => onChange(e.target.value)}
-    >
-        {options.map(option => (
-            <option key={option.value} value={option.value}>{option.label}</option>
-        ))}
-    </select>
+const SelectFilter = ({ label, value, options, onChange }) => (
+    <div>
+        <h4 className="text-neutral-400 text-xs text-medium">{label}</h4>
+        <select
+            className="w-full max-w-52 border border-neutral-800 border-solid py-1 px-1"
+            value={value}
+            onChange={e => onChange(e.target.value)}
+        >
+            {options.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+        </select>
+    </div>
 );
 
 const Filter = ({ filter, value, onChange }) => {
     if (filter.type === 'text') {
-        return <TextFilter value={value} onChange={onChange} />;
+        return <TextFilter label={filter.label} placeholder={filter.placeholder} value={value} onChange={onChange} />;
     } else if (filter.type === 'select') {
-        return <SelectFilter value={value} options={filter.options} onChange={onChange} />;
+        return <SelectFilter label={filter.label} value={value} options={filter.options} onChange={onChange} />;
     }
     return null;
 };
