@@ -4,10 +4,9 @@ import {
     keepPreviousData,
 } from '@tanstack/react-query';
 import { FieldAPI } from '../../../api/FieldAPI';
-import { useCrudible } from '../../../lib/useCrudible';
+import { useCrudible } from '../../../lib/useCrudible/useCrudible';
 import Field from './Field';
 import FieldListFilters from './FieldListFilters';
-import Pager from './Pager';
 
 export default function FieldListOutput() {
 
@@ -31,7 +30,7 @@ export default function FieldListOutput() {
         placeholderData: keepPreviousData,
     });
 
-    const { SortableHeader } = useCrudible();
+    const { Header, Grid, SortableHeader, Pager, Footer } = useCrudible();
 
     if (isLoading && !data) {
         return(
@@ -43,6 +42,8 @@ export default function FieldListOutput() {
 
     return(
         <div className="max-w-3xl">
+            <Header to="/fields/create" />
+            <Grid data={data.fields} />
             <FieldListFilters 
                 recordsPerPage={recordsPerPage}
                 setRecordsPerPage={setRecordsPerPage}
@@ -86,14 +87,7 @@ export default function FieldListOutput() {
                 page={page}
                 setPage={setPage}
             />
-            <div className="flex gap-6 text-xs text-neutral-400">
-                <div>
-                    Pages Found: {data.max_num_pages}
-                </div>
-                <div>
-                    Total Records: {data.found_posts}
-                </div>
-            </div>
+            <Footer data={data} />
         </div>
     );
 
