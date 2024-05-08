@@ -43,7 +43,16 @@ export default function FieldListOutput() {
     return(
         <div className="max-w-3xl">
             <Header to="/fields/create" />
-            <Grid data={data.fields} />
+            <Grid 
+                data={data} 
+                page={page}
+                setPage={setPage}
+                sortColumn={sortColumn}
+                setSortColumn={setSortColumn}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+            />
+            <h2 className="mt-8 font-bold text-3xl">---------- AFTER GRID ---------</h2>
             <FieldListFilters 
                 recordsPerPage={recordsPerPage}
                 setRecordsPerPage={setRecordsPerPage}

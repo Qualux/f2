@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import SortableHeader from './SortableHeader';
 import Filters from './Filters';
+import Pager from './Pager';
 import DeleteButton from './DeleteButton';
 
 const columns = [
@@ -49,10 +50,7 @@ function GridRow({field, index}) {
 
 }
 
-export default function Grid({data}) {
-
-    const [sortColumn, setSortColumn] = useState('ID');
-    const [sortOrder, setSortOrder] = useState('DESC');
+export default function Grid({data, page, setPage, sortColumn, setSortColumn, sortOrder, setSortOrder}) {
 
     return(
         <main>
@@ -69,10 +67,15 @@ export default function Grid({data}) {
                         setSortOrder={setSortOrder}
                     />
                 ))}
-                {data.map( ( field, index ) =>
+                {data.fields.map( ( field, index ) =>
                     <GridRow key={index} field={field} index={index} />
                 )}
             </ul>
+            <Pager 
+                pageCount={data.max_num_pages}
+                page={page}
+                setPage={setPage}
+            />
         </main>
     );
 

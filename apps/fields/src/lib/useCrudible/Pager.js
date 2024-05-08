@@ -1,6 +1,7 @@
 import PagerLink from './PagerLink';
 
 export default function Pager({ pageCount, page, setPage }) {
+
     const handleClick = (pageNum) => {
         setPage(pageNum);
     };
@@ -26,4 +27,5 @@ export default function Pager({ pageCount, page, setPage }) {
             </ul>
         </main>
     );
+
 }
