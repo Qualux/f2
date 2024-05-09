@@ -18,7 +18,6 @@ import DeleteFieldRoute from './routes/fields/DeleteFieldRoute';
 
 // Field Group Routes.
 import GroupsDashboard from './routes/groups/GroupsDashboard';
-import GroupsDashboard2 from './routes/groups/GroupsDashboard2';
 import CreateFieldGroup from './routes/groups/CreateFieldGroup';
 import EditFieldGroup from './routes/groups/EditFieldGroup';
 import DeleteFieldGroup from './routes/groups/DeleteFieldGroup';
@@ -71,10 +70,6 @@ const router = createHashRouter([
         path: "groups",
         element: <GroupsDashboard />,
         children: [
-          {
-            path: "dash2",
-            element: <GroupsDashboard2 />,
-          },
           {
             path: "create",
             element: <CreateFieldGroup />,

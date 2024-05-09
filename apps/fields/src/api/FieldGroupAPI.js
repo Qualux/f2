@@ -12,11 +12,9 @@ export const FieldGroupAPI = {
             orderby: sortColumn,
         }
 
-        /*
         if(filterValues.records_per_page) {
             params.records_per_page = filterValues.records_per_page;
         }
-        */
 
         const response = await axios.get(`${this.baseUrl}/field-group`, { params });
 
