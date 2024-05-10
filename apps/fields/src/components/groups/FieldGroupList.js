@@ -19,8 +19,8 @@ const routes = {
 /* Columns and filters definition. */
 
 const columns = [
-    { label: 'ID', columnKey: 'ID' },
-    { label: 'Title', columnKey: 'title' },
+    { label: 'ID', columnKey: 'ID', recordKey: 'id' },
+    { label: 'Title', columnKey: 'title', recordKey: 'title' },
 ];
 
 const filters = [

@@ -19,10 +19,10 @@ const routes = {
 /* Columns and filters definition. */
 
 const columns = [
-    { label: 'ID', columnKey: 'ID' },
-    { label: 'Title', columnKey: 'title' },
-    { label: 'Type', columnKey: 'field_type' },
-    { label: '', columnKey: '' },
+    { label: 'ID', columnKey: 'ID', recordKey: 'id', },
+    { label: 'Title', columnKey: 'title', recordKey: 'field_title', },
+    { label: 'Type', columnKey: 'field_type', recordKey: 'field_type', },
+    { label: '', columnKey: 'controls' },
 ];
 
 const filters = [
