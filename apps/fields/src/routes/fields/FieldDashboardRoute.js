@@ -1,6 +1,6 @@
 import { useLocation, Outlet } from "react-router-dom";
 import AppTemplate from '../../components/global/AppTemplate';
-import FieldList from '../../components/fields/FieldList';
+import Dashboard from '../../components/fields/FieldDashboard';
 
 export default function FieldDashboardRoute() {
 
@@ -13,7 +13,7 @@ export default function FieldDashboardRoute() {
         return(
             <AppTemplate title="Field Manager">
                 <div className="max-w-3xl my-2">
-                    <FieldList />
+                    <Dashboard />
                 </div>
             </AppTemplate>
         )

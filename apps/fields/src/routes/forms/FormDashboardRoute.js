@@ -1,4 +1,5 @@
 import { useLocation, Outlet } from "react-router-dom";
+import AppTemplate from '../../components/global/AppTemplate';
 import Dashboard from '../../components/forms/FormDashboard';
 
 export default function FormDashboardRoute() {
@@ -8,7 +9,11 @@ export default function FormDashboardRoute() {
 
     if( isMainRoute ) {
         return(
-            <Dashboard />
+            <AppTemplate title="Form Manager">
+                <div className="max-w-3xl my-2">
+                    <Dashboard />
+                </div>
+            </AppTemplate>
         );
     }
 

@@ -45,7 +45,7 @@ const filters = [
 const initialFilterValues = Object.fromEntries(filters.map(filter => [filter.key, ''])); // Initialize all filters to empty string
 
 /* Wrapper component that uses Crudible to set React Query context provider. */
-export default function FieldList() {
+export default function FieldDashboard() {
 
     const { Crudible } = useCrudible({
         sdoKey: 'field'

@@ -1,7 +1,7 @@
 import Form from '../../components/forms/FormManagerForm';
 import AppTemplate from '../../components/global/AppTemplate';
 
-export default function FormCreateRoute() {
+export default function FormEditRoute() {
 
     return(
         <AppTemplate title="Create Form">
