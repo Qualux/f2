@@ -27,6 +27,14 @@ export default function AppMenu() {
                             GROUPS
                     </NavLink>
                 </li>
+                <li className="flex items-center justify-stretch m-0">
+                    <NavLink
+                            to="/forms"
+                            className={itemClasses}
+                            >
+                            FORMS
+                    </NavLink>
+                </li>
             </ul>
         </main>   
     )

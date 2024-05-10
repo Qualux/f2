@@ -1,46 +1,33 @@
-import { useForm } from "react-hook-form";
-import Field from '../fields/Field';
-import { useFieldGroup } from '../../lib/useFieldGroup';
+import { useCrudible } from '../../lib/useCrudible/useCrudible';
 
 export default function Form() {
 
-    const { fieldGroup, isLoaded } = useFieldGroup( '001', 0 );
-
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-        reset,
-        setValue, 
-        getValues,
-        control
-    } = useForm();
-
-    if( !isLoaded ) {
-        return(
-            <main>Field group loading...</main>
-        )
-    }
+    const { Header, AppForm, sdo, sdoRoutes } = useCrudible({
+        sdoKey: 'form'
+    });
 
     return(
         <main>
-            <form>
-                <div>
-                    {fieldGroup.fields_numeric.map( ( field, index ) =>
-                        <div key={index} className="my-6">
-                            <Field 
-                                field={field} 
-                                register={register}
-                                errors={errors} 
-                                getValues={getValues}
-                                setValue={setValue}
-                                control={control}
-                            />
-                        </div>
-                    )}
-                </div>
-            </form>
+            <Header
+                title="F2 Form Manager"
+                buttonLabel="Create Form"
+                to={sdoRoutes.create}
+            />
+            <h1 className="mb-12 text-5xl text-neutral-700">
+                {sdo.title}
+            </h1>
+            <AppForm />
+            <div>
+                <button className="flex flex-col justify-center items-center gap-8 bg-neutral-300 text-neutral-700 p-12">
+                    <span className="text-5xl font-bold">
+                        Create Field Group
+                    </span>
+                    <svg className="w-16 h-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </button>
+            </div>
+
         </main>
     );
 

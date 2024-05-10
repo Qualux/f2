@@ -1,0 +1,11 @@
+{
+    "form": {
+        "title": "F2 Form SDO",
+        "routeBase": "/forms",
+        "field_groups": [
+            {
+
+            }
+        ]
+    }
+}
