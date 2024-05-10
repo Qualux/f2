@@ -26,6 +26,7 @@ import DeleteFieldGroup from './routes/groups/DeleteFieldGroup';
 import FormDashboardRoute from './routes/forms/FormDashboardRoute';
 import FormCreateRoute from './routes/forms/FormCreateRoute';
 import FormEditRoute from './routes/forms/FormEditRoute';
+import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 
 import {
   createHashRouter,
@@ -53,6 +54,10 @@ const router = createHashRouter([
           {
             path: "edit/:formId",
             element: <FormEditRoute />,
+          },
+          {
+            path: "delete/:formId",
+            element: <FormDeleteRoute />,
           },
         ],
       },
