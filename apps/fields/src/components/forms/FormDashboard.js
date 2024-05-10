@@ -1,6 +1,6 @@
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
 
-export default function Form() {
+export default function FormDashboard() {
 
     const { Header, AppForm, sdo, sdoRoutes } = useCrudible({
         sdoKey: 'form'
