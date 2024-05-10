@@ -30,6 +30,9 @@ class Plugin {
 
         require_once( ZERO_PATH . '/php/Field/Field.php' );
 
+        require_once( ZERO_PATH . '/php/Field/FieldPostType.php' );
+        $fpt = new Field\FieldPostType();
+
         require_once( ZERO_PATH . '/php/Field/FieldShortcodes.php' );
         $fs = new Field\FieldShortcodes();
 

@@ -1,34 +1,115 @@
+import { useState }  from 'react';
+import {
+    useQuery,
+    keepPreviousData,
+} from '@tanstack/react-query';
+import { FieldAPI } from '../../api/FieldAPI';
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
+
+/* Setup route paths. */
+const routes = {
+    edit: '/fields/edit',
+    view: '/fields/view',
+    delete: '/fields/delete',
+    create: '/fields/create',
+}
+
+/* Columns and filters definition. */
+
+const columns = [
+    { label: 'ID', columnKey: 'ID', recordKey: 'id', },
+    { label: 'Title', columnKey: 'title', recordKey: 'field_title', },
+    { label: 'Type', columnKey: 'field_type', recordKey: 'field_type', },
+    { label: '', columnKey: 'controls' },
+];
+
+const filters = [
+    { key: 'field_type', label: 'FIELD TYPE', type: 'select', options: [
+        { value: '', label: 'Any' },
+        { value: 'text', label: 'Text' },
+        { value: 'checkbox', label: 'Checkbox' },
+        { value: 'select', label: 'Select' },
+        { value: 'number', label: 'Number' },
+    ]},
+    { key: 'search', label: 'SEARCH', placeholder: 'Search by field title...', type: 'text' },
+    { key: 'records_per_page', label: 'RECORDS PER PAGE', type: 'select', options: [
+        { value: '10', label: '10' },
+        { value: '25', label: '25' },
+        { value: '50', label: '50' },
+        { value: '100', label: '100' },
+    ]},
+];
+
+const initialFilterValues = Object.fromEntries(filters.map(filter => [filter.key, ''])); // Initialize all filters to empty string
+
 
 export default function FormDashboard() {
 
-    const { Header, AppForm, sdo, sdoRoutes } = useCrudible({
+    const { Crudible, Header, AppForm, sdo, Grid, sdoRoutes } = useCrudible({
         sdoKey: 'form'
     });
 
     return(
         <main>
-            <Header
-                title="F2 Form Manager"
-                buttonLabel="Create Form"
-                to={sdoRoutes.create}
-            />
-            <h1 className="mb-12 text-5xl text-neutral-700">
-                {sdo.title}
-            </h1>
-            <AppForm />
-            <div>
-                <button className="flex flex-col justify-center items-center gap-8 bg-neutral-300 text-neutral-700 p-12">
-                    <span className="text-5xl font-bold">
-                        Create Field Group
-                    </span>
-                    <svg className="w-16 h-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                </button>
-            </div>
-
+            <Crudible>
+                <FormManager />
+            </Crudible>
         </main>
+    );
+
+}
+
+function FormManager() {
+
+    const [page, setPage] = useState(1);
+    const [sortColumn, setSortColumn] = useState('ID');
+    const [sortOrder, setSortOrder] = useState('DESC');
+    const [filterValues, setFilterValues] = useState(initialFilterValues);
+
+    const {
+        isLoading,
+        data,
+    } = useQuery({
+        queryKey: ['f2_forms', page, sortColumn, sortOrder, filterValues],
+        queryFn: () => FieldAPI.get(page, sortColumn, sortOrder, filterValues),
+        placeholderData: keepPreviousData,
+    });
+
+    const { Header, Grid, Footer, sdo, sdoRoutes } = useCrudible({
+        sdoKey: 'form'
+    });
+
+    if (isLoading && !data) {
+        return(
+            <div>
+                IS LOADING
+            </div>
+        )
+    }
+
+    return(
+        <div className="max-w-3xl">
+            <Header 
+                to={sdoRoutes.create} 
+                buttonLabel="Create Form"
+                title="F2 FORMS MANAGER"
+            />
+            <Grid 
+                routes={routes}
+                data={data} 
+                columns={columns}
+                page={page}
+                setPage={setPage}
+                sortColumn={sortColumn}
+                setSortColumn={setSortColumn}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+                filters={filters}
+                filterValues={filterValues}
+                setFilterValues={setFilterValues}
+            />
+            <Footer data={data} />
+        </div>
     );
 
 }
