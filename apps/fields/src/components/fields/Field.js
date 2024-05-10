@@ -34,21 +34,16 @@ export default function Field( {field:fieldReference, register, errors, getValue
         field = systemFieldsJson[fieldReference];
     }
 
-    console.log(field)
-
     if( Object.hasOwn( field, 'field_conditions') && field.field_conditions === true ) {
-        console.log('field has conditions:')
-        console.log(field)
+
         if( Object.hasOwn( field, 'field_condition_rules') && field.field_condition_rules instanceof Array ) {
-            console.log('has defined array conditions')
             field.field_condition_rules.forEach((crg, i) => {
-                console.log(crg)
                 const cr = crg[0];
                 const value = getValues(cr.field);
-                console.log(value)
             }) 
         }
         return null;
+
     }
 
     switch( field.field_type ) {

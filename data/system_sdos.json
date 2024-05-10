@@ -4,7 +4,17 @@
         "routeBase": "/forms",
         "field_groups": [
             {
-
+                "id": "006",
+                "post_type": "form",
+                "fields": [
+                    {
+                        "field_type": "text",
+                        "field_name": "title",
+                        "field_title": "Title",
+                        "field_label": "Title",
+                        "field_placeholder": "Admin title..."
+                    }
+                ]
             }
         ]
     },
@@ -19,7 +29,7 @@
     },
     "field": {
         "title": "F2 Form Group SDO",
-        "routeBase": "/groups",
+        "routeBase": "/fields",
         "field_groups": [
             {
 

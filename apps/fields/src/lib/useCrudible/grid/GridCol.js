@@ -2,8 +2,6 @@ import Controls from './Controls';
 
 export default function GridCol( { column, record, routes } ) {
 
-    console.log(record)
-
     if(column.columnKey === 'controls') {
 
         return (
