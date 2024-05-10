@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const FieldGroupAPI = {
+export const FormAPI = {
 
-    baseUrl: 'http://ds.local/wp-json/zero/v1',
+    baseUrl: 'http://ds.local/wp-json/f2/v1',
 
     get: async function (page, sortColumn = 'ID', sortOrder = 'DESC', filterValues) {
 
@@ -20,7 +20,7 @@ export const FieldGroupAPI = {
             params.search = filterValues.search;
         }
 
-        const response = await axios.get(`${this.baseUrl}/field-group`, { params });
+        const response = await axios.get(`${this.baseUrl}/form`, { params });
 
         return response.data;
 

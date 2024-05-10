@@ -54,8 +54,14 @@ class Plugin {
         require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupRoutes.php' );
         $fgr = new FieldGroup\FieldGroupRoutes();
 
+        /*
+         * Form internal SDO.
+         */
+        require_once( ZERO_PATH . '/php/Form/Form.php' );
         require_once( ZERO_PATH . '/php/Form/FormPostType.php' );
         $frt = new Form\FormPostType();
+        require_once( ZERO_PATH . '/php/Form/FormRoutes.php' );
+        new Form\FormRoutes();
 
         require_once( ZERO_PATH . '/php/FieldType/FieldType.php' );
         require_once( ZERO_PATH . '/php/FieldType/FieldTypeText.php' );

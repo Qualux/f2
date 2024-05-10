@@ -3,7 +3,7 @@ import {
     useQuery,
     keepPreviousData,
 } from '@tanstack/react-query';
-import { FieldAPI } from '../../api/FieldAPI';
+import { FormAPI } from '../../api/FormAPI';
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
 
 /* Setup route paths. */
@@ -18,19 +18,11 @@ const routes = {
 
 const columns = [
     { label: 'ID', columnKey: 'ID', recordKey: 'id', },
-    { label: 'Title', columnKey: 'title', recordKey: 'field_title', },
-    { label: 'Type', columnKey: 'field_type', recordKey: 'field_type', },
+    { label: 'Title', columnKey: 'title', recordKey: 'title', },
     { label: '', columnKey: 'controls' },
 ];
 
 const filters = [
-    { key: 'field_type', label: 'FIELD TYPE', type: 'select', options: [
-        { value: '', label: 'Any' },
-        { value: 'text', label: 'Text' },
-        { value: 'checkbox', label: 'Checkbox' },
-        { value: 'select', label: 'Select' },
-        { value: 'number', label: 'Number' },
-    ]},
     { key: 'search', label: 'SEARCH', placeholder: 'Search by field title...', type: 'text' },
     { key: 'records_per_page', label: 'RECORDS PER PAGE', type: 'select', options: [
         { value: '10', label: '10' },
@@ -71,7 +63,7 @@ function FormManager() {
         data,
     } = useQuery({
         queryKey: ['f2_forms', page, sortColumn, sortOrder, filterValues],
-        queryFn: () => FieldAPI.get(page, sortColumn, sortOrder, filterValues),
+        queryFn: () => FormAPI.get(page, sortColumn, sortOrder, filterValues),
         placeholderData: keepPreviousData,
     });
 
