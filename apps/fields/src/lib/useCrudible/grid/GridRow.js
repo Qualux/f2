@@ -10,6 +10,7 @@ export default function GridRow({record, index, routes, columns}) {
                     key={index}
                     column={column}
                     record={record}
+                    routes={routes}
                 />
             )}            
         </>

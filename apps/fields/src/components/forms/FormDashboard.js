@@ -8,10 +8,10 @@ import { useCrudible } from '../../lib/useCrudible/useCrudible';
 
 /* Setup route paths. */
 const routes = {
-    edit: '/fields/edit',
-    view: '/fields/view',
-    delete: '/fields/delete',
-    create: '/fields/create',
+    edit: '/forms/edit',
+    view: '/forms/view',
+    delete: '/forms/delete',
+    create: '/forms/create',
 }
 
 /* Columns and filters definition. */
@@ -37,7 +37,7 @@ const initialFilterValues = Object.fromEntries(filters.map(filter => [filter.key
 
 export default function FormDashboard() {
 
-    const { Crudible, Header, AppForm, sdo, Grid, sdoRoutes } = useCrudible({
+    const { Crudible } = useCrudible({
         sdoKey: 'form'
     });
 
@@ -99,6 +99,8 @@ function FormManager() {
                 filters={filters}
                 filterValues={filterValues}
                 setFilterValues={setFilterValues}
+                sdo={sdo}
+                sdoRoutes={sdoRoutes}
             />
             <Footer data={data} />
         </div>

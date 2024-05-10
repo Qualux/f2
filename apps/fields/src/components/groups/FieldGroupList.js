@@ -38,7 +38,9 @@ const initialFilterValues = Object.fromEntries(filters.map(filter => [filter.key
 /* Wrapper component that uses Crudible to set React Query context provider. */
 export default function FieldGroupList() {
 
-    const { Crudible } = useCrudible();
+    const { Crudible } = useCrudible({
+        sdoKey: 'field_group'
+    });
 
     return(
         <Crudible>
@@ -65,7 +67,9 @@ function FieldGroupManager() {
         placeholderData: keepPreviousData,
     });
 
-    const { Header, Grid, Footer } = useCrudible();
+    const { Header, Grid, Footer } = useCrudible({
+        sdoKey: 'field_group'
+    });
 
     if (isLoading && !data) {
         return(

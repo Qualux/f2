@@ -7,5 +7,23 @@
 
             }
         ]
+    },
+    "field_group": {
+        "title": "F2 Form Group SDO",
+        "routeBase": "/groups",
+        "field_groups": [
+            {
+
+            }
+        ]
+    },
+    "field": {
+        "title": "F2 Form Group SDO",
+        "routeBase": "/groups",
+        "field_groups": [
+            {
+
+            }
+        ]
     }
 }

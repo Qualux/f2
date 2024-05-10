@@ -47,7 +47,9 @@ const initialFilterValues = Object.fromEntries(filters.map(filter => [filter.key
 /* Wrapper component that uses Crudible to set React Query context provider. */
 export default function FieldList() {
 
-    const { Crudible } = useCrudible();
+    const { Crudible } = useCrudible({
+        sdoKey: 'field'
+    });
 
     return(
         <Crudible>
@@ -74,7 +76,9 @@ function FieldManager() {
         placeholderData: keepPreviousData,
     });
 
-    const { Header, Grid, Footer } = useCrudible();
+    const { Header, Grid, Footer } = useCrudible({
+        sdoKey: 'field'
+    });
 
     if (isLoading && !data) {
         return(
