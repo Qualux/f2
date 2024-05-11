@@ -3,7 +3,19 @@
         "title": "F2 Post Type SDO",
         "routeBase": "sdo/post-type",
         "field_groups": [
-            
+            {
+                "id": "007",
+                "post_type": "form",
+                "fields": [
+                    {
+                        "field_type": "text",
+                        "field_name": "title",
+                        "field_title": "Title",
+                        "field_label": "Title",
+                        "field_placeholder": "Admin title..."
+                    }
+                ]
+            }
         ]
     },
     "form": {
