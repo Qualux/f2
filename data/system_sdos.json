@@ -1,4 +1,11 @@
 {
+    "f2-post-type": {
+        "title": "F2 Post Type SDO",
+        "routeBase": "sdo/post-type",
+        "field_groups": [
+            
+        ]
+    },
     "form": {
         "title": "F2 Form SDO",
         "routeBase": "/forms",
@@ -13,6 +20,12 @@
                         "field_title": "Title",
                         "field_label": "Title",
                         "field_placeholder": "Admin title..."
+                    },
+                    {
+                        "field_type": "post_collection",
+                        "field_name": "fields",
+                        "field_title": "Fields",
+                        "field_label": "Fields"
                     }
                 ]
             }

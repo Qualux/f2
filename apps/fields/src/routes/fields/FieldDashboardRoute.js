@@ -5,8 +5,6 @@ import Dashboard from '../../components/fields/FieldDashboard';
 export default function FieldDashboardRoute() {
 
     const location = useLocation();
-
-    // Check if the current route is the main route ("/groups")
     const isMainRoute = location.pathname === "/fields";
 
     if( isMainRoute ) {

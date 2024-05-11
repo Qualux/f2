@@ -15,7 +15,7 @@ export function useFieldCollection() {
           `${domain.api}/zero/v1/field`
         );
         const data = await response.json();
-        setFields(data.fields);
+        setFields(data.records);
         setIsLoaded(true);
       } catch (error) {
         console.error("Error fetching data:", error);

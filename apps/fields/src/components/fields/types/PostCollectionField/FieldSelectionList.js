@@ -47,11 +47,14 @@ export default function FieldSelectionList({setOpen}) {
         return <main>Loading fields....</main>
     }
 
+    if( !fields ) {
+        return(
+            <EmptyMessage />
+        )
+    }
+
     return(
         <section>
-            <p>
-                {selectionId}
-            </p>
             <ul>
                 {fields.map( ( field, index ) =>
                     <Field 

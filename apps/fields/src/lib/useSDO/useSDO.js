@@ -15,7 +15,7 @@ export function useSDO( sdoKey ) {
     }
     const sdo = getSystemSDO( sdoKey );
 
-    function FieldGroup( { fieldGroup, register, errors } ) {
+    function FieldGroup( { fieldGroup, register, errors, setValue } ) {
 
         return(
             <div>
@@ -25,12 +25,13 @@ export function useSDO( sdoKey ) {
                             field={field} 
                             register={register}
                             errors={errors} 
+                            setValue={setValue}
                         />
                     </div>
                 )}
             </div>
         );
-        
+
     }
 
     function AppForm() {
@@ -41,6 +42,7 @@ export function useSDO( sdoKey ) {
             register,
             handleSubmit,
             formState: { errors },
+            setValue
         } = useForm();
 
         const onSubmit = (data) => {
@@ -59,6 +61,7 @@ export function useSDO( sdoKey ) {
                             fieldGroup={fieldGroup} 
                             register={register}
                             errors={errors}
+                            setValue={setValue}
                         />
                     )}
                 </div>

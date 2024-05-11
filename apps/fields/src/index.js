@@ -28,6 +28,10 @@ import FormCreateRoute from './routes/forms/FormCreateRoute';
 import FormEditRoute from './routes/forms/FormEditRoute';
 import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 
+// SDO Routes. 
+import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
+import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
+
 import {
   createHashRouter,
   RouterProvider,
@@ -42,6 +46,22 @@ const router = createHashRouter([
       {
         index: true,
         element: <Dashboard />
+      },
+      {
+        path: "sdo",
+        element: <SDO_DashboardRoute />,
+        children: [
+          {
+            path: "post-type",
+            element: <SDO_DashboardRoute />,
+            children: [
+              {
+                path: "create",
+                element: <SDO_PostTypeCreateRoute />,
+              }
+            ]
+          }
+        ],
       },
       {
         path: "forms",
