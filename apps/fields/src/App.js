@@ -16,7 +16,7 @@ function domainContextValues() {
 
   let url = window.location.origin;
   if( isLocal ) {
-    url = 'http://ds.local/';
+    url = 'http://ds.local';
   } else {
     url = window.location.origin;
   }

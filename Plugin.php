@@ -22,6 +22,9 @@ class Plugin {
 
     public function __construct() {
 
+        require_once( F2_PATH . '/php/SDO/API_Routes.php' );
+        $c = new API_Routes();
+
         require_once( ZERO_PATH . '/php/AdminMenu.php' );
         $c = new AdminMenu();
 
