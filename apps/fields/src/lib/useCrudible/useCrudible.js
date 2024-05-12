@@ -3,6 +3,7 @@ import Crudible from './Crudible';
 import Manager from './Manager';
 import Header from './Header';
 import Footer from './Footer';
+import DeleteScreen from './DeleteScreen';
 import Grid from './grid/Grid';
 
 export function useCrudible( params = { sdoKey: null } ) {
@@ -15,6 +16,6 @@ export function useCrudible( params = { sdoKey: null } ) {
         view: '/' + sdo.routeBase + '/view',
     }
 
-    return { Crudible, Manager, Grid, Header, Footer, AppForm, sdo, sdoRoutes }
+    return { Crudible, Manager, Grid, Header, Footer, AppForm, DeleteScreen, sdo, sdoRoutes }
 
 }

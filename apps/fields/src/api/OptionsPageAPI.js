@@ -26,4 +26,13 @@ export const OptionsPageAPI = {
 
     },
 
+    delete: async function (id) {
+        try {
+            const response = await axios.delete(`${this.baseUrl}/sdo/options-page/${id}`);
+            return response.data;
+        } catch (error) {
+            throw new Error('Failed to delete item.');
+        }
+    },
+
 };
