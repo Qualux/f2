@@ -32,8 +32,12 @@ import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
 import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
-import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
 import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
+import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
+import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageEditRoute';
+import SDO_OptionsPageDeleteRoute from './routes/sdo/options-page/SDO_OptionsPageDeleteRoute';
+import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageViewRoute';
+
 
 import {
   createHashRouter,
@@ -81,7 +85,19 @@ const router = createHashRouter([
               {
                 path: "create",
                 element: <SDO_OptionsPageCreateRoute />,
-              }
+              },
+              {
+                path: "edit/:id",
+                element: <SDO_OptionsPageEditRoute />,
+              },
+              {
+                path: "delete/:id",
+                element: <SDO_OptionsPageDeleteRoute />,
+              },
+              {
+                path: "view/:id",
+                element: <SDO_OptionsPageViewRoute />,
+              },
             ]
           },
         ],

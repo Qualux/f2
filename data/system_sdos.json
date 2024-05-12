@@ -73,23 +73,10 @@
         ],
         "columns": [
             { "label": "ID", "columnKey": "ID", "recordKey": "id" },
-            { "label": "Title", "columnKey": "title", "recordKey": "field_title" },
-            { "label": "Type", "columnKey": "field_type", "recordKey": "field_type" },
+            { "label": "Title", "columnKey": "title", "recordKey": "title" },
             { "label": "", "columnKey": "controls" }
         ],
         "filters": [
-            { 
-                "key": "field_type", 
-                "label": "FIELD TYPE", 
-                "type": "select", 
-                "options": [
-                    { "value": "", "label": "Any" },
-                    { "value": "text", "label": "Text" },
-                    { "value": "checkbox", "label": "Checkbox" },
-                    { "value": "select", "label": "Select" },
-                    { "value": "number", "label": "Number" }
-                ]
-            },
             { "key": "search", "label": "SEARCH", "placeholder": "Search by field title...", "type": "text" },
             { 
                 "key": "records_per_page", 
