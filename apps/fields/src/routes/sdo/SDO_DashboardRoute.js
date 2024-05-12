@@ -29,13 +29,17 @@ export default function SDO_DashboardRoute() {
                     </span>
                     <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
                 </NavLink>
-                <NavLink className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                <NavLink 
+                    to="/sdo/taxonomy/create"
+                    className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                     <span>
                         Taxonomy
                     </span>
                     <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
                 </NavLink>
-                <NavLink className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                <NavLink 
+                    to="/sdo/options-page/create"
+                    className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                     <span>
                         Options Page
                     </span>

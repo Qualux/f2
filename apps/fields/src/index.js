@@ -31,6 +31,8 @@ import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 // SDO Routes. 
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
+import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
+import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
 
 import {
   createHashRouter,
@@ -60,7 +62,27 @@ const router = createHashRouter([
                 element: <SDO_PostTypeCreateRoute />,
               }
             ]
-          }
+          },
+          {
+            path: "taxonomy",
+            element: <SDO_DashboardRoute />,
+            children: [
+              {
+                path: "create",
+                element: <SDO_TaxonomyCreateRoute />,
+              }
+            ]
+          },
+          {
+            path: "options-page",
+            element: <SDO_DashboardRoute />,
+            children: [
+              {
+                path: "create",
+                element: <SDO_OptionsPageCreateRoute />,
+              }
+            ]
+          },
         ],
       },
       {

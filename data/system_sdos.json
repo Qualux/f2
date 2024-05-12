@@ -2,10 +2,58 @@
     "f2-post-type": {
         "title": "F2 Post Type SDO",
         "routeBase": "sdo/post-type",
+        "post_type": "f2-post-type",
         "field_groups": [
             {
                 "id": "007",
-                "post_type": "form",
+                "post_type": "f2-post-type",
+                "fields": [
+                    {
+                        "field_type": "text",
+                        "field_name": "title",
+                        "field_title": "Title",
+                        "field_label": "Title",
+                        "field_placeholder": "Admin title..."
+                    },
+                    {
+                        "field_type": "text",
+                        "field_name": "name_plural",
+                        "field_title": "Plural Name",
+                        "field_label": "Plural Name",
+                        "field_placeholder": "Plural name..."
+                    }
+                ]
+            }
+        ]
+    },
+    "f2-taxonomy": {
+        "title": "F2 Taxonomy SDO",
+        "routeBase": "sdo/taxonomy",
+        "post_type": "f2-taxonomy",
+        "field_groups": [
+            {
+                "id": "008",
+                "post_type": "f2-taxonomy",
+                "fields": [
+                    {
+                        "field_type": "text",
+                        "field_name": "title",
+                        "field_title": "Title",
+                        "field_label": "Title",
+                        "field_placeholder": "Admin title..."
+                    }
+                ]
+            }
+        ]
+    },
+    "f2-options-page": {
+        "title": "F2 Options Page SDO",
+        "routeBase": "sdo/options-page",
+        "post_type": "f2-options-page",
+        "field_groups": [
+            {
+                "id": "009",
+                "post_type": "f2-options-page",
                 "fields": [
                     {
                         "field_type": "text",
