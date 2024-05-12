@@ -30,7 +30,9 @@ import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 
 // SDO Routes. 
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
+import SDO_PostTypeDashboardRoute from './routes/sdo/post-type/SDO_PostTypeDashboardRoute';
 import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
+import SDO_TaxonomyDashboardRoute from './routes/sdo/taxonomy/SDO_TaxonomyDashboardRoute';
 import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
 import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
 import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
@@ -60,7 +62,7 @@ const router = createHashRouter([
         children: [
           {
             path: "post-type",
-            element: <SDO_DashboardRoute />,
+            element: <SDO_PostTypeDashboardRoute />,
             children: [
               {
                 path: "create",
@@ -70,7 +72,7 @@ const router = createHashRouter([
           },
           {
             path: "taxonomy",
-            element: <SDO_DashboardRoute />,
+            element: <SDO_TaxonomyDashboardRoute />,
             children: [
               {
                 path: "create",

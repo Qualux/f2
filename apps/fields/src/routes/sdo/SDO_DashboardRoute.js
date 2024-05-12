@@ -48,6 +48,22 @@ export default function SDO_DashboardRoute() {
             </section>
             <section>
                 <NavLink 
+                    to="/sdo/post-type"
+                    className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                    <span>
+                        Manage Post Types
+                    </span>
+                    <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+                </NavLink>
+                <NavLink 
+                    to="/sdo/taxonomy"
+                    className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                    <span>
+                        Manage Taxonomies
+                    </span>
+                    <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+                </NavLink>
+                <NavLink 
                     to="/sdo/options-page"
                     className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                     <span>
