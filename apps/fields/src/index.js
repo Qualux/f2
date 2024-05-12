@@ -33,6 +33,7 @@ import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
 import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
 import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
+import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
 
 import {
   createHashRouter,
@@ -75,7 +76,7 @@ const router = createHashRouter([
           },
           {
             path: "options-page",
-            element: <SDO_DashboardRoute />,
+            element: <SDO_OptionsPageDashboardRoute />,
             children: [
               {
                 path: "create",

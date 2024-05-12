@@ -48,8 +48,14 @@
     },
     "f2-options-page": {
         "title": "F2 Options Page SDO",
+        "displayTitle": "F2 Options Page Manager",
         "routeBase": "sdo/options-page",
         "post_type": "f2-options-page",
+        "create": {
+            "button": {
+                "label": "Create Options Page"
+            }
+        },
         "field_groups": [
             {
                 "id": "009",
@@ -62,6 +68,38 @@
                         "field_label": "Title",
                         "field_placeholder": "Admin title..."
                     }
+                ]
+            }
+        ],
+        "columns": [
+            { "label": "ID", "columnKey": "ID", "recordKey": "id" },
+            { "label": "Title", "columnKey": "title", "recordKey": "field_title" },
+            { "label": "Type", "columnKey": "field_type", "recordKey": "field_type" },
+            { "label": "", "columnKey": "controls" }
+        ],
+        "filters": [
+            { 
+                "key": "field_type", 
+                "label": "FIELD TYPE", 
+                "type": "select", 
+                "options": [
+                    { "value": "", "label": "Any" },
+                    { "value": "text", "label": "Text" },
+                    { "value": "checkbox", "label": "Checkbox" },
+                    { "value": "select", "label": "Select" },
+                    { "value": "number", "label": "Number" }
+                ]
+            },
+            { "key": "search", "label": "SEARCH", "placeholder": "Search by field title...", "type": "text" },
+            { 
+                "key": "records_per_page", 
+                "label": "RECORDS PER PAGE", 
+                "type": "select", 
+                "options": [
+                    { "value": "10", "label": "10" },
+                    { "value": "25", "label": "25" },
+                    { "value": "50", "label": "50" },
+                    { "value": "100", "label": "100" }
                 ]
             }
         ]
