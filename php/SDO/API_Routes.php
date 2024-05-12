@@ -140,7 +140,28 @@ class API_Routes {
                 )
             );
 
-        }
+            \register_rest_route( '/f2/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
+                array(
+                    'methods' => 'DELETE',
+                    'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
+
+                        $id = $req->get_param( 'id' );
+                        $result = \wp_delete_post( $id, 1 );
+
+                        return new \WP_REST_Response(
+                            array(
+                                'status'  => 200,
+                                'message' => 'Deleted attempted.',
+                                'result'  => $result,
+                            )
+                        );
+        
+                    },
+                    'permission_callback' => function() { return true; },
+                )
+            );
+
+        }  
 
     }
 

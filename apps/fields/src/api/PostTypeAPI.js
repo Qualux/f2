@@ -26,4 +26,13 @@ export const PostTypeAPI = {
 
     },
 
+    delete: async function (id) {
+        try {
+            const response = await axios.delete(`${this.baseUrl}/sdo/post-type/${id}`);
+            return response.data;
+        } catch (error) {
+            throw new Error('Failed to delete item.');
+        }
+    },
+
 };
