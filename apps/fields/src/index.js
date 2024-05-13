@@ -32,16 +32,17 @@ import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_PostTypeDashboardRoute from './routes/sdo/post-type/SDO_PostTypeDashboardRoute';
 import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
+import SDO_PostTypeEditRoute from './routes/sdo/post-type/SDO_PostTypeEditRoute';
 import SDO_PostTypeDeleteRoute from './routes/sdo/post-type/SDO_PostTypeDeleteRoute';
 import SDO_TaxonomyDashboardRoute from './routes/sdo/taxonomy/SDO_TaxonomyDashboardRoute';
 import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
+import SDO_TaxonomyEditRoute from './routes/sdo/taxonomy/SDO_TaxonomyEditRoute';
 import SDO_TaxonomyDeleteRoute from './routes/sdo/taxonomy/SDO_TaxonomyDeleteRoute';
 import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
 import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
 import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageEditRoute';
 import SDO_OptionsPageDeleteRoute from './routes/sdo/options-page/SDO_OptionsPageDeleteRoute';
 import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageViewRoute';
-
 
 import {
   createHashRouter,
@@ -71,6 +72,10 @@ const router = createHashRouter([
                 element: <SDO_PostTypeCreateRoute />,
               },
               {
+                path: "edit/:id",
+                element: <SDO_PostTypeEditRoute />,
+              },
+              {
                 path: "delete/:id",
                 element: <SDO_PostTypeDeleteRoute />,
               },
@@ -83,6 +88,10 @@ const router = createHashRouter([
               {
                 path: "create",
                 element: <SDO_TaxonomyCreateRoute />,
+              },
+              {
+                path: "edit/:id",
+                element: <SDO_TaxonomyEditRoute />,
               },
               {
                 path: "delete/:id",
