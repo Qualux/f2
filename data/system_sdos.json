@@ -117,6 +117,13 @@
                         "field_title": "Title",
                         "field_label": "Title",
                         "field_placeholder": "Admin title..."
+                    },
+                    {
+                        "field_type": "text",
+                        "field_name": "page_slug",
+                        "field_title": "Page Slug",
+                        "field_label": "Page Slug",
+                        "field_placeholder": "Page slug..."
                     }
                 ]
             }

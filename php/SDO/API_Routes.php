@@ -107,6 +107,25 @@ class API_Routes {
                 )
             );
 
+            register_rest_route( 'f2/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', array(
+                'methods' => 'GET',
+                'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
+                    $id = $req->get_param( 'id' );
+                    
+                    $m            = new Model();
+                    $m->post_type = $sdo['post_type'];
+                    $m->load( $id );
+
+                    return new \WP_REST_Response(
+                        array(
+                            'status' => 200,
+                            'record' => $m,
+                        )
+                    );
+                },
+                'permission_callback' => '__return_true',
+            ));
+
             \register_rest_route( '/f2/v1', '/' . $sdo['routeBase'], 
                 array(
                     'methods' => 'POST',

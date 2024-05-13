@@ -33,15 +33,15 @@ class F2_OptionsPage {
             'labels'             => $labels,
             'public'             => true,
             'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_menu'       => true,
+            'show_ui'            => false,
+            'show_in_menu'       => false,
             'show_in_rest'       => true,
             'query_var'          => true,
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'       => false,
             'menu_position'      => null,
-            'supports'           => array( 'title', 'editor', 'author')
+            'supports'           => array( 'title', 'author')
         );
     
         register_post_type( 'f2-options-page', $args );
@@ -56,10 +56,11 @@ class F2_OptionsPage {
 
         if( empty( $f2_options_pages )) { return; }
 
-        foreach( $f2_options_pages as $op ) {
+        foreach( $f2_options_pages as $p ) {
 
-            $menu_title    = get_post_meta( $op->ID, 'menu_title', 1 );
-            $slug          = get_post_meta( $op->ID, 'page_slug', 1 );
+            $menu_title    = $p->post_title;
+            // $slug          = get_post_meta( $p->ID, 'page_slug', 1 );
+            $slug          = 'f2-123';
 
             // @TODO use WP core menu/submenu add functions.
             add_menu_page( 
