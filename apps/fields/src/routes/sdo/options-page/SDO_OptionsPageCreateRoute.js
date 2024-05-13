@@ -3,13 +3,13 @@ import AppTemplate from '../../../components/global/AppTemplate';
 
 export default function SDO_OptionsPageCreateRoute() {
 
-    const { Header, AppForm } = useCrudible({
+    const { HeaderSDO, AppForm } = useCrudible({
         sdoKey: 'f2-options-page'
     });
 
     return(
         <AppTemplate>
-            <Header />
+            <HeaderSDO />
             <AppForm />
         </AppTemplate>
     );

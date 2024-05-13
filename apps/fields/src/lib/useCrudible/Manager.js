@@ -21,7 +21,7 @@ export default function Manager( {sdoKey, api} ) {
         placeholderData: keepPreviousData,
     });
 
-    const { Header, Grid, Footer, sdo, sdoRoutes } = useCrudible({
+    const { HeaderSDO, Grid, Footer, sdo, sdoRoutes } = useCrudible({
         sdoKey
     });
 
@@ -40,11 +40,7 @@ export default function Manager( {sdoKey, api} ) {
 
     return(
         <div className="max-w-3xl my-2">
-            <Header 
-                to={sdoRoutes.create} 
-                buttonLabel={sdo.create.button.label}
-                title={sdo.displayTitle}
-            />
+            <HeaderSDO />
             <Grid 
                 routes={sdoRoutes}
                 data={data} 

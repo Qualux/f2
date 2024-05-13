@@ -26,6 +26,13 @@ export const OptionsPageAPI = {
 
     },
 
+    getOne: async function (id) {
+
+        const response = await axios.get(`${this.baseUrl}/sdo/options-page/${id}`);
+        return response.data;
+
+    },
+
     delete: async function (id) {
         try {
             const response = await axios.delete(`${this.baseUrl}/sdo/options-page/${id}`);
