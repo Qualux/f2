@@ -86,7 +86,7 @@ class F2_OptionsPage {
                     if( empty( $fgs )) { return; }
 
                     foreach( $fgs as $fg ) {
-                        echo '<div id="zero-fg" data-field-group="'.$fg->ID.'"></div>';
+                        echo '<div id="f2-options-fields" data-field-group="'.$fg->ID.'"></div>';
                     }
                     
                 },
