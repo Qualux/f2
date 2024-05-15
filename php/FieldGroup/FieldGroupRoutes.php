@@ -13,10 +13,11 @@ class FieldGroupRoutes {
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 
-                    $params            = $req->get_json_params();
-                    $title             = $params['title'];
-                    $fields            = $params['fields'];
-                    $storage_post_type = $params['storage_post_type'];
+                    $params               = $req->get_json_params();
+                    $title                = $params['title'];
+                    $fields               = $params['fields'];
+                    $storage_post_type    = $params['storage_post_type'];
+                    $storage_options_page = $params['storage_options_page'];
 
                     $post_id = wp_insert_post(
                         [
@@ -29,6 +30,7 @@ class FieldGroupRoutes {
 
                     update_post_meta( $post_id, 'z_fg_fields', $fields );
                     update_post_meta( $post_id, 'z_fg_storage_post_type', $storage_post_type );
+                    update_post_meta( $post_id, 'storage_options_page', $storage_options_page );
 
                     return new \WP_REST_Response(
                         array(

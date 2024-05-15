@@ -69,9 +69,26 @@ class F2_OptionsPage {
                 $menu_title, 
                 'manage_options', 
                 $slug, 
-                function() {
-                    $field_group_id = 34;
-                    echo '<div id="f2-options-fields" data-field-group="'.$field_group_id.'"></div>';
+                function() use ($p) {
+
+                    $fgs = get_posts([
+                        'post_type'   => 'field-group',
+                        'numberposts' => -1,
+                        'meta_query' => [
+                            [
+                                'key'     => 'storage_options_page',
+                                'value'   => $p->ID,
+                                'compare' => '=',
+                            ]
+                        ]
+                    ]);
+        
+                    if( empty( $fgs )) { return; }
+
+                    foreach( $fgs as $fg ) {
+                        echo '<div id="zero-fg" data-field-group="'.$fg->ID.'"></div>';
+                    }
+                    
                 },
                 $icon_url,
                 $position,

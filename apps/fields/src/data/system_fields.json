@@ -138,5 +138,12 @@
         "field_title": "Post Type",
         "field_label": "Post Type",
         "field_placeholder": "Enter post type to assign field group..."
+    },
+    "field_group_options_page": {
+        "field_type": "number",
+        "field_name": "field_group_options_page",
+        "field_title": "Options Page",
+        "field_label": "Options Page",
+        "field_placeholder": "Options page ID to assign field group..."
     }
 }

@@ -21,7 +21,6 @@ export default function FieldGroupCreateForm() {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
         reset,
         setValue, 
@@ -34,6 +33,7 @@ export default function FieldGroupCreateForm() {
             title: data.field_group_title,
             fields: getValues('field_group_fields'),
             storage_post_type: data.field_group_post_type,
+            storage_options_page: data.field_group_options_page,
         }
 
         postData(domain.api + '/zero/v1/field-group', preparedData).then((data) => {
@@ -77,6 +77,12 @@ export default function FieldGroupCreateForm() {
 
                 <Field 
                     field={systemFields.field_group_post_type}
+                    register={register}
+                    errors={errors}
+                />
+
+                <Field 
+                    field={systemFields.field_group_options_page}
                     register={register}
                     errors={errors}
                 />
