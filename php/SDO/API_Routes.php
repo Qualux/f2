@@ -86,6 +86,7 @@ class API_Routes {
                         $models = [];
                         foreach( $query->posts as $p ) {
                             $m            = new Model();
+                            $m->sdo       = $sdo;
                             $m->post_type = $sdo['post_type'];
                             $m->load( $p->ID );
                             $models[] = $m;
@@ -113,6 +114,7 @@ class API_Routes {
                     $id = $req->get_param( 'id' );
                     
                     $m            = new Model();
+                    $m->sdo       = $sdo;
                     $m->post_type = $sdo['post_type'];
                     $m->load( $id );
 
@@ -134,6 +136,7 @@ class API_Routes {
                         $params = $req->get_json_params();
 
                         $m            = new Model();
+                        $m->sdo       = $sdo;
                         $m->post_type = $sdo['post_type'];
 
                         foreach( $sdo['field_groups'] as $fg ) {

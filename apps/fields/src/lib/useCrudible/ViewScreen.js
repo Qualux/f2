@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 
 export default function ViewScreen({id, sdo, api}) {
 
@@ -24,13 +24,18 @@ export default function ViewScreen({id, sdo, api}) {
         ) 
     }
 
-    return(
+    return (
         <main>
-            <h2>VS COMPED</h2>
-            <div>{id}</div>
-            <h2>
-                {record.title}
-            </h2>
+            <ul className="grid">
+                {sdo.field_groups.map((fieldGroup) => (
+                    fieldGroup.fields.map((field) => (
+                        <Fragment key={field.field_name}>
+                            <li>{field.field_title}</li>
+                            <li>{record[field.field_name]}</li>
+                        </Fragment>
+                    ))
+                ))}
+            </ul>
         </main>
     );
 
