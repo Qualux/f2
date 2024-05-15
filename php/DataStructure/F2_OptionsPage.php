@@ -59,8 +59,9 @@ class F2_OptionsPage {
         foreach( $f2_options_pages as $p ) {
 
             $menu_title    = $p->post_title;
-            // $slug          = get_post_meta( $p->ID, 'page_slug', 1 );
-            $slug          = 'f2-123';
+            $slug          = get_post_meta( $p->ID, 'page_slug', 1 );
+            $icon_url      = get_post_meta( $p->ID, 'icon_url', 1 );
+            $position      = get_post_meta( $p->ID, 'position', 1 );
 
             // @TODO use WP core menu/submenu add functions.
             add_menu_page( 
@@ -72,6 +73,8 @@ class F2_OptionsPage {
                     $field_group_id = 34;
                     echo '<div id="f2-options-fields" data-field-group="'.$field_group_id.'"></div>';
                 },
+                $icon_url,
+                $position,
             );
     
         }

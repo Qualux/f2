@@ -124,6 +124,20 @@
                         "field_title": "Page Slug",
                         "field_label": "Page Slug",
                         "field_placeholder": "Page slug..."
+                    },
+                    {
+                        "field_type": "text",
+                        "field_name": "icon_url",
+                        "field_title": "Icon",
+                        "field_label": "Icon",
+                        "field_placeholder": "Dashicon name or icon URL..."
+                    },
+                    {
+                        "field_type": "number",
+                        "field_name": "position",
+                        "field_title": "Position",
+                        "field_label": "Position",
+                        "field_placeholder": "Position in menu..."
                     }
                 ]
             }
