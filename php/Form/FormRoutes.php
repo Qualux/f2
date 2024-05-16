@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\Form;
+namespace F3\Form;
 
 class FormRoutes {
 
@@ -9,7 +9,7 @@ class FormRoutes {
         add_action( 'rest_api_init', function () {
 
             // Fetch many endpoint.
-            register_rest_route( 'f2/v1', '/form', array(
+            register_rest_route( 'f3/v1', '/form', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
 

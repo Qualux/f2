@@ -1,13 +1,13 @@
 <?php 
 
-namespace Zero\FieldGroup;
+namespace F3\FieldGroup;
 
 class FieldGroupShortcodes {
 
     public function __construct() {
 
         /* Greeting Shortcode */
-        add_shortcode( 'zero_fg', function( $atts = [], $content = null, $tag = '' ) {
+        add_shortcode( 'f3_fg', function( $atts = [], $content = null, $tag = '' ) {
 
             $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 

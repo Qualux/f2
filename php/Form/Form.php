@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\Form;
+namespace F3\Form;
 
 class Form {
 

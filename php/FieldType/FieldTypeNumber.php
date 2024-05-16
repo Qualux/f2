@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\FieldType;
+namespace F3\FieldType;
 
 class FieldTypeNumber {
 

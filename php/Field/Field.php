@@ -1,7 +1,7 @@
 <?php 
 
-namespace Zero\Field;
-use \Zero\FieldType\FieldType;
+namespace F3\Field;
+use \F3\FieldType\FieldType;
 
 class Field {
 

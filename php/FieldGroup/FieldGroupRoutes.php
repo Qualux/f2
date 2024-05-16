@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\FieldGroup;
+namespace F3\FieldGroup;
 
 class FieldGroupRoutes {
     
@@ -9,7 +9,7 @@ class FieldGroupRoutes {
         add_action( 'rest_api_init', function () {
 
             // Create endpoint.
-            register_rest_route( 'zero/v1', '/field-group', array(
+            register_rest_route( 'f3/v1', '/field-group', array(
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 
@@ -46,7 +46,7 @@ class FieldGroupRoutes {
             ));
 
             // Update endpoint.
-            register_rest_route( 'zero/v1', '/field-group/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field-group/(?P<id>\d+)', array(
 
                 'methods' => 'POST',
                 'callback' => function( \WP_REST_Request $request ) {
@@ -82,7 +82,7 @@ class FieldGroupRoutes {
             ));
 
             // Fetch one endpoint.
-            register_rest_route( 'zero/v1', '/field-group/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field-group/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
 
@@ -103,7 +103,7 @@ class FieldGroupRoutes {
             ));
 
             // Fetch many endpoint.
-            register_rest_route( 'zero/v1', '/field-group', array(
+            register_rest_route( 'f3/v1', '/field-group', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
 
@@ -185,7 +185,7 @@ class FieldGroupRoutes {
             ));
 
             // Delete field group endpoint.
-            register_rest_route( 'zero/v1', '/field-group/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field-group/(?P<id>\d+)', array(
 
                 'methods' => 'DELETE',
                 'callback' => function( \WP_REST_Request $request ) {
@@ -219,7 +219,7 @@ class FieldGroupRoutes {
             * Save post meta or option values. 
             * If field group assigned to post type, either update or create the post. 
             */
-            register_rest_route( 'zero/v1', '/field-group/values/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field-group/values/(?P<id>\d+)', array(
 
                 'methods' => 'POST',
                 'callback' => function( \WP_REST_Request $request ) {

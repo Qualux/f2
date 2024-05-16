@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\Field;
+namespace F3\Field;
 
 class FieldRoutes {
     
@@ -9,7 +9,7 @@ class FieldRoutes {
         add_action( 'rest_api_init', function () {
 
             // Create endpoint.
-            register_rest_route( 'zero/v1', '/field', array(
+            register_rest_route( 'f3/v1', '/field', array(
                 'methods' => 'POST',
                 'callback' => function( $req ) {
 
@@ -28,7 +28,7 @@ class FieldRoutes {
                     return new \WP_REST_Response(
                         array(
                             'status'   => 200,
-                            'message'  => __( 'Saved field with ID '. $f->id . '.', 'f2' ),
+                            'message'  => __( 'Saved field with ID '. $f->id . '.', 'f3' ),
                             'field_id' => $f->id,
                             'params'   => $params,
                         )
@@ -39,7 +39,7 @@ class FieldRoutes {
             ));
 
             // Update endpoint.
-            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field/(?P<id>\d+)', array(
 
                 'methods' => 'POST',
                 'callback' => function( \WP_REST_Request $request ) {
@@ -72,7 +72,7 @@ class FieldRoutes {
             ));
 
             // Fetch one endpoint.
-            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
                     $id = $request->get_param( 'id' );
@@ -89,7 +89,7 @@ class FieldRoutes {
             ));
 
             // Fetch many endpoint.
-            register_rest_route( 'zero/v1', '/field', array(
+            register_rest_route( 'f3/v1', '/field', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $request ) {
 
@@ -188,7 +188,7 @@ class FieldRoutes {
             ));
 
             // Save value endpoint.
-            register_rest_route( 'zero/v1', '/field/value', array(
+            register_rest_route( 'f3/v1', '/field/value', array(
 
                 'methods' => 'POST',
                 'callback' => function( $req ) {
@@ -226,7 +226,7 @@ class FieldRoutes {
             ));
 
             // Delete field group endpoint.
-            register_rest_route( 'zero/v1', '/field/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/field/(?P<id>\d+)', array(
 
                 'methods' => 'DELETE',
                 'callback' => function( \WP_REST_Request $request ) {

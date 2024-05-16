@@ -1,8 +1,8 @@
 <?php
 
-namespace Zero\DataStructure;
+namespace F3\DataStructure;
 
-class F2_OptionsPage {
+class F3_OptionsPage {
 
     public function __construct() {
 
@@ -13,20 +13,20 @@ class F2_OptionsPage {
 
     function register_post_type() {
         $labels = array(
-            'name'               => __( 'F2 Options Page', 'f2' ),
-            'singular_name'      => __( 'F2 Options Page', 'f2' ),
-            'menu_name'          => __( 'F2 Options Page', 'f2' ),
-            'name_admin_bar'     => __( 'F2 Options Page', 'f2' ),
-            'add_new'            => __( 'Add New', 'f2' ),
-            'add_new_item'       => __( 'Add New F2 Options Page', 'f2' ),
-            'new_item'           => __( 'New F2 Options Page', 'f2' ),
-            'edit_item'          => __( 'Edit F2 Options Page', 'f2' ),
-            'view_item'          => __( 'View F2 Options Page', 'f2' ),
-            'all_items'          => __( 'All F2 Options Pages', 'f2' ),
-            'search_items'       => __( 'Search F2 Options Pages', 'f2' ),
-            'parent_item_colon'  => __( 'Parent F2 Options Pages:', 'f2' ),
-            'not_found'          => __( 'No F2 Options Pages found.', 'f2' ),
-            'not_found_in_trash' => __( 'No F2 Options Pages found in Trash.', 'f2' )
+            'name'               => __( 'F3 Options Page', 'f3' ),
+            'singular_name'      => __( 'F3 Options Page', 'f3' ),
+            'menu_name'          => __( 'F3 Options Page', 'f3' ),
+            'name_admin_bar'     => __( 'F3 Options Page', 'f3' ),
+            'add_new'            => __( 'Add New', 'f3' ),
+            'add_new_item'       => __( 'Add New F3 Options Page', 'f3' ),
+            'new_item'           => __( 'New F3 Options Page', 'f3' ),
+            'edit_item'          => __( 'Edit F3 Options Page', 'f3' ),
+            'view_item'          => __( 'View F3 Options Page', 'f3' ),
+            'all_items'          => __( 'All F3 Options Pages', 'f3' ),
+            'search_items'       => __( 'Search F3 Options Pages', 'f3' ),
+            'parent_item_colon'  => __( 'Parent F3 Options Pages:', 'f3' ),
+            'not_found'          => __( 'No F3 Options Pages found.', 'f3' ),
+            'not_found_in_trash' => __( 'No F3 Options Pages found in Trash.', 'f3' )
         );
     
         $args = array(
@@ -44,19 +44,19 @@ class F2_OptionsPage {
             'supports'           => array( 'title', 'author')
         );
     
-        register_post_type( 'f2-options-page', $args );
+        register_post_type( 'f3-options-page', $args );
     }
 
     public function register_options_pages() {
 
-        $f2_options_pages = get_posts([
-            'post_type'   => 'f2-options-page',
+        $f3_options_pages = get_posts([
+            'post_type'   => 'f3-options-page',
             'numberposts' => -1,
         ]);
 
-        if( empty( $f2_options_pages )) { return; }
+        if( empty( $f3_options_pages )) { return; }
 
-        foreach( $f2_options_pages as $p ) {
+        foreach( $f3_options_pages as $p ) {
 
             $menu_title    = $p->post_title;
             $slug          = get_post_meta( $p->ID, 'page_slug', 1 );
@@ -86,7 +86,7 @@ class F2_OptionsPage {
                     if( empty( $fgs )) { return; }
 
                     foreach( $fgs as $fg ) {
-                        echo '<div id="f2-options-fields" data-field-group="'.$fg->ID.'"></div>';
+                        echo '<div id="f3-options-fields" data-field-group="'.$fg->ID.'"></div>';
                     }
                     
                 },

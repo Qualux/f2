@@ -7,8 +7,8 @@
  * 
  */
 
-namespace Zero\Metabox;
-use Zero\FieldGroup\FieldGroup;
+namespace F3\Metabox;
+use F3\FieldGroup\FieldGroup;
 
 class Metabox {
 
@@ -47,7 +47,7 @@ class Metabox {
                 $fg->load( $fg_post->ID );
 
                 add_meta_box( 
-                    'zero_metabox_' . $fg->id, 
+                    'f3_metabox_' . $fg->id, 
                     $fg->title, 
                     [ $this, 'content' ], 
                     $fg->storage_post_type, 
@@ -69,20 +69,20 @@ class Metabox {
             $fgs = [
                 [
                     'id'        => '003',
-                    'name'      => 'f2_post_type', 
-                    'post_type' => 'f2-post-type',
+                    'name'      => 'f3_post_type', 
+                    'post_type' => 'f3-post-type',
                 ],
                 [
                     'id'        => '004',
-                    'name'      => 'f2_options_page', 
-                    'post_type' => 'f2-options-page',
+                    'name'      => 'f3_options_page', 
+                    'post_type' => 'f3-options-page',
                 ]
             ];
 
             foreach( $fgs as $fg ) {
 
                 add_meta_box( 
-                    'zero_metabox_' . $fg['id'], 
+                    'f3_metabox_' . $fg['id'], 
                     $fg['name'], 
                     [ $this, 'content' ], 
                     $fg['post_type'], 
@@ -100,7 +100,7 @@ class Metabox {
     public function content( $post, $box ) {
 
         $field_group_id = $box['args']['field_group_id'];
-        echo '<div id="zero-fg" data-field-group="'.$field_group_id.'"></div>';
+        echo '<div id="f3-fg" data-field-group="'.$field_group_id.'"></div>';
         
     }
 

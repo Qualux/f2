@@ -1,6 +1,6 @@
 <?php 
 
-namespace F2\SDO;
+namespace F3\SDO;
 
 class API_Routes {
 
@@ -17,7 +17,7 @@ class API_Routes {
 
         foreach( $sdo_list as $sdo_key => $sdo ) {
 
-            \register_rest_route( '/f2/v1', '/' . $sdo['routeBase'], 
+            \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'], 
                 array(
                     'methods' => 'GET',
                     'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -108,7 +108,7 @@ class API_Routes {
                 )
             );
 
-            register_rest_route( 'f2/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', array(
+            register_rest_route( 'f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
                     $id = $req->get_param( 'id' );
@@ -128,7 +128,7 @@ class API_Routes {
                 'permission_callback' => '__return_true',
             ));
 
-            \register_rest_route( '/f2/v1', '/' . $sdo['routeBase'], 
+            \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'], 
                 array(
                     'methods' => 'POST',
                     'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -150,7 +150,7 @@ class API_Routes {
                         return new \WP_REST_Response(
                             array(
                                 'status'   => 200,
-                                'message'  => __( 'Saved.', 'f2' ),
+                                'message'  => __( 'Saved.', 'f3' ),
                                 'params'   => $params,
                                 'model'    => $m,
                                 'sdo'      => $sdo,
@@ -162,7 +162,7 @@ class API_Routes {
                 )
             );
 
-            \register_rest_route( '/f2/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
+            \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
                 array(
                     'methods' => 'DELETE',
                     'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {

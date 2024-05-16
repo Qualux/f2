@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero\Form;
+namespace F3\Form;
 
 class FormPostType {
 
@@ -16,46 +16,46 @@ class FormPostType {
 
     $labels = array(
 
-    'name'                     => __( 'Form', 'zero' ),
-    'singular_name'            => __( 'Form', 'zero' ),
-    'add_new'                  => __( 'Add New', 'zero' ),
-    'add_new_item'             => __( 'Add New Form', 'zero' ),
-    'edit_item'                => __( 'Edit Form', 'zero' ),
-    'new_item'                 => __( 'New Form', 'zero' ),
-    'view_item'                => __( 'View Form', 'zero' ),
-    'view_items'               => __( 'View Forms', 'zero' ),
-    'search_items'             => __( 'Search Forms', 'zero' ),
-    'not_found'                => __( 'No Forms found.', 'zero' ),
-    'not_found_in_trash'       => __( 'No Forms found in Trash.', 'zero' ),
-    'parent_item_colon'        => __( 'Parent Forms:', 'zero' ),
-    'all_items'                => __( 'All Forms', 'zero' ),
-    'archives'                 => __( 'Form Archives', 'zero' ),
-    'attributes'               => __( 'Form Attributes', 'zero' ),
-    'insert_into_item'         => __( 'Insert into Form', 'zero' ),
-    'uploaded_to_this_item'    => __( 'Uploaded to this Form', 'zero' ),
-    'featured_image'           => __( 'Form Image', 'zero' ),
-    'set_featured_image'       => __( 'Set featured image', 'zero' ),
-    'remove_featured_image'    => __( 'Remove featured image', 'zero' ),
-    'use_featured_image'       => __( 'Use as featured image', 'zero' ),
-    'menu_name'                => __( 'Forms', 'zero' ),
-    'filter_items_list'        => __( 'Filter Form list', 'zero' ),
-    'filter_by_date'           => __( 'Filter by date', 'zero' ),
-    'items_list_navigation'    => __( 'Forms list navigation', 'zero' ),
-    'items_list'               => __( 'Forms list', 'zero' ),
-    'item_published'           => __( 'Form published.', 'zero' ),
-    'item_published_privately' => __( 'Form published privately.', 'zero' ),
-    'item_reverted_to_draft'   => __( 'Form reverted to draft.', 'zero' ),
-    'item_scheduled'           => __( 'Form scheduled.', 'zero' ),
-    'item_updated'             => __( 'Form updated.', 'zero' ),
-    'item_link'                => __( 'Form Link', 'zero' ),
-    'item_link_description'    => __( 'A link to a field.', 'zero' ),
+    'name'                     => __( 'Form', 'f3' ),
+    'singular_name'            => __( 'Form', 'f3' ),
+    'add_new'                  => __( 'Add New', 'f3' ),
+    'add_new_item'             => __( 'Add New Form', 'f3' ),
+    'edit_item'                => __( 'Edit Form', 'f3' ),
+    'new_item'                 => __( 'New Form', 'f3' ),
+    'view_item'                => __( 'View Form', 'f3' ),
+    'view_items'               => __( 'View Forms', 'f3' ),
+    'search_items'             => __( 'Search Forms', 'f3' ),
+    'not_found'                => __( 'No Forms found.', 'f3' ),
+    'not_found_in_trash'       => __( 'No Forms found in Trash.', 'f3' ),
+    'parent_item_colon'        => __( 'Parent Forms:', 'f3' ),
+    'all_items'                => __( 'All Forms', 'f3' ),
+    'archives'                 => __( 'Form Archives', 'f3' ),
+    'attributes'               => __( 'Form Attributes', 'f3' ),
+    'insert_into_item'         => __( 'Insert into Form', 'f3' ),
+    'uploaded_to_this_item'    => __( 'Uploaded to this Form', 'f3' ),
+    'featured_image'           => __( 'Form Image', 'f3' ),
+    'set_featured_image'       => __( 'Set featured image', 'f3' ),
+    'remove_featured_image'    => __( 'Remove featured image', 'f3' ),
+    'use_featured_image'       => __( 'Use as featured image', 'f3' ),
+    'menu_name'                => __( 'Forms', 'f3' ),
+    'filter_items_list'        => __( 'Filter Form list', 'f3' ),
+    'filter_by_date'           => __( 'Filter by date', 'f3' ),
+    'items_list_navigation'    => __( 'Forms list navigation', 'f3' ),
+    'items_list'               => __( 'Forms list', 'f3' ),
+    'item_published'           => __( 'Form published.', 'f3' ),
+    'item_published_privately' => __( 'Form published privately.', 'f3' ),
+    'item_reverted_to_draft'   => __( 'Form reverted to draft.', 'f3' ),
+    'item_scheduled'           => __( 'Form scheduled.', 'f3' ),
+    'item_updated'             => __( 'Form updated.', 'f3' ),
+    'item_link'                => __( 'Form Link', 'f3' ),
+    'item_link_description'    => __( 'A link to a field.', 'f3' ),
 
     );
 
     $args = array(
 
     'labels'                => $labels,
-    'description'           => __( 'Create forms.', 'zero' ),
+    'description'           => __( 'Create forms.', 'f3' ),
     'public'                => false,
     'hierarchical'          => false,
     'exclude_from_search'   => true,

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Zero;
+namespace F3;
 
 class AdminMenu {
 
@@ -9,10 +9,10 @@ class AdminMenu {
         add_action('admin_menu', function() {
 
             add_menu_page(
-                'F2', // Page title
-                'F2',    // Menu title
+                'F3', // Page title
+                'F3',    // Menu title
                 'manage_options', // Capability
-                'zero', // Menu slug
+                'f3', // Menu slug
                 [ $this, 'page' ], // Callback function
                 'dashicons-admin-generic', // Icon URL (optional)
                 10 // Position (optional)

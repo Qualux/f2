@@ -1,6 +1,6 @@
 <?php 
 
-namespace F2\SDO;
+namespace F3\SDO;
 
 class Model {
 

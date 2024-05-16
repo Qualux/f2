@@ -1,7 +1,7 @@
 <?php 
 
-namespace Zero\FieldGroup;
-use Zero\Field\Field;
+namespace F3\FieldGroup;
+use F3\Field\Field;
 
 class FieldGroup {
 
@@ -49,8 +49,8 @@ class FieldGroup {
             if ( $data !== null ) {
                 $fg = $data->{$id};
                 $this->id                = $fg->id;
-                $this->title             = 'F2 Post Types Field Group';
-                $this->storage_post_type = 'f2-post-type';
+                $this->title             = 'F3 Post Types Field Group';
+                $this->storage_post_type = 'f3-post-type';
                 $this->fields            = $fg->fields_numeric;
                 $this->fields_name       = new \stdClass;
                 foreach( $this->fields as $field ) {
