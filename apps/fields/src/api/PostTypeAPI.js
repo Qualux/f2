@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const PostTypeAPI = {
 
-    baseUrl: 'http://ds.local/wp-json/f2/v1',
+    baseUrl: 'http://ds.local/wp-json/f3/v1',
 
     get: async function (page, sortColumn = 'ID', sortOrder = 'DESC', filterValues) {
 

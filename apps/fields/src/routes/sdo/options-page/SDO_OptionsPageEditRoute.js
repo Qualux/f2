@@ -4,7 +4,7 @@ import AppTemplate from '../../../components/global/AppTemplate';
 export default function SDO_OptionsPageEditRoute() {
 
     const { HeaderSDO, AppForm } = useCrudible({
-        sdoKey: 'f2-options-page'
+        sdoKey: 'f3-options-page'
     });
 
     return(

@@ -51,7 +51,7 @@ export default function FieldGroupEditForm({fieldGroup, fieldGroupLoaded}) {
             storage_post_type: data.field_group_post_type,
         }
 
-        postData(`${domain.api}/zero/v1/field-group/${fieldGroup.id}`, preparedData).then((data) => {
+        postData(`${domain.api}/f3/v1/field-group/${fieldGroup.id}`, preparedData).then((data) => {
             setComplete(true);
         });
 

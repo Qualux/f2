@@ -9,7 +9,7 @@ export default function SDO_TaxonomyDashboardRoute() {
     const isMainRoute = location.pathname === "/sdo/taxonomy";
 
     const { Crudible, Manager } = useCrudible({
-        sdoKey: 'f2-taxonomy'
+        sdoKey: 'f3-taxonomy'
     });
 
     if( ! isMainRoute ) {
@@ -20,7 +20,7 @@ export default function SDO_TaxonomyDashboardRoute() {
         <Crudible>
             <AppTemplate>
                 <Manager 
-                    sdoKey="f2-taxonomy"
+                    sdoKey="f3-taxonomy"
                     api={TaxonomyAPI}
                 />
             </AppTemplate>

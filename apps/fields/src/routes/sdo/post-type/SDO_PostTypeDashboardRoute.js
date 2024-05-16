@@ -9,7 +9,7 @@ export default function SDO_PostTypeDashboardRoute() {
     const isMainRoute = location.pathname === "/sdo/post-type";
 
     const { Crudible, Manager } = useCrudible({
-        sdoKey: 'f2-post-type'
+        sdoKey: 'f3-post-type'
     });
 
     if( ! isMainRoute ) {
@@ -20,7 +20,7 @@ export default function SDO_PostTypeDashboardRoute() {
         <Crudible>
             <AppTemplate>
                 <Manager 
-                    sdoKey="f2-post-type"
+                    sdoKey="f3-post-type"
                     api={PostTypeAPI}
                 />
             </AppTemplate>

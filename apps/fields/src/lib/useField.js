@@ -12,7 +12,7 @@ export function useField(id) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${domain.api}/zero/v1/field/${id}`
+          `${domain.api}/f3/v1/field/${id}`
         );
         const data = await response.json();
         setField(data.field);
@@ -29,7 +29,7 @@ export function useField(id) {
   const deleteField = async () => {
     try {
       const response = await fetch(
-          `${domain.api}/zero/v1/field/${id}`,
+          `${domain.api}/f3/v1/field/${id}`,
         {
           method: 'DELETE'
         }

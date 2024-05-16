@@ -33,7 +33,7 @@ export default function FieldCreateForm() {
 
         data.field_type = data.field_type.value;
 
-        postData(domain.api + '/zero/v1/field', data).then((data) => {
+        postData(domain.api + '/f3/v1/field', data).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);
         });

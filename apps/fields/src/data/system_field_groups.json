@@ -16,7 +16,7 @@
     },
     "003": {
         "id": "003",
-        "post_type": "f2-post-type",
+        "post_type": "f3-post-type",
         "fields_numeric": [
             {
                 "field_type": "text",
@@ -29,7 +29,7 @@
     },
     "004": {
         "id": "004",
-        "post_type": "f2-options-page",
+        "post_type": "f3-options-page",
         "fields_numeric": [
             {
                 "field_type": "text",

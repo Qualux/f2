@@ -8,7 +8,7 @@ export default function SDO_OptionsPageViewRoute() {
     const { id } = useParams();
 
     const { ViewScreen } = useCrudible({
-        sdoKey: 'f2-options-page',
+        sdoKey: 'f3-options-page',
         recordId: id,
         api: OptionsPageAPI,
     });

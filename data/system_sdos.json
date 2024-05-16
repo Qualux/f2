@@ -1,9 +1,9 @@
 {
-    "f2-post-type": {
-        "title": "F2 Post Type SDO",
-        "displayTitle": "F2 Post Type Manager",
+    "f3-post-type": {
+        "title": "F3 Post Type SDO",
+        "displayTitle": "F3 Post Type Manager",
         "routeBase": "sdo/post-type",
-        "post_type": "f2-post-type",
+        "post_type": "f3-post-type",
         "create": {
             "button": {
                 "label": "Register Post Type"
@@ -12,7 +12,7 @@
         "field_groups": [
             {
                 "id": "007",
-                "post_type": "f2-post-type",
+                "post_type": "f3-post-type",
                 "fields": [
                     {
                         "field_type": "text",
@@ -51,11 +51,11 @@
             }
         ]
     },
-    "f2-taxonomy": {
-        "title": "F2 Taxonomy SDO",
-        "displayTitle": "F2 Taxonomy Manager",
+    "f3-taxonomy": {
+        "title": "F3 Taxonomy SDO",
+        "displayTitle": "F3 Taxonomy Manager",
         "routeBase": "sdo/taxonomy",
-        "post_type": "f2-taxonomy",
+        "post_type": "f3-taxonomy",
         "create": {
             "button": {
                 "label": "Register Taxonomy"
@@ -64,7 +64,7 @@
         "field_groups": [
             {
                 "id": "008",
-                "post_type": "f2-taxonomy",
+                "post_type": "f3-taxonomy",
                 "fields": [
                     {
                         "field_type": "text",
@@ -96,11 +96,11 @@
             }
         ]
     },
-    "f2-options-page": {
-        "title": "F2 Options Page SDO",
-        "displayTitle": "F2 Options Page Manager",
+    "f3-options-page": {
+        "title": "F3 Options Page SDO",
+        "displayTitle": "F3 Options Page Manager",
         "routeBase": "sdo/options-page",
-        "post_type": "f2-options-page",
+        "post_type": "f3-options-page",
         "create": {
             "button": {
                 "label": "Create Options Page"
@@ -109,7 +109,7 @@
         "field_groups": [
             {
                 "id": "009",
-                "post_type": "f2-options-page",
+                "post_type": "f3-options-page",
                 "fields": [
                     {
                         "field_type": "text",
@@ -163,7 +163,7 @@
         ]
     },
     "form": {
-        "title": "F2 Form SDO",
+        "title": "F3 Form SDO",
         "routeBase": "/forms",
         "field_groups": [
             {
@@ -188,7 +188,7 @@
         ]
     },
     "field_group": {
-        "title": "F2 Form Group SDO",
+        "title": "F3 Form Group SDO",
         "routeBase": "/groups",
         "field_groups": [
             {
@@ -197,7 +197,7 @@
         ]
     },
     "field": {
-        "title": "F2 Form Group SDO",
+        "title": "F3 Form Group SDO",
         "routeBase": "/fields",
         "field_groups": [
             {

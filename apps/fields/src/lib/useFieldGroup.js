@@ -20,7 +20,7 @@ export function useFieldGroup( id, post_id ) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${domain.api}/zero/v1/field-group/${id}?post_id=${post_id}`
+          `${domain.api}/f3/v1/field-group/${id}?post_id=${post_id}`
         );
         const data = await response.json();
         setFieldGroup(data.field_group);
@@ -37,7 +37,7 @@ export function useFieldGroup( id, post_id ) {
   const deleteFieldGroup = async () => {
     try {
       const response = await fetch(
-        `${domain.api}/zero/v1/field-group/${id}`,
+        `${domain.api}/f3/v1/field-group/${id}`,
         {
           method: 'DELETE'
         }

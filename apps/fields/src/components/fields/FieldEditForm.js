@@ -52,7 +52,7 @@ export default function FieldEditForm({field, fieldLoaded}) {
 
     const onSubmit = (data) => {
 
-        postData(domain.api + '/zero/v1/field/' + field.id, data).then((data) => {
+        postData(domain.api + '/f3/v1/field/' + field.id, data).then((data) => {
             setCreatedFieldData(data);
             setComplete(true);
         });

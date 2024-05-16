@@ -4,7 +4,7 @@ import AppTemplate from '../../../components/global/AppTemplate';
 export default function SDO_TaxonomyEditRoute() {
 
     const { HeaderSDO, AppForm } = useCrudible({
-        sdoKey: 'f2-taxonomy'
+        sdoKey: 'f3-taxonomy'
     });
 
     return(

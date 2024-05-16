@@ -49,7 +49,7 @@ export function useSDO( sdoKey ) {
 
             console.log('submit:')
             console.log(data)
-            postData(domain.api + '/f2/v1/' + sdo.routeBase, data).then((data) => {
+            postData(domain.api + '/f3/v1/' + sdo.routeBase, data).then((data) => {
                 console.log(data)
             });
     

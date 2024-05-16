@@ -195,18 +195,18 @@ if ( document.getElementById("root") ) {
   );
 }
 
-if ( document.getElementById("zero-fg") ) {
-  const tag = document.getElementById("zero-fg");
+if ( document.getElementById("f3-fg") ) {
+  const tag = document.getElementById("f3-fg");
   const fieldGroupId = tag.getAttribute('data-field-group');
-  createRoot(document.getElementById("zero-fg")).render(
+  createRoot(document.getElementById("f3-fg")).render(
     <FieldGroupRenderApp fieldGroupId={fieldGroupId} />
   );
 }
 
-if ( document.getElementById("f2-options-fields") ) {
-  const tag = document.getElementById("f2-options-fields");
+if ( document.getElementById("f3-options-fields") ) {
+  const tag = document.getElementById("f3-options-fields");
   const fieldGroupId = tag.getAttribute('data-field-group');
-  createRoot(document.getElementById("f2-options-fields")).render(
+  createRoot(document.getElementById("f3-options-fields")).render(
     <OptionsPageRenderApp fieldGroupId={fieldGroupId} />
   );
 }

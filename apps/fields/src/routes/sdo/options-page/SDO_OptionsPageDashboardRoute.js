@@ -9,7 +9,7 @@ export default function SDO_OptionsPageDashboardRoute() {
     const isMainRoute = location.pathname === "/sdo/options-page";
 
     const { Crudible, Manager } = useCrudible({
-        sdoKey: 'f2-options-page'
+        sdoKey: 'f3-options-page'
     });
 
     if( ! isMainRoute ) {
@@ -20,7 +20,7 @@ export default function SDO_OptionsPageDashboardRoute() {
         <Crudible>
             <AppTemplate>
                 <Manager 
-                    sdoKey="f2-options-page"
+                    sdoKey="f3-options-page"
                     api={OptionsPageAPI}
                 />
             </AppTemplate>

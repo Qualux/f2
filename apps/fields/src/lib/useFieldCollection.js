@@ -12,7 +12,7 @@ export function useFieldCollection() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${domain.api}/zero/v1/field`
+          `${domain.api}/f3/v1/field`
         );
         const data = await response.json();
         setFields(data.records);

@@ -16,7 +16,7 @@ export default function Manager( {sdoKey, api} ) {
         isLoading,
         data,
     } = useQuery({
-        queryKey: ['f2_sdo_query', page, sortColumn, sortOrder, filterValues],
+        queryKey: ['f3_sdo_query', page, sortColumn, sortOrder, filterValues],
         queryFn: () => api.get(page, sortColumn, sortOrder, filterValues),
         placeholderData: keepPreviousData,
     });

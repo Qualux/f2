@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const api = axios.create({
   withCredentials: true,
-  baseURL: "http://ds.local/wp-json/zero/v1/",
+  baseURL: "http://ds.local/wp-json/f3/v1/",
 })
 
 // defining a custom error handler for all APIs

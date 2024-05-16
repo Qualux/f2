@@ -8,7 +8,7 @@ export default function SDO_TaxonomyDeleteRoute() {
     const { id } = useParams();
 
     const { DeleteScreen, sdo, sdoRoutes } = useCrudible({
-        sdoKey: 'f2-post-type'
+        sdoKey: 'f3-post-type'
     });
 
     return(

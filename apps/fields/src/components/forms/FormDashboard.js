@@ -62,7 +62,7 @@ function FormManager() {
         isLoading,
         data,
     } = useQuery({
-        queryKey: ['f2_forms', page, sortColumn, sortOrder, filterValues],
+        queryKey: ['f3_forms', page, sortColumn, sortOrder, filterValues],
         queryFn: () => FormAPI.get(page, sortColumn, sortOrder, filterValues),
         placeholderData: keepPreviousData,
     });
@@ -84,7 +84,7 @@ function FormManager() {
             <Header 
                 to={sdoRoutes.create} 
                 buttonLabel="Create Form"
-                title="F2 FORMS MANAGER"
+                title="F3 FORMS MANAGER"
             />
             <Grid 
                 routes={routes}

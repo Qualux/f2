@@ -97,7 +97,7 @@ function Render( {fieldGroupId, postId} ) {
                         values: getValues()
                     }
 
-                    postData(`${domain.api}/zero/v1/field-group/values/${fieldGroupId}`, preparedData).then((data) => {
+                    postData(`${domain.api}/f3/v1/field-group/values/${fieldGroupId}`, preparedData).then((data) => {
                         console.log(data)
                     });
                 

@@ -36,7 +36,7 @@ export default function FieldGroupCreateForm() {
             storage_options_page: data.field_group_options_page,
         }
 
-        postData(domain.api + '/zero/v1/field-group', preparedData).then((data) => {
+        postData(domain.api + '/f3/v1/field-group', preparedData).then((data) => {
             setComplete(true);
             setResponse(data);
         });

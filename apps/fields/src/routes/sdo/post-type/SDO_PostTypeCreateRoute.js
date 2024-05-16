@@ -4,7 +4,7 @@ import AppTemplate from '../../../components/global/AppTemplate';
 export default function SDO_PostTypeCreateRoute() {
 
     const { HeaderSDO, AppForm } = useCrudible({
-        sdoKey: 'f2-post-type'
+        sdoKey: 'f3-post-type'
     });
 
     return(

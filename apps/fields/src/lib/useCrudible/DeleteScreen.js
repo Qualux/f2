@@ -3,7 +3,7 @@ import { useCrudible } from './useCrudible';
 export default function DeleteScreen( {id, sdo, sdoRoutes, api} ) {
 
     const { Header } = useCrudible({
-        sdoKey: 'f2-options-page'
+        sdoKey: 'f3-options-page'
     });
 
     const deleteHandler = async (e) => {

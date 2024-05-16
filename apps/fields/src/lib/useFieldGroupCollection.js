@@ -12,7 +12,7 @@ export function useFieldGroupCollection() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${domain.api}/zero/v1/field-group`
+          `${domain.api}/f3/v1/field-group`
         );
         const data = await response.json();
         setFieldGroups(data.field_groups);
