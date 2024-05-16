@@ -40,7 +40,7 @@ class FieldGroup {
     public function system_load( $id ) {
 
         // Construct the full path to the JSON file
-        $file = ZERO_PATH . '/apps/fields/src/data/system_field_groups.json';
+        $file = F3_PATH . '/apps/fields/src/data/system_field_groups.json';
 
         if (file_exists( $file )) {
             $contents = file_get_contents( $file );

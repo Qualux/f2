@@ -27,7 +27,7 @@ class FieldType {
     }
 
     public function get_field_type_list() {
-        $json        = file_get_contents( ZERO_PATH . '/data/field_types/field_types_internal.json'); 
+        $json        = file_get_contents( F3_PATH . '/data/field_types/field_types_internal.json'); 
         $types_array = json_decode( $json, true); 
         $types = new \stdClass;
         foreach( $types_array as $t ) {

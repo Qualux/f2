@@ -13,10 +13,10 @@ class Enqueue {
             if( $screen->base !== 'toplevel_page_zero' ) {
                 return;
             }
-            $json  = file_get_contents( ZERO_PATH . '/apps/fields/build/asset-manifest.json'); 
+            $json  = file_get_contents( F3_PATH . '/apps/fields/build/asset-manifest.json'); 
             $build = json_decode( $json, true); 
-            wp_enqueue_style( 'zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
-            wp_enqueue_script( 'zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
+            wp_enqueue_style( 'zero-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
+            wp_enqueue_script( 'zero-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
         });
 
 
@@ -31,19 +31,19 @@ class Enqueue {
             }
             */
             
-            $json  = file_get_contents( ZERO_PATH . '/apps/fields/build/asset-manifest.json'); 
+            $json  = file_get_contents( F3_PATH . '/apps/fields/build/asset-manifest.json'); 
             $build = json_decode( $json, true); 
-            wp_enqueue_style( 'zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
-            wp_enqueue_script( 'zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
+            wp_enqueue_style( 'zero-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
+            wp_enqueue_script( 'zero-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
         });
 
         // Enqueue assets for field rendering in Gutenberg.
 
         add_action('enqueue_block_editor_assets', function() {
-            $json = file_get_contents(ZERO_PATH . '/apps/fields/build/asset-manifest.json');
+            $json = file_get_contents(F3_PATH . '/apps/fields/build/asset-manifest.json');
             $build = json_decode($json, true);
-            wp_enqueue_style('zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all');
-            wp_enqueue_script('zero-app-fields', ZERO_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', true);
+            wp_enqueue_style('zero-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all');
+            wp_enqueue_script('zero-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', true);
         });
 
     }

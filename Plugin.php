@@ -1,8 +1,8 @@
 <?php 
 
 /*
- * Plugin Name: F2
- * Description: F2 is a fields system for WordPress that enables you to create structured data.
+ * Plugin Name: F3
+ * Description: F3 is a fields system for WordPress that enables you to create structured data.
  * Author: SaberWP 
  * Author URL: https://saberwp.com 
  * Version: 0.0.1
@@ -10,13 +10,9 @@
 
 namespace Zero;
 
-define( 'ZERO_URL', plugin_dir_url( __FILE__ ) );
-define( 'ZERO_PATH', plugin_dir_path( __FILE__ ) );
-define( 'ZERO_VERSION', '0.0.1' );
-
-define( 'F2_URL', plugin_dir_url( __FILE__ ) );
-define( 'F2_PATH', plugin_dir_path( __FILE__ ) );
-define( 'F2_VERSION', '0.0.1' );
+define( 'F3_URL', plugin_dir_url( __FILE__ ) );
+define( 'F3_PATH', plugin_dir_path( __FILE__ ) );
+define( 'F3_VERSION', '0.0.1' );
 
 class Plugin {
 
@@ -24,64 +20,64 @@ class Plugin {
 
         /* SDO Classes */
 
-        require_once( F2_PATH . '/php/SDO/Model.php' );
+        require_once( F3_PATH . '/php/SDO/Model.php' );
 
-        require_once( F2_PATH . '/php/SDO/API_Routes.php' );
+        require_once( F3_PATH . '/php/SDO/API_Routes.php' );
         $c = new \F2\SDO\API_Routes();
 
-        require_once( ZERO_PATH . '/php/AdminMenu.php' );
+        require_once( F3_PATH . '/php/AdminMenu.php' );
         $c = new AdminMenu();
 
-        require_once( ZERO_PATH . '/php/Enqueue.php' );
+        require_once( F3_PATH . '/php/Enqueue.php' );
         $e = new Enqueue();
 
-        require_once( ZERO_PATH . '/php/Field/Field.php' );
+        require_once( F3_PATH . '/php/Field/Field.php' );
 
-        require_once( ZERO_PATH . '/php/Field/FieldPostType.php' );
+        require_once( F3_PATH . '/php/Field/FieldPostType.php' );
         $fpt = new Field\FieldPostType();
 
-        require_once( ZERO_PATH . '/php/Field/FieldShortcodes.php' );
+        require_once( F3_PATH . '/php/Field/FieldShortcodes.php' );
         $fs = new Field\FieldShortcodes();
 
-        require_once( ZERO_PATH . '/php/Field/FieldRoutes.php' );
+        require_once( F3_PATH . '/php/Field/FieldRoutes.php' );
         $r = new Field\FieldRoutes();
 
-        require_once( ZERO_PATH . '/php/Metabox/Metabox.php' );
+        require_once( F3_PATH . '/php/Metabox/Metabox.php' );
         $m = new Metabox\Metabox();
 
-        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroup.php' );
+        require_once( F3_PATH . '/php/FieldGroup/FieldGroup.php' );
         $fgpt = new FieldGroup\FieldGroup();
 
-        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupPostType.php' );
+        require_once( F3_PATH . '/php/FieldGroup/FieldGroupPostType.php' );
         $fgpt = new FieldGroup\FieldGroupPostType();
 
-        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupShortcodes.php' );
+        require_once( F3_PATH . '/php/FieldGroup/FieldGroupShortcodes.php' );
         $fgs = new FieldGroup\FieldGroupShortcodes();
 
-        require_once( ZERO_PATH . '/php/FieldGroup/FieldGroupRoutes.php' );
+        require_once( F3_PATH . '/php/FieldGroup/FieldGroupRoutes.php' );
         $fgr = new FieldGroup\FieldGroupRoutes();
 
         /*
          * Form internal SDO.
          */
-        require_once( ZERO_PATH . '/php/Form/Form.php' );
-        require_once( ZERO_PATH . '/php/Form/FormPostType.php' );
+        require_once( F3_PATH . '/php/Form/Form.php' );
+        require_once( F3_PATH . '/php/Form/FormPostType.php' );
         $frt = new Form\FormPostType();
-        require_once( ZERO_PATH . '/php/Form/FormRoutes.php' );
+        require_once( F3_PATH . '/php/Form/FormRoutes.php' );
         new Form\FormRoutes();
 
-        require_once( ZERO_PATH . '/php/FieldType/FieldType.php' );
-        require_once( ZERO_PATH . '/php/FieldType/FieldTypeText.php' );
-        require_once( ZERO_PATH . '/php/FieldType/FieldTypeSelect.php' );
-        require_once( ZERO_PATH . '/php/FieldType/FieldTypeNumber.php' );
+        require_once( F3_PATH . '/php/FieldType/FieldType.php' );
+        require_once( F3_PATH . '/php/FieldType/FieldTypeText.php' );
+        require_once( F3_PATH . '/php/FieldType/FieldTypeSelect.php' );
+        require_once( F3_PATH . '/php/FieldType/FieldTypeNumber.php' );
 
-        require_once( ZERO_PATH . '/php/DataStructure/F2_PostType.php' );
+        require_once( F3_PATH . '/php/DataStructure/F2_PostType.php' );
         $dspt = new DataStructure\F2_PostType();
 
-        require_once( ZERO_PATH . '/php/DataStructure/F2_Taxonomy.php' );
+        require_once( F3_PATH . '/php/DataStructure/F2_Taxonomy.php' );
         $dstax = new DataStructure\F2_Taxonomy();
 
-        require_once( ZERO_PATH . '/php/DataStructure/F2_OptionsPage.php' );
+        require_once( F3_PATH . '/php/DataStructure/F2_OptionsPage.php' );
         $dsop = new DataStructure\F2_OptionsPage();
 
     }

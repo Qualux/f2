@@ -12,7 +12,7 @@ class API_Routes {
 
     public function register() {
 
-        $sdo_json      = file_get_contents( F2_PATH . '/data/system_sdos.json' );
+        $sdo_json      = file_get_contents( F3_PATH . '/data/system_sdos.json' );
         $sdo_list      = json_decode( $sdo_json, 1 );
 
         foreach( $sdo_list as $sdo_key => $sdo ) {
