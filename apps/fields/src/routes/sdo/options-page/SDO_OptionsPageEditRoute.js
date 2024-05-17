@@ -1,5 +1,6 @@
 import { useCrudible } from '../../../lib/useCrudible/useCrudible';
 import AppTemplate from '../../../components/global/AppTemplate';
+import ScreenWrap from '../../../components/global/ScreenWrap';
 
 export default function SDO_OptionsPageEditRoute() {
 
@@ -9,8 +10,10 @@ export default function SDO_OptionsPageEditRoute() {
 
     return(
         <AppTemplate>
-            <HeaderSDO />
-            <AppForm />
+            <HeaderSDO mode="edit" />
+            <ScreenWrap>
+                <AppForm />
+            </ScreenWrap> 
         </AppTemplate>
     );
 
