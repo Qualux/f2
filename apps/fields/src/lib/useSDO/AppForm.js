@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import Field from '../../components/fields/Field';
+import {
+    useQuery
+} from '@tanstack/react-query';
 
 function FieldGroup( { fieldGroup, register, errors, setValue } ) {
 
@@ -21,7 +24,13 @@ function FieldGroup( { fieldGroup, register, errors, setValue } ) {
 
 }
 
-export default function AppForm( { sdo, postData, domain, api, recordId } ) {
+export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) {
+
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['record', recordId],
+        queryFn: () => api.getOne(recordId),
+        enabled: !!recordId, // Only run query if recordId is available
+    });
 
     const {
         register,
@@ -32,14 +41,11 @@ export default function AppForm( { sdo, postData, domain, api, recordId } ) {
     } = useForm();
 
     useEffect(() => {
-        
-        //api.getOne()
-        //reset 
-
-        console.log('recordId:')
-        console.log(recordId)
-
-    }, []);
+        if (data) {
+            console.log('Fetched record:', data);
+            reset(data.record); // Reset the form with the fetched data
+        }
+    }, [data, reset]);
 
     const onSubmit = (data) => {
 

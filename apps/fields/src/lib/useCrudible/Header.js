@@ -21,6 +21,22 @@ export default function CrudibleHeader({to, buttonLabel, title, mode, dashboardR
             )
         }
 
+        if( mode === 'edit' ) {
+            return(
+                <div className="flex gap-5 items-center">
+                    <h2 className="text-neutral-300 font-semibold text-lg">
+                        EDIT
+                    </h2>
+                    <NavLink
+                        to={dashboardRoute}
+                        className="fill-neutral-300 transition-transform hover:scale-125"
+                    >
+                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
+                    </NavLink>
+                </div>
+            )
+        }
+
         return(
             <NavLink
                 to={to}

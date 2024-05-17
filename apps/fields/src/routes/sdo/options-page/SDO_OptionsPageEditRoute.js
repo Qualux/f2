@@ -10,20 +10,22 @@ export default function SDO_OptionsPageEditRoute() {
 
     console.log(id)
 
-    const { HeaderSDO, AppForm } = useCrudible({
+    const { Crudible, HeaderSDO, AppForm } = useCrudible({
         sdoKey: 'f3-options-page'
     });
 
     return(
-        <AppTemplate>
-            <HeaderSDO mode="edit" />
-            <ScreenWrap>
-                <AppForm 
-                    recordId={id}
-                    api={OptionsPageAPI} 
-                />
-            </ScreenWrap> 
-        </AppTemplate>
+        <Crudible>
+            <AppTemplate>
+                <HeaderSDO mode="edit" />
+                <ScreenWrap>
+                    <AppForm 
+                        recordId={id}
+                        api={OptionsPageAPI} 
+                    />
+                </ScreenWrap> 
+            </AppTemplate>
+        </Crudible>
     );
 
 }
