@@ -128,6 +128,7 @@ class API_Routes {
                 'permission_callback' => '__return_true',
             ));
 
+            // Create route.
             \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'], 
                 array(
                     'methods' => 'POST',
@@ -136,6 +137,43 @@ class API_Routes {
                         $params = $req->get_json_params();
 
                         $m            = new Model();
+                        $m->sdo       = $sdo;
+                        $m->post_type = $sdo['post_type'];
+
+                        foreach( $sdo['field_groups'] as $fg ) {
+                            foreach( $fg['fields'] as $f ) {
+                                $m->{$f['field_name']} = $params[$f['field_name']];
+                            }
+                        }
+
+                        $m->save();
+                        
+                        return new \WP_REST_Response(
+                            array(
+                                'status'   => 200,
+                                'message'  => __( 'Saved.', 'f3' ),
+                                'params'   => $params,
+                                'model'    => $m,
+                                'sdo'      => $sdo,
+                            )
+                        );
+        
+                    },
+                    'permission_callback' => function() { return true; },
+                )
+            );
+
+            // Edit route. 
+            \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
+                array(
+                    'methods' => 'PUT',
+                    'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
+
+                        $id     = $req->get_param( 'id' );
+                        $params = $req->get_json_params();
+
+                        $m            = new Model();
+                        $m->id        = $id;
                         $m->sdo       = $sdo;
                         $m->post_type = $sdo['post_type'];
 

@@ -51,9 +51,14 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
 
         console.log('submit:')
         console.log(data)
-        postData(domain.api + '/f3/v1/' + sdo.routeBase, data).then((data) => {
-            console.log(data)
-        });
+        if( !recordId ) {
+            postData(domain.api + '/f3/v1/' + sdo.routeBase, data).then((data) => {
+                console.log(data)
+            });
+        } else {
+            api.edit(recordId, data);
+        }
+        
 
     }
 
