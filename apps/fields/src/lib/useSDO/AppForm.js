@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import Field from '../../components/fields/Field';
 import {
@@ -26,6 +26,8 @@ function FieldGroup( { fieldGroup, register, errors, setValue } ) {
 
 export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) {
 
+    const [formStatus, setFormStatus] = useState('loading');
+
     const { data, error, isLoading } = useQuery({
         queryKey: ['record', recordId],
         queryFn: () => api.getOne(recordId),
@@ -44,6 +46,7 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
         if (data) {
             console.log('Fetched record:', data);
             reset(data.record); // Reset the form with the fetched data
+            setFormStatus('ready');
         }
     }, [data, reset]);
 
@@ -54,12 +57,25 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
         if( !recordId ) {
             postData(domain.api + '/f3/v1/' + sdo.routeBase, data).then((data) => {
                 console.log(data)
+                setFormStatus('complete');
             });
         } else {
             api.edit(recordId, data);
+            setFormStatus('complete');
         }
         
 
+    }
+
+    if( formStatus === 'complete' ) {
+        return(
+            <div>
+                <p>
+                    Operation completed successfully.
+                </p>
+            </div>
+
+        );  
     }
 
     return(
