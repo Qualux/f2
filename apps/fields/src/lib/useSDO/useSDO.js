@@ -1,83 +1,25 @@
-import { useState, useEffect, useContext } from 'react';
-import { useForm } from "react-hook-form";
+import { useContext } from 'react';
 import systemSDO from '../../../../../data/system_sdos.json';
-import Field from '../../components/fields/Field';
-import { DomainContext } from '../../contexts';
 import { useFetch } from '../../lib/useFetch';
+import { DomainContext } from '../../contexts';
+import AppForm from './AppForm';
 
 export function useSDO( sdoKey ) {
 
     const domain = useContext(DomainContext);
     const { postData } = useFetch();
+    const sdo = systemSDO[ sdoKey ];
 
-    function getSystemSDO( SDO_Key ) {
-        return systemSDO[ SDO_Key ];
-    }
-    const sdo = getSystemSDO( sdoKey );
+    const AppFormComponent = ( { api, recordId } ) => (
+        <AppForm 
+            sdo={sdo} 
+            postData={postData} 
+            domain={domain} 
+            api={api}
+            recordId={recordId}
+        />
+    );
 
-    function FieldGroup( { fieldGroup, register, errors, setValue } ) {
-
-        return(
-            <div>
-                {fieldGroup.fields.map( ( field, index ) =>
-                    <div key={index} className="my-6">
-                        <Field 
-                            field={field} 
-                            register={register}
-                            errors={errors} 
-                            setValue={setValue}
-                        />
-                    </div>
-                )}
-            </div>
-        );
-
-    }
-
-    function AppForm() {
-
-        const sdo = getSystemSDO( sdoKey );
-
-        const {
-            register,
-            handleSubmit,
-            formState: { errors },
-            setValue
-        } = useForm();
-
-        const onSubmit = (data) => {
-
-            console.log('submit:')
-            console.log(data)
-            postData(domain.api + '/f3/v1/' + sdo.routeBase, data).then((data) => {
-                console.log(data)
-            });
-    
-        }
-
-        return(
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    {sdo.field_groups.map( ( fieldGroup, index ) =>
-                        <FieldGroup 
-                            key={index} 
-                            fieldGroup={fieldGroup} 
-                            register={register}
-                            errors={errors}
-                            setValue={setValue}
-                        />
-                    )}
-                </div>
-                <button 
-                    className="bg-sky-700 text-white py-2 px-12 font-semibold hover:bg-sky-800"
-                >
-                    SAVE FORM
-                </button>
-            </form>
-        );
-
-    }
-
-    return { sdo, AppForm }
+    return { sdo, AppForm: AppFormComponent }
 
 }
