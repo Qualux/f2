@@ -11,18 +11,21 @@ export function useCrudible( params = { sdoKey: null, recordId: 0, api: null } )
 
     const { sdo, AppForm } = useSDO( params.sdoKey );
     const sdoRoutes = {
+        dashboard: '/' + sdo.routeBase,
         create: '/' + sdo.routeBase + '/create',
         edit: '/' + sdo.routeBase + '/edit',
         delete: '/' + sdo.routeBase + '/delete',
         view: '/' + sdo.routeBase + '/view',
     }
 
-    function HeaderSDO() {
+    function HeaderSDO({mode}) {
         return (
             <Header
                 to={sdoRoutes.create} 
                 buttonLabel={sdo.create.button.label}
                 title={sdo.displayTitle}
+                mode={mode}
+                dashboardRoute={sdoRoutes.dashboard}
             />
         );
     }

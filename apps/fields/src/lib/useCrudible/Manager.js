@@ -4,6 +4,7 @@ import {
     keepPreviousData,
 } from '@tanstack/react-query';
 import { useCrudible } from './useCrudible';
+import ScreenWrap from '../../components/global/ScreenWrap';
 
 export default function Manager( {sdoKey, api} ) {
 
@@ -39,24 +40,26 @@ export default function Manager( {sdoKey, api} ) {
     }
 
     return(
-        <div className="max-w-3xl my-2">
+        <>
             <HeaderSDO />
-            <Grid 
-                routes={sdoRoutes}
-                data={data} 
-                columns={sdo.columns}
-                page={page}
-                setPage={setPage}
-                sortColumn={sortColumn}
-                setSortColumn={setSortColumn}
-                sortOrder={sortOrder}
-                setSortOrder={setSortOrder}
-                filters={sdo.filters}
-                filterValues={filterValues}
-                setFilterValues={setFilterValues}
-            />
-            <Footer data={data} />
-        </div>
+            <ScreenWrap>
+                <Grid 
+                    routes={sdoRoutes}
+                    data={data} 
+                    columns={sdo.columns}
+                    page={page}
+                    setPage={setPage}
+                    sortColumn={sortColumn}
+                    setSortColumn={setSortColumn}
+                    sortOrder={sortOrder}
+                    setSortOrder={setSortOrder}
+                    filters={sdo.filters}
+                    filterValues={filterValues}
+                    setFilterValues={setFilterValues}
+                />
+                <Footer data={data} />
+            </ScreenWrap>
+        </>
     );
 
 }
