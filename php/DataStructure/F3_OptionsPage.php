@@ -2,6 +2,14 @@
 
 namespace F3\DataStructure;
 
+/**
+ * Class F3_OptionsPage
+ *
+ * Handles the registration of the F3 Options Page custom post type
+ * and the creation of admin menu pages for each options page.
+ *
+ * @package F3\DataStructure
+ */
 class F3_OptionsPage {
 
     public function __construct() {
