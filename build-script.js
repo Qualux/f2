@@ -11,7 +11,7 @@ const version = packageJson.version || '1.0.0';
 const sourceDir = path.resolve(__dirname);
 const buildDir = path.resolve(__dirname, 'build');
 const tmpDir = path.join(buildDir, 'tmp');
-const zipFilePath = path.join(buildDir, `f2-${version}.zip`);
+const zipFilePath = path.join(buildDir, `f3-${version}.zip`);
 
 // Clear the temporary and output directories before copying files
 fs.emptyDirSync(tmpDir);
@@ -33,7 +33,7 @@ zip.writeZip(zipFilePath, (err) => {
   if (err) {
     console.error('Error zipping the files:', err);
   } else {
-    console.log(`Distribution package (f2-${version}.zip) created successfully.`);
+    console.log(`Distribution package (f3-${version}.zip) created successfully.`);
   }
 
   // Remove the temporary directory after zipping
