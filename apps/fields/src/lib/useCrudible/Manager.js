@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { useCrudible } from './useCrudible';
 import ScreenWrap from '../../components/global/ScreenWrap';
+import SkeletonList from '../../components/global/SkeletonList';
 
 export default function Manager( {sdoKey, api} ) {
 
@@ -33,9 +34,12 @@ export default function Manager( {sdoKey, api} ) {
 
     if (isLoading && !data) {
         return(
-            <div>
-                IS LOADING
-            </div>
+            <>
+                <HeaderSDO />
+                <ScreenWrap>
+                    <SkeletonList />
+                </ScreenWrap>
+            </>
         )
     }
 
