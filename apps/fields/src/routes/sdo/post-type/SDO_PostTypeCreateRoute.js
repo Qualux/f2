@@ -11,15 +11,15 @@ export default function SDO_PostTypeCreateRoute() {
 
     return(
         <Crudible>
-        <AppTemplate>
-            <HeaderSDO mode="create" />
-            <ScreenWrap>
-                <AppForm 
-                    api={PostTypeAPI} 
-                />
-            </ScreenWrap> 
-        </AppTemplate>
-    </Crudible>
+            <AppTemplate>
+                <HeaderSDO mode="create" />
+                <ScreenWrap>
+                    <AppForm 
+                        api={PostTypeAPI} 
+                    />
+                </ScreenWrap> 
+            </AppTemplate>
+        </Crudible>
     );
 
 }

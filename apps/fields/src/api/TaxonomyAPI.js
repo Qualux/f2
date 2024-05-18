@@ -26,6 +26,30 @@ export const TaxonomyAPI = {
 
     },
 
+    getOne: async function (id) {
+        const response = await axios.get(`${this.baseUrl}/sdo/taxonomy/${id}`);
+        return response.data;
+    },
+
+    create: async function (data) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/sdo/taxonomy`, data);
+            return response.data;
+        } catch (error) {
+            throw new Error('Failed to create item.');
+        }
+    },
+
+    edit: async function (id, data) {
+        try {
+            const response = await axios.put(`${this.baseUrl}/sdo/taxonomy/${id}`, data);
+            return response.data;
+        } catch (error) {
+            throw new Error('Failed to edit item.');
+        }
+    },
+
+
     delete: async function (id) {
         try {
             const response = await axios.delete(`${this.baseUrl}/sdo/taxonomy/${id}`);
