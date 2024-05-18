@@ -23,7 +23,17 @@ class Model {
         foreach( $this->sdo['field_groups'] as $fg ) {
             foreach( $fg['fields'] as $f ) {
                 
-                $this->{$f['field_name']} = get_post_meta( $this->id, $f['field_name'], 1 );
+                if( $f['field_type'] === 'true_false' ) {
+                    $value = get_post_meta( $this->id, $f['field_name'], 1 );
+                    if( $value === "1" ) {
+                        $value = true;
+                    } else {
+                        $value = false;
+                    }
+                    $this->{$f['field_name']} = $value;
+                } else {
+                    $this->{$f['field_name']} = get_post_meta( $this->id, $f['field_name'], 1 );
+                }
 
             }
         }

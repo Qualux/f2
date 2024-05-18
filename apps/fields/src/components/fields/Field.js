@@ -20,13 +20,22 @@ function fieldDefinitionTypeCheck(field) {
         return 'object';
     } else if (typeof field === 'string') {
         return 'string';
-    console.log('Variable "field" is a string.');
     } else {
         return 'invalid';
     }
 }
 
-export default function Field( {field:fieldReference, register, errors, getValues, setValue, valuesInit, control} ) {
+export default function Field( 
+        {
+            field:fieldReference, 
+            register, 
+            errors, 
+            getValues, 
+            setValue, 
+            valuesInit, 
+            control, 
+            value
+        }) {
 
     let field = fieldReference;
     const fieldDefinitionType = fieldDefinitionTypeCheck( fieldReference );
@@ -60,7 +69,17 @@ export default function Field( {field:fieldReference, register, errors, getValue
             return <CheckboxField field={field} register={register} errors={errors} />
             break;
         case 'true_false':
-            return <TrueFalseField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            return(
+                <TrueFalseField 
+                    field={field} 
+                    register={register} 
+                    errors={errors} 
+                    setValue={setValue} 
+                    getValues={getValues} 
+                    valuesInit={valuesInit} 
+                    value={value}
+                />
+            )
             break;
         case 'searchable_select':
             return <SearchableSelectField field={field} register={register} errors={errors} control={control} />

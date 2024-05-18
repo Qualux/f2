@@ -93,6 +93,13 @@
                         "field_title": "Public",
                         "field_label": "Public",
                         "default_value": true
+                    },
+                    {
+                        "field_type": "true_false",
+                        "field_name": "publicly_queryable",
+                        "field_title": "Public Queryable",
+                        "field_label": "Public Queryable",
+                        "default_value": false
                     }
                 ]
             }

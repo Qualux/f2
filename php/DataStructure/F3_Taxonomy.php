@@ -61,7 +61,8 @@ class F3_Taxonomy {
             $name          = $tax->post_title;
             $taxonomy_key  = get_post_meta( $tax->ID, 'taxonomy_key', 1 );
             $object_type   = get_post_meta( $tax->ID, 'object_type', 1 );
-            $public        = get_post_meta( $tax->ID, 'public', 1 );
+            $public              = get_post_meta( $tax->ID, 'public', 1 );
+            $publicly_queryable  = get_post_meta( $tax->ID, 'publicly_queryable', 1 );
 
             $labels = array(
                 'name'                       => __( $name, 'f3' ),
@@ -81,6 +82,7 @@ class F3_Taxonomy {
             $args = array(
                 'labels'                     => $labels,
                 'public'                     => $public,
+                'public_queryable'           => $publicly_queryable,
                 'hierarchical'               => true,
                 'show_ui'                    => true,
                 'show_admin_column'          => true,

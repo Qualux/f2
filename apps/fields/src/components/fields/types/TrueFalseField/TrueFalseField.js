@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Switch } from '@headlessui/react';
 import Label from '../../Label';
 
@@ -6,13 +6,22 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function TrueFalseField( {field, register, errors, setValue} ) {
+export default function TrueFalseField( {field, value, register, errors, setValue} ) {
 
     const [enabled, setEnabled] = useState(false);
 
-    const handleChange = ( value ) => {
-        setEnabled( value );
-        setValue( field.field_name, value );
+    useEffect(() => {
+        const initialEnabled = value !== undefined ? value : field.default_value;
+        setEnabled(initialEnabled);
+    }, [value]);
+
+    const handleChange = ( newValue ) => {
+
+        console.log('new value:')
+        console.log(newValue)
+
+        setEnabled( newValue );
+        setValue( field.field_name, newValue );
     }
 
     return(

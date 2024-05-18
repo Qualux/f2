@@ -5,7 +5,10 @@ import {
     useQuery
 } from '@tanstack/react-query';
 
-function FieldGroup( { fieldGroup, register, errors, setValue } ) {
+function FieldGroup( { fieldGroup, register, errors, setValue, record } ) {
+
+    console.log('record in FieldGroup:')
+    console.log(record)
 
     return(
         <div>
@@ -16,6 +19,7 @@ function FieldGroup( { fieldGroup, register, errors, setValue } ) {
                         register={register}
                         errors={errors} 
                         setValue={setValue}
+                        value={record[field.field_name]}
                     />
                 </div>
             )}
@@ -27,6 +31,7 @@ function FieldGroup( { fieldGroup, register, errors, setValue } ) {
 export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) {
 
     const [formStatus, setFormStatus] = useState('loading');
+    const [record, setRecord] = useState(false);
 
     const { data, error, isLoading } = useQuery({
         queryKey: ['record', recordId],
@@ -47,6 +52,7 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
             console.log('Fetched record:', data);
             reset(data.record); // Reset the form with the fetched data
             setFormStatus('ready');
+            setRecord(data.record);
         }
     }, [data, reset]);
 
@@ -88,6 +94,7 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
                         register={register}
                         errors={errors}
                         setValue={setValue}
+                        record={record}
                     />
                 )}
             </div>

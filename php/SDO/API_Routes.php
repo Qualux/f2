@@ -108,6 +108,7 @@ class API_Routes {
                 )
             );
 
+            // Get one.
             register_rest_route( 'f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
