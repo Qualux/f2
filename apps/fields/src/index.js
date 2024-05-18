@@ -38,6 +38,7 @@ import SDO_TaxonomyDashboardRoute from './routes/sdo/taxonomy/SDO_TaxonomyDashbo
 import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
 import SDO_TaxonomyEditRoute from './routes/sdo/taxonomy/SDO_TaxonomyEditRoute';
 import SDO_TaxonomyDeleteRoute from './routes/sdo/taxonomy/SDO_TaxonomyDeleteRoute';
+import SDO_TaxonomyViewRoute from './routes/sdo/taxonomy/SDO_TaxonomyViewRoute';
 import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
 import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
 import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageEditRoute';
@@ -96,6 +97,10 @@ const router = createHashRouter([
               {
                 path: "delete/:id",
                 element: <SDO_TaxonomyDeleteRoute />,
+              },
+              {
+                path: "view/:id",
+                element: <SDO_TaxonomyViewRoute />,
               },
             ]
           },

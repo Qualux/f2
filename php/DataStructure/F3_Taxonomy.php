@@ -58,11 +58,13 @@ class F3_Taxonomy {
 
         foreach( $f3_taxonomies as $tax ) {
 
-            $taxonomy_key  = $tax->post_name;
-            $name_plural   = get_post_meta( $pt->ID, 'name_plural', 1 );
+            $name          = $tax->post_title;
+            $taxonomy_key  = get_post_meta( $tax->ID, 'taxonomy_key', 1 );
+            $object_type   = get_post_meta( $tax->ID, 'object_type', 1 );
+            $public        = get_post_meta( $tax->ID, 'public', 1 );
 
             $labels = array(
-                'name'                       => __( 'Custom Taxonomies', 'f3' ),
+                'name'                       => __( $name, 'f3' ),
                 'singular_name'              => __( 'Custom Taxonomy', 'f3' ),
                 'menu_name'                  => __( 'Custom Taxonomy', 'f3' ),
                 'all_items'                  => __( 'All Custom Taxonomies', 'f3' ),
@@ -78,7 +80,7 @@ class F3_Taxonomy {
         
             $args = array(
                 'labels'                     => $labels,
-                'public'                     => true,
+                'public'                     => $public,
                 'hierarchical'               => true,
                 'show_ui'                    => true,
                 'show_admin_column'          => true,
@@ -86,7 +88,7 @@ class F3_Taxonomy {
                 'rewrite'                    => array( 'slug' => $taxonomy_key ),
             );
         
-            register_taxonomy( $taxonomy_key, array( 'post' ), $args );
+            register_taxonomy( $taxonomy_key, $object_type, $args );
     
         }
 

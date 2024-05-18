@@ -72,6 +72,27 @@
                         "field_title": "Title",
                         "field_label": "Title",
                         "field_placeholder": "Admin title..."
+                    },
+                    {
+                        "field_type": "text",
+                        "field_name": "taxonomy_key",
+                        "field_title": "Taxonomy Key",
+                        "field_label": "Taxonomy Key",
+                        "field_placeholder": "Unique lowercase taxonomy key..."
+                    },
+                    {
+                        "field_type": "text",
+                        "field_name": "object_type",
+                        "field_title": "Object Type",
+                        "field_label": "Object Type",
+                        "field_placeholder": "Object, post type to associate..."
+                    },
+                    {
+                        "field_type": "true_false",
+                        "field_name": "public",
+                        "field_title": "Public",
+                        "field_label": "Public",
+                        "default_value": true
                     }
                 ]
             }
