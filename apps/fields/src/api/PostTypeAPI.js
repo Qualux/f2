@@ -26,12 +26,35 @@ export const PostTypeAPI = {
 
     },
 
+    getOne: async function (id) {
+        const response = await axios.get(`${this.baseUrl}/sdo/post-type/${id}`);
+        return response.data;
+    },
+
     delete: async function (id) {
         try {
             const response = await axios.delete(`${this.baseUrl}/sdo/post-type/${id}`);
             return response.data;
         } catch (error) {
             throw new Error('Failed to delete item.');
+        }
+    },
+
+    create: async function (data) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/sdo/post-type`, data);
+            return response.data;
+        } catch (error) {
+            throw new Error('Failed to create item.');
+        }
+    },
+
+    edit: async function (id, data) {
+        try {
+            const response = await axios.put(`${this.baseUrl}/sdo/post-type/${id}`, data);
+            return response.data;
+        } catch (error) {
+            throw new Error('Failed to edit item.');
         }
     },
 

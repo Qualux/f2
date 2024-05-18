@@ -7,9 +7,7 @@ import { OptionsPageAPI } from '../../../api/OptionsPageAPI';
 export default function SDO_OptionsPageEditRoute() {
 
     const { id } = useParams();
-
-    console.log(id)
-
+    
     const { Crudible, HeaderSDO, AppForm } = useCrudible({
         sdoKey: 'f3-options-page'
     });

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const OptionsPageAPI = {
+    
     baseUrl: 'http://ds.local/wp-json/f3/v1',
 
     get: async function (page, sortColumn = 'ID', sortOrder = 'DESC', filterValues) {
@@ -53,4 +54,5 @@ export const OptionsPageAPI = {
             throw new Error('Failed to edit item.');
         }
     },
+
 };
