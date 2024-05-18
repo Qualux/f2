@@ -7,7 +7,7 @@ export default function SDO_OptionsPageDeleteRoute() {
 
     const { id } = useParams();
 
-    const { Header, DeleteScreen, sdo, sdoRoutes } = useCrudible({
+    const { DeleteScreen, sdo, sdoRoutes } = useCrudible({
         sdoKey: 'f3-options-page'
     });
 
