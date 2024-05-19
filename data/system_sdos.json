@@ -99,8 +99,15 @@
                         "field_name": "publicly_queryable",
                         "field_title": "Public Queryable",
                         "field_label": "Public Queryable",
+                        "default_value": true
+                    },
+                    {
+                        "field_type": "true_false",
+                        "field_name": "hierarchical",
+                        "field_title": "Hierarchical",
+                        "field_label": "Hierarchical",
                         "default_value": false
-                    }
+                    }   
                 ]
             }
         ],
