@@ -292,6 +292,25 @@
             }
         ]
     },
+    "grid": {
+        "title": "F3 Grid SDO",
+        "routeBase": "/grids",
+        "field_groups": [
+            {
+                "id": "008",
+                "post_type": "f3-grid",
+                "fields": [
+                    {
+                        "field_type": "text",
+                        "field_name": "title",
+                        "field_title": "Title",
+                        "field_label": "Title",
+                        "field_placeholder": "Admin title..."
+                    }
+                ]
+            }
+        ]
+    },
     "field_group": {
         "title": "F3 Form Group SDO",
         "routeBase": "/groups",
