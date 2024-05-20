@@ -45,6 +45,9 @@ import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageE
 import SDO_OptionsPageDeleteRoute from './routes/sdo/options-page/SDO_OptionsPageDeleteRoute';
 import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageViewRoute';
 
+/* Grid Routes */
+import GridDashboard from "./routes/grids/GridDashboard";
+
 import {
   createHashRouter,
   RouterProvider,
@@ -59,6 +62,10 @@ const router = createHashRouter([
       {
         index: true,
         element: <Dashboard />
+      },
+      {
+        path: "grid",
+        element: <GridDashboard />,
       },
       {
         path: "sdo",
