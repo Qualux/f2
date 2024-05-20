@@ -74,9 +74,6 @@ class Plugin {
         /* Grids Layer */
         require_once( F3_PATH . '/php/Grid/GridPostType.php' );
         new Grid\GridPostType();
-        //require_once( F3_PATH . '/php/FieldType/FieldTypeText.php' );
-        //require_once( F3_PATH . '/php/FieldType/FieldTypeSelect.php' );
-        //require_once( F3_PATH . '/php/FieldType/FieldTypeNumber.php' );
 
         require_once( F3_PATH . '/php/DataStructure/F3_PostType.php' );
         $dspt = new DataStructure\F3_PostType();

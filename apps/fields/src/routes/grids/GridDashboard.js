@@ -9,7 +9,7 @@ export default function GridDashboard() {
     const isMainRoute = location.pathname === "/grids";
 
     const { Crudible, Manager } = useCrudible({
-        sdoKey: 'f3-options-page'
+        sdoKey: 'f3-grid'
     });
 
     if( ! isMainRoute ) {
@@ -20,7 +20,7 @@ export default function GridDashboard() {
         <Crudible>
             <AppTemplate>
                 <Manager 
-                    sdoKey="f3-options-page"
+                    sdoKey="f3-grid"
                     api={GridAPI}
                 />
             </AppTemplate>

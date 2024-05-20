@@ -270,6 +270,7 @@
     "form": {
         "title": "F3 Form SDO",
         "routeBase": "/forms",
+        "post_type": "f3-form",
         "field_groups": [
             {
                 "id": "006",
@@ -292,9 +293,16 @@
             }
         ]
     },
-    "grid": {
+    "f3-grid": {
         "title": "F3 Grid SDO",
-        "routeBase": "/grids",
+        "displayTitle": "F3 Grid Manager",
+        "routeBase": "/grid",
+        "post_type": "f3-grid",
+        "create": {
+            "button": {
+                "label": "Create Grid"
+            }
+        },
         "field_groups": [
             {
                 "id": "008",
@@ -307,6 +315,25 @@
                         "field_label": "Title",
                         "field_placeholder": "Admin title..."
                     }
+                ]
+            }
+        ],
+        "columns": [
+            { "label": "ID", "columnKey": "ID", "recordKey": "id" },
+            { "label": "Title", "columnKey": "title", "recordKey": "title" },
+            { "label": "", "columnKey": "controls" }
+        ],
+        "filters": [
+            { "key": "search", "label": "SEARCH", "placeholder": "Search by title...", "type": "text" },
+            { 
+                "key": "records_per_page", 
+                "label": "RECORDS PER PAGE", 
+                "type": "select", 
+                "options": [
+                    { "value": "10", "label": "10" },
+                    { "value": "25", "label": "25" },
+                    { "value": "50", "label": "50" },
+                    { "value": "100", "label": "100" }
                 ]
             }
         ]

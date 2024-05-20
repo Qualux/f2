@@ -19,18 +19,18 @@ export const GridAPI = {
             params.search = filterValues.search;
         }
 
-        const response = await axios.get(`${this.baseUrl}/sdo/grid`, { params });
+        const response = await axios.get(`${this.baseUrl}/grid`, { params });
         return response.data;
     },
 
     getOne: async function (id) {
-        const response = await axios.get(`${this.baseUrl}/sdo/grid/${id}`);
+        const response = await axios.get(`${this.baseUrl}/grid/${id}`);
         return response.data;
     },
 
     delete: async function (id) {
         try {
-            const response = await axios.delete(`${this.baseUrl}/sdo/grid/${id}`);
+            const response = await axios.delete(`${this.baseUrl}/grid/${id}`);
             return response.data;
         } catch (error) {
             throw new Error('Failed to delete item.');
@@ -39,7 +39,7 @@ export const GridAPI = {
 
     create: async function (data) {
         try {
-            const response = await axios.post(`${this.baseUrl}/sdo/grid`, data);
+            const response = await axios.post(`${this.baseUrl}/grid`, data);
             return response.data;
         } catch (error) {
             throw new Error('Failed to create item.');
@@ -48,7 +48,7 @@ export const GridAPI = {
 
     edit: async function (id, data) {
         try {
-            const response = await axios.put(`${this.baseUrl}/sdo/grid/${id}`, data);
+            const response = await axios.put(`${this.baseUrl}/grid/${id}`, data);
             return response.data;
         } catch (error) {
             throw new Error('Failed to edit item.');
