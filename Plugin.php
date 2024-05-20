@@ -80,6 +80,10 @@ class Plugin {
         require_once( F3_PATH . '/php/DataStructure/F3_OptionsPage.php' );
         $dsop = new DataStructure\F3_OptionsPage();
 
+        /* Dashboard Routes */
+        require_once( F3_PATH . '/php/Dashboard/DashboardDataRoutes.php' );
+        new Dashboard\DashboardDataRoutes();
+
     }
 
     public static function activate() {
