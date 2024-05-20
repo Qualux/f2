@@ -57,14 +57,23 @@ class F3_PostType {
 
         if( empty( $f3_post_types )) { return; }
 
-        foreach( $f3_post_types as $pt ) {
+        foreach( $f3_post_types as $p ) {
 
-            $post_type_key = $pt->post_name;
-            $name_plural   = get_post_meta( $pt->ID, 'name_plural', 1 );
+            $title         = $p->post_title;
+            $post_type_key = get_post_meta( $p->ID, 'post_type_key', 1 );
+            $name_plural   = get_post_meta( $p->ID, 'name_plural', 1 );
+            $singular_name = get_post_meta( $p->ID, 'singular_name', 1 );
+            $description   = get_post_meta( $p->ID, 'description', 1 );
+            $public        = get_post_meta( $p->ID, 'public', 1 );
+            $hierarchical  = get_post_meta( $p->ID, 'hierarchical', 1 );
+            $position      = get_post_meta( $p->ID, 'position', 1 );
+            $show_ui       = get_post_meta( $p->ID, 'show_ui', 1 );
+            $show_in_menu  = get_post_meta( $p->ID, 'show_in_menu', 1 );
+            $show_in_rest  = get_post_meta( $p->ID, 'show_in_rest', 1 );
 
             $labels = array(
                 'name'               => __( $name_plural, 'f3' ),
-                'singular_name'      => __( $name_plural, 'f3' ),
+                'singular_name'      => __( $singular_name, 'f3' ),
                 'menu_name'          => __( $name_plural, 'f3' ),
                 'name_admin_bar'     => __( $name_plural, 'f3' ),
                 'add_new'            => __( 'Add New', 'f3' ),
@@ -81,17 +90,18 @@ class F3_PostType {
         
             $args = array(
                 'labels'             => $labels,
-                'public'             => true,
-                'publicly_queryable' => true,
-                'show_ui'            => true,
-                'show_in_menu'       => true,
-                'show_in_rest'       => true,
+                'description'        => $description,
+                'public'             => $public,
+                'publicly_queryable' => $public,
+                'show_ui'            => $show_ui,
+                'show_in_menu'       => $show_in_menu,
+                'show_in_rest'       => $show_in_rest,
                 'query_var'          => true,
                 'rewrite'            => array( 'slug' => $post_type_key ),
                 'capability_type'    => 'post',
                 'has_archive'        => true,
-                'hierarchical'       => false,
-                'menu_position'      => null,
+                'hierarchical'       => $hierarchical,
+                'menu_position'      => $position,
                 'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
             );
         
