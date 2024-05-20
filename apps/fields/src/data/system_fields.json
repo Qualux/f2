@@ -119,6 +119,12 @@
         "field_title": "Field Choices",
         "field_label": "Field Choices"
     },
+    "field_default_value": {
+        "field_type": "text",
+        "field_name": "field_default_value",
+        "field_title": "Default Value",
+        "field_label": "Default Value"
+    },
     "field_group_title": {
         "field_type": "text",
         "field_name": "field_group_title",

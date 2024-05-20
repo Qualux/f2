@@ -125,6 +125,14 @@ export default function FieldEditForm({field, fieldLoaded}) {
                     errors={errors}
                 />
 
+                <Field 
+                    field={systemFields.field_default_value}
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                    getValues={getValues}
+                />
+
                 {conditionPlaceholder &&
                     <Field 
                         field={systemFields.field_placeholder}

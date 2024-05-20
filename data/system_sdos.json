@@ -242,7 +242,8 @@
                         "field_name": "position",
                         "field_title": "Position",
                         "field_label": "Position",
-                        "field_placeholder": "Position in menu..."
+                        "field_placeholder": "Position in menu...",
+                        "field_default_value": 15
                     }
                 ]
             }

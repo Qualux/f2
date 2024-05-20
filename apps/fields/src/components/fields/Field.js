@@ -43,6 +43,7 @@ export default function Field(
         field = systemFieldsJson[fieldReference];
     }
 
+    // Conditional display check.
     if( Object.hasOwn( field, 'field_conditions') && field.field_conditions === true ) {
 
         if( Object.hasOwn( field, 'field_condition_rules') && field.field_condition_rules instanceof Array ) {
@@ -55,9 +56,21 @@ export default function Field(
 
     }
 
+    console.log('field:')
+    console.log(field.name)
+    console.log('value:')
+    console.log(value)
+
     switch( field.field_type ) {
         case 'text': 
-            return <TextField field={field} register={register} errors={errors} /> 
+            return (
+                <TextField 
+                    field={field} 
+                    register={register} 
+                    errors={errors} 
+                    value={value}
+                /> 
+            )
             break
         case 'textarea': 
             return <TextAreaField field={field} register={register} errors={errors} /> 

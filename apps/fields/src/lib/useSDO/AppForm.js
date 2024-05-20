@@ -45,8 +45,24 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
     } = useForm();
 
     useEffect(() => {
+
+        console.log('is useEffect running once in AppForm/create?')
+        if( sdo.routeBase === 'sdo/options-page' ) {
+            console.log('options appform detected!')
+            const position_default = sdo.field_groups[0].fields[3].field_default_value;
+            console.log(sdo.field_groups[0].fields)
+            reset( sdo.field_groups[0].fields )
+        }
+
         if (data) {
             console.log('Fetched record:', data);
+
+            // @TODO parse sdo here and if value is undefined then set the value to the default before calling reset().
+            if( sdo.routeBase === 'sdo/options-page' ) {
+                console.log('options appform detected!')
+                
+            }
+
             reset(data.record); // Reset the form with the fetched data
             setFormStatus('ready');
             setRecord(data.record);
