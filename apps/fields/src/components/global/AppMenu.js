@@ -4,8 +4,8 @@ const itemClasses = ({ isActive, isPending }) => {
 
     console.log(isActive)
 
-    const base = "grow py-1 px-3 font-semibold text-sm"
-    const extra = isPending ? "" : isActive ? "text-sky-200" : "!text-neutral-100 hover:text-neutral-200"
+    const base  = "grow py-0.5 px-3 font-semibold text-sm"
+    const extra = isActive ? "text-neutral-500 border border-solid border-neutral-500" : "!text-neutral-100 hover:!text-neutral-300"
     return base + ' ' + extra;
 }
 
@@ -13,8 +13,8 @@ export default function AppMenu() {
 
     return(
         <main className="">
-            <ul className="w-48 gap-2 flex">
-            <li className="flex items-center justify-stretch m-0">
+            <ul className="gap-2 flex">
+                <li className="flex items-center justify-stretch m-0">
                     <NavLink
                             to="/sdo"
                             className={itemClasses}
@@ -30,12 +30,12 @@ export default function AppMenu() {
                             FIELDS
                     </NavLink>
                 </li>
-                <li className="flex items-center justify-stretch m-0">
+                <li className="block flex items-center justify-stretch m-0">
                     <NavLink
                             to="/groups"
                             className={itemClasses}
                             >
-                            GROUPS
+                            FIELD GROUPS
                     </NavLink>
                 </li>
                 <li className="flex items-center justify-stretch m-0">
@@ -44,6 +44,14 @@ export default function AppMenu() {
                             className={itemClasses}
                             >
                             FORMS
+                    </NavLink>
+                </li>
+                <li className="flex items-center justify-stretch m-0">
+                    <NavLink
+                            to="/grids"
+                            className={itemClasses}
+                            >
+                            GRIDS
                     </NavLink>
                 </li>
             </ul>
