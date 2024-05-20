@@ -44,7 +44,25 @@ function ManageButtons( { labelSingular, labelPlural, manageRoute, createRoute }
         </NavLink>
       </span>
     )
-  }
+}
+
+function FieldGroupCount( {recordCount} ) {
+    return(
+        <Stat 
+            label="FIELD GROUP COUNT"
+            stat={recordCount}
+        />
+    )
+}
+
+function FieldCount( {recordCount} ) {
+    return(
+        <Stat 
+            label="FIELD COUNT"
+            stat={recordCount}
+        />
+    )
+}
 
 function PostTypeCount( {recordCount} ) {
     return(
@@ -68,6 +86,15 @@ function OptionsPageCount( {recordCount} ) {
     return(
         <Stat 
             label="OPTIONS PAGE COUNT"
+            stat={recordCount}
+        />
+    )
+}
+
+function FormCount( {recordCount} ) {
+    return(
+        <Stat 
+            label="FORM COUNT"
             stat={recordCount}
         />
     )
@@ -105,13 +132,37 @@ function DashboardContent() {
     }
 
     return(
-        <div className="w-lg max-w-3xl flex flex-col">
+        <div className="max-w-5xl flex flex-col">
             <section className="text-zinc-800">
                 <h2 className="font-bold text-xl mb-5">
-                    Dashboard
+                    F3 Dashboard
                 </h2>
             </section>
-            <ul className="grid grid-cols-2 gap-8">
+            <ul className="w-full grid grid-cols-2 gap-8">
+                <DashboardSection>
+                        <SectionHeader text="CUSTOM FIELDS" />
+                        <FieldGroupCount 
+                            recordCount={data.sdo_counts.field_groups.publish}
+                        />
+                        <ManageButtons 
+                            manageRoute="/groups"
+                            createRoute="/groups/create"
+                            labelPlural="Field Groups"
+                            labelSingular="Field Group"
+                        />
+                </DashboardSection>
+                <DashboardSection>
+                        <SectionHeader text="CUSTOM FIELDS" />
+                        <FieldCount 
+                            recordCount={data.sdo_counts.fields.publish}
+                        />
+                        <ManageButtons 
+                            manageRoute="/fields"
+                            createRoute="/fields/create"
+                            labelPlural="Fields"
+                            labelSingular="Field"
+                        />
+                </DashboardSection>
                 <DashboardSection>
                     <SectionHeader text="CUSTOM POST TYPES" />
                     <PostTypeCount 
@@ -146,6 +197,18 @@ function DashboardContent() {
                         createRoute="/sdo/options-page/create"
                         labelPlural="Options Pages"
                         labelSingular="Options Page"
+                    />
+                </DashboardSection>
+                <DashboardSection>
+                    <SectionHeader text="FORMS" />
+                    <FormCount 
+                        recordCount={data.sdo_counts.forms.publish}
+                    />
+                    <ManageButtons 
+                        manageRoute="/form"
+                        createRoute="/form/create"
+                        labelPlural="Forms"
+                        labelSingular="Form"
                     />
                 </DashboardSection>
             </ul>
