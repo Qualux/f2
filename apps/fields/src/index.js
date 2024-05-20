@@ -64,7 +64,7 @@ const router = createHashRouter([
         element: <Dashboard />
       },
       {
-        path: "grid",
+        path: "grids",
         element: <GridDashboard />,
       },
       {
