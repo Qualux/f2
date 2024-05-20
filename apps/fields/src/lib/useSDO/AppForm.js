@@ -7,9 +7,6 @@ import {
 
 function FieldGroup( { fieldGroup, register, errors, setValue, record } ) {
 
-    console.log('record in FieldGroup:')
-    console.log(record)
-
     return(
         <div>
             {fieldGroup.fields.map( ( field, index ) =>

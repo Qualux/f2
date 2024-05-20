@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import Label from './Label';
-import SelectField from './types/SelectField';
 import Field from './Field';
 import { useForm } from "react-hook-form";
 
@@ -35,10 +32,7 @@ export default function FieldView({field, fieldLoaded, fieldValue, setFieldValue
 
     const {
         register,
-        handleSubmit,
-        watch,
         formState: { errors },
-        reset,
         setValue, 
         getValues,
         control

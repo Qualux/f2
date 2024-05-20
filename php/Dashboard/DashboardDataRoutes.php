@@ -22,7 +22,9 @@ class DashboardDataRoutes {
             'callback' => function( \WP_REST_Request $req ) {
 
                 $sdo_counts = [
-                    'options_pages' => wp_count_posts('f3-options-page')
+                    'options_pages' => wp_count_posts('f3-options-page'),
+                    'taxonomies' => wp_count_posts('f3-taxonomy'),
+                    'post_types' => wp_count_posts('f3-post-type'),
                 ];
 
                 return new \WP_REST_Response(
