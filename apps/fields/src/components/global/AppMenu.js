@@ -48,7 +48,7 @@ export default function AppMenu() {
                 </li>
                 <li className="flex items-center justify-stretch m-0">
                     <NavLink
-                            to="/grids"
+                            to="/grid"
                             className={itemClasses}
                             >
                             GRIDS

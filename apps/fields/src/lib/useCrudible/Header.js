@@ -3,6 +3,9 @@ import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 
 export default function CrudibleHeader({to, buttonLabel, title, mode, dashboardRoute}) {
 
+    console.log('CrudibleHeader to:')
+    console.log(to)
+
     function leftCol() {
 
         if( mode === 'create' ) {

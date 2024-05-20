@@ -269,6 +269,7 @@
     },
     "form": {
         "title": "F3 Form SDO",
+        "displayTitle": "F3 Form Manager",
         "routeBase": "/forms",
         "post_type": "f3-form",
         "field_groups": [
@@ -296,7 +297,7 @@
     "f3-grid": {
         "title": "F3 Grid SDO",
         "displayTitle": "F3 Grid Manager",
-        "routeBase": "/grid",
+        "routeBase": "grid",
         "post_type": "f3-grid",
         "create": {
             "button": {

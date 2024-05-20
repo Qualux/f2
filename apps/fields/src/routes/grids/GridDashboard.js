@@ -5,8 +5,10 @@ import { GridAPI } from '../../api/GridAPI';
 
 export default function GridDashboard() {
 
+    console.log('grid dash...')
+
     const location = useLocation();
-    const isMainRoute = location.pathname === "/grids";
+    const isMainRoute = location.pathname === "/grid";
 
     const { Crudible, Manager } = useCrudible({
         sdoKey: 'f3-grid'
