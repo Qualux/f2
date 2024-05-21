@@ -15,9 +15,6 @@ class PostTypes {
         $sdo_list_json = file_get_contents( F3_PATH . '/data/sdo/reference.json' );
         $sdo_list      = json_decode( $sdo_list_json, 1 );
         foreach( $sdo_list as $sdo_ref ) {
-
-            
-
             $sdo_json = file_get_contents( F3_PATH . '/data/sdo/' . $sdo_ref['file'] );
             $sdo      = json_decode( $sdo_json, 1 );
             $this->post_type( $sdo['post_type'] );
