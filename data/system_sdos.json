@@ -75,7 +75,7 @@
                         "field_name": "show_in_rest",
                         "field_title": "Show in REST",
                         "field_label": "Show in REST",
-                        "default_value": true
+                        "field_default_value": true
                     },
                     {
                         "field_type": "true_false",
@@ -89,7 +89,25 @@
                         "field_name": "position",
                         "field_title": "Position",
                         "field_label": "Position",
-                        "field_placeholder": "Position in menu..."
+                        "field_placeholder": "Position in menu...",
+                        "field_default_value": 15.12
+                    },
+                    {
+                        "field_type": "text",
+                        "field_name": "test_condition_field",
+                        "field_title": "Test Condition Field",
+                        "field_label": "Test Condition Field",
+                        "field_placeholder": "Test condition field...",
+                        "field_conditions": true,
+                        "field_condition_rules": [
+                            [
+                                {
+                                    "field": "hierarchical",
+                                    "operator": "=",
+                                    "value": true
+                                }
+                            ]
+                        ]
                     }
                 ]
             }

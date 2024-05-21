@@ -4,8 +4,6 @@ import { Controller } from "react-hook-form";
 
 export default function SearchableSelectField( {field, register, errors, control} ) {
 
-    console.log(field.field_choices)
-
     return(
         <div className="my-4">
             <Label text={field.field_label} />

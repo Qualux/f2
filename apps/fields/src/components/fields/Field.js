@@ -1,3 +1,8 @@
+/*
+ * Field handles rendering of a field. 
+ * Field does not check conditions for rendering, it is up to the parent component to use React Hook Form to watch conditional values.
+ */ 
+
 import systemFieldsJson from '../../data/system_fields.json';
 import TextField from './types/TextField';
 import TextAreaField from './types/TextAreaField';
@@ -42,24 +47,6 @@ export default function Field(
     if( fieldDefinitionType === 'string' ) {
         field = systemFieldsJson[fieldReference];
     }
-
-    // Conditional display check.
-    if( Object.hasOwn( field, 'field_conditions') && field.field_conditions === true ) {
-
-        if( Object.hasOwn( field, 'field_condition_rules') && field.field_condition_rules instanceof Array ) {
-            field.field_condition_rules.forEach((crg, i) => {
-                const cr = crg[0];
-                const value = getValues(cr.field);
-            }) 
-        }
-        return null;
-
-    }
-
-    console.log('field:')
-    console.log(field.name)
-    console.log('value:')
-    console.log(value)
 
     switch( field.field_type ) {
         case 'text': 
