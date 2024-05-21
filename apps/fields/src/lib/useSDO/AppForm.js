@@ -25,6 +25,18 @@ function FieldGroup( { fieldGroup, register, errors, setValue, record } ) {
 
 }
 
+function makeDefaultFieldValues(fields) {
+    const defaultValues = {};
+
+    fields.forEach(field => {
+        const key = field.field_name;
+        const value = field.field_default_value !== undefined ? field.field_default_value : null;
+        defaultValues[key] = value;
+    });
+
+    return defaultValues;
+}
+
 export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) {
 
     const [formStatus, setFormStatus] = useState('loading');
@@ -46,27 +58,19 @@ export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) 
 
     useEffect(() => {
 
-        console.log('is useEffect running once in AppForm/create?')
-        if( sdo.routeBase === 'sdo/options-page' ) {
-            console.log('options appform detected!')
-            const position_default = sdo.field_groups[0].fields[3].field_default_value;
-            console.log(sdo.field_groups[0].fields)
-            reset( sdo.field_groups[0].fields )
+        if( !recordId ) {
+            const defaultValues = makeDefaultFieldValues( sdo.field_groups[0].fields ); 
+            reset( defaultValues );
         }
 
-        if (data) {
-            console.log('Fetched record:', data);
 
-            // @TODO parse sdo here and if value is undefined then set the value to the default before calling reset().
-            if( sdo.routeBase === 'sdo/options-page' ) {
-                console.log('options appform detected!')
-                
-            }
-
+        if (recordId && data) {
+            const defaultValues = makeDefaultFieldValues( sdo.field_groups[0].fields ); 
             reset(data.record); // Reset the form with the fetched data
             setFormStatus('ready');
             setRecord(data.record);
         }
+        
     }, [data, reset]);
 
     const onSubmit = (data) => {
