@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import FieldGroupRenderApp from './FieldGroupRenderApp';
 import OptionsPageRenderApp from './OptionsPageRenderApp';
+import {
+  createHashRouter,
+  RouterProvider,
+  Outlet,
+} from "react-router-dom";
 
 /* Standard App. */
 
@@ -45,15 +50,41 @@ import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageE
 import SDO_OptionsPageDeleteRoute from './routes/sdo/options-page/SDO_OptionsPageDeleteRoute';
 import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageViewRoute';
 
+/* SDO Automated */
+import querySDO from '../../../data/sdo/query.json';
+import SDO_DashboardRoute2 from './routes/sdo/SDO_DashboardRoute2';
+import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
+import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
+import SDO_DeleteRoute from './routes/sdo/SDO_DeleteRoute';
+import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
+
 /* Grid Routes */
 import GridDashboard from './routes/grids/GridDashboard';
 import GridCreateRoute from './routes/grids/GridCreateRoute';
 
-import {
-  createHashRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+/* Query Routes */
+const queryRoutes = {
+  path: "query",
+  element: <SDO_DashboardRoute2 sdo={querySDO} />,
+  children: [
+    {
+      path: "create",
+      element: <SDO_CreateRoute sdo={querySDO} />,
+    },
+    {
+      path: "edit/:id",
+      element: <SDO_EditRoute sdo={querySDO} />,
+    },
+    {
+      path: "delete/:id",
+      element: <SDO_DeleteRoute sdo={querySDO} />,
+    },
+    {
+      path: "view/:id",
+      element: <SDO_ViewRoute />,
+    },
+  ]
+}
 
 const router = createHashRouter([
   {
@@ -64,6 +95,7 @@ const router = createHashRouter([
         index: true,
         element: <Dashboard />
       },
+      queryRoutes,
       {
         path: "grid",
         element: <GridDashboard />,

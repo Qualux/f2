@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
     useQuery,
     keepPreviousData,
@@ -6,6 +6,7 @@ import {
 import { useCrudible } from './useCrudible';
 import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
+import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 
 export default function Manager( {sdoKey, api} ) {
 
@@ -14,6 +15,22 @@ export default function Manager( {sdoKey, api} ) {
     const [sortOrder, setSortOrder] = useState('DESC');
     const [filterValues, setFilterValues] = useState(null);
 
+    const sdo = useContext(SDO_Context);
+    const { HeaderSDO, Grid, Footer, sdoRoutes, SDO_Context } = useCrudible({
+        sdoDefinition: sdo
+    });
+    
+
+    console.log('sdo in Manager:')
+    console.log(sdo)
+
+
+    /* Newer SDO does not pass the API because it is uses the SDO_StandardAPI */
+    if( ! api ) {
+        api = SDO_StandardAPI;
+        api.routeBase = sdo.routeBase;
+    }
+
     const {
         isLoading,
         data,
@@ -21,10 +38,6 @@ export default function Manager( {sdoKey, api} ) {
         queryKey: ['f3_sdo_query', page, sortColumn, sortOrder, filterValues],
         queryFn: () => api.get(page, sortColumn, sortOrder, filterValues),
         placeholderData: keepPreviousData,
-    });
-
-    const { HeaderSDO, Grid, Footer, sdo, sdoRoutes } = useCrudible({
-        sdoKey
     });
 
     useEffect(() => {
