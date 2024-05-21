@@ -7,23 +7,19 @@ export default function SDO_DashboardRoute( {sdo} ) {
     const location = useLocation();
     const isMainRoute = location.pathname === '/' + sdo.routeBase;
 
-    const { Crudible, SDO, Manager } = useCrudible({
-        sdoDefinition: sdo
-    });
+    const { Crudible, Manager } = useCrudible();
 
     if( ! isMainRoute ) {
         return <Outlet />
     }
 
     return(
-        <Crudible>
-            <SDO>
-                <AppTemplate>
-                    <Manager 
-                        sdoKey="f3-options-page"
-                    />
-                </AppTemplate>
-            </SDO>
+        <Crudible sdo={sdo}>
+            <AppTemplate>
+                <Manager 
+                    sdoKey="f3-options-page"
+                />
+            </AppTemplate>
         </Crudible>
     );
 

@@ -15,12 +15,10 @@ export default function Manager( {sdoKey, api} ) {
     const [sortOrder, setSortOrder] = useState('DESC');
     const [filterValues, setFilterValues] = useState(null);
 
-    const sdo = useContext(SDO_Context);
-    const { HeaderSDO, Grid, Footer, sdoRoutes, SDO_Context } = useCrudible({
-        sdoDefinition: sdo
-    });
     
-
+    const { HeaderSDO, Grid, Footer, sdoRoutes, SDO_Context } = useCrudible();
+    
+    const sdo = useContext(SDO_Context);
     console.log('sdo in Manager:')
     console.log(sdo)
 

@@ -4,6 +4,7 @@ import Field from '../../components/fields/Field';
 import {
     useQuery
 } from '@tanstack/react-query';
+import { useCrudible } from './useCrudible';
 
 function FieldRenderer({field, watch, register, errors, setValue, value}) {
 
@@ -62,10 +63,6 @@ function FieldRenderer({field, watch, register, errors, setValue, value}) {
 
 function FieldGroup( { fieldGroup, watch, register, errors, setValue, record } ) {
 
-    const watchFields = watch();
-    console.log('watchFields:');
-    console.log(watchFields)
-
     return(
         <div>
             {fieldGroup.fields.map( ( field, index ) =>
@@ -96,7 +93,10 @@ function makeDefaultFieldValues(fields) {
     return defaultValues;
 }
 
-export default function AppForm( { sdo, postData, domain, api, recordId = 0 } ) {
+export default function AppForm( { postData, domain, api, recordId = 0 } ) {
+
+    const { useSDO } = useCrudible();
+    const sdo = useSDO();
 
     const [formStatus, setFormStatus] = useState('loading');
     const [record, setRecord] = useState(false);
