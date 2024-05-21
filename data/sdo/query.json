@@ -3,7 +3,10 @@
     "title": "F3 Post Type SDO",
     "displayTitle": "F3 Post Type Manager",
     "routeBase": "query",
-    "post_type": "f3-query",
+    "post_type": {
+        "post_type_key": "f3-query",
+        "label": "F3 Query"
+    },
     "create": {
         "button": {
             "label": "Build Query"

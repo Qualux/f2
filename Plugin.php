@@ -19,11 +19,11 @@ class Plugin {
     public function __construct() {
 
         /* SDO Classes */
-
         require_once( F3_PATH . '/php/SDO/Model.php' );
-
         require_once( F3_PATH . '/php/SDO/API_Routes.php' );
-        $c = new \F3\SDO\API_Routes();
+        new SDO\API_Routes();
+        require_once( F3_PATH . '/php/SDO/PostTypes.php' );
+        new SDO\PostTypes();
 
         require_once( F3_PATH . '/php/AdminMenu.php' );
         $c = new AdminMenu();
