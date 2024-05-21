@@ -1,22 +1,17 @@
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
 import AppTemplate from '../../components/global/AppTemplate';
 import ScreenWrap from '../../components/global/ScreenWrap';
-import { OptionsPageAPI } from '../../api/OptionsPageAPI';
 
-export default function SDO_OptionsPageCreateRoute() {
+export default function SDO_OptionsPageCreateRoute({sdo}) {
 
-    const { Crudible, HeaderSDO, AppForm } = useCrudible({
-        sdoKey: 'f3-options-page'
-    });
+    const { Crudible, Header, AppForm } = useCrudible();
 
     return(
-        <Crudible>
+        <Crudible sdo={sdo}>
             <AppTemplate>
-                <HeaderSDO mode="create" />
+                <Header />
                 <ScreenWrap>
-                    <AppForm 
-                        api={OptionsPageAPI} 
-                    />
+                    <AppForm />
                 </ScreenWrap> 
             </AppTemplate>
         </Crudible>

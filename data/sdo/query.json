@@ -1,7 +1,7 @@
 {
     "name": "query",
-    "title": "F3 Post Type SDO",
-    "displayTitle": "F3 Post Type Manager",
+    "title": "F3 Query SDO",
+    "displayTitle": "F3 Query Manager",
     "routeBase": "query",
     "post_type": {
         "post_type_key": "f3-query",

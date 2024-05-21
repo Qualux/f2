@@ -24,6 +24,7 @@ class API_Routes {
 
     function register_one( $sdo ) {
 
+        // Get collection route.
         \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'], 
             array(
                 'methods' => 'GET',
@@ -63,7 +64,7 @@ class API_Routes {
                     } 
 
                     $query_params = [
-                        'post_type'      => $sdo['post_type'],
+                        'post_type'      => $sdo['post_type']['post_type_key'],
                         'posts_per_page' => $records_per_page,
                         'paged'          => $page,
                         'order'          => $order,
@@ -94,7 +95,7 @@ class API_Routes {
                     foreach( $query->posts as $p ) {
                         $m            = new Model();
                         $m->sdo       = $sdo;
-                        $m->post_type = $sdo['post_type'];
+                        $m->post_type = $sdo['post_type']['post_type_key'];
                         $m->load( $p->ID );
                         $models[] = $m;
                     }
@@ -115,7 +116,7 @@ class API_Routes {
             )
         );
 
-        // Get one.
+        // Get one route.
         register_rest_route( 'f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', array(
             'methods' => 'GET',
             'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -123,7 +124,7 @@ class API_Routes {
                 
                 $m            = new Model();
                 $m->sdo       = $sdo;
-                $m->post_type = $sdo['post_type'];
+                $m->post_type = $sdo['post_type']['post_type_key'];
                 $m->load( $id );
 
                 return new \WP_REST_Response(
@@ -146,7 +147,7 @@ class API_Routes {
 
                     $m            = new Model();
                     $m->sdo       = $sdo;
-                    $m->post_type = $sdo['post_type'];
+                    $m->post_type = $sdo['post_type']['post_type_key'];
 
                     foreach( $sdo['field_groups'] as $fg ) {
                         foreach( $fg['fields'] as $f ) {
@@ -172,7 +173,7 @@ class API_Routes {
         );
 
         // Edit route. 
-        \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
+        \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)',
             array(
                 'methods' => 'PUT',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -183,7 +184,7 @@ class API_Routes {
                     $m            = new Model();
                     $m->id        = $id;
                     $m->sdo       = $sdo;
-                    $m->post_type = $sdo['post_type'];
+                    $m->post_type = $sdo['post_type']['post_type_key'];
 
                     foreach( $sdo['field_groups'] as $fg ) {
                         foreach( $fg['fields'] as $f ) {
@@ -208,6 +209,7 @@ class API_Routes {
             )
         );
 
+        // Delete route.
         \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
             array(
                 'methods' => 'DELETE',

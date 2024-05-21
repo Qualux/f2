@@ -6,19 +6,12 @@ import Footer from './Footer';
 import DeleteScreen from './DeleteScreen';
 import ViewScreen from './ViewScreen';
 import Grid from './grid/Grid';
-import systemSDO from '../../../../../data/system_sdos.json';
 import { DomainContext } from '../../contexts';
 import { useFetch } from '../../lib/useFetch';
 import AppForm from './AppForm';
 import { SDO_Context } from './SDO_Context';
 
 export function useCrudible( params = { recordId: 0, api: null } ) {
-
-    /*
-     * Older SDO usage is to pass the sdoKey and pick the SDO from ssytemSDO (/data/system_sdos.json).
-     * Newer usage passes the SDO from useCrudible, which gets it from the route. 
-     */
-    // OLD WAY TO LOAD SDO FROM JSON: sdo = systemSDO[ params.sdoKey ];
 
     const domain = useContext(DomainContext);
     const { postData } = useFetch();
@@ -36,12 +29,12 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
         />
     );
 
-    function HeaderSDO({mode}) {
+    function HeaderComponent({mode}) {
+
         return (
-            <Header
-                mode={mode}
-            />
+            <Header />
         );
+
     }
 
     function ViewScreenCompiled() {
@@ -56,8 +49,7 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
         Crudible, 
         Manager, 
         Grid, 
-        Header, 
-        HeaderSDO, 
+        Header: HeaderComponent, 
         Footer, 
         AppForm: AppFormComponent, 
         DeleteScreen, 

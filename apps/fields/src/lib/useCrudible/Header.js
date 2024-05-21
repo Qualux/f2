@@ -1,18 +1,26 @@
+import { useLocation } from "react-router-dom";
+import { useCrudible } from './useCrudible';
 import { NavLink } from "react-router-dom";
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 
-export default function CrudibleHeader({to, buttonLabel, title, mode, dashboardRoute}) {
+export default function Header() {
+
+    const { useSDO } = useCrudible();
+    const location = useLocation();
+    const sdo = useSDO();
+    const isCreateRoute = location.pathname === sdo.routes.create;
+    const isEditRoute = location.pathname === sdo.routes.edit;
 
     function leftCol() {
 
-        if( mode === 'create' ) {
+        if( isCreateRoute ) {
             return(
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         CREATE
                     </h2>
                     <NavLink
-                        to={dashboardRoute}
+                        to={sdo.routes.dashboard}
                         className="fill-neutral-300 transition-transform hover:scale-125"
                     >
                         <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
@@ -21,14 +29,14 @@ export default function CrudibleHeader({to, buttonLabel, title, mode, dashboardR
             )
         }
 
-        if( mode === 'edit' ) {
+        if( isEditRoute ) {
             return(
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         EDIT
                     </h2>
                     <NavLink
-                        to={dashboardRoute}
+                        to={sdo.routes.dashboard}
                         className="fill-neutral-300 transition-transform hover:scale-125"
                     >
                         <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
@@ -39,10 +47,10 @@ export default function CrudibleHeader({to, buttonLabel, title, mode, dashboardR
 
         return(
             <NavLink
-                to={to}
+                to={sdo.routes.create}
                 className="inline-block bg-neutral-700 text-neutral-200 text-sm py-1 px-4 font-medium rounded-sm shadow-md transition-transform hover:scale-110 hover:text-neutral-200"
             >
-                {buttonLabel}
+                {sdo.create.button.label}
             </NavLink>
         )
 
@@ -58,7 +66,7 @@ export default function CrudibleHeader({to, buttonLabel, title, mode, dashboardR
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                 </svg>
                 <p className="text-neutral-300 font-semibold text-sm">
-                    {title}
+                    {sdo.displayTitle}
                 </p>
             </div>
         </div>

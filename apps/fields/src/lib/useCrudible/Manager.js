@@ -14,7 +14,7 @@ export default function Manager() {
     const [sortColumn, setSortColumn] = useState('ID');
     const [sortOrder, setSortOrder] = useState('DESC');
     const [filterValues, setFilterValues] = useState(null);
-    const { HeaderSDO, Grid, Footer, useSDO } = useCrudible();
+    const { Header, Grid, Footer, useSDO } = useCrudible();
     const sdo = useSDO();
 
     console.log('sdo in manager:')
@@ -44,7 +44,7 @@ export default function Manager() {
     if (isLoading && !data) {
         return(
             <>
-                <HeaderSDO />
+                <Header />
                 <ScreenWrap>
                     <SkeletonList />
                 </ScreenWrap>
@@ -55,7 +55,7 @@ export default function Manager() {
     if( data === undefined ) {
         return(
             <>
-                <HeaderSDO />
+                <Header />
                 <ScreenWrap>
                     <SkeletonList />
                 </ScreenWrap>
@@ -65,7 +65,7 @@ export default function Manager() {
 
     return(
         <>
-            <HeaderSDO />
+            <Header />
             <ScreenWrap>
                 <Grid 
                     routes={sdo.routes}

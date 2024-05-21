@@ -16,9 +16,7 @@ export default function SDO_DashboardRoute( {sdo} ) {
     return(
         <Crudible sdo={sdo}>
             <AppTemplate>
-                <Manager 
-                    sdoKey="f3-options-page"
-                />
+                <Manager />
             </AppTemplate>
         </Crudible>
     );
