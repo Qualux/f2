@@ -34,7 +34,7 @@ import FormEditRoute from './routes/forms/FormEditRoute';
 import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 
 // SDO Routes. 
-import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
+//import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_PostTypeDashboardRoute from './routes/sdo/post-type/SDO_PostTypeDashboardRoute';
 import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
 import SDO_PostTypeEditRoute from './routes/sdo/post-type/SDO_PostTypeEditRoute';
@@ -52,7 +52,7 @@ import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageV
 
 /* SDO Automated */
 import querySDO from '../../../data/sdo/query.json';
-import SDO_DashboardRoute2 from './routes/sdo/SDO_DashboardRoute2';
+import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
 import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
 import SDO_DeleteRoute from './routes/sdo/SDO_DeleteRoute';
@@ -65,7 +65,7 @@ import GridCreateRoute from './routes/grids/GridCreateRoute';
 /* Query Routes */
 const queryRoutes = {
   path: "query",
-  element: <SDO_DashboardRoute2 sdo={querySDO} />,
+  element: <SDO_DashboardRoute sdo={querySDO} />,
   children: [
     {
       path: "create",
@@ -81,7 +81,7 @@ const queryRoutes = {
     },
     {
       path: "view/:id",
-      element: <SDO_ViewRoute />,
+      element: <SDO_ViewRoute sdo={querySDO} />,
     },
   ]
 }

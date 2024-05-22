@@ -9,7 +9,9 @@ export default function Header() {
     const location = useLocation();
     const sdo = useSDO();
     const isCreateRoute = location.pathname === sdo.routes.create;
-    const isEditRoute = location.pathname === sdo.routes.edit;
+    const isEditRoute = location.pathname.startsWith(sdo.routes.edit);
+    const isViewRoute = location.pathname.startsWith(sdo.routes.view);
+    const isDeleteRoute = location.pathname.startsWith(sdo.routes.delete);
 
     function leftCol() {
 
@@ -34,6 +36,22 @@ export default function Header() {
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         EDIT
+                    </h2>
+                    <NavLink
+                        to={sdo.routes.dashboard}
+                        className="fill-neutral-300 transition-transform hover:scale-125"
+                    >
+                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
+                    </NavLink>
+                </div>
+            )
+        }
+
+        if( isViewRoute ) {
+            return(
+                <div className="flex gap-5 items-center">
+                    <h2 className="text-neutral-300 font-semibold text-lg">
+                        VIEW
                     </h2>
                     <NavLink
                         to={sdo.routes.dashboard}

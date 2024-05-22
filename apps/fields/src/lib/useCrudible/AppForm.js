@@ -5,6 +5,7 @@ import {
     useQuery
 } from '@tanstack/react-query';
 import { useCrudible } from './useCrudible';
+import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 
 function FieldRenderer({field, watch, register, errors, setValue, value}) {
 
@@ -18,9 +19,6 @@ function FieldRenderer({field, watch, register, errors, setValue, value}) {
         /* @param crg | Conditions Rule Group */
         if( Object.hasOwn( field, 'field_condition_rules') && field.field_condition_rules instanceof Array ) {
 
-            console.log('conditions found for field:')
-            console.log(field)
-
             field.field_condition_rules.forEach((crg, i) => {
                 const cr = crg[0];
                 const testFieldValue = watch(cr.field);
@@ -32,12 +30,6 @@ function FieldRenderer({field, watch, register, errors, setValue, value}) {
                         console.log('conditions check failed')
                     }
                 }
-
-                console.log('condition_rule:')
-                console.log(cr)
-
-                console.log('conditional_field_values:')
-                console.log(testFieldValue)
 
             }) 
         }
@@ -82,6 +74,7 @@ function FieldGroup( { fieldGroup, watch, register, errors, setValue, record } )
 }
 
 function makeDefaultFieldValues(fields) {
+
     const defaultValues = {};
 
     fields.forEach(field => {
@@ -91,12 +84,17 @@ function makeDefaultFieldValues(fields) {
     });
 
     return defaultValues;
+
 }
 
-export default function AppForm( { postData, domain, api, recordId = 0 } ) {
+export default function AppForm( { postData, domain, recordId = 0 } ) {
 
     const { useSDO } = useCrudible();
     const sdo = useSDO();
+
+    // Setup API.
+    const api = SDO_StandardAPI;
+    api.routeBase = sdo.routeBase;
 
     const [formStatus, setFormStatus] = useState('loading');
     const [record, setRecord] = useState(false);

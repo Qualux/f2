@@ -17,9 +17,6 @@ export default function Manager() {
     const { Header, Grid, Footer, useSDO } = useCrudible();
     const sdo = useSDO();
 
-    console.log('sdo in manager:')
-    console.log(sdo)
-
     // Setup API.
     const api = SDO_StandardAPI;
     api.routeBase = sdo.routeBase;

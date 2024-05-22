@@ -2,25 +2,19 @@ import { useParams } from 'react-router-dom';
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
 import AppTemplate from '../../components/global/AppTemplate';
 import ScreenWrap from '../../components/global/ScreenWrap';
-import { OptionsPageAPI } from '../../api/OptionsPageAPI';
 
-export default function SDO_OptionsPageEditRoute() {
+export default function SDO_OptionsPageEditRoute( {sdo} ) {
 
     const { id } = useParams();
     
-    const { Crudible, HeaderSDO, AppForm } = useCrudible({
-        sdoKey: 'f3-options-page'
-    });
+    const { Crudible, Header, AppForm } = useCrudible();
 
     return(
-        <Crudible>
+        <Crudible sdo={sdo}>
             <AppTemplate>
-                <HeaderSDO mode="edit" />
+                <Header />
                 <ScreenWrap>
-                    <AppForm 
-                        recordId={id}
-                        api={OptionsPageAPI} 
-                    />
+                    <AppForm recordId={id} />
                 </ScreenWrap> 
             </AppTemplate>
         </Crudible>
