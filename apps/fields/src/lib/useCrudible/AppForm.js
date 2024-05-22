@@ -54,25 +54,31 @@ function FieldRenderer({field, watch, register, errors, setValue, value, control
     )
 }
 
-function FieldGroup( { fieldGroup, watch, register, errors, setValue, record, control } ) {
+function getFieldValue(record, field) {
+    return record && record.hasOwnProperty(field.field_name) ? record[field.field_name] : '';
+}
 
-    return(
+function FieldGroup({ fieldGroup, watch, register, errors, setValue, record, control }) {
+
+    console.log('record:')
+    console.log(record)
+
+    return (
         <div>
-            {fieldGroup.fields.map( ( field, index ) =>
-                <FieldRenderer 
+            {fieldGroup.fields.map((field, index) => (
+                <FieldRenderer
                     key={index}
                     field={field}
                     watch={watch}
                     register={register}
                     errors={errors}
                     setValue={setValue}
-                    value={record[field.field_name]}
+                    value={getFieldValue(record, field)}
                     control={control}
-                />                  
-            )}
+                />
+            ))}
         </div>
     );
-
 }
 
 function makeDefaultFieldValues(fields) {

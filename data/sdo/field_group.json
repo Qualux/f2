@@ -1,0 +1,69 @@
+{
+    "name": "field_group",
+    "title": "F3 Field Group SDO",
+    "displayTitle": "F3 Field Group Manager",
+    "routeBase": "field-group",
+    "post_type": {
+        "post_type_key": "f3-field-group",
+        "label": "F3 Field Group"
+    },
+    "create": {
+        "button": {
+            "label": "Create Field Group"
+        }
+    },
+    "field_groups": [
+        {
+            "id": "001",
+            "post_type": "f3-field-group",
+            "fields": [
+                {
+                    "field_type": "text",
+                    "field_name": "title",
+                    "field_title": "Field Group Title",
+                    "field_label": "Field Group Title",
+                    "field_placeholder": "Enter title for display..."
+                },
+                {
+                    "field_type": "post_collection",
+                    "field_name": "field_group_fields",
+                    "field_title": "Fields",
+                    "field_label": "Fields"
+                },
+                {
+                    "field_type": "text",
+                    "field_name": "field_group_post_type",
+                    "field_title": "Post Type",
+                    "field_label": "Post Type",
+                    "field_placeholder": "Enter post type to assign field group..."
+                },
+                {
+                    "field_type": "number",
+                    "field_name": "field_group_options_page",
+                    "field_title": "Options Page",
+                    "field_label": "Options Page",
+                    "field_placeholder": "Options page ID to assign field group..."
+                }
+            ]
+        }
+    ],
+    "columns": [
+        { "label": "ID", "columnKey": "ID", "recordKey": "id" },
+        { "label": "Title", "columnKey": "title", "recordKey": "title" },
+        { "label": "", "columnKey": "controls" }
+    ],
+    "filters": [
+        { "key": "search", "label": "SEARCH", "placeholder": "Search by field title...", "type": "text" },
+        { 
+            "key": "records_per_page", 
+            "label": "RECORDS PER PAGE", 
+            "type": "select", 
+            "options": [
+                { "value": "10", "label": "10" },
+                { "value": "25", "label": "25" },
+                { "value": "50", "label": "50" },
+                { "value": "100", "label": "100" }
+            ]
+        }
+    ]
+}

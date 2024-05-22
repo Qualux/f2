@@ -26,5 +26,9 @@
     {
         "name": "field",
         "file": "field.json"
+    },
+    {
+        "name": "field-group",
+        "file": "field_group.json"
     }
 ]

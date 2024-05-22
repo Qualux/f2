@@ -14,32 +14,8 @@ import {
 
 import Dashboard from './routes/Dashboard';
 
-// Field Routes.
-import FieldDashboardRoute from './routes/fields/FieldDashboardRoute';
-import CreateFieldRoute from './routes/fields/CreateFieldRoute';
-import ViewFieldRoute from './routes/fields/ViewFieldRoute';
-import EditFieldRoute from './routes/fields/EditFieldRoute';
-import DeleteFieldRoute from './routes/fields/DeleteFieldRoute';
-
-// Field Group Routes.
-import GroupsDashboard from './routes/groups/GroupsDashboard';
-import CreateFieldGroup from './routes/groups/CreateFieldGroup';
-import EditFieldGroup from './routes/groups/EditFieldGroup';
-import DeleteFieldGroup from './routes/groups/DeleteFieldGroup';
-
-// Form Routes. 
-import FormDashboardRoute from './routes/forms/FormDashboardRoute';
-import FormCreateRoute from './routes/forms/FormCreateRoute';
-import FormEditRoute from './routes/forms/FormEditRoute';
-import FormDeleteRoute from './routes/forms/FormDeleteRoute';
-
 // SDO Routes. 
 import SDO_MenuRoute from './routes/sdo/SDO_MenuRoute';
-import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
-import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
-import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageEditRoute';
-import SDO_OptionsPageDeleteRoute from './routes/sdo/options-page/SDO_OptionsPageDeleteRoute';
-import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageViewRoute';
 
 /* SDO Automated */
 import querySDO from '../../../data/sdo/query.json';
@@ -49,6 +25,7 @@ import optionsPageSDO from '../../../data/sdo/options_page.json';
 import gridSDO from '../../../data/sdo/grid.json';
 import formSDO from '../../../data/sdo/form.json';
 import fieldSDO from '../../../data/sdo/field.json';
+import fieldGroupSDO from '../../../data/sdo/field_group.json';
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
 import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
@@ -84,8 +61,6 @@ function makeSDO_Routes( sdo ) {
 
 }
 
-
-
 /* Query Routes */
 const queryRoutes = makeSDO_Routes( querySDO );
 const postTypeRoutes = makeSDO_Routes( postTypeSDO );
@@ -94,6 +69,7 @@ const optionsPageRoutes = makeSDO_Routes( optionsPageSDO );
 const gridRoutes = makeSDO_Routes( gridSDO );
 const formRoutes = makeSDO_Routes( formSDO );
 const fieldRoutes = makeSDO_Routes( fieldSDO );
+const fieldGroupRoutes = makeSDO_Routes( fieldGroupSDO );
 
 
 const router = createHashRouter([
@@ -112,34 +88,11 @@ const router = createHashRouter([
       gridRoutes,
       formRoutes,
       fieldRoutes,
+      fieldGroupRoutes,
       {
         path: "sdo",
-        element: <SDO_MenuRoute />,
-        children: [
-          {
-            path: "options-page",
-            element: <SDO_OptionsPageDashboardRoute />,
-          },
-        ],
+        element: <SDO_MenuRoute />
       },
-      {
-        path: "groups",
-        element: <GroupsDashboard />,
-        children: [
-          {
-            path: "create",
-            element: <CreateFieldGroup />,
-          },
-          {
-            path: "edit/:groupId",
-            element: <EditFieldGroup />,
-          },
-          {
-            path: "delete/:groupId",
-            element: <DeleteFieldGroup />,
-          },
-        ],
-      }
     ],
   },
 ]);
