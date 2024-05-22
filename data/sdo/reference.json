@@ -14,5 +14,9 @@
     {
         "name": "options_page",
         "file": "options_page.json"
+    },
+    {
+        "name": "grid",
+        "file": "grid.json"
     }
 ]

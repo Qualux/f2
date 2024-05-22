@@ -46,15 +46,12 @@ import querySDO from '../../../data/sdo/query.json';
 import postTypeSDO from '../../../data/sdo/post_type.json';
 import taxonomySDO from '../../../data/sdo/taxonomy.json';
 import optionsPageSDO from '../../../data/sdo/options_page.json';
+import gridSDO from '../../../data/sdo/grid.json';
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
 import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
 import SDO_DeleteRoute from './routes/sdo/SDO_DeleteRoute';
 import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
-
-/* Grid Routes */
-import GridDashboard from './routes/grids/GridDashboard';
-import GridCreateRoute from './routes/grids/GridCreateRoute';
 
 /* Make SDO Route Set. */
 function makeSDO_Routes( sdo ) {
@@ -92,6 +89,7 @@ const queryRoutes = makeSDO_Routes( querySDO );
 const postTypeRoutes = makeSDO_Routes( postTypeSDO );
 const taxonomyRoutes = makeSDO_Routes( taxonomySDO );
 const optionsPageRoutes = makeSDO_Routes( optionsPageSDO );
+const gridRoutes = makeSDO_Routes( gridSDO );
 
 const router = createHashRouter([
   {
@@ -106,16 +104,7 @@ const router = createHashRouter([
       postTypeRoutes,
       taxonomyRoutes,
       optionsPageRoutes,
-      {
-        path: "grid",
-        element: <GridDashboard />,
-        children: [
-          {
-            path: "create",
-            element: <GridCreateRoute />,
-          },
-        ]
-      },
+      gridRoutes,
       {
         path: "sdo",
         element: <SDO_MenuRoute />,
@@ -123,24 +112,6 @@ const router = createHashRouter([
           {
             path: "options-page",
             element: <SDO_OptionsPageDashboardRoute />,
-            children: [
-              {
-                path: "create",
-                element: <SDO_OptionsPageCreateRoute />,
-              },
-              {
-                path: "edit/:id",
-                element: <SDO_OptionsPageEditRoute />,
-              },
-              {
-                path: "delete/:id",
-                element: <SDO_OptionsPageDeleteRoute />,
-              },
-              {
-                path: "view/:id",
-                element: <SDO_OptionsPageViewRoute />,
-              },
-            ]
           },
         ],
       },
