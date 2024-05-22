@@ -9,8 +9,6 @@ import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 
 function FieldRenderer({field, watch, register, errors, setValue, value, control}) {
 
-    const currentFormValues = watch();
-
     // Block rendering if conditions not met. 
     if( Object.hasOwn( field, 'field_conditions') && field.field_conditions === true ) {
 
@@ -59,9 +57,6 @@ function getFieldValue(record, field) {
 }
 
 function FieldGroup({ fieldGroup, watch, register, errors, setValue, record, control }) {
-
-    console.log('record:')
-    console.log(record)
 
     return (
         <div>
