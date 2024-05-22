@@ -7,7 +7,7 @@ import {
 import { useCrudible } from './useCrudible';
 import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 
-function FieldRenderer({field, watch, register, errors, setValue, value}) {
+function FieldRenderer({field, watch, register, errors, setValue, value, control}) {
 
     const currentFormValues = watch();
 
@@ -48,12 +48,13 @@ function FieldRenderer({field, watch, register, errors, setValue, value}) {
                 errors={errors} 
                 setValue={setValue}
                 value={value}
+                control={control}
             />
         </div>
     )
 }
 
-function FieldGroup( { fieldGroup, watch, register, errors, setValue, record } ) {
+function FieldGroup( { fieldGroup, watch, register, errors, setValue, record, control } ) {
 
     return(
         <div>
@@ -66,6 +67,7 @@ function FieldGroup( { fieldGroup, watch, register, errors, setValue, record } )
                     errors={errors}
                     setValue={setValue}
                     value={record[field.field_name]}
+                    control={control}
                 />                  
             )}
         </div>
@@ -111,7 +113,8 @@ export default function AppForm( { postData, domain, recordId = 0 } ) {
         formState: { errors },
         setValue,
         reset,
-        watch
+        watch,
+        control,
     } = useForm();
 
     useEffect(() => {
@@ -168,6 +171,7 @@ export default function AppForm( { postData, domain, recordId = 0 } ) {
                         register={register}
                         errors={errors}
                         setValue={setValue} 
+                        control={control}
                     />
                 )}
             </div>

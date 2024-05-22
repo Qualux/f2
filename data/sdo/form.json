@@ -1,0 +1,49 @@
+{
+    "name": "form",
+    "title": "F3 Form SDO",
+    "displayTitle": "F3 Form Manager",
+    "routeBase": "form",
+    "post_type": {
+        "post_type_key": "f3-form",
+        "label": "F3 Form"
+    },
+    "create": {
+        "button": {
+            "label": "Make Form"
+        }
+    },
+    "field_groups": [
+        {
+            "id": "001",
+            "post_type": "f3-form",
+            "fields": [
+                {
+                    "field_type": "text",
+                    "field_name": "title",
+                    "field_title": "Title",
+                    "field_label": "Title",
+                    "field_placeholder": "Admin title..."
+                }
+            ]
+        }
+    ],
+    "columns": [
+        { "label": "ID", "columnKey": "ID", "recordKey": "id" },
+        { "label": "Title", "columnKey": "title", "recordKey": "title" },
+        { "label": "", "columnKey": "controls" }
+    ],
+    "filters": [
+        { "key": "search", "label": "SEARCH", "placeholder": "Search by field title...", "type": "text" },
+        { 
+            "key": "records_per_page", 
+            "label": "RECORDS PER PAGE", 
+            "type": "select", 
+            "options": [
+                { "value": "10", "label": "10" },
+                { "value": "25", "label": "25" },
+                { "value": "50", "label": "50" },
+                { "value": "100", "label": "100" }
+            ]
+        }
+    ]
+}

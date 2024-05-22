@@ -47,6 +47,8 @@ import postTypeSDO from '../../../data/sdo/post_type.json';
 import taxonomySDO from '../../../data/sdo/taxonomy.json';
 import optionsPageSDO from '../../../data/sdo/options_page.json';
 import gridSDO from '../../../data/sdo/grid.json';
+import formSDO from '../../../data/sdo/form.json';
+import fieldSDO from '../../../data/sdo/field.json';
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
 import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
@@ -90,6 +92,9 @@ const postTypeRoutes = makeSDO_Routes( postTypeSDO );
 const taxonomyRoutes = makeSDO_Routes( taxonomySDO );
 const optionsPageRoutes = makeSDO_Routes( optionsPageSDO );
 const gridRoutes = makeSDO_Routes( gridSDO );
+const formRoutes = makeSDO_Routes( formSDO );
+const fieldRoutes = makeSDO_Routes( fieldSDO );
+
 
 const router = createHashRouter([
   {
@@ -105,6 +110,8 @@ const router = createHashRouter([
       taxonomyRoutes,
       optionsPageRoutes,
       gridRoutes,
+      formRoutes,
+      fieldRoutes,
       {
         path: "sdo",
         element: <SDO_MenuRoute />,
@@ -112,46 +119,6 @@ const router = createHashRouter([
           {
             path: "options-page",
             element: <SDO_OptionsPageDashboardRoute />,
-          },
-        ],
-      },
-      {
-        path: "forms",
-        element: <FormDashboardRoute />,
-        children: [
-          {
-            path: "create",
-            element: <FormCreateRoute />,
-          },
-          {
-            path: "edit/:formId",
-            element: <FormEditRoute />,
-          },
-          {
-            path: "delete/:formId",
-            element: <FormDeleteRoute />,
-          },
-        ],
-      },
-      {
-        path: "fields",
-        element: <FieldDashboardRoute />,
-        children: [
-          {
-            path: "create",
-            element: <CreateFieldRoute />,
-          },
-          {
-            path: "view/:fieldId",
-            element: <ViewFieldRoute />,
-          },
-          {
-            path: "edit/:fieldId",
-            element: <EditFieldRoute />,
-          },
-          {
-            path: "delete/:fieldId",
-            element: <DeleteFieldRoute />,
           },
         ],
       },

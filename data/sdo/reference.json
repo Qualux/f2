@@ -18,5 +18,13 @@
     {
         "name": "grid",
         "file": "grid.json"
+    },
+    {
+        "name": "form",
+        "file": "form.json"
+    },
+    {
+        "name": "field",
+        "file": "field.json"
     }
 ]

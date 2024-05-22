@@ -22,7 +22,7 @@ export default function AppMenu() {
                 </li>
                 <li className="flex items-center justify-stretch m-0">
                     <NavLink
-                            to="/fields"
+                            to="/field"
                             className={itemClasses}
                             >
                             FIELDS
@@ -30,7 +30,7 @@ export default function AppMenu() {
                 </li>
                 <li className="block flex items-center justify-stretch m-0">
                     <NavLink
-                            to="/groups"
+                            to="/field-group"
                             className={itemClasses}
                             >
                             FIELD GROUPS
@@ -38,7 +38,7 @@ export default function AppMenu() {
                 </li>
                 <li className="flex items-center justify-stretch m-0">
                     <NavLink
-                            to="/forms"
+                            to="/form"
                             className={itemClasses}
                             >
                             FORMS
