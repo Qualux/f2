@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { useCrudible } from './useCrudible';
+import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 import ScreenWrap from '../../components/global/ScreenWrap';
 
-export default function DeleteScreen( {id, sdo, sdoRoutes, api} ) {
+
+export default function DeleteScreen( {id} ) {
 
     const [status, setStatus] = useState('ready');
+    const { Header, useSDO } = useCrudible();
 
-    const { Header } = useCrudible({
-        sdoKey: 'f3-options-page'
-    });
+    const sdo = useSDO();
+
+    // Setup API.
+    const api = SDO_StandardAPI;
+    api.routeBase = sdo.routeBase;
 
     const deleteHandler = async (e) => {
         try {
@@ -23,11 +28,7 @@ export default function DeleteScreen( {id, sdo, sdoRoutes, api} ) {
     if( status === 'done' ) {
         return(
             <main>
-            <Header 
-                to={sdoRoutes.create} 
-                buttonLabel={sdo.create.button.label}
-                title={sdo.displayTitle}
-            />
+            <Header />
             <ScreenWrap>
                 <p>
                     Record deleted.
@@ -39,11 +40,7 @@ export default function DeleteScreen( {id, sdo, sdoRoutes, api} ) {
 
     return(
         <main>
-            <Header 
-                to={sdoRoutes.create} 
-                buttonLabel={sdo.create.button.label}
-                title={sdo.displayTitle}
-            />
+            <Header />
             <ScreenWrap>
                 <h2 className="text-2xl font-bold mb-6">
                     Confirm Deletion

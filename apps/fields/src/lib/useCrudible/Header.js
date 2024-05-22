@@ -63,6 +63,22 @@ export default function Header() {
             )
         }
 
+        if( isDeleteRoute ) {
+            return(
+                <div className="flex gap-5 items-center">
+                    <h2 className="text-neutral-300 font-semibold text-lg">
+                        DELETE
+                    </h2>
+                    <NavLink
+                        to={sdo.routes.dashboard}
+                        className="fill-neutral-300 transition-transform hover:scale-125"
+                    >
+                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
+                    </NavLink>
+                </div>
+            )
+        }
+
         return(
             <NavLink
                 to={sdo.routes.create}

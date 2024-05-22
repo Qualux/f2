@@ -1,25 +1,21 @@
 import { useParams } from 'react-router-dom';
 import AppTemplate from '../../components/global/AppTemplate';
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
-import { OptionsPageAPI } from '../../api/OptionsPageAPI';
 
-export default function SDO_OptionsPageDeleteRoute() {
+export default function SDO_OptionsPageDeleteRoute( {sdo} ) {
 
     const { id } = useParams();
 
-    const { DeleteScreen, sdo, sdoRoutes } = useCrudible({
-        sdoKey: 'f3-options-page'
-    });
+    const { Crudible, DeleteScreen } = useCrudible();
 
     return(
-        <AppTemplate>
-            <DeleteScreen
-                id={id}
-                sdo={sdo}
-                sdoRoutes={sdoRoutes}
-                api={OptionsPageAPI}
-            />
-        </AppTemplate>
+        <Crudible sdo={sdo}>
+            <AppTemplate>
+                <DeleteScreen
+                    id={id}
+                />
+            </AppTemplate>
+        </Crudible>
     );
 
 }
