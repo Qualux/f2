@@ -1,0 +1,72 @@
+{
+    "name": "options_page",
+    "title": "F3 Options Page SDO",
+    "displayTitle": "F3 Options Page Manager",
+    "routeBase": "options-page",
+    "post_type": {
+        "post_type_key": "f3-options-page",
+        "label": "F3 Options Page"
+    },
+    "create": {
+        "button": {
+            "label": "Create Options Page"
+        }
+    },
+    "field_groups": [
+        {
+            "id": "009",
+            "post_type": "f3-options-page",
+            "fields": [
+                {
+                    "field_type": "text",
+                    "field_name": "title",
+                    "field_title": "Title",
+                    "field_label": "Title",
+                    "field_placeholder": "Admin title..."
+                },
+                {
+                    "field_type": "text",
+                    "field_name": "page_slug",
+                    "field_title": "Page Slug",
+                    "field_label": "Page Slug",
+                    "field_placeholder": "Page slug...",
+                    "field_default_value": "slug-123"
+                },
+                {
+                    "field_type": "text",
+                    "field_name": "icon_url",
+                    "field_title": "Icon",
+                    "field_label": "Icon",
+                    "field_placeholder": "Dashicon name or icon URL..."
+                },
+                {
+                    "field_type": "number",
+                    "field_name": "position",
+                    "field_title": "Position",
+                    "field_label": "Position",
+                    "field_placeholder": "Position in menu...",
+                    "field_default_value": 15.89
+                }
+            ]
+        }
+    ],
+    "columns": [
+        { "label": "ID", "columnKey": "ID", "recordKey": "id" },
+        { "label": "Title", "columnKey": "title", "recordKey": "title" },
+        { "label": "", "columnKey": "controls" }
+    ],
+    "filters": [
+        { "key": "search", "label": "SEARCH", "placeholder": "Search by field title...", "type": "text" },
+        { 
+            "key": "records_per_page", 
+            "label": "RECORDS PER PAGE", 
+            "type": "select", 
+            "options": [
+                { "value": "10", "label": "10" },
+                { "value": "25", "label": "25" },
+                { "value": "50", "label": "50" },
+                { "value": "100", "label": "100" }
+            ]
+        }
+    ]
+}

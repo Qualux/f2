@@ -2,7 +2,7 @@ import { useLocation, Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
-export default function SDO_DashboardRoute() {
+export default function SDO_MenuRoute() {
 
     const location = useLocation();
     const isMainRoute = location.pathname === "/sdo";
@@ -18,7 +18,7 @@ export default function SDO_DashboardRoute() {
             </h1>
             <section className="grid grid-cols-3">
                 <NavLink 
-                    to="/sdo/post-type"
+                    to="/post-type"
                     className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                     <span>
                         Manage Post Types
@@ -26,7 +26,7 @@ export default function SDO_DashboardRoute() {
                     <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
                 </NavLink>
                 <NavLink 
-                    to="/sdo/taxonomy"
+                    to="/taxonomy"
                     className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                     <span>
                         Manage Taxonomies
@@ -34,7 +34,7 @@ export default function SDO_DashboardRoute() {
                     <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
                 </NavLink>
                 <NavLink 
-                    to="/sdo/options-page"
+                    to="/options-page"
                     className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                     <span>
                         Manage Options Pages

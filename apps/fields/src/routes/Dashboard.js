@@ -169,8 +169,8 @@ function DashboardContent() {
                         recordCount={data.sdo_counts.post_types.publish}
                     />
                     <ManageButtons 
-                        manageRoute="/sdo/post-type"
-                        createRoute="/sdo/post-type/create"
+                        manageRoute="/post-type"
+                        createRoute="/post-type/create"
                         labelPlural="Post Types"
                         labelSingular="Post Type"
                     />
@@ -181,8 +181,8 @@ function DashboardContent() {
                         recordCount={data.sdo_counts.taxonomies.publish}
                     />
                     <ManageButtons 
-                        manageRoute="/sdo/taxonomy"
-                        createRoute="/sdo/taxonomy/create"
+                        manageRoute="/taxonomy"
+                        createRoute="/taxonomy/create"
                         labelPlural="Taxonomies"
                         labelSingular="Taxonomy"
                     />
@@ -193,8 +193,8 @@ function DashboardContent() {
                         recordCount={data.sdo_counts.options_pages.publish}
                     />
                     <ManageButtons 
-                        manageRoute="/sdo/options-page"
-                        createRoute="/sdo/options-page/create"
+                        manageRoute="/options-page"
+                        createRoute="/options-page/create"
                         labelPlural="Options Pages"
                         labelSingular="Options Page"
                     />

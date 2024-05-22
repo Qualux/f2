@@ -34,16 +34,7 @@ import FormEditRoute from './routes/forms/FormEditRoute';
 import FormDeleteRoute from './routes/forms/FormDeleteRoute';
 
 // SDO Routes. 
-//import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
-import SDO_PostTypeDashboardRoute from './routes/sdo/post-type/SDO_PostTypeDashboardRoute';
-import SDO_PostTypeCreateRoute from './routes/sdo/post-type/SDO_PostTypeCreateRoute';
-import SDO_PostTypeEditRoute from './routes/sdo/post-type/SDO_PostTypeEditRoute';
-import SDO_PostTypeDeleteRoute from './routes/sdo/post-type/SDO_PostTypeDeleteRoute';
-import SDO_TaxonomyDashboardRoute from './routes/sdo/taxonomy/SDO_TaxonomyDashboardRoute';
-import SDO_TaxonomyCreateRoute from './routes/sdo/taxonomy/SDO_TaxonomyCreateRoute';
-import SDO_TaxonomyEditRoute from './routes/sdo/taxonomy/SDO_TaxonomyEditRoute';
-import SDO_TaxonomyDeleteRoute from './routes/sdo/taxonomy/SDO_TaxonomyDeleteRoute';
-import SDO_TaxonomyViewRoute from './routes/sdo/taxonomy/SDO_TaxonomyViewRoute';
+import SDO_MenuRoute from './routes/sdo/SDO_MenuRoute';
 import SDO_OptionsPageDashboardRoute from './routes/sdo/options-page/SDO_OptionsPageDashboardRoute';
 import SDO_OptionsPageCreateRoute from './routes/sdo/options-page/SDO_OptionsPageCreateRoute';
 import SDO_OptionsPageEditRoute from './routes/sdo/options-page/SDO_OptionsPageEditRoute';
@@ -52,6 +43,9 @@ import SDO_OptionsPageViewRoute from './routes/sdo/options-page/SDO_OptionsPageV
 
 /* SDO Automated */
 import querySDO from '../../../data/sdo/query.json';
+import postTypeSDO from '../../../data/sdo/post_type.json';
+import taxonomySDO from '../../../data/sdo/taxonomy.json';
+import optionsPageSDO from '../../../data/sdo/options_page.json';
 import SDO_DashboardRoute from './routes/sdo/SDO_DashboardRoute';
 import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
 import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
@@ -62,29 +56,42 @@ import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
 import GridDashboard from './routes/grids/GridDashboard';
 import GridCreateRoute from './routes/grids/GridCreateRoute';
 
-/* Query Routes */
-const queryRoutes = {
-  path: "query",
-  element: <SDO_DashboardRoute sdo={querySDO} />,
-  children: [
-    {
-      path: "create",
-      element: <SDO_CreateRoute sdo={querySDO} />,
-    },
-    {
-      path: "edit/:id",
-      element: <SDO_EditRoute sdo={querySDO} />,
-    },
-    {
-      path: "delete/:id",
-      element: <SDO_DeleteRoute sdo={querySDO} />,
-    },
-    {
-      path: "view/:id",
-      element: <SDO_ViewRoute sdo={querySDO} />,
-    },
-  ]
+/* Make SDO Route Set. */
+function makeSDO_Routes( sdo ) {
+
+  const routes = {
+    path: sdo.routeBase,
+    element: <SDO_DashboardRoute sdo={sdo} />,
+    children: [
+      {
+        path: "create",
+        element: <SDO_CreateRoute sdo={sdo} />,
+      },
+      {
+        path: "edit/:id",
+        element: <SDO_EditRoute sdo={sdo} />,
+      },
+      {
+        path: "delete/:id",
+        element: <SDO_DeleteRoute sdo={sdo} />,
+      },
+      {
+        path: "view/:id",
+        element: <SDO_ViewRoute sdo={sdo} />,
+      },
+    ]
+  }
+  return routes;
+
 }
+
+
+
+/* Query Routes */
+const queryRoutes = makeSDO_Routes( querySDO );
+const postTypeRoutes = makeSDO_Routes( postTypeSDO );
+const taxonomyRoutes = makeSDO_Routes( taxonomySDO );
+const optionsPageRoutes = makeSDO_Routes( optionsPageSDO );
 
 const router = createHashRouter([
   {
@@ -96,6 +103,9 @@ const router = createHashRouter([
         element: <Dashboard />
       },
       queryRoutes,
+      postTypeRoutes,
+      taxonomyRoutes,
+      optionsPageRoutes,
       {
         path: "grid",
         element: <GridDashboard />,
@@ -108,48 +118,8 @@ const router = createHashRouter([
       },
       {
         path: "sdo",
-        element: <SDO_DashboardRoute />,
+        element: <SDO_MenuRoute />,
         children: [
-          {
-            path: "post-type",
-            element: <SDO_PostTypeDashboardRoute />,
-            children: [
-              {
-                path: "create",
-                element: <SDO_PostTypeCreateRoute />,
-              },
-              {
-                path: "edit/:id",
-                element: <SDO_PostTypeEditRoute />,
-              },
-              {
-                path: "delete/:id",
-                element: <SDO_PostTypeDeleteRoute />,
-              },
-            ]
-          },
-          {
-            path: "taxonomy",
-            element: <SDO_TaxonomyDashboardRoute />,
-            children: [
-              {
-                path: "create",
-                element: <SDO_TaxonomyCreateRoute />,
-              },
-              {
-                path: "edit/:id",
-                element: <SDO_TaxonomyEditRoute />,
-              },
-              {
-                path: "delete/:id",
-                element: <SDO_TaxonomyDeleteRoute />,
-              },
-              {
-                path: "view/:id",
-                element: <SDO_TaxonomyViewRoute />,
-              },
-            ]
-          },
           {
             path: "options-page",
             element: <SDO_OptionsPageDashboardRoute />,

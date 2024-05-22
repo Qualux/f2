@@ -2,5 +2,17 @@
     {
         "name": "query",
         "file": "query.json"
+    },
+    {
+        "name": "post_type",
+        "file": "post_type.json"
+    },
+    {
+        "name": "taxonomy",
+        "file": "taxonomy.json"
+    },
+    {
+        "name": "options_page",
+        "file": "options_page.json"
     }
 ]
