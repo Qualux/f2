@@ -2,12 +2,20 @@ import { createContext, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Field from '../../components/fields/Field';
 import { checkConditions } from './conditionsChecker';
+import { makeDefaultFieldValues } from './defaultValues';
 
 const FormContext = createContext();
 
 export function useFormManager( params = {} ) {
 
-    function FormProvider({ form, children }) {
+    function FormProvider({ formData, children }) {
+
+        let defaultValues = {}
+        if( formData.record ) {
+            defaultValues = formData.record;
+        } else {
+            defaultValues = makeDefaultFieldValues( formData.form.field_groups );
+        }
 
         const {
             register,
@@ -17,7 +25,7 @@ export function useFormManager( params = {} ) {
             reset,
             watch,
             control,
-        } = useForm();
+        } = useForm( {defaultValues} );
 
         const formSubmitHandler = (data) => {
 
@@ -36,7 +44,7 @@ export function useFormManager( params = {} ) {
             watch, 
             control,
             formSubmitHandler,
-            form,
+            formData,
         }
 
         return (
@@ -76,18 +84,26 @@ export function useFormManager( params = {} ) {
 
     function Fields() {
 
-        const { form } = useFormContext();
+        const { formData } = useFormContext();
 
         return(  
-            <main>
-                <span>Fields</span>
-                <span>{form.field_groups.length}</span>
-                <FieldRenderer 
-                    field={form.field_groups[0].fields[0]}
-                />
-            </main>
+            <section>
+                {formData.form.field_groups.map((fieldGroup, index) => (
+                    <FieldGroupRenderer key={index} fieldGroup={fieldGroup} />
+                ))}
+            </section>
         );
 
+    }
+
+    function FieldGroupRenderer( { fieldGroup } ) {
+        return(
+            <div>
+                {fieldGroup.fields.map((field, index) => (
+                    <FieldRenderer key={index} field={field} />
+                ))}
+            </div>
+        )
     }
 
     function FieldRenderer( { field } ) {
