@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
 import Field from '../../components/fields/Field';
 import { checkConditions } from './conditionsChecker';
 import { makeDefaultFieldValues } from './defaultValues';
@@ -9,6 +9,8 @@ const FormContext = createContext();
 export function useFormManager( params = {} ) {
 
     function FormProvider({ formData, children }) {
+
+        const [formStatus, setFormStatus] = useState('loading');
 
         let defaultValues = {}
         if( formData.record ) {
@@ -25,6 +27,7 @@ export function useFormManager( params = {} ) {
             reset,
             watch,
             control,
+            getFieldState,
         } = useForm( {defaultValues} );
 
         const formSubmitHandler = (data) => {
@@ -32,6 +35,14 @@ export function useFormManager( params = {} ) {
             console.log('Handling submit with formSubmitHandler in useFormManager')
             console.log('Form submit data:')
             console.log(data)
+
+            if( !formData.record.id ) {
+                formData.api.create(data);
+                setFormStatus('complete');
+            } else {
+                formData.api.edit(formData.record.id, data);
+                setFormStatus('complete');
+            }
 
         }
 
@@ -45,6 +56,9 @@ export function useFormManager( params = {} ) {
             control,
             formSubmitHandler,
             formData,
+            formStatus, 
+            setFormStatus,
+            getFieldState,
         }
 
         return (
@@ -86,24 +100,129 @@ export function useFormManager( params = {} ) {
 
         const { formData } = useFormContext();
 
+        function render(fieldGroup, index) {
+
+            console.log('field group at render()')
+            console.log(fieldGroup)
+
+            if( fieldGroup.repeat ) {
+                return(
+                    <FieldGroupRepeatRender
+                        key={index}
+                        fieldGroup={fieldGroup}
+                    />
+                );
+            }
+
+            return(
+                <FieldGroupRender
+                    key={index} 
+                    fieldGroup={fieldGroup} 
+                />
+            );
+        }
+
         return(  
             <section>
                 {formData.form.field_groups.map((fieldGroup, index) => (
-                    <FieldGroupRenderer key={index} fieldGroup={fieldGroup} />
+                    render(fieldGroup, index)
                 ))}
             </section>
         );
 
     }
 
-    function FieldGroupRenderer( { fieldGroup } ) {
+    function FieldGroupRender( { fieldGroup } ) {
+
         return(
             <div>
                 {fieldGroup.fields.map((field, index) => (
                     <FieldRenderer key={index} field={field} />
                 ))}
             </div>
-        )
+        );
+
+    }
+
+    function FieldGroupRepeatRender( { fieldGroup } ) {
+
+        const { control } = useFormContext();
+        const { fields, append, remove, move } = useFieldArray({
+            control,
+            name: fieldGroup.name,
+          });
+
+        useEffect(() => {
+            if (fields.length === 0) {
+                append({}); // You can customize this with your default field structure
+            }
+        }, [fields, append]);
+
+        return(
+            <div>
+                {fields.map((rhfField, rhfFieldIndex) => (
+                    <RepeatRow 
+                        key={rhfField.id}
+                        fieldGroup={fieldGroup}
+                        rhfField={rhfField}
+                        rhfFieldIndex={rhfFieldIndex}
+                        append={append}
+                        remove={remove}
+                        move={move}
+                    />
+                ))}
+            </div>
+        );
+
+    }
+
+    function RepeatRow( { fieldGroup, rhfFieldIndex, append, remove, move } ) { 
+
+        function render( field, fieldIndex, rhfFieldIndex ) {
+
+            const repeatField = { ...field, field_name: `${fieldGroup.name}.${rhfFieldIndex}.${field.field_name}` };
+
+            return(
+                <FieldRenderer 
+                    key={fieldIndex}
+                    field={repeatField} 
+                />
+            );
+
+        }
+
+        return(
+            <div className="flex gap-10"> 
+                {fieldGroup.fields.map((field, fieldIndex) => (
+                    render( field, fieldIndex, rhfFieldIndex )
+                ))}
+                <button 
+                    type="button"
+                    onClick={() => { move(rhfFieldIndex, rhfFieldIndex-1) }}
+                >
+                    UP
+                </button>
+                <button 
+                    type="button"
+                    onClick={() => { move(rhfFieldIndex, rhfFieldIndex+1) }}
+                >
+                    DOWN
+                </button>
+                <button 
+                    type="button"
+                    onClick={() => { append() }}
+                >
+                    ADD
+                </button>
+                <button 
+                    type="button"
+                    onClick={() => { remove(rhfFieldIndex) }}
+                >
+                    REMOVE
+                </button>
+            </div>
+        );
+
     }
 
     function FieldRenderer( { field } ) {
@@ -129,12 +248,37 @@ export function useFormManager( params = {} ) {
 
     }
 
+    function makeValidationObject( field ) {
+        let validators = {}
+        if( field.field_required ) {
+            validators.required = true; 
+        }
+        return validators;
+    }
+
+    function FormComplete() {
+
+        const { formStatus } = useFormContext();
+
+        if( formStatus !== 'complete' ) {
+            return null;
+        }
+
+        return(
+            <main>
+                Form submission complete.
+            </main>
+        )
+    }
+
     return {
         useFormContext,
         FormProvider,
         Form,
         Fields,
         SubmitButton,
+        makeValidationObject,
+        FormComplete,
     }
 
 }
