@@ -43,6 +43,12 @@
                     "field_title": "Options Page",
                     "field_label": "Options Page",
                     "field_placeholder": "Options page ID to assign field group..."
+                },
+                {
+                    "field_type": "true_false",
+                    "field_name": "repeat",
+                    "field_title": "Repeat Fields",
+                    "field_label": "Repeat Fields"
                 }
             ]
         }
