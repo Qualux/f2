@@ -36,7 +36,7 @@ export function useFormManager( params = {} ) {
             console.log('Form submit data:')
             console.log(data)
 
-            if( !formData.record.id ) {
+            if( !formData.record?.id ) {
                 formData.api.create(data);
                 setFormStatus('complete');
             } else {
