@@ -78,6 +78,10 @@ class Plugin {
         require_once( F3_PATH . '/php/Dashboard/DashboardDataRoutes.php' );
         new Dashboard\DashboardDataRoutes();
 
+        /* Locations Handler */
+        require_once( F3_PATH . '/php/Locations/Locations.php' );
+        new Locations\Locations();
+
     }
 
     public static function activate() {

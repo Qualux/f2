@@ -28854,7 +28854,9 @@ const FormRender = () => {
     formData: formData
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormComplete, null));
 };
-render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormRender, null), document.getElementById(`react-app`));
+document.querySelectorAll('.f3-form').forEach(element => {
+  render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormRender, null), element);
+});
 })();
 
 /******/ })()

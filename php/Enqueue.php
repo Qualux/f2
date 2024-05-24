@@ -30,7 +30,20 @@ class Enqueue {
             wp_enqueue_script('f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', true);
         });
 
-        // Enqueue render app. 
+        // Enqueue render app back. 
+        add_action( 'admin_enqueue_scripts', function() {
+            wp_enqueue_script(
+                'f3-render',
+                F3_URL . '/apps/render/build/index.js',
+                ['wp-element'],
+                time(), //For production use wp_get_theme()->get('Version')  
+                [
+                    'in_footer' => true,
+                ]      
+            );
+        });
+
+        // Enqueue render app front. 
         add_action( 'wp_enqueue_scripts', function() {
             wp_enqueue_script(
                 'f3-render',

@@ -53,4 +53,6 @@ const FormRender = () => {
 
 };
 
-render(<FormRender />, document.getElementById(`react-app`));
+document.querySelectorAll('.f3-form').forEach(element => {
+    render(<FormRender />, element);
+});
