@@ -1271,9 +1271,12 @@ const DomainContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Field: () => (/* reexport safe */ _components_fields_Field__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   Field: () => (/* reexport safe */ _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   useFormManager: () => (/* reexport safe */ _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_0__.useFormManager)
 /* harmony export */ });
-/* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/fields/Field */ "../shared/components/fields/Field.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/fields/Field */ "../shared/components/fields/Field.js");
+
 
 
 
@@ -28805,22 +28808,53 @@ const {
   useState
 } = wp.element;
 
-const Votes = () => {
-  const [votes, setVotes] = useState(0);
-  const addVote = () => {
-    setVotes(votes + 1);
-  };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(shared__WEBPACK_IMPORTED_MODULE_1__.Field, {
-    field: {
-      field_type: 'text',
-      field_name: 'test_field_1',
-      placeholder: 'Test field 1...'
+const formData = {
+  form: {
+    field_groups: [{
+      name: 'fg1',
+      fields: [{
+        field_name: 'test_field_1',
+        field_type: 'text',
+        field_placeholder: 'Test field 1...',
+        field_default_value: 'Ten 10',
+        field_required: true
+      }, {
+        field_name: 'test_field_2',
+        field_type: 'text',
+        field_placeholder: 'Test field 2...',
+        field_default_value: 'Seven 7'
+      }],
+      repeat: true
+    }]
+  },
+  record: {
+    id: 0,
+    type: 'PostRecord',
+    test_field_1: 'Thirteen 13',
+    test_field_2: 'Fiver 55555'
+  },
+  api: {
+    get: () => {
+      console.log('API get() called.');
+    },
+    create: () => {
+      console.log('API create() called.');
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, votes, " Votes"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: addVote
-  }, "Vote!")));
+  }
 };
-render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Votes, null), document.getElementById(`react-app`));
+const FormRender = () => {
+  const {
+    FormProvider,
+    Form,
+    Fields,
+    SubmitButton,
+    FormComplete
+  } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormProvider, {
+    formData: formData
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormComplete, null));
+};
+render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormRender, null), document.getElementById(`react-app`));
 })();
 
 /******/ })()

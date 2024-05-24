@@ -40,7 +40,7 @@ const formData = {
 
 export default function Test() {
 
-    const { useFormContext, FormProvider, Form, Fields, SubmitButton, FormComplete } = useFormManager();
+    const { FormProvider, Form, Fields, SubmitButton, FormComplete } = useFormManager();
 
     return(
         <AppTemplate>

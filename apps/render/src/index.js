@@ -1,28 +1,56 @@
 const { render, useState } = wp.element;
-import { Field } from 'shared';
+import { useFormManager, Field } from 'shared';
 
-const Votes = () => {
-  const [votes, setVotes] = useState(0);
-  const addVote = () => {
-    setVotes(votes + 1);
-  };
-  return (
-    <div>
-      <Field 
-        field={
+const formData = {
+  form: {
+      field_groups: [
           {
-            field_type: 'text',
-            field_name: 'test_field_1',
-            placeholder: 'Test field 1...'
-          }  
-        }
-      />
-      <h2>{votes} Votes</h2>
-      <p>
-        <button onClick={addVote}>Vote!</button>
-      </p>
-    </div>
+              name: 'fg1',
+              fields: [
+                  {
+                      field_name: 'test_field_1',
+                      field_type: 'text',
+                      field_placeholder: 'Test field 1...',
+                      field_default_value: 'Ten 10',
+                      field_required: true,
+                  },
+                  {
+                      field_name: 'test_field_2',
+                      field_type: 'text',
+                      field_placeholder: 'Test field 2...',
+                      field_default_value: 'Seven 7',
+                  }
+              ],
+              repeat: true,
+          }
+      ]
+  },
+  record: {
+      id: 0,
+      type: 'PostRecord',
+      test_field_1: 'Thirteen 13',
+      test_field_2: 'Fiver 55555',
+  },
+  api: {
+    get: () => { console.log('API get() called.') },
+    create: () => { console.log('API create() called.') },
+  },
+}
+
+const FormRender = () => {
+
+  const { FormProvider, Form, Fields, SubmitButton, FormComplete } = useFormManager();
+
+  return(
+    <FormProvider formData={formData}>
+        <Form>
+            <Fields />
+            <SubmitButton />
+        </Form>
+        <FormComplete />
+    </FormProvider>
   );
+
 };
 
-render(<Votes />, document.getElementById(`react-app`));
+render(<FormRender />, document.getElementById(`react-app`));
