@@ -16,6 +16,9 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "shared": "file:../shared"
+  },
   "devDependencies": {
     "@wordpress/scripts": "^27.9.0"
   }
