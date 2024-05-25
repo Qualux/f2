@@ -20,6 +20,7 @@ import ImageField from './types/ImageField/ImageField';
 import FileField from './types/FileField/FileField';
 import InlineField from './types/InlineField/InlineField';
 import FieldGroupCollectionField from './types/FieldGroupCollectionField/FieldGroupCollectionField';
+import FieldCollectionField from './types/FieldCollectionField/FieldCollectionField';
 
 export default function Field( 
         {
@@ -72,7 +73,7 @@ export default function Field(
             return <SearchableSelectField field={field} register={register} errors={errors} control={control} />
             break;
         case 'number':
-            return <NumberField field={field} register={register} errors={errors} />;
+            return <NumberField field={field} register={register} errors={errors} fieldRegisterPrefix={fieldRegisterPrefix} />;
             break;
         case 'range':
             return <RangeField field={field} register={register} errors={errors} />;
@@ -87,10 +88,10 @@ export default function Field(
             return <CollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
             break;
         case 'post_collection':
-            return <PostCollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            return <PostCollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} fieldRegisterPrefix={fieldRegisterPrefix} />
             break;
         case 'radio_group':
-            return <RadioGroupField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            return <RadioGroupField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} fieldRegisterPrefix={fieldRegisterPrefix} />
             break;
         case 'image':
             return <ImageField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
@@ -103,6 +104,9 @@ export default function Field(
             break;
         case 'field_group_collection':
             return <FieldGroupCollectionField field={field} />
+            break;
+        case 'field_collection':
+            return <FieldCollectionField field={field} />
             break;
         default:
             return(

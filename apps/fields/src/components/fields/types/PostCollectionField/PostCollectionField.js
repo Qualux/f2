@@ -16,7 +16,7 @@ function SelectExistingField({open, setOpen}) {
     )
 }
 
-export default function PostCollectionField({field, setValue, getValues, valuesInit}) {
+export default function PostCollectionField({field, setValue, getValues, valuesInit, fieldRegisterPrefix}) {
 
     const [existingField, setExistingField] = useState(false);
     const [selectedChildIds, setSelectedChildIds] = useState([]);
@@ -45,7 +45,8 @@ export default function PostCollectionField({field, setValue, getValues, valuesI
 
 
     useEffect(() => {
-        setValue( field.field_name, selectedChildIds );
+        const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.field_name}` : field.field_name;
+        setValue( registerName, selectedChildIds );
     }, [setValue, selectedChildIds]);
 
     return(
