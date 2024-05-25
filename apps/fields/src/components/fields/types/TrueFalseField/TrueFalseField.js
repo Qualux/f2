@@ -17,9 +17,6 @@ export default function TrueFalseField( {field, value, register, errors, setValu
 
     const handleChange = ( newValue ) => {
 
-        console.log('new value:')
-        console.log(newValue)
-
         setEnabled( newValue );
         setValue( field.field_name, newValue );
     }

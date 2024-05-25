@@ -9,9 +9,6 @@ export default function ViewScreen( {id} ) {
     const { useSDO } = useCrudible();
     const sdo = useSDO();
 
-    console.log('sdo in view screen:')
-    console.log(sdo)
-
     // Setup API.
     const api = SDO_StandardAPI;
     api.routeBase = sdo.routeBase;
@@ -26,8 +23,6 @@ export default function ViewScreen( {id} ) {
         fetchData( id, api );
 
     }, [])
-
-    console.log(record)
 
     if( ! record ) {
         return(

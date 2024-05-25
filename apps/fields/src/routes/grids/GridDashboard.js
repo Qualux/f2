@@ -5,8 +5,6 @@ import { GridAPI } from '../../api/GridAPI';
 
 export default function GridDashboard() {
 
-    console.log('grid dash...')
-
     const location = useLocation();
     const isMainRoute = location.pathname === "/grid";
 

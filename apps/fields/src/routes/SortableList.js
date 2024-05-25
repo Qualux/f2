@@ -15,7 +15,7 @@ const SortableList = () => {
     const formMethods = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+
     };
 
     return (

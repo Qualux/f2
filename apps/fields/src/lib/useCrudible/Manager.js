@@ -30,9 +30,6 @@ export default function Manager() {
         placeholderData: keepPreviousData,
     });
 
-    console.log('data in manager:')
-    console.log(data)
-
     useEffect(() => {
         const initialFilterValues = Object.fromEntries(sdo.filters.map(filter => [filter.key, ''])); // Initialize all filters to empty string
         setFilterValues(initialFilterValues);

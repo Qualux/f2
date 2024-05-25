@@ -34,9 +34,6 @@ export default function Field(
             fieldRegisterPrefix = ''
         }) {
 
-            console.log('fieldRegisterPrefix at Field');
-        console.log(fieldRegisterPrefix)
-
     switch( field.field_type ) {
         case 'text': 
             return (

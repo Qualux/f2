@@ -44,8 +44,6 @@ const CompleteScreen = () => {
 
 function Render( {fieldGroupId} ) {
 
-    console.log('Render running...')
-
     const [complete, setComplete] = useState(false);
     const { fieldGroup, isLoaded } = useFieldGroup( fieldGroupId, 'option' );
     const { postData } = useFetch();
@@ -108,9 +106,6 @@ function Render( {fieldGroupId} ) {
 }
 
 export default function OptionsPageRenderApp( {fieldGroupId} ) {
-
-    console.log('OptionsPageRenderApp running...')
-
 
     useEffect(() => {
         

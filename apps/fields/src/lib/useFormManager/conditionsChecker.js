@@ -17,7 +17,7 @@ export function checkConditions(field, watch) {
                 if (testFieldValue == cr.value) {
                     conditionsCheckPassed = true;
                 } else {
-                    console.log('conditions check failed');
+
                 }
             }
 

@@ -33,7 +33,6 @@ export function useFormManager() {
         const formSubmitHandler = (data) => {
 
             if( window.F3_NESTED_FORM_SUBMISSION ) {
-                console.log('read that we cannot submit because of nested form...')
                 return;
             }
 

@@ -18,7 +18,6 @@ export default function DeleteScreen( {id} ) {
     const deleteHandler = async (e) => {
         try {
             await api.delete(id);
-            console.log('Delete successful');
             setStatus('done');
         } catch (error) {
             console.error('Delete failed:', error.message);

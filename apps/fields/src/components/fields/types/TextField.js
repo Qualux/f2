@@ -10,11 +10,6 @@ export default function TextField( { field, fieldRegisterPrefix } ) {
 
     const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.field_name}` : field.field_name;
 
-    console.log('fieldRegisterPrefix:')
-    console.log(fieldRegisterPrefix)
-    console.log('registerName:')
-    console.log(registerName)
-
     return(
         <div className="my-4">
             <Label text={field.field_label} />

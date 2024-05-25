@@ -31,16 +31,9 @@ export default function PostCollectionField({field, setValue, getValues, valuesI
 
     useEffect(() => {
 
-        console.log('check values init...')
-        console.log(valuesInit)
-
         if(valuesInit) {
 
-            console.log('values init...')
-
             const collectionList = getValues( field.field_name );
-
-            console.log(collectionList)
 
             if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
                 setSelectedChildIds( collectionList );
