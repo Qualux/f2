@@ -3,13 +3,13 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useRecordRelate } from '../lib/useRecordRelate/useRecordRelate';
 
 const SortableList = () => {
+
     const { 
         RecordRelateProviders, 
         SelectionList, 
-        SelectedList,
         CreateButton,
         SelectExistingButton,
-        InlineCreateForm,
+        RecordList,
     } = useRecordRelate();
 
     const formMethods = useForm();
@@ -19,27 +19,22 @@ const SortableList = () => {
     };
 
     return (
-        <RecordRelateProviders>
-            <main>
-                <div className="flex items-center gap-px">
-                    <CreateButton />
-                    <SelectExistingButton />
-                </div>
-                <div>
-                    <SelectionList />
-                </div>
-                <div>
-                    <SelectedList />
-                </div>
-                <div>
-                    <FormProvider {...formMethods}>
-                        <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-                            <InlineCreateForm />
-                        </form>
-                    </FormProvider>
-                </div>
-            </main>
-        </RecordRelateProviders>
+        <FormProvider {...formMethods}>
+            <form onSubmit={formMethods.handleSubmit(onSubmit)}>
+                <RecordRelateProviders>
+                    <main>
+                        <div className="flex items-center gap-px">
+                            <CreateButton />
+                            <SelectExistingButton />
+                        </div>
+                        <section className="grid grid-cols-2 gap-px bg-neutral-800 text-neutral-100">
+                            <SelectionList />
+                            <RecordList />
+                        </section>
+                    </main>
+                </RecordRelateProviders>
+            </form>
+        </FormProvider>
     );
 };
 

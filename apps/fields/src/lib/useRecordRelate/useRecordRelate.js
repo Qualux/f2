@@ -9,49 +9,69 @@ import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
 import Sortable from 'sortablejs';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFieldArray } from 'react-hook-form';
 
 const sdo = {
     routeBase: 'field-group',
 };
 
-const SelectedListContext = createContext();
+const FieldArrayContext = createContext();
+const queryClient = new QueryClient();
 
 export function useRecordRelate() {
 
     function RecordRelateProviders({children}) {
-        const queryClient = new QueryClient();
 
         return (
             <QueryClientProvider client={queryClient}>
-                <SelectedListProvider>
+                <FieldArrayProvider>
                     {children}
-                </SelectedListProvider>
+                </FieldArrayProvider>
             </QueryClientProvider>
         );
+
     }
 
-    function SelectedListProvider({ children }) {
-        const [selectedList, setSelectedList] = useState([]);
+    function FieldArrayProvider({ children }) {
 
-        const addToSelectedList = (item) => {
-            setSelectedList((prevList) => [...prevList, item]);
-        };
+        const { control } = useFormContext();
 
-        const removeFromSelectedList = (itemId) => {
-            setSelectedList((prevList) => prevList.filter((item) => item.id !== itemId));
-        };
+        const { fields, append, remove } = useFieldArray({
+            control: control,
+            name: 'records'
+          });
+
+        function addRecord(record) {
+            append(
+                {
+                    id: record.id,
+                    title: record?.title,
+                }
+            );
+        }
 
         return (
-            <SelectedListContext.Provider value={{ selectedList, addToSelectedList, removeFromSelectedList }}>
+            <FieldArrayContext.Provider value={{ fields, append, remove, addRecord }}>
                 {children}
-            </SelectedListContext.Provider>
+            </FieldArrayContext.Provider>
         );
+
+    }
+
+    function useFieldArrayContext() {
+        return useContext(FieldArrayContext);
     }
 
     function CreateButton() {
+
+        const { addRecord } = useFieldArrayContext();
+
         return (
-            <button className="bg-neutral-800 py-4 px-12 text-neutral-100 font-semibold">
+            <button 
+                type="button" 
+                className="bg-neutral-800 py-4 px-12 text-neutral-100 font-semibold"
+                onClick={() => addRecord({ id: 0, title: 'New record...' })}
+            >
                 CREATE
             </button>
         );
@@ -59,13 +79,14 @@ export function useRecordRelate() {
 
     function SelectExistingButton() {
         return (
-            <button className="bg-neutral-800 py-4 px-12 text-neutral-100 font-semibold">
+            <button type="button" className="bg-neutral-800 py-4 px-12 text-neutral-100 font-semibold">
                 SELECT EXISTING
             </button>
         );
     }
 
     function SelectionList() {
+
         const api = SDO_StandardAPI;
         api.routeBase = sdo.routeBase;
 
@@ -75,7 +96,7 @@ export function useRecordRelate() {
             placeholderData: keepPreviousData,
         });
 
-        const { addToSelectedList } = useContext(SelectedListContext);
+        const { addRecord } = useFieldArrayContext();
 
         if (isLoading && !data || data === undefined) {
             return (
@@ -89,43 +110,12 @@ export function useRecordRelate() {
             <ul>
                 {data.records.map((record, index) => (
                     <li key={index}>
-                        {record.id} <button onClick={() => addToSelectedList(record)}>Add</button>
+                        {record.id} <button onClick={() => addRecord(record)}>Add</button>
                     </li>
                 ))}
             </ul>
         );
-    }
 
-    function SelectedList() {
-        const { selectedList, removeFromSelectedList } = useContext(SelectedListContext);
-        const listRef = useRef(null);
-
-        useEffect(() => {
-            if (listRef.current) {
-                const sortable = new Sortable(listRef.current, {
-                    animation: 150,
-                });
-
-                return () => {
-                    sortable.destroy();
-                };
-            }
-        }, [selectedList]);
-
-        return (
-            <main className="bg-neutral-800 p-6">
-                <h2 className="text-neutral-400 font-medium text-sm">
-                    RELATED RECORDS
-                </h2>
-                <ul className="text-neutral-400 font-medium text-sm" ref={listRef}>
-                    {selectedList.map((record, index) => (
-                        <li key={index}>
-                            {record.id} <button onClick={() => removeFromSelectedList(record.id)}>Remove</button>
-                        </li>
-                    ))}
-                </ul>
-            </main>
-        );
     }
 
     function InlineCreateForm() {
@@ -150,14 +140,40 @@ export function useRecordRelate() {
                 </div>
             </div>
         );
+
+    }
+
+    function RecordList() {
+
+        const { useFieldArrayContext } = useRecordRelate();
+        const { fields } = useFieldArrayContext();
+        const { register  } = useFormContext();
+    
+        return(
+            <div className="p-6"> 
+                {fields.map((field, index) => (
+                    <div key={field.id} className="flex gap-3 mb-2">
+                        <input
+                            className="bg-neutral-700 text-neutral-200"
+                            {...register(`records.${index}.id`)} 
+                        />
+                        <input
+                            className="bg-neutral-700 text-neutral-200"
+                            {...register(`records.${index}.title`)} 
+                        />
+                    </div>
+                ))} 
+            </div>
+        )
     }
 
     return {
         RecordRelateProviders,
         SelectionList,
-        SelectedList,
         CreateButton,
         SelectExistingButton,
         InlineCreateForm,
+        useFieldArrayContext,
+        RecordList,
     };
 }
