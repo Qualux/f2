@@ -5,7 +5,9 @@ export const SDO_StandardAPI = {
     baseUrl: 'http://ds.local/wp-json/f3/v1',
     routeBase: '',
 
-    get: async function (page, sortColumn = 'ID', sortOrder = 'DESC', filterValues) {
+    get: async function ( page = 1, sortColumn = 'ID', sortOrder = 'DESC', filterValues = {} ) {
+
+        console.log('get sending...')
 
         const params = {
             page: page,
@@ -13,15 +15,23 @@ export const SDO_StandardAPI = {
             orderby: sortColumn,
         }
 
+        console.log('alive at 18')
+
         if(filterValues.records_per_page) {
             params.records_per_page = filterValues.records_per_page;
         }
+
+        console.log('alive at 24')
 
         if(filterValues.search) {
             params.search = filterValues.search;
         }
 
+        console.log('before send req.')
+
         const response = await axios.get(`${this.baseUrl}/${this.routeBase}`, { params });
+
+        console.log(response)
 
         return response.data;
 

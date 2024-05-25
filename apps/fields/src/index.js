@@ -34,6 +34,7 @@ import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
 
 import Test from './routes/Test';
 import Inline from './routes/Inline';
+import SortableList from './routes/SortableList';
 
 /* Make SDO Route Set. */
 function makeSDO_Routes( sdo ) {
@@ -91,6 +92,10 @@ const router = createHashRouter([
       {
         path: "inline",
         element: <Inline />
+      },
+      {
+        path: "sort",
+        element: <SortableList />
       },
       queryRoutes,
       postTypeRoutes,
