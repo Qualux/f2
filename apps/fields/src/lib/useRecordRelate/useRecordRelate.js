@@ -1,27 +1,22 @@
-import React, { createContext, useState, useContext, useEffect, useRef } from 'react';
+import { createContext, useState, useContext, useEffect, useRef } from 'react';
 import {
     QueryClient,
     QueryClientProvider,
     useQuery,
     keepPreviousData,
 } from '@tanstack/react-query';
-import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
 import Sortable from 'sortablejs';
 import { useFieldArray } from 'react-hook-form';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
 import { useFieldGroupRender } from '../../lib/useFieldGroupRender/useFieldGroupRender';
+import { useStandardAPI } from '../../lib/useStandardAPI';
 
-const sdo = {
-    routeBase: 'field-group',
-};
-
-const RecordRelateContext = createContext();
 const FieldArrayContext = createContext();
 const queryClient = new QueryClient();
 
-export function useRecordRelate() {
+export function useRecordRelate( RecordRelateContext ) {
 
     function RecordRelateProviders({children, fieldName, sdo}) {
 
@@ -111,12 +106,12 @@ export function useRecordRelate() {
 
     function SelectionList() {
 
-        const api = SDO_StandardAPI;
-        api.routeBase = sdo.routeBase;
+        const { sdo } = useRecordRelateContext();
+        const API = useStandardAPI(sdo.routeBase);
 
         const { isLoading, data } = useQuery({
-            queryKey: ['f3_sdo_query_' + sdo.routeBase],
-            queryFn: () => api.get(1),
+            queryKey: ['f3_sdo_query_' + sdo.routeBase, sdo.routeBase],
+            queryFn: () => API.get(1),
             placeholderData: keepPreviousData,
         });
 
@@ -131,13 +126,16 @@ export function useRecordRelate() {
         }
 
         return (
-            <ul>
-                {data.records.map((record, index) => (
-                    <li key={index}>
-                        {record.id} <button onClick={() => addRecord(record)}>Add</button>
-                    </li>
-                ))}
-            </ul>
+            <div>
+                <h2>Selection List {sdo.routeBase} {API.routeBase}</h2>
+                <ul>
+                    {data.records.map((record, index) => (
+                        <li key={index}>
+                            {record.id} <button onClick={() => addRecord(record)}>Add</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         );
 
     }

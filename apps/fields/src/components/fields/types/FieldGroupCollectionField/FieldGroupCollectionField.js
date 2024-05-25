@@ -1,5 +1,8 @@
+import { createContext, useState, useContext } from 'react';
 import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
 import fieldGroupSDO from '../../../../../../../data/sdo/field_group.json';
+
+const FieldRecordRelateContext = createContext();
 
 export default function FieldGroupCollectionField({field}) {
 
@@ -9,7 +12,7 @@ export default function FieldGroupCollectionField({field}) {
         CreateButton,
         SelectExistingButton,
         RecordList,
-    } = useRecordRelate();
+    } = useRecordRelate( FieldRecordRelateContext );
 
     return(
         <main>

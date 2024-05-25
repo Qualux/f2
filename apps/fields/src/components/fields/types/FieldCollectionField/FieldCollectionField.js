@@ -1,5 +1,8 @@
+import { createContext, useState, useContext } from 'react';
 import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
-import fieldGroupSDO from '../../../../../../../data/sdo/field.json';
+import fieldSDO from '../../../../../../../data/sdo/field.json';
+
+const FieldGroupRecordRelateContext = createContext();
 
 export default function FieldCollectionField({field}) {
 
@@ -9,16 +12,16 @@ export default function FieldCollectionField({field}) {
         CreateButton,
         SelectExistingButton,
         RecordList,
-    } = useRecordRelate();
+    } = useRecordRelate( FieldGroupRecordRelateContext );
 
     return(
         <main>
             <h2>
-                Field Groups
+                Fields
             </h2>
             <RecordRelateProviders
                 fieldName={field.field_name}
-                sdo={fieldGroupSDO}
+                sdo={fieldSDO}
             >
                 <main>
                     <div className="flex items-center gap-px">
