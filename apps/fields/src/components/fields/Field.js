@@ -20,6 +20,7 @@ import RadioGroupField from './types/RadioGroupField/RadioGroupField';
 import ImageField from './types/ImageField/ImageField';
 import FileField from './types/FileField/FileField';
 import InlineField from './types/InlineField/InlineField';
+import FieldGroupCollectionField from './types/FieldGroupCollectionField/FieldGroupCollectionField';
 
 function fieldDefinitionTypeCheck(field) {
     if (typeof field === 'object') {
@@ -114,6 +115,9 @@ export default function Field(
             break;
         case 'inline':
             return <InlineField />
+            break;
+        case 'field_group_collection':
+            return <FieldGroupCollectionField />
             break;
         default:
             return(

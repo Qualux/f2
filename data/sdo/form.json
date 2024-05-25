@@ -23,6 +23,12 @@
                     "field_title": "Title",
                     "field_label": "Title",
                     "field_placeholder": "Admin title..."
+                },
+                {
+                    "field_type": "field_group_collection",
+                    "field_name": "field_groups",
+                    "field_title": "Field Groups",
+                    "field_label": "Field Groups"
                 }
             ]
         }
