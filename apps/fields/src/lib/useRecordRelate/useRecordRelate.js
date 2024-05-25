@@ -9,7 +9,8 @@ import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
 import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
 import Sortable from 'sortablejs';
-import { useFormContext, useFieldArray } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
+import { useFormManager } from '../../lib/useFormManager/useFormManager';
 
 const sdo = {
     routeBase: 'field-group',
@@ -34,6 +35,7 @@ export function useRecordRelate() {
 
     function FieldArrayProvider({ children }) {
 
+        const { useFormContext } = useFormManager();
         const { control } = useFormContext();
 
         const { fields, append, remove } = useFieldArray({
@@ -120,6 +122,7 @@ export function useRecordRelate() {
 
     function InlineCreateForm() {
 
+        const { useFormContext } = useFormManager();
         const { register, formState: { errors } } = useFormContext();
 
         return(
@@ -147,6 +150,8 @@ export function useRecordRelate() {
 
         const { useFieldArrayContext } = useRecordRelate();
         const { fields } = useFieldArrayContext();
+
+        const { useFormContext } = useFormManager();
         const { register  } = useFormContext();
     
         return(
