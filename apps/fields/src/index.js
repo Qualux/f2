@@ -33,6 +33,7 @@ import SDO_DeleteRoute from './routes/sdo/SDO_DeleteRoute';
 import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
 
 import Test from './routes/Test';
+import Inline from './routes/Inline';
 
 /* Make SDO Route Set. */
 function makeSDO_Routes( sdo ) {
@@ -86,6 +87,10 @@ const router = createHashRouter([
       {
         path: "test",
         element: <Test />
+      },
+      {
+        path: "inline",
+        element: <Inline />
       },
       queryRoutes,
       postTypeRoutes,

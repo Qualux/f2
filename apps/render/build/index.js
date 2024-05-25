@@ -1,6 +1,37 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/utils/interceptTaxonomyFormSubmission.js":
+/*!******************************************************!*\
+  !*** ./src/utils/interceptTaxonomyFormSubmission.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   interceptTaxonomyFormSubmission: () => (/* binding */ interceptTaxonomyFormSubmission)
+/* harmony export */ });
+function interceptTaxonomyFormSubmission(validationFunction) {
+  function setupFormInterception() {
+    const form = document.getElementById('addtag');
+    console.log(form);
+    console.log(jQuery);
+    window.ajaxEnabled = false;
+    jQuery.ajaxSetup({
+      beforeSend: function () {
+        return window.ajaxEnabled;
+      }
+    });
+    form.addEventListener('submit', e => {
+      console.log('form is submitting...');
+    });
+  }
+  document.addEventListener('DOMContentLoaded', setupFormInterception);
+}
+
+/***/ }),
+
 /***/ "../shared/components/Modal.js":
 /*!*************************************!*\
   !*** ../shared/components/Modal.js ***!
@@ -28802,11 +28833,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "../shared/index.js");
+/* harmony import */ var _utils_interceptTaxonomyFormSubmission__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/interceptTaxonomyFormSubmission */ "./src/utils/interceptTaxonomyFormSubmission.js");
 
 const {
   render,
   useState
 } = wp.element;
+
 
 const formData = {
   form: {
@@ -28850,6 +28883,12 @@ const FormRender = () => {
     SubmitButton,
     FormComplete
   } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+  const validateFormData = () => {
+    // Implement your validation logic here
+    // Return true if validation passes, false otherwise
+    return false;
+  };
+  (0,_utils_interceptTaxonomyFormSubmission__WEBPACK_IMPORTED_MODULE_2__.interceptTaxonomyFormSubmission)(validateFormData);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormProvider, {
     formData: formData
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormComplete, null));

@@ -6,7 +6,7 @@ import { makeDefaultFieldValues } from './defaultValues';
 
 const FormContext = createContext();
 
-export function useFormManager( params = {} ) {
+export function useFormManager() {
 
     function FormProvider({ formData, children }) {
 
@@ -32,9 +32,10 @@ export function useFormManager( params = {} ) {
 
         const formSubmitHandler = (data) => {
 
-            console.log('Handling submit with formSubmitHandler in useFormManager')
-            console.log('Form submit data:')
-            console.log(data)
+            if( window.F3_NESTED_FORM_SUBMISSION ) {
+                console.log('read that we cannot submit because of nested form...')
+                return;
+            }
 
             if( !formData.record?.id ) {
                 formData.api.create(data);
@@ -101,9 +102,6 @@ export function useFormManager( params = {} ) {
         const { formData } = useFormContext();
 
         function render(fieldGroup, index) {
-
-            console.log('field group at render()')
-            console.log(fieldGroup)
 
             if( fieldGroup.repeat ) {
                 return(

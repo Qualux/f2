@@ -86,29 +86,22 @@ class Locations {
 
     function handle_taxonomy_editor( $screen ) {
 
-        print "Detected taxonomy editor 5555555";
-        var_dump($screen->taxonomy);
-
-        add_action( 'category_edit_form_fields', function() {
-            echo 'TAX EDITOR FIELDS';
+        add_action( $screen->taxonomy.'_add_form_fields', function() {
+            echo '<div class="f3-form" style="margin-bottom: 100px; border-bottom:solid 10px red;"></div>';
         });
 
     }
 
-    
-
     function handle_term_editor( $screen ) {
-        print "Detected term editor 222222222";
-
-        echo '<pre>';
-        var_dump($screen);
-        echo '</pre>';
 
         add_action( $screen->taxonomy.'_edit_form_fields', function() {
-            echo 'TERM EDITOR FIELDS';
+            echo '<tr>';
+            echo '<td>';
             echo '<div class="f3-form" style="margin-bottom: 100px; border-bottom:solid 10px red;"></div>';
-            echo '<div class="f3-form" style="margin-bottom: 100px; border-bottom:solid 10px red;"></div>';
-        });
+            echo '</td>';
+            echo '</tr>';
+        }, 50);
+
     }
 
     function handle_user_form() {

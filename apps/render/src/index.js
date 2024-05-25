@@ -1,5 +1,6 @@
 const { render, useState } = wp.element;
 import { useFormManager, Field } from 'shared';
+import { interceptTaxonomyFormSubmission } from './utils/interceptTaxonomyFormSubmission';
 
 const formData = {
   form: {
@@ -40,6 +41,14 @@ const formData = {
 const FormRender = () => {
 
   const { FormProvider, Form, Fields, SubmitButton, FormComplete } = useFormManager();
+
+  const validateFormData = () => {
+        // Implement your validation logic here
+        // Return true if validation passes, false otherwise
+        return false;
+    };
+
+  interceptTaxonomyFormSubmission(validateFormData);
 
   return(
     <FormProvider formData={formData}>

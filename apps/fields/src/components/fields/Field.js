@@ -19,6 +19,7 @@ import CheckboxField from './types/CheckboxField/CheckboxField';
 import RadioGroupField from './types/RadioGroupField/RadioGroupField';
 import ImageField from './types/ImageField/ImageField';
 import FileField from './types/FileField/FileField';
+import InlineField from './types/InlineField/InlineField';
 
 function fieldDefinitionTypeCheck(field) {
     if (typeof field === 'object') {
@@ -110,6 +111,9 @@ export default function Field(
             break;
         case 'file':
             return <FileField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            break;
+        case 'inline':
+            return <InlineField />
             break;
         default:
             return(
