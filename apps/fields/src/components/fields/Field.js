@@ -3,7 +3,6 @@
  * Field does not check conditions for rendering, it is up to the parent component to use React Hook Form to watch conditional values.
  */ 
 
-import systemFieldsJson from '../../data/system_fields.json';
 import TextField from './types/TextField';
 import TextAreaField from './types/TextAreaField';
 import SelectField from './types/SelectField';
@@ -22,33 +21,21 @@ import FileField from './types/FileField/FileField';
 import InlineField from './types/InlineField/InlineField';
 import FieldGroupCollectionField from './types/FieldGroupCollectionField/FieldGroupCollectionField';
 
-function fieldDefinitionTypeCheck(field) {
-    if (typeof field === 'object') {
-        return 'object';
-    } else if (typeof field === 'string') {
-        return 'string';
-    } else {
-        return 'invalid';
-    }
-}
-
 export default function Field( 
         {
-            field:fieldReference, 
+            field, 
             register, 
             errors, 
             getValues, 
             setValue, 
             valuesInit, 
             control, 
-            value
+            value,
+            fieldRegisterPrefix = ''
         }) {
 
-    let field = fieldReference;
-    const fieldDefinitionType = fieldDefinitionTypeCheck( fieldReference );
-    if( fieldDefinitionType === 'string' ) {
-        field = systemFieldsJson[fieldReference];
-    }
+            console.log('fieldRegisterPrefix at Field');
+        console.log(fieldRegisterPrefix)
 
     switch( field.field_type ) {
         case 'text': 
@@ -58,6 +45,7 @@ export default function Field(
                     register={register} 
                     errors={errors} 
                     value={value}
+                    fieldRegisterPrefix={fieldRegisterPrefix}
                 /> 
             )
             break
@@ -117,7 +105,7 @@ export default function Field(
             return <InlineField />
             break;
         case 'field_group_collection':
-            return <FieldGroupCollectionField />
+            return <FieldGroupCollectionField field={field} />
             break;
         default:
             return(

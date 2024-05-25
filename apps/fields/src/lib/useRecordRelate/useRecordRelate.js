@@ -11,36 +11,58 @@ import SkeletonList from '../../components/global/SkeletonList';
 import Sortable from 'sortablejs';
 import { useFieldArray } from 'react-hook-form';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
+import { useFieldGroupRender } from '../../lib/useFieldGroupRender/useFieldGroupRender';
 
 const sdo = {
     routeBase: 'field-group',
 };
 
+const RecordRelateContext = createContext();
 const FieldArrayContext = createContext();
 const queryClient = new QueryClient();
 
 export function useRecordRelate() {
 
-    function RecordRelateProviders({children}) {
+    function RecordRelateProviders({children, fieldName, sdo}) {
 
         return (
-            <QueryClientProvider client={queryClient}>
-                <FieldArrayProvider>
-                    {children}
-                </FieldArrayProvider>
-            </QueryClientProvider>
+            <RecordRelateProvider
+                fieldName={fieldName}
+                sdo={sdo}
+            >
+                <QueryClientProvider client={queryClient}>
+                    <FieldArrayProvider>
+                        {children}
+                    </FieldArrayProvider>
+                </QueryClientProvider>
+            </RecordRelateProvider>
         );
 
+    }
+
+    function RecordRelateProvider({children, fieldName, sdo}) {
+
+        return (
+            <RecordRelateContext.Provider value={{ fieldName, sdo }}>
+                {children}
+            </RecordRelateContext.Provider>
+        );
+
+    }
+
+    function useRecordRelateContext() {
+        return useContext(RecordRelateContext);
     }
 
     function FieldArrayProvider({ children }) {
 
         const { useFormContext } = useFormManager();
         const { control } = useFormContext();
+        const { fieldName } = useRecordRelateContext();
 
         const { fields, append, remove } = useFieldArray({
             control: control,
-            name: 'records'
+            name: fieldName,
           });
 
         function addRecord(record) {
@@ -120,27 +142,20 @@ export function useRecordRelate() {
 
     }
 
-    function InlineCreateForm() {
-
-        const { useFormContext } = useFormManager();
-        const { register, formState: { errors } } = useFormContext();
+    function InlineCreateForm( { fieldRegisterPrefix } ) {
+        
+        const { sdo } = useRecordRelateContext();
+        const { FieldGroupRender } = useFieldGroupRender();
 
         return(
-            <div>
-                <div>
-                    <label className="block text-neutral-400 font-medium mb-1">Title</label>
-                    <input
-                        type="text"
-                        className="border border-neutral-400 bg-neutral-800 text-neutral-200 text-sm px-2 py-1 rounded"
-                        {...register("title", { required: "Title is required" })}
+            <div className="flex gap-3 mb-2">
+                {sdo.field_groups.map((fieldGroup, index) => (
+                    <FieldGroupRender 
+                        key={index}
+                        fieldGroup={fieldGroup}
+                        fieldRegisterPrefix={fieldRegisterPrefix}
                     />
-                    {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
-                </div>
-                <div>
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                        Submit
-                    </button>
-                </div>
+                ))}
             </div>
         );
 
@@ -149,27 +164,20 @@ export function useRecordRelate() {
     function RecordList() {
 
         const { useFieldArrayContext } = useRecordRelate();
-        const { fields } = useFieldArrayContext();
-
-        const { useFormContext } = useFormManager();
-        const { register  } = useFormContext();
+        const { fieldName } = useRecordRelateContext();
+        const { fields } = useFieldArrayContext();    
     
         return(
             <div className="p-6"> 
                 {fields.map((field, index) => (
-                    <div key={field.id} className="flex gap-3 mb-2">
-                        <input
-                            className="bg-neutral-700 text-neutral-200"
-                            {...register(`records.${index}.id`)} 
-                        />
-                        <input
-                            className="bg-neutral-700 text-neutral-200"
-                            {...register(`records.${index}.title`)} 
-                        />
-                    </div>
+                    <InlineCreateForm 
+                        key={field.id}
+                        fieldRegisterPrefix={`${fieldName}.${index}`}
+                    />
                 ))} 
             </div>
-        )
+        );
+
     }
 
     return {
@@ -177,8 +185,8 @@ export function useRecordRelate() {
         SelectionList,
         CreateButton,
         SelectExistingButton,
-        InlineCreateForm,
-        useFieldArrayContext,
         RecordList,
+        useFieldArrayContext,
+        useRecordRelateContext, 
     };
 }

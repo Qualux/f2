@@ -274,9 +274,11 @@ export function useFormManager() {
         FormProvider,
         Form,
         Fields,
+        Field,
         SubmitButton,
         makeValidationObject,
         FormComplete,
+        checkConditions,
     }
 
 }

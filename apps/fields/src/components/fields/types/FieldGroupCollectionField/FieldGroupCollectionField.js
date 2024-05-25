@@ -1,6 +1,7 @@
 import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
+import fieldGroupSDO from '../../../../../../../data/sdo/field_group.json';
 
-export default function FieldGroupCollectionField() {
+export default function FieldGroupCollectionField({field}) {
 
     const { 
         RecordRelateProviders, 
@@ -12,14 +13,19 @@ export default function FieldGroupCollectionField() {
 
     return(
         <main>
-            <h2>Field Group Collection</h2>
-            <RecordRelateProviders>
+            <h2>
+                Field Groups
+            </h2>
+            <RecordRelateProviders
+                fieldName={field.field_name}
+                sdo={fieldGroupSDO}
+            >
                 <main>
                     <div className="flex items-center gap-px">
                         <CreateButton />
                         <SelectExistingButton />
                     </div>
-                    <section className="grid grid-cols-2 gap-px bg-neutral-800 text-neutral-100">
+                    <section className="flex gap-px bg-neutral-800 text-neutral-100">
                         <SelectionList />
                         <RecordList />
                     </section>
