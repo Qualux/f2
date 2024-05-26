@@ -25,9 +25,11 @@ class DashboardDataRoutes {
                     'options_pages' => wp_count_posts('f3-options-page'),
                     'taxonomies'    => wp_count_posts('f3-taxonomy'),
                     'post_types'    => wp_count_posts('f3-post-type'),
-                    'fields'        => wp_count_posts('field'),
-                    'field_groups'  => wp_count_posts('field-group'),
-                    'forms'          => wp_count_posts('form'),
+                    'fields'        => wp_count_posts('f3-field'),
+                    'field_groups'  => wp_count_posts('f3-field-group'),
+                    'forms'         => wp_count_posts('f3-form'),
+                    'grids'         => wp_count_posts('f3-grid'),
+                    'queries'       => wp_count_posts('f3-query'),
                 ];
 
                 return new \WP_REST_Response(

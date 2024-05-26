@@ -34,7 +34,11 @@ class F3_OptionsPage {
             $icon_url      = get_post_meta( $p->ID, 'icon_url', 1 );
             $position      = get_post_meta( $p->ID, 'position', 1 );
 
-            // @TODO use WP core menu/submenu add functions.
+            // Validation $position is numeric. 
+            if (!is_numeric($position)) {
+                $position = 10; // Set to default 10 if not numeric position.
+            }
+
             add_menu_page( 
                 $menu_title, 
                 $menu_title, 

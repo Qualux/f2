@@ -59,12 +59,14 @@ class Locations {
 
     function handle_post_editor() {
 
+        /* @TODO remove reliance on Metabox so it can be removed.
         $mb = new Metabox();
         $form = new \stdClass;
         $form->id = 100;
         $form->title = 'Test Form 1';
         $form->location_post_type = 'classic';
         $mb->form_meta_box( $form );
+        */
 
     }
 
