@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useCrudible } from './useCrudible';
-import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
+import { useStandardAPI } from '../../lib/useStandardAPI';
 
 export default function ViewScreen( {id} ) {
 
@@ -8,19 +8,15 @@ export default function ViewScreen( {id} ) {
 
     const { useSDO } = useCrudible();
     const sdo = useSDO();
-
-    // Setup API.
-    const api = SDO_StandardAPI;
-    api.route_base = sdo.route_base;
+    const API = useStandardAPI(sdo.route_base);
 
     useEffect( () => {
        
-        async function fetchData( id, api ) {
-            
-            const data = await api.getOne(id);
+        async function fetchData( id, API ) {  
+            const data = await API.getOne(id);
             setRecord(data.record);
         }
-        fetchData( id, api );
+        fetchData( id, API );
 
     }, [])
 
