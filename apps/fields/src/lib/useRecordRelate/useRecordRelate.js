@@ -111,10 +111,10 @@ export function useRecordRelate( RecordRelateContext ) {
     function SelectionList() {
 
         const { sdo } = useRecordRelateContext();
-        const API = useStandardAPI(sdo.routeBase);
+        const API = useStandardAPI(sdo.route_base);
 
         const { isLoading, data } = useQuery({
-            queryKey: ['f3_sdo_query_' + sdo.routeBase, sdo.routeBase],
+            queryKey: ['f3_sdo_query_' + sdo.route_base, sdo.route_base],
             queryFn: () => API.get(1),
             placeholderData: keepPreviousData,
         });
@@ -131,7 +131,7 @@ export function useRecordRelate( RecordRelateContext ) {
 
         return (
             <div>
-                <h2>Selection List {sdo.routeBase} {API.routeBase}</h2>
+                <h2>Selection List {sdo.route_base} {API.route_base}</h2>
                 <ul>
                     {data.records.map((record, index) => (
                         <li key={index}>

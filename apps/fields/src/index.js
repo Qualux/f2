@@ -40,7 +40,7 @@ import SortableList from './routes/SortableList';
 function makeSDO_Routes( sdo ) {
 
   const routes = {
-    path: sdo.routeBase,
+    path: sdo.route_base,
     element: <SDO_DashboardRoute sdo={sdo} />,
     children: [
       {

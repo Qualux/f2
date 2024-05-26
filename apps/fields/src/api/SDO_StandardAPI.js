@@ -3,12 +3,12 @@ import axios from 'axios';
 export const SDO_StandardAPI = {
 
     baseUrl: 'http://ds.local/wp-json/f3/v1',
-    routeBase: '',
+    route_base: '',
 
     get: async function ( page = 1, sortColumn = 'ID', sortOrder = 'DESC', filterValues = {} ) {
 
         console.log('api call SDO_StandardAPI:');
-        console.log(this.routeBase)
+        console.log(this.route_base)
 
         const params = {
             page: page,
@@ -25,19 +25,19 @@ export const SDO_StandardAPI = {
             params.search = filterValues.search;
         }
 
-        const response = await axios.get(`${this.baseUrl}/${this.routeBase}`, { params });
+        const response = await axios.get(`${this.baseUrl}/${this.route_base}`, { params });
         return response.data;
 
     },
 
     getOne: async function (id) {
-        const response = await axios.get(`${this.baseUrl}/${this.routeBase}/${id}`);
+        const response = await axios.get(`${this.baseUrl}/${this.route_base}/${id}`);
         return response.data;
     },
 
     create: async function (data) {
         try {
-            const response = await axios.post(`${this.baseUrl}/${this.routeBase}`, data);
+            const response = await axios.post(`${this.baseUrl}/${this.route_base}`, data);
             return response.data;
         } catch (error) {
             throw new Error('Failed to create item.');
@@ -46,7 +46,7 @@ export const SDO_StandardAPI = {
 
     edit: async function (id, data) {
         try {
-            const response = await axios.put(`${this.baseUrl}/${this.routeBase}/${id}`, data);
+            const response = await axios.put(`${this.baseUrl}/${this.route_base}/${id}`, data);
             return response.data;
         } catch (error) {
             throw new Error('Failed to edit item.');
@@ -56,7 +56,7 @@ export const SDO_StandardAPI = {
 
     delete: async function (id) {
         try {
-            const response = await axios.delete(`${this.baseUrl}/${this.routeBase}/${id}`);
+            const response = await axios.delete(`${this.baseUrl}/${this.route_base}/${id}`);
             return response.data;
         } catch (error) {
             throw new Error('Failed to delete item.');

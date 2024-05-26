@@ -19,13 +19,13 @@ export default function Manager() {
 
     // Setup API.
     const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    api.route_base = sdo.route_base;
 
     const {
         isLoading,
         data,
     } = useQuery({
-        queryKey: ['f3_sdo_query_'+sdo.routeBase, page, sortColumn, sortOrder, filterValues],
+        queryKey: ['f3_sdo_query_'+sdo.route_base, page, sortColumn, sortOrder, filterValues],
         queryFn: () => api.get(page, sortColumn, sortOrder, filterValues),
         placeholderData: keepPreviousData,
     });

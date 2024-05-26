@@ -11,7 +11,7 @@ export default function ViewScreen( {id} ) {
 
     // Setup API.
     const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    api.route_base = sdo.route_base;
 
     useEffect( () => {
        

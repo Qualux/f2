@@ -3,7 +3,7 @@ import { useFormManager } from '../lib/useFormManager/useFormManager';
 import { SDO_StandardAPI } from '../api/SDO_StandardAPI';
 
 const api = SDO_StandardAPI;
-api.routeBase = 'options-page';
+api.route_base = 'options-page';
 
 const formData = {
     form: {

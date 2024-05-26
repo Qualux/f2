@@ -13,7 +13,7 @@ export default function DeleteScreen( {id} ) {
 
     // Setup API.
     const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    api.route_base = sdo.route_base;
 
     const deleteHandler = async (e) => {
         try {

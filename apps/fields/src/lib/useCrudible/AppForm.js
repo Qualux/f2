@@ -13,7 +13,7 @@ export default function AppForm( { recordId = 0 } ) {
 
     // Setup API.
     const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    api.route_base = sdo.route_base;
 
     const { data } = useQuery({
         queryKey: ['record', recordId],

@@ -5,7 +5,7 @@ import AppTemplate from '../../components/global/AppTemplate';
 export default function SDO_DashboardRoute( {sdo} ) {
 
     const location = useLocation();
-    const isMainRoute = location.pathname === '/' + sdo.routeBase;
+    const isMainRoute = location.pathname === '/' + sdo.route_base;
 
     const { Crudible, Manager } = useCrudible();
 
