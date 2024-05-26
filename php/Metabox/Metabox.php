@@ -104,34 +104,4 @@ class Metabox {
         
     }
 
-    /* Form metaboxes. Newer, after location switched from FG to Form. */
-
-    function form_meta_box( $form ) {
-
-        add_action('add_meta_boxes', function( $post_type ) use ( $form ) {
-
-            echo 'adding metabox';
-            echo 'post type is: ' . $post_type;
-            var_dump($form);
-
-            add_meta_box( 
-                'f3_metabox_form_' . $form->id, 
-                $form->title, 
-                [ $this, 'form_content' ], 
-                $form->location_post_type, 
-                'advanced', 
-                'default',
-                [ 'form_id' => $form->id ],
-            );
-
-        });
-
-    }
-
-    function form_content( $post, $box ) {
-
-        echo 'FORM METABOX';
-
-    }
-
 }
