@@ -23,18 +23,37 @@ class StandardAPI {
             params.search = filterValues.search;
         }
 
-        const response = await axios.get(`${this.baseUrl}/${this.route_base}`, { params });
+        const response = await axios.get(`${this.baseUrl}/${this.route_base}`, {
+            params,
+            withCredentials: true,
+            headers: {
+                'content-type': 'application/json',
+                'X-WP-Nonce': window.wpApiSettings.nonce,
+            }
+        });
         return response.data;
     }
 
     async getOne(id) {
-        const response = await axios.get(`${this.baseUrl}/${this.route_base}/${id}`);
+        const response = await axios.get(`${this.baseUrl}/${this.route_base}/${id}`, {
+            withCredentials: true,
+            headers: {
+                'content-type': 'application/json',
+                'X-WP-Nonce': window.wpApiSettings.nonce,
+            }
+        });
         return response.data;
     }
 
     async create(data) {
         try {
-            const response = await axios.post(`${this.baseUrl}/${this.route_base}`, data);
+            const response = await axios.post(`${this.baseUrl}/${this.route_base}`, data, {
+                withCredentials: true,
+                headers: {
+                    'content-type': 'application/json',
+                    'X-WP-Nonce': window.wpApiSettings.nonce,
+                }
+            });
             return response.data;
         } catch (error) {
             throw new Error('Failed to create item.');
@@ -43,7 +62,13 @@ class StandardAPI {
 
     async edit(id, data) {
         try {
-            const response = await axios.put(`${this.baseUrl}/${this.route_base}/${id}`, data);
+            const response = await axios.put(`${this.baseUrl}/${this.route_base}/${id}`, data, {
+                withCredentials: true,
+                headers: {
+                    'content-type': 'application/json',
+                    'X-WP-Nonce': window.wpApiSettings.nonce,
+                }
+            });
             return response.data;
         } catch (error) {
             throw new Error('Failed to edit item.');
@@ -52,7 +77,13 @@ class StandardAPI {
 
     async delete(id) {
         try {
-            const response = await axios.delete(`${this.baseUrl}/${this.route_base}/${id}`);
+            const response = await axios.delete(`${this.baseUrl}/${this.route_base}/${id}`, {
+                withCredentials: true,
+                headers: {
+                    'content-type': 'application/json',
+                    'X-WP-Nonce': window.wpApiSettings.nonce,
+                }
+            });
             return response.data;
         } catch (error) {
             throw new Error('Failed to delete item.');
