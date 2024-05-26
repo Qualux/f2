@@ -18,53 +18,53 @@
             "post_type": "f3-taxonomy",
             "fields": [
                 {
-                    "field_type": "text",
-                    "field_name": "title",
-                    "field_title": "Title",
-                    "field_label": "Title",
-                    "field_placeholder": "Admin title..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Title",
+                    "label": "Title",
+                    "placeholder": "Admin title..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "taxonomy_key",
-                    "field_title": "Taxonomy Key",
-                    "field_label": "Taxonomy Key",
-                    "field_placeholder": "Unique lowercase taxonomy key..."
+                    "type": "text",
+                    "name": "taxonomy_key",
+                    "title": "Taxonomy Key",
+                    "label": "Taxonomy Key",
+                    "placeholder": "Unique lowercase taxonomy key..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "object_type",
-                    "field_title": "Object Type",
-                    "field_label": "Object Type",
-                    "field_placeholder": "Object, post type to associate..."
+                    "type": "text",
+                    "name": "object_type",
+                    "title": "Object Type",
+                    "label": "Object Type",
+                    "placeholder": "Object, post type to associate..."
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "public",
-                    "field_title": "Public",
-                    "field_label": "Public",
+                    "type": "true_false",
+                    "name": "public",
+                    "title": "Public",
+                    "label": "Public",
                     "default_value": true
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "publicly_queryable",
-                    "field_title": "Public Queryable",
-                    "field_label": "Public Queryable",
+                    "type": "true_false",
+                    "name": "publicly_queryable",
+                    "title": "Public Queryable",
+                    "label": "Public Queryable",
                     "default_value": true
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "hierarchical",
-                    "field_title": "Hierarchical",
-                    "field_label": "Hierarchical",
+                    "type": "true_false",
+                    "name": "hierarchical",
+                    "title": "Hierarchical",
+                    "label": "Hierarchical",
                     "default_value": false
                 }, 
                 {
-                    "field_type": "number",
-                    "field_name": "position",
-                    "field_title": "Position",
-                    "field_label": "Position",
-                    "field_placeholder": "Position in menu..."
+                    "type": "number",
+                    "name": "position",
+                    "title": "Position",
+                    "label": "Position",
+                    "placeholder": "Position in menu..."
                 }
             ]
         }

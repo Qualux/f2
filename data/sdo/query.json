@@ -18,11 +18,11 @@
             "post_type": "f3-post-type",
             "fields": [
                 {
-                    "field_type": "text",
-                    "field_name": "title",
-                    "field_title": "Title",
-                    "field_label": "Title",
-                    "field_placeholder": "Admin title..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Title",
+                    "label": "Title",
+                    "placeholder": "Admin title..."
                 }
             ]
         }

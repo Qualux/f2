@@ -18,10 +18,10 @@
             "post_type": "f3-field",
             "fields": [
                 {
-                    "field_type": "searchable_select",
-                    "field_name": "field_type",
-                    "field_title": "Field Type",
-                    "field_label": "Field Type",
+                    "type": "searchable_select",
+                    "name": "type",
+                    "title": "Field Type",
+                    "label": "Field Type",
                     "field_choices": [
                         {
                             "label": "Basic Fields",
@@ -80,39 +80,39 @@
                     ]        
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "field_title",
-                    "field_title": "Field Title",
-                    "field_label": "Field Title",
-                    "field_placeholder": "Enter title for display..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Field Title",
+                    "label": "Field Title",
+                    "placeholder": "Enter title for display..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "field_label",
-                    "field_title": "Field Label",
-                    "field_label": "Field Label",
-                    "field_placeholder": "Enter label for display, leave blank to turn off label rendering..."
+                    "type": "text",
+                    "name": "label",
+                    "title": "Field Label",
+                    "label": "Field Label",
+                    "placeholder": "Enter label for display, leave blank to turn off label rendering..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "field_name",
-                    "field_title": "Field Name",
-                    "field_label": "Field Name",
-                    "field_placeholder": "Unique lowercase system name..."
+                    "type": "text",
+                    "name": "name",
+                    "title": "Field Name",
+                    "label": "Field Name",
+                    "placeholder": "Unique lowercase system name..."
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "field_conditions",
-                    "field_title": "Render Conditionally",
-                    "field_label": "Render Conditionally",
-                    "field_placeholder": "Unique lowercase system name..."
+                    "type": "true_false",
+                    "name": "field_conditions",
+                    "title": "Render Conditionally",
+                    "label": "Render Conditionally",
+                    "placeholder": "Unique lowercase system name..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "field_condition_rules",
-                    "field_title": "Configure Condition Rules",
-                    "field_label": "Configure Condition Rules",
-                    "field_placeholder": "Condition rules...",
+                    "type": "text",
+                    "name": "field_condition_rules",
+                    "title": "Configure Condition Rules",
+                    "label": "Configure Condition Rules",
+                    "placeholder": "Condition rules...",
                     "field_conditions": true,
                     "field_condition_rules": [
                         [
@@ -125,17 +125,17 @@
                     ]
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "field_placeholder",
-                    "field_title": "Field Placeholder",
-                    "field_label": "Field Placeholder",
-                    "field_placeholder": "Enter placeholder text..."
+                    "type": "text",
+                    "name": "placeholder",
+                    "title": "Field Placeholder",
+                    "label": "Field Placeholder",
+                    "placeholder": "Enter placeholder text..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "field_default_value",
-                    "field_title": "Default Value",
-                    "field_label": "Default Value"
+                    "type": "text",
+                    "name": "field_default_value",
+                    "title": "Default Value",
+                    "label": "Default Value"
                 }
             ]
         }

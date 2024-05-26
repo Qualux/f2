@@ -18,33 +18,33 @@
             "post_type": "f3-options-page",
             "fields": [
                 {
-                    "field_type": "text",
-                    "field_name": "title",
-                    "field_title": "Title",
-                    "field_label": "Title",
-                    "field_placeholder": "Admin title..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Title",
+                    "label": "Title",
+                    "placeholder": "Admin title..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "page_slug",
-                    "field_title": "Page Slug",
-                    "field_label": "Page Slug",
-                    "field_placeholder": "Page slug...",
+                    "type": "text",
+                    "name": "page_slug",
+                    "title": "Page Slug",
+                    "label": "Page Slug",
+                    "placeholder": "Page slug...",
                     "field_default_value": "slug-123"
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "icon_url",
-                    "field_title": "Icon",
-                    "field_label": "Icon",
-                    "field_placeholder": "Dashicon name or icon URL..."
+                    "type": "text",
+                    "name": "icon_url",
+                    "title": "Icon",
+                    "label": "Icon",
+                    "placeholder": "Dashicon name or icon URL..."
                 },
                 {
-                    "field_type": "number",
-                    "field_name": "position",
-                    "field_title": "Position",
-                    "field_label": "Position",
-                    "field_placeholder": "Position in menu...",
+                    "type": "number",
+                    "name": "position",
+                    "title": "Position",
+                    "label": "Position",
+                    "placeholder": "Position in menu...",
                     "field_default_value": 15.89
                 }
             ]

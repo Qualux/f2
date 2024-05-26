@@ -18,17 +18,17 @@
             "post_type": "f3-form",
             "fields": [
                 {
-                    "field_type": "text",
-                    "field_name": "title",
-                    "field_title": "Title",
-                    "field_label": "Title",
-                    "field_placeholder": "Admin title..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Title",
+                    "label": "Title",
+                    "placeholder": "Admin title..."
                 },
                 {
-                    "field_type": "field_group_collection",
-                    "field_name": "field_groups",
-                    "field_title": "Field Groups",
-                    "field_label": "Field Groups"
+                    "type": "field_group_collection",
+                    "name": "field_groups",
+                    "title": "Field Groups",
+                    "label": "Field Groups"
                 }
             ]
         }

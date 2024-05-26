@@ -18,89 +18,89 @@
             "post_type": "f3-post-type",
             "fields": [
                 {
-                    "field_type": "text",
-                    "field_name": "title",
-                    "field_title": "Title",
-                    "field_label": "Title",
-                    "field_placeholder": "Admin title..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Title",
+                    "label": "Title",
+                    "placeholder": "Admin title..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "post_type_key",
-                    "field_title": "Post Type Key",
-                    "field_label": "Post Type Key",
-                    "field_placeholder": "Unique lowercase post type key..."
+                    "type": "text",
+                    "name": "post_type_key",
+                    "title": "Post Type Key",
+                    "label": "Post Type Key",
+                    "placeholder": "Unique lowercase post type key..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "name_plural",
-                    "field_title": "Plural Name",
-                    "field_label": "Plural Name",
-                    "field_placeholder": "Plural name..."
+                    "type": "text",
+                    "name": "name_plural",
+                    "title": "Plural Name",
+                    "label": "Plural Name",
+                    "placeholder": "Plural name..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "singular_name",
-                    "field_title": "Singular Name",
-                    "field_label": "Singular Name",
-                    "field_placeholder": "Singular name..."
+                    "type": "text",
+                    "name": "singular_name",
+                    "title": "Singular Name",
+                    "label": "Singular Name",
+                    "placeholder": "Singular name..."
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "description",
-                    "field_title": "Description",
-                    "field_label": "Description",
-                    "field_placeholder": "Short description of what the post type is used for..."
+                    "type": "text",
+                    "name": "description",
+                    "title": "Description",
+                    "label": "Description",
+                    "placeholder": "Short description of what the post type is used for..."
                 }, 
                 {
-                    "field_type": "true_false",
-                    "field_name": "public",
-                    "field_title": "Public",
-                    "field_label": "Public",
+                    "type": "true_false",
+                    "name": "public",
+                    "title": "Public",
+                    "label": "Public",
                     "default_value": false
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "show_ui",
-                    "field_title": "Show UI",
-                    "field_label": "Show UI",
+                    "type": "true_false",
+                    "name": "show_ui",
+                    "title": "Show UI",
+                    "label": "Show UI",
                     "default_value": false
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "show_in_menu",
-                    "field_title": "Show in Menu",
-                    "field_label": "Show in Menu",
+                    "type": "true_false",
+                    "name": "show_in_menu",
+                    "title": "Show in Menu",
+                    "label": "Show in Menu",
                     "default_value": false
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "show_in_rest",
-                    "field_title": "Show in REST",
-                    "field_label": "Show in REST",
+                    "type": "true_false",
+                    "name": "show_in_rest",
+                    "title": "Show in REST",
+                    "label": "Show in REST",
                     "field_default_value": true
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "hierarchical",
-                    "field_title": "Hierarchical",
-                    "field_label": "Hierarchical",
+                    "type": "true_false",
+                    "name": "hierarchical",
+                    "title": "Hierarchical",
+                    "label": "Hierarchical",
                     "default_value": false
                 },
                 {
-                    "field_type": "number",
-                    "field_name": "position",
-                    "field_title": "Position",
-                    "field_label": "Position",
-                    "field_placeholder": "Position in menu...",
+                    "type": "number",
+                    "name": "position",
+                    "title": "Position",
+                    "label": "Position",
+                    "placeholder": "Position in menu...",
                     "field_default_value": 15.12
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "test_condition_field",
-                    "field_title": "Test Condition Field",
-                    "field_label": "Test Condition Field",
-                    "field_placeholder": "Test condition field...",
+                    "type": "text",
+                    "name": "test_condition_field",
+                    "title": "Test Condition Field",
+                    "label": "Test Condition Field",
+                    "placeholder": "Test condition field...",
                     "field_conditions": true,
                     "field_condition_rules": [
                         [

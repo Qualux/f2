@@ -18,37 +18,37 @@
             "post_type": "f3-field-group",
             "fields": [
                 {
-                    "field_type": "text",
-                    "field_name": "title",
-                    "field_title": "Field Group Title",
-                    "field_label": "Field Group Title",
-                    "field_placeholder": "Enter title for display..."
+                    "type": "text",
+                    "name": "title",
+                    "title": "Field Group Title",
+                    "label": "Field Group Title",
+                    "placeholder": "Enter title for display..."
                 },
                 {
-                    "field_type": "field_collection",
-                    "field_name": "fields",
-                    "field_title": "Fields",
-                    "field_label": "Fields"
+                    "type": "field_collection",
+                    "name": "fields",
+                    "title": "Fields",
+                    "label": "Fields"
                 },
                 {
-                    "field_type": "text",
-                    "field_name": "location_post_type",
-                    "field_title": "Post Type",
-                    "field_label": "Post Type",
-                    "field_placeholder": "Enter post type to assign field group..."
+                    "type": "text",
+                    "name": "location_post_type",
+                    "title": "Post Type",
+                    "label": "Post Type",
+                    "placeholder": "Enter post type to assign field group..."
                 },
                 {
-                    "field_type": "number",
-                    "field_name": "location_options_page",
-                    "field_title": "Options Page",
-                    "field_label": "Options Page",
-                    "field_placeholder": "Options page ID to assign field group..."
+                    "type": "number",
+                    "name": "location_options_page",
+                    "title": "Options Page",
+                    "label": "Options Page",
+                    "placeholder": "Options page ID to assign field group..."
                 },
                 {
-                    "field_type": "true_false",
-                    "field_name": "repeat",
-                    "field_title": "Repeat Fields",
-                    "field_label": "Repeat Fields"
+                    "type": "true_false",
+                    "name": "repeat",
+                    "title": "Repeat Fields",
+                    "label": "Repeat Fields"
                 }
             ]
         }
