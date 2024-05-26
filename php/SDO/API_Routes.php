@@ -25,7 +25,7 @@ class API_Routes {
     function register_one( $sdo ) {
 
         // Get collection route.
-        \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'], 
+        \register_rest_route( '/f3/v1', '/' . $sdo['route_base'], 
             array(
                 'methods' => 'GET',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -117,7 +117,7 @@ class API_Routes {
         );
 
         // Get one route.
-        register_rest_route( 'f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', array(
+        register_rest_route( 'f3/v1', '/' . $sdo['route_base'] . '/(?P<id>\d+)', array(
             'methods' => 'GET',
             'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
                 $id = $req->get_param( 'id' );
@@ -138,7 +138,7 @@ class API_Routes {
         ));
 
         // Create route.
-        \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'], 
+        \register_rest_route( '/f3/v1', '/' . $sdo['route_base'], 
             array(
                 'methods' => 'POST',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -173,7 +173,7 @@ class API_Routes {
         );
 
         // Edit route. 
-        \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)',
+        \register_rest_route( '/f3/v1', '/' . $sdo['route_base'] . '/(?P<id>\d+)',
             array(
                 'methods' => 'PUT',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
@@ -210,7 +210,7 @@ class API_Routes {
         );
 
         // Delete route.
-        \register_rest_route( '/f3/v1', '/' . $sdo['routeBase'] . '/(?P<id>\d+)', 
+        \register_rest_route( '/f3/v1', '/' . $sdo['route_base'] . '/(?P<id>\d+)', 
             array(
                 'methods' => 'DELETE',
                 'callback' => function( \WP_REST_Request $req ) use ( $sdo ) {
