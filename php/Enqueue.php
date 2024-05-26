@@ -24,10 +24,12 @@ class Enqueue {
         
             wp_localize_script( 
                 'f3-app-fields', 
-                'wpApiSettings', 
+                'f3Settings', 
                 array( 
-                    'root'  => esc_url_raw( rest_url() ) . 'f3/v1', 
-                    'nonce' => wp_create_nonce( 'wp_rest' ) 
+                    'apiRoot'        => esc_url_raw( rest_url() ),
+                    'apiF3Root'      => esc_url_raw( rest_url() ) . 'f3/v1/',
+                    'nonce'          => wp_create_nonce( 'wp_rest' ),
+                    'apiCorePrefix'  => rest_get_url_prefix(),
                 ) 
             );
 

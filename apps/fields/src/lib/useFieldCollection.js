@@ -10,7 +10,7 @@ export function useFieldCollection() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${window.wpApiSettings.root}/f3/v1/field`
+          `${window.f3Settings.apiF3Root}field`
         );
         const data = await response.json();
         setFields(data.records);
