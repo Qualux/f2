@@ -20,8 +20,10 @@ class Plugin {
 
         /* SDO Classes */
         require_once( F3_PATH . '/php/SDO/Model.php' );
+
         require_once( F3_PATH . '/php/SDO/API_Routes.php' );
         new SDO\API_Routes();
+        
         require_once( F3_PATH . '/php/SDO/PostTypes.php' );
         new SDO\PostTypes();
 
@@ -31,36 +33,12 @@ class Plugin {
         require_once( F3_PATH . '/php/Enqueue.php' );
         $e = new Enqueue();
 
-        require_once( F3_PATH . '/php/Field/Field.php' );
-
-        require_once( F3_PATH . '/php/Field/FieldPostType.php' );
-        $fpt = new Field\FieldPostType();
-
-        require_once( F3_PATH . '/php/Field/FieldShortcodes.php' );
-        $fs = new Field\FieldShortcodes();
-
-        require_once( F3_PATH . '/php/Field/FieldRoutes.php' );
-        $r = new Field\FieldRoutes();
-
         require_once( F3_PATH . '/php/Metabox/Metabox.php' );
         $m = new Metabox\Metabox();
-
-        require_once( F3_PATH . '/php/FieldGroup/FieldGroup.php' );
-        $fgpt = new FieldGroup\FieldGroup();
 
         /*
          * Form internal SDO.
          */
-        require_once( F3_PATH . '/php/Form/Form.php' );
-        require_once( F3_PATH . '/php/Form/FormPostType.php' );
-        $frt = new Form\FormPostType();
-        require_once( F3_PATH . '/php/Form/FormRoutes.php' );
-        new Form\FormRoutes();
-
-        require_once( F3_PATH . '/php/FieldType/FieldType.php' );
-        require_once( F3_PATH . '/php/FieldType/FieldTypeText.php' );
-        require_once( F3_PATH . '/php/FieldType/FieldTypeSelect.php' );
-        require_once( F3_PATH . '/php/FieldType/FieldTypeNumber.php' );
 
         require_once( F3_PATH . '/php/DataStructure/F3_PostType.php' );
         $dspt = new DataStructure\F3_PostType();
