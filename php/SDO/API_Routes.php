@@ -112,7 +112,9 @@ class API_Routes {
                     );
     
                 },
-                'permission_callback' => function() { return true; },
+                'permission_callback' => function() {
+                    return current_user_can('edit_others_posts');
+                },
             )
         );
 
@@ -134,7 +136,9 @@ class API_Routes {
                     )
                 );
             },
-            'permission_callback' => '__return_true',
+            'permission_callback' => function() {
+                return current_user_can('edit_others_posts');
+            },
         ));
 
         // Create route.
@@ -168,7 +172,9 @@ class API_Routes {
                     );
     
                 },
-                'permission_callback' => function() { return true; },
+                'permission_callback' => function() {
+                    return current_user_can('edit_others_posts');
+                },
             )
         );
 
@@ -205,7 +211,9 @@ class API_Routes {
                     );
     
                 },
-                'permission_callback' => function() { return true; },
+                'permission_callback' => function() {
+                    return current_user_can('edit_others_posts');
+                },
             )
         );
 
@@ -227,7 +235,9 @@ class API_Routes {
                     );
     
                 },
-                'permission_callback' => function() { return true; },
+                'permission_callback' => function() {
+                    return current_user_can('edit_others_posts');
+                },
             )
         );
         

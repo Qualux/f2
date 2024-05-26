@@ -11,14 +11,26 @@ class Enqueue {
         // @TODO render scripts required for Options Pages, Taxonomy and User editing.
 
         add_action( 'admin_enqueue_scripts', function() {
+
             $screen = \get_current_screen();
             if( $screen->base !== 'toplevel_page_f3' ) {
                 return;
             }
+
             $json  = file_get_contents( F3_PATH . '/apps/fields/build/asset-manifest.json'); 
             $build = json_decode( $json, true); 
             wp_enqueue_style( 'f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
             wp_enqueue_script( 'f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
+        
+            wp_localize_script( 
+                'f3-app-fields', 
+                'wpApiSettings', 
+                array( 
+                    'root'  => esc_url_raw( rest_url() ), 
+                    'nonce' => wp_create_nonce( 'wp_rest' ) 
+                ) 
+            );
+        
         });
 
         // Enqueue assets for field rendering in Gutenberg.
@@ -55,7 +67,7 @@ class Enqueue {
                 ]      
             );
         });
-
+        
     }
 
 }
