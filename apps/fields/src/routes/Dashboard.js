@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { DomainContext } from '../contexts';
 import AppTemplate from '../components/global/AppTemplate';
 import {
     QueryClient,
@@ -22,6 +21,7 @@ function Stat( { label, stat } ) {
 }
 
 function ManageButtons( { labelSingular, labelPlural, manageRoute, createRoute } ) {
+
     return (
       <span className="isolate inline-flex rounded-md shadow-sm">
         <NavLink
@@ -145,8 +145,8 @@ function DashboardContent() {
                             recordCount={data.sdo_counts.field_groups.publish}
                         />
                         <ManageButtons 
-                            manageRoute="/groups"
-                            createRoute="/groups/create"
+                            manageRoute="/field-group"
+                            createRoute="/field-group/create"
                             labelPlural="Field Groups"
                             labelSingular="Field Group"
                         />
@@ -157,8 +157,8 @@ function DashboardContent() {
                             recordCount={data.sdo_counts.fields.publish}
                         />
                         <ManageButtons 
-                            manageRoute="/fields"
-                            createRoute="/fields/create"
+                            manageRoute="/field"
+                            createRoute="/field/create"
                             labelPlural="Fields"
                             labelSingular="Field"
                         />
@@ -219,7 +219,6 @@ function DashboardContent() {
 
 export default function Dashboard() {
 
-    const domain = useContext(DomainContext);
     const queryClient = new QueryClient();
 
     return(

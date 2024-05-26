@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 class StandardAPI {
+
     constructor(route_base) {
-        this.baseUrl = 'http://ds.local/wp-json/f3/v1';
         this.route_base = route_base;
     }
 
     async get(page = 1, sortColumn = 'ID', sortOrder = 'DESC', filterValues = {}) {
-        console.log('api call StandardAPI:', this.route_base);
 
         const params = {
             page: page,
@@ -23,7 +22,7 @@ class StandardAPI {
             params.search = filterValues.search;
         }
 
-        const response = await axios.get(`${this.baseUrl}/${this.route_base}`, {
+        const response = await axios.get(`${window.wpApiSettings.root}/${this.route_base}`, {
             params,
             withCredentials: true,
             headers: {
@@ -35,7 +34,7 @@ class StandardAPI {
     }
 
     async getOne(id) {
-        const response = await axios.get(`${this.baseUrl}/${this.route_base}/${id}`, {
+        const response = await axios.get(`${window.wpApiSettings.root}/${this.route_base}/${id}`, {
             withCredentials: true,
             headers: {
                 'content-type': 'application/json',
@@ -47,7 +46,7 @@ class StandardAPI {
 
     async create(data) {
         try {
-            const response = await axios.post(`${this.baseUrl}/${this.route_base}`, data, {
+            const response = await axios.post(`${window.wpApiSettings.root}/${this.route_base}`, data, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',
@@ -62,7 +61,7 @@ class StandardAPI {
 
     async edit(id, data) {
         try {
-            const response = await axios.put(`${this.baseUrl}/${this.route_base}/${id}`, data, {
+            const response = await axios.put(`${window.wpApiSettings.root}/${this.route_base}/${id}`, data, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',
@@ -77,7 +76,7 @@ class StandardAPI {
 
     async delete(id) {
         try {
-            const response = await axios.delete(`${this.baseUrl}/${this.route_base}/${id}`, {
+            const response = await axios.delete(`${window.wpApiSettings.root}/${this.route_base}/${id}`, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',

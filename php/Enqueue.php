@@ -30,8 +30,6 @@ class Enqueue {
                     'nonce' => wp_create_nonce( 'wp_rest' ) 
                 ) 
             );
-        
-        });
 
         // Enqueue assets for field rendering in Gutenberg.
 

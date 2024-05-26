@@ -2,13 +2,9 @@ import axios from 'axios';
 
 export const SDO_StandardAPI = {
 
-    baseUrl: 'http://ds.local/wp-json/f3/v1',
     route_base: '',
 
     get: async function (page = 1, sortColumn = 'ID', sortOrder = 'DESC', filterValues = {}) {
-
-        console.log('api call SDO_StandardAPI:');
-        console.log(this.route_base);
 
         const params = {
             page: page,
@@ -24,7 +20,7 @@ export const SDO_StandardAPI = {
             params.search = filterValues.search;
         }
 
-        const response = await axios.get(`${this.baseUrl}/${this.route_base}`, {
+        const response = await axios.get(`${window.wpApiSettings.root}/${this.route_base}`, {
             params,
             withCredentials: true,
             headers: {
@@ -36,7 +32,7 @@ export const SDO_StandardAPI = {
     },
 
     getOne: async function (id) {
-        const response = await axios.get(`${this.baseUrl}/${this.route_base}/${id}`, {
+        const response = await axios.get(`${window.wpApiSettings.root}/${this.route_base}/${id}`, {
             withCredentials: true,
             headers: {
                 'content-type': 'application/json',
@@ -48,7 +44,7 @@ export const SDO_StandardAPI = {
 
     create: async function (data) {
         try {
-            const response = await axios.post(`${this.baseUrl}/${this.route_base}`, data, {
+            const response = await axios.post(`${window.wpApiSettings.root}/${this.route_base}`, data, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',
@@ -63,7 +59,7 @@ export const SDO_StandardAPI = {
 
     edit: async function (id, data) {
         try {
-            const response = await axios.put(`${this.baseUrl}/${this.route_base}/${id}`, data, {
+            const response = await axios.put(`${window.wpApiSettings.root}/${this.route_base}/${id}`, data, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',
@@ -78,7 +74,7 @@ export const SDO_StandardAPI = {
 
     delete: async function (id) {
         try {
-            const response = await axios.delete(`${this.baseUrl}/${this.route_base}/${id}`, {
+            const response = await axios.delete(`${window.wpApiSettings.root}/${this.route_base}/${id}`, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',
