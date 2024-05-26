@@ -151,7 +151,7 @@ class API_Routes {
 
                     foreach( $sdo['field_groups'] as $fg ) {
                         foreach( $fg['fields'] as $f ) {
-                            $m->{$f['field_name']} = $params[$f['field_name']];
+                            $m->{$f['name']} = $params[$f['name']];
                         }
                     }
 
@@ -188,7 +188,7 @@ class API_Routes {
 
                     foreach( $sdo['field_groups'] as $fg ) {
                         foreach( $fg['fields'] as $f ) {
-                            $m->{$f['field_name']} = $params[$f['field_name']];
+                            $m->{$f['name']} = $params[$f['name']];
                         }
                     }
 

@@ -23,16 +23,16 @@ class Model {
         foreach( $this->sdo['field_groups'] as $fg ) {
             foreach( $fg['fields'] as $f ) {
                 
-                if( $f['field_type'] === 'true_false' ) {
-                    $value = get_post_meta( $this->id, $f['field_name'], 1 );
+                if( $f['type'] === 'true_false' ) {
+                    $value = get_post_meta( $this->id, $f['name'], 1 );
                     if( $value === "1" ) {
                         $value = true;
                     } else {
                         $value = false;
                     }
-                    $this->{$f['field_name']} = $value;
+                    $this->{$f['name']} = $value;
                 } else {
-                    $this->{$f['field_name']} = get_post_meta( $this->id, $f['field_name'], 1 );
+                    $this->{$f['name']} = get_post_meta( $this->id, $f['name'], 1 );
                 }
 
             }
@@ -76,7 +76,7 @@ class Model {
         foreach( $this->sdo['field_groups'] as $fg ) {
             foreach( $fg['fields'] as $f ) {
                 
-                update_post_meta( $this->id, $f['field_name'], $this->{$f['field_name']} );
+                update_post_meta( $this->id, $f['name'], $this->{$f['name']} );
 
             }
         }
