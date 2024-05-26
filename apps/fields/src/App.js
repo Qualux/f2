@@ -1,9 +1,6 @@
-import { createContext } from 'react';
 import { DomainContext } from './contexts';
 import AppHeader from './components/global/AppHeader';
 import {
-  createHashRouter,
-  RouterProvider,
   Outlet,
 } from "react-router-dom";
 
