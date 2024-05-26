@@ -48,9 +48,6 @@ class Plugin {
         require_once( F3_PATH . '/php/FieldGroup/FieldGroup.php' );
         $fgpt = new FieldGroup\FieldGroup();
 
-        require_once( F3_PATH . '/php/FieldGroup/FieldGroupShortcodes.php' );
-        $fgs = new FieldGroup\FieldGroupShortcodes();
-
         /*
          * Form internal SDO.
          */

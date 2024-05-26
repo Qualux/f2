@@ -8,7 +8,6 @@
  */
 
 namespace F3\Locations;
-use F3\FieldGroup\FieldGroup;
 use F3\Metabox\Metabox;
 
 class Locations {
