@@ -20,7 +20,7 @@ export default function FieldCollectionField({field}) {
                 Fields
             </h2>
             <RecordRelateProviders
-                fieldName={field.field_name}
+                fieldName={field.name}
                 sdo={fieldSDO}
             >
                 <main>

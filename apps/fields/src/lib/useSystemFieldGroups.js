@@ -8,9 +8,9 @@ export function useSystemFieldGroups() {
         field: {
             title: 'Field Editor',
             fields: [
-                systemFields.field_type,
-                systemFields.field_title,
-                systemFields.field_name,
+                systemFields.type,
+                systemFields.title,
+                systemFields.name,
                 systemFields.field_storage,
             ],
             storage: {

@@ -12,16 +12,16 @@ const formData = {
                 name: 'fg1',
                 fields: [
                     {
-                        field_name: 'test_field_1',
-                        field_type: 'text',
-                        field_placeholder: 'Test field 1...',
+                        name: 'test_field_1',
+                        type: 'text',
+                        placeholder: 'Test field 1...',
                         field_default_value: 'Ten 10',
                         field_required: true,
                     },
                     {
-                        field_name: 'test_field_2',
-                        field_type: 'text',
-                        field_placeholder: 'Test field 2...',
+                        name: 'test_field_2',
+                        type: 'text',
+                        placeholder: 'Test field 2...',
                         field_default_value: 'Seven 7',
                     }
                 ],

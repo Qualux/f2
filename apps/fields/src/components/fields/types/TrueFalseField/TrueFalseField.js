@@ -18,12 +18,12 @@ export default function TrueFalseField( {field, value, register, errors, setValu
     const handleChange = ( newValue ) => {
 
         setEnabled( newValue );
-        setValue( field.field_name, newValue );
+        setValue( field.name, newValue );
     }
 
     return(
         <div className="my-4">
-            <Label text={field.field_label} />
+            <Label text={field.label} />
             <Switch
                 checked={enabled}
                 onChange={handleChange}
@@ -41,7 +41,7 @@ export default function TrueFalseField( {field, value, register, errors, setValu
                 )}
                 />
             </Switch>
-            {errors[field.field_name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
+            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
          </div>
     );
 

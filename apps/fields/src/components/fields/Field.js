@@ -35,7 +35,7 @@ export default function Field(
             fieldRegisterPrefix = ''
         }) {
 
-    switch( field.field_type ) {
+    switch( field.type ) {
         case 'text': 
             return (
                 <TextField 
@@ -111,7 +111,7 @@ export default function Field(
         default:
             return(
                 <p className="my-8">
-                    Invalid or missing field type. {field.field_type}
+                    Invalid or missing field type. {field.type}
                 </p> 
             )
             break;

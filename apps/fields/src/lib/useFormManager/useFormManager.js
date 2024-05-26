@@ -177,7 +177,7 @@ export function useFormManager() {
 
         function render( field, fieldIndex, rhfFieldIndex ) {
 
-            const repeatField = { ...field, field_name: `${fieldGroup.name}.${rhfFieldIndex}.${field.field_name}` };
+            const repeatField = { ...field, name: `${fieldGroup.name}.${rhfFieldIndex}.${field.name}` };
 
             return(
                 <FieldRenderer 

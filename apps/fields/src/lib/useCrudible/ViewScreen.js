@@ -37,9 +37,9 @@ export default function ViewScreen( {id} ) {
             <ul className="grid">
                 {sdo.field_groups.map((fieldGroup) => (
                     fieldGroup.fields.map((field) => (
-                        <Fragment key={field.field_name}>
-                            <li>{field.field_title}</li>
-                            <li>{record[field.field_name]}</li>
+                        <Fragment key={field.name}>
+                            <li>{field.title}</li>
+                            <li>{record[field.name]}</li>
                         </Fragment>
                     ))
                 ))}

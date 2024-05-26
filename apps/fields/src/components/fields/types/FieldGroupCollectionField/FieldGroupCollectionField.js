@@ -20,7 +20,7 @@ export default function FieldGroupCollectionField({field}) {
                 Field Groups
             </h2>
             <RecordRelateProviders
-                fieldName={field.field_name}
+                fieldName={field.name}
                 sdo={fieldGroupSDO}
             >
                 <main>

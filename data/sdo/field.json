@@ -22,7 +22,7 @@
                     "name": "type",
                     "title": "Field Type",
                     "label": "Field Type",
-                    "field_choices": [
+                    "choices": [
                         {
                             "label": "Basic Fields",
                             "options": [

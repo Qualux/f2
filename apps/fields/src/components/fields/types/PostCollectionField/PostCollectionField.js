@@ -33,7 +33,7 @@ export default function PostCollectionField({field, setValue, getValues, valuesI
 
         if(valuesInit) {
 
-            const collectionList = getValues( field.field_name );
+            const collectionList = getValues( field.name );
 
             if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
                 setSelectedChildIds( collectionList );
@@ -45,7 +45,7 @@ export default function PostCollectionField({field, setValue, getValues, valuesI
 
 
     useEffect(() => {
-        const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.field_name}` : field.field_name;
+        const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
         setValue( registerName, selectedChildIds );
     }, [setValue, selectedChildIds]);
 
