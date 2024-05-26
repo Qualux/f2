@@ -1,8 +1,8 @@
 {
     "name": "query",
     "title": "F3 Query SDO",
-    "displayTitle": "F3 Query Manager",
-    "routeBase": "query",
+    "display_title": "F3 Query Manager",
+    "route_base": "query",
     "post_type": {
         "post_type_key": "f3-query",
         "label": "F3 Query"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "001",
+            "name": "field_group_1",
             "post_type": "f3-post-type",
             "fields": [
                 {

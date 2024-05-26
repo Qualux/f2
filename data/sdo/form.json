@@ -1,8 +1,8 @@
 {
     "name": "form",
     "title": "F3 Form SDO",
-    "displayTitle": "F3 Form Manager",
-    "routeBase": "form",
+    "display_title": "F3 Form Manager",
+    "route_base": "form",
     "post_type": {
         "post_type_key": "f3-form",
         "label": "F3 Form"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "001",
+            "name": "field_group_1",
             "post_type": "f3-form",
             "fields": [
                 {

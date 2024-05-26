@@ -1,8 +1,8 @@
 {
     "name": "taxonomy",
     "title": "F3 Taxonomy SDO",
-    "displayTitle": "F3 Taxonomy Manager",
-    "routeBase": "taxonomy",
+    "display_title": "F3 Taxonomy Manager",
+    "route_base": "taxonomy",
     "post_type": {
         "post_type_key": "f3-taxonomy",
         "label": "F3 Taxonomy"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "008",
+            "name": "field_group_1",
             "post_type": "f3-taxonomy",
             "fields": [
                 {

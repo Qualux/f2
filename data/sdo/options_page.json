@@ -1,8 +1,8 @@
 {
     "name": "options_page",
     "title": "F3 Options Page SDO",
-    "displayTitle": "F3 Options Page Manager",
-    "routeBase": "options-page",
+    "display_title": "F3 Options Page Manager",
+    "route_base": "options-page",
     "post_type": {
         "post_type_key": "f3-options-page",
         "label": "F3 Options Page"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "009",
+            "name": "field_group_1",
             "post_type": "f3-options-page",
             "fields": [
                 {

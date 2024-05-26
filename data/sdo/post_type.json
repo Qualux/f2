@@ -1,8 +1,8 @@
 {
     "name": "post_type",
     "title": "F3 Post Type SDO",
-    "displayTitle": "F3 Post Type Manager",
-    "routeBase": "post-type",
+    "display_title": "F3 Post Type Manager",
+    "route_base": "post-type",
     "post_type": {
         "post_type_key": "f3-post-type",
         "label": "F3 Post Type"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "007",
+            "name": "field_group_1",
             "post_type": "f3-post-type",
             "fields": [
                 {

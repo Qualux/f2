@@ -1,8 +1,8 @@
 {
     "name": "grid",
     "title": "F3 Grid SDO",
-    "displayTitle": "F3 Grid Manager",
-    "routeBase": "grid",
+    "display_title": "F3 Grid Manager",
+    "route_base": "grid",
     "post_type": {
         "post_type_key": "f3-grid",
         "label": "F3 Grid"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "008",
+            "name": "field_group_1",
             "post_type": "f3-grid",
             "fields": [
                 {

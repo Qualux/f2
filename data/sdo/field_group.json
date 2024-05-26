@@ -1,8 +1,8 @@
 {
     "name": "field_group",
     "title": "F3 Field Group SDO",
-    "displayTitle": "F3 Field Group Manager",
-    "routeBase": "field-group",
+    "display_title": "F3 Field Group Manager",
+    "route_base": "field-group",
     "post_type": {
         "post_type_key": "f3-field-group",
         "label": "F3 Field Group"
@@ -14,7 +14,7 @@
     },
     "field_groups": [
         {
-            "id": "001",
+            "name": "field_group_1",
             "post_type": "f3-field-group",
             "fields": [
                 {
