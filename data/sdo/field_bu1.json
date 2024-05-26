@@ -132,6 +132,12 @@
                     "field_placeholder": "Enter placeholder text..."
                 },
                 {
+                    "field_type": "collection",
+                    "field_name": "field_choices",
+                    "field_title": "Field Choices",
+                    "field_label": "Field Choices"
+                },
+                {
                     "field_type": "text",
                     "field_name": "field_default_value",
                     "field_title": "Default Value",

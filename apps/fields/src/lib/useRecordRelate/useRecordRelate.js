@@ -55,12 +55,16 @@ export function useRecordRelate( RecordRelateContext ) {
         const { control } = useFormContext();
         const { fieldName } = useRecordRelateContext();
 
+        console.log("setting fieldName useFieldArray:")
+        console.log(fieldName)
+
         const { fields, append, remove } = useFieldArray({
             control: control,
             name: fieldName,
           });
 
         function addRecord(record) {
+
             append(
                 {
                     id: record.id,
@@ -163,7 +167,10 @@ export function useRecordRelate( RecordRelateContext ) {
 
         const { useFieldArrayContext } = useRecordRelate();
         const { fieldName } = useRecordRelateContext();
-        const { fields } = useFieldArrayContext();    
+        const { fields } = useFieldArrayContext(); 
+        
+        console.log('RecordList fields from useFieldArrayContext:');
+        console.log(fields)
     
         return(
             <div className="p-6"> 
