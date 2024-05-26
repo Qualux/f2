@@ -26,10 +26,12 @@ class Enqueue {
                 'f3-app-fields', 
                 'wpApiSettings', 
                 array( 
-                    'root'  => esc_url_raw( rest_url() ), 
+                    'root'  => esc_url_raw( rest_url() ) . 'f3/v1', 
                     'nonce' => wp_create_nonce( 'wp_rest' ) 
                 ) 
             );
+
+        });
 
         // Enqueue assets for field rendering in Gutenberg.
 
