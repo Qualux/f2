@@ -17,22 +17,12 @@ class Locations {
 
         add_action('current_screen', [$this, 'run_location_check']);
 
-        
-
     }
 
     public function run_location_check() {
-
-        echo 'Running location check...';
-
-        add_action( 'category_edit_form_fields', function() {
-            echo 'TAX EDITOR FIELDS';
-        });
         
 
         $screen = get_current_screen();
-
-        var_dump( $screen->base );
 
         // Check for post editor or Gutenberg editor
         if ($screen->is_block_editor) {
@@ -47,28 +37,24 @@ class Locations {
 
         // Check for taxonomy editor
         if ($screen->base === 'edit-tags') {
-            // This is a term editor screen
             $this->handle_taxonomy_editor( $screen );
         }
 
         // Check for term editor
         if ($screen->base === 'term') {
-            // This is a term editor screen
             $this->handle_term_editor( $screen );
         }
 
         // Check for user form
         if ($screen->base === 'user-edit' || $screen->base === 'profile') {
-            // This is a user form screen
             $this->handle_user_form();
         }
     }
 
     function handle_block_editor() {
 
-        
+        // @TODO handle block editor location output.
 
-        print "Detected block editor 1111111111";
     }
 
     function handle_post_editor() {
@@ -105,7 +91,7 @@ class Locations {
     }
 
     function handle_user_form() {
-        print "Detected user form 3333333";
+        // @TODO handle user form location output.
     }
 
 }
