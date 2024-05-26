@@ -2,8 +2,6 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
-import FieldGroupRenderApp from './FieldGroupRenderApp';
-import OptionsPageRenderApp from './OptionsPageRenderApp';
 import {
   createHashRouter,
   RouterProvider,
@@ -31,10 +29,6 @@ import SDO_CreateRoute from './routes/sdo/SDO_CreateRoute';
 import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
 import SDO_DeleteRoute from './routes/sdo/SDO_DeleteRoute';
 import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
-
-import Test from './routes/Test';
-import Inline from './routes/Inline';
-import SortableList from './routes/SortableList';
 
 /* Make SDO Route Set. */
 function makeSDO_Routes( sdo ) {
@@ -86,16 +80,8 @@ const router = createHashRouter([
         element: <Dashboard />
       },
       {
-        path: "test",
-        element: <Test />
-      },
-      {
-        path: "inline",
-        element: <Inline />
-      },
-      {
-        path: "sort",
-        element: <SortableList />
+        path: "sdo",
+        element: <SDO_MenuRoute />
       },
       queryRoutes,
       postTypeRoutes,
@@ -104,11 +90,7 @@ const router = createHashRouter([
       gridRoutes,
       formRoutes,
       fieldRoutes,
-      fieldGroupRoutes,
-      {
-        path: "sdo",
-        element: <SDO_MenuRoute />
-      },
+      fieldGroupRoutes, 
     ],
   },
 ]);
@@ -120,21 +102,5 @@ if ( document.getElementById("root") ) {
     <RouterProvider router={router}>
       <Outlet />
     </RouterProvider>
-  );
-}
-
-if ( document.getElementById("f3-fg") ) {
-  const tag = document.getElementById("f3-fg");
-  const fieldGroupId = tag.getAttribute('data-field-group');
-  createRoot(document.getElementById("f3-fg")).render(
-    <FieldGroupRenderApp fieldGroupId={fieldGroupId} />
-  );
-}
-
-if ( document.getElementById("f3-options-fields") ) {
-  const tag = document.getElementById("f3-options-fields");
-  const fieldGroupId = tag.getAttribute('data-field-group');
-  createRoot(document.getElementById("f3-options-fields")).render(
-    <OptionsPageRenderApp fieldGroupId={fieldGroupId} />
   );
 }
