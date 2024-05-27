@@ -11,7 +11,7 @@ import Sortable from 'sortablejs';
 import { useFieldArray } from 'react-hook-form';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
 import { useFieldGroupRender } from '../../lib/useFieldGroupRender/useFieldGroupRender';
-import { useStandardAPI } from '../../lib/useStandardAPI';
+import { useStandardAPI } from 'shared';
 
 const FieldArrayContext = createContext();
 const queryClient = new QueryClient();

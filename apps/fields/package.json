@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "shared": "file:../shared",
     "@babel/core": "^7.16.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.3",

@@ -6,15 +6,10 @@ import Footer from './Footer';
 import DeleteScreen from './DeleteScreen';
 import ViewScreen from './ViewScreen';
 import Grid from './grid/Grid';
-import { DomainContext } from '../../contexts';
-import { useFetch } from '../../lib/useFetch';
 import AppForm from './AppForm';
 import { SDO_Context } from './SDO_Context';
 
 export function useCrudible( params = { recordId: 0, api: null } ) {
-
-    const domain = useContext(DomainContext);
-    const { postData } = useFetch();
 
     function useSDO() {
         const sdo = useContext(SDO_Context);
@@ -23,8 +18,6 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
 
     const AppFormComponent = ( { recordId } ) => (
         <AppForm 
-            postData={postData} 
-            domain={domain} 
             recordId={recordId}
         />
     );

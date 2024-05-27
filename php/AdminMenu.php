@@ -25,6 +25,7 @@ class AdminMenu {
 
     public function page() {
         echo '<div id="root" style="margin-left: -20px; background-color: #FFF;"></div>';
+        echo '<div id="f3-admin" style="margin-left: -20px; background-color: #FFF;"></div>';
     }
 
 }

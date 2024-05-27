@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useCrudible } from './useCrudible';
-import { useStandardAPI } from '../../lib/useStandardAPI';
+import { useStandardAPI } from 'shared';
 
 export default function ViewScreen( {id} ) {
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCrudible } from './useCrudible';
-import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
+import { useStandardAPI } from '../../lib/useStandardAPI';
 import ScreenWrap from '../../components/global/ScreenWrap';
 
 
@@ -12,13 +12,11 @@ export default function DeleteScreen( {id} ) {
     const sdo = useSDO();
 
     // Setup API.
-    const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    const API = useStandardAPI(sdo.route_base);
 
     const deleteHandler = async (e) => {
         try {
-            await api.delete(id);
-            console.log('Delete successful');
+            await API.delete(id);
             setStatus('done');
         } catch (error) {
             console.error('Delete failed:', error.message);

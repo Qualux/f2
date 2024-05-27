@@ -9,13 +9,13 @@ export default function Crudible( {children, sdo} ) {
 
     const queryClient = new QueryClient();
 
-    /* Generate the route data from the SDO routeBase. */
+    /* Generate the route data from the SDO route_base. */
     const sdoRoutes = {
-        dashboard: '/' + sdo.routeBase,
-        create: '/' + sdo.routeBase + '/create',
-        edit: '/' + sdo.routeBase + '/edit',
-        delete: '/' + sdo.routeBase + '/delete',
-        view: '/' + sdo.routeBase + '/view',
+        dashboard: '/' + sdo.route_base,
+        create: '/' + sdo.route_base + '/create',
+        edit: '/' + sdo.route_base + '/edit',
+        delete: '/' + sdo.route_base + '/delete',
+        view: '/' + sdo.route_base + '/view',
     }
     sdo.routes = sdoRoutes;
 

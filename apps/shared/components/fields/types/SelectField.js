@@ -2,7 +2,7 @@ import Label from '../Label';
 
 function ChoicesList({field}) {
 
-    if( !field.field_choices ) {
+    if( !field.choices ) {
         return(
             <option value="0">No choices</option>
         );
@@ -10,7 +10,7 @@ function ChoicesList({field}) {
 
     return(
         <>
-            {field.field_choices.map((choice, index) => (
+            {field.choices.map((choice, index) => (
                 <option key={index} value={choice.value}>
                     {choice.label}
                 </option>
@@ -23,14 +23,14 @@ export default function SelectField( {field, register, errors} ) {
 
     return(
         <div className="my-4">
-            <Label text={field.field_label} />
+            <Label text={field.label} />
             <select
                 className="w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
-                {...register(field.field_name, { required: true })}
+                {...register(field.name, { required: true })}
             >
                 <ChoicesList field={field} />
             </select>
-            {errors[field.field_name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
+            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
         </div>
     );
 

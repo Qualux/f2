@@ -1,5 +1,5 @@
-import { useState, createContext, useEffect } from 'react';
-import Modal from '../../../Modal';
+import { useState, useEffect } from 'react';
+import Modal from '../../../global/Modal';
 import FieldList from './FieldSelectionList';
 import ChildFieldContext from './ChildFieldContext';
 import Label from '../../Label';
@@ -16,7 +16,7 @@ function SelectExistingField({open, setOpen}) {
     )
 }
 
-export default function PostCollectionField({field, setValue, getValues, valuesInit}) {
+export default function PostCollectionField({field, setValue, getValues, valuesInit, fieldRegisterPrefix}) {
 
     const [existingField, setExistingField] = useState(false);
     const [selectedChildIds, setSelectedChildIds] = useState([]);
@@ -31,16 +31,9 @@ export default function PostCollectionField({field, setValue, getValues, valuesI
 
     useEffect(() => {
 
-        console.log('check values init...')
-        console.log(valuesInit)
-
         if(valuesInit) {
 
-            console.log('values init...')
-
-            const collectionList = getValues( field.field_name );
-
-            console.log(collectionList)
+            const collectionList = getValues( field.name );
 
             if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
                 setSelectedChildIds( collectionList );
@@ -52,7 +45,8 @@ export default function PostCollectionField({field, setValue, getValues, valuesI
 
 
     useEffect(() => {
-        setValue( field.field_name, selectedChildIds );
+        const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+        setValue( registerName, selectedChildIds );
     }, [setValue, selectedChildIds]);
 
     return(

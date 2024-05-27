@@ -22,6 +22,14 @@ class Enqueue {
             wp_enqueue_style( 'f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
             wp_enqueue_script( 'f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
         
+            // Enqueue F3 admin. 
+            wp_enqueue_script(
+                'f3-admin',
+                F3_URL . '/apps/admin/build/index.js',
+                ['wp-element', 'f3-app-fields'],
+                time(), //For production use wp_get_theme()->get('Version')    
+            );
+
             wp_localize_script( 
                 'f3-app-fields', 
                 'f3Settings', 

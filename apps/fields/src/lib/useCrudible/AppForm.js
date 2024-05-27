@@ -3,7 +3,7 @@ import {
 } from '@tanstack/react-query';
 import { useCrudible } from './useCrudible';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
-import { useStandardAPI } from '../../lib/useStandardAPI';
+import { useStandardAPI } from 'shared';
 
 export default function AppForm( { recordId = 0 } ) {
 

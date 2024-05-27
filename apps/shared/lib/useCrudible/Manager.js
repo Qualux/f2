@@ -6,7 +6,7 @@ import {
 import { useCrudible } from './useCrudible';
 import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
-import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
+import { useStandardAPI } from '../../lib/useStandardAPI';
 
 export default function Manager() {
 
@@ -16,22 +16,16 @@ export default function Manager() {
     const [filterValues, setFilterValues] = useState(null);
     const { Header, Grid, Footer, useSDO } = useCrudible();
     const sdo = useSDO();
-
-    // Setup API.
-    const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    const API = useStandardAPI(sdo.route_base);
 
     const {
         isLoading,
         data,
     } = useQuery({
-        queryKey: ['f3_sdo_query_'+sdo.routeBase, page, sortColumn, sortOrder, filterValues],
-        queryFn: () => api.get(page, sortColumn, sortOrder, filterValues),
+        queryKey: ['f3_sdo_query_'+sdo.route_base, page, sortColumn, sortOrder, filterValues],
+        queryFn: () => API.get(page, sortColumn, sortOrder, filterValues),
         placeholderData: keepPreviousData,
     });
-
-    console.log('data in manager:')
-    console.log(data)
 
     useEffect(() => {
         const initialFilterValues = Object.fromEntries(sdo.filters.map(filter => [filter.key, ''])); // Initialize all filters to empty string

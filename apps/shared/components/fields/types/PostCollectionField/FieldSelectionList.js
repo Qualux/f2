@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFieldCollection } from '../../../../lib/useFieldCollection';
+import { NavLink } from "react-router-dom";
 import useChildFieldContext from './useChildFieldContext';
 
 function EmptyMessage() {
@@ -12,7 +13,7 @@ function EmptyMessage() {
 
 function Field({field, index, setOpen}) {
 
-    const { handleSelectChild } = useChildFieldContext();
+    const { selectedChildIds, handleSelectChild, handleDeselectChild } = useChildFieldContext();
 
     return(
         <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">

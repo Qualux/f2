@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useCrudible } from './useCrudible';
-import { SDO_StandardAPI } from '../../api/SDO_StandardAPI';
+import { useStandardAPI } from '../../lib/useStandardAPI';
 
 export default function ViewScreen( {id} ) {
 
@@ -8,26 +8,17 @@ export default function ViewScreen( {id} ) {
 
     const { useSDO } = useCrudible();
     const sdo = useSDO();
-
-    console.log('sdo in view screen:')
-    console.log(sdo)
-
-    // Setup API.
-    const api = SDO_StandardAPI;
-    api.routeBase = sdo.routeBase;
+    const API = useStandardAPI(sdo.route_base);
 
     useEffect( () => {
        
-        async function fetchData( id, api ) {
-            
-            const data = await api.getOne(id);
+        async function fetchData( id, API ) {  
+            const data = await API.getOne(id);
             setRecord(data.record);
         }
-        fetchData( id, api );
+        fetchData( id, API );
 
     }, [])
-
-    console.log(record)
 
     if( ! record ) {
         return(
@@ -42,9 +33,9 @@ export default function ViewScreen( {id} ) {
             <ul className="grid">
                 {sdo.field_groups.map((fieldGroup) => (
                     fieldGroup.fields.map((field) => (
-                        <Fragment key={field.field_name}>
-                            <li>{field.field_title}</li>
-                            <li>{record[field.field_name]}</li>
+                        <Fragment key={field.name}>
+                            <li>{field.title}</li>
+                            <li>{record[field.name]}</li>
                         </Fragment>
                     ))
                 ))}

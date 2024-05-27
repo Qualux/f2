@@ -1,4 +1,4 @@
-const { render, useState } = wp.element;
+const { render } = wp.element;
 import { useFormManager, Field } from 'shared';
 import { interceptTaxonomyFormSubmission } from './utils/interceptTaxonomyFormSubmission';
 

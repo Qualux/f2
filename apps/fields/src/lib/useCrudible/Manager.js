@@ -6,7 +6,7 @@ import {
 import { useCrudible } from './useCrudible';
 import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
-import { useStandardAPI } from '../../lib/useStandardAPI';
+import { useStandardAPI } from 'shared';
 
 export default function Manager() {
 

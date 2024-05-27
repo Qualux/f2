@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import GridRow from './GridRow';
 import SortableHeader from '../SortableHeader';
 import Filters from '../Filters';
