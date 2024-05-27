@@ -5,9 +5,11 @@ import ScreenWrap from './components/global/ScreenWrap';
 import SkeletonList from './components/global/SkeletonList';
 import { useStandardAPI } from './lib/useStandardAPI';
 import { useCrudible } from './lib/useCrudible/useCrudible';
+import { useFieldGroupRender } from './lib/useFieldGroupRender/useFieldGroupRender';
 
 export { 
     useCrudible,
+    useFieldGroupRender,
     useStandardAPI,
     useFormManager,
     Field,

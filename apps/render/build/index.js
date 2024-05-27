@@ -1662,6 +1662,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ScreenWrap: () => (/* reexport safe */ _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   SkeletonList: () => (/* reexport safe */ _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_4__["default"]),
 /* harmony export */   useCrudible: () => (/* reexport safe */ _lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_6__.useCrudible),
+/* harmony export */   useFieldGroupRender: () => (/* reexport safe */ _lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_7__.useFieldGroupRender),
 /* harmony export */   useFormManager: () => (/* reexport safe */ _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_0__.useFormManager),
 /* harmony export */   useStandardAPI: () => (/* reexport safe */ _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_5__.useStandardAPI)
 /* harmony export */ });
@@ -1672,6 +1673,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/global/SkeletonList */ "../shared/components/global/SkeletonList.js");
 /* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
 /* harmony import */ var _lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/useCrudible/useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/useFieldGroupRender/useFieldGroupRender */ "../shared/lib/useFieldGroupRender/useFieldGroupRender.js");
+
 
 
 

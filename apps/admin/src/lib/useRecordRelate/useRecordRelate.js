@@ -9,7 +9,7 @@ import { ScreenWrap } from 'shared';
 import { SkeletonList } from 'shared';
 import { useFieldArray } from 'react-hook-form';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
-import { useFieldGroupRender } from '../../lib/useFieldGroupRender/useFieldGroupRender';
+import { useFieldGroupRender } from 'shared';
 import { useStandardAPI } from 'shared';
 
 const FieldArrayContext = createContext();
