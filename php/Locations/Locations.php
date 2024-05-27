@@ -19,80 +19,285 @@ class Locations {
     }
 
     public function run_location_check() {
-        
 
         $screen = get_current_screen();
+
+        // Check for F3 options page.
+        if (strpos($screen->base, 'toplevel_page_') === 0) {
+
+            $slug = substr($screen->base, strlen('toplevel_page_'));
+
+            $options_page_posts = get_posts([
+                'post_type'   => 'f3-options-page',
+                'numberposts' => -1,
+                'meta_query' => [
+                    [
+                        'key'     => 'page_slug',
+                        'value'   => $slug,
+                        'compare' => '=',
+                    ]
+                ]
+            ]);
+
+            if( empty( $options_page_posts )) { return; }
+
+            $this->handle_options_page( $screen );
+
+        }
+
 
         // Check for post editor or Gutenberg editor
         if ($screen->is_block_editor) {
             // This is a post editor screen
-            $this->handle_block_editor();
+            $this->handle_block_editor( $screen );
         }
 
         if ($screen->base === 'post' || $screen->base === 'edit') {
             // This is a post editor screen
-            $this->handle_post_editor();
+            $this->handle_post_editor( $screen );
         }
 
         // Check for taxonomy editor
         if ($screen->base === 'edit-tags') {
-            $this->handle_taxonomy_editor( $screen );
+            $this->handle_term_add( $screen );
         }
 
         // Check for term editor
         if ($screen->base === 'term') {
-            $this->handle_term_editor( $screen );
+            $this->handle_term_edit( $screen );
         }
 
-        // Check for user form
-        if ($screen->base === 'user-edit' || $screen->base === 'profile') {
-            $this->handle_user_form();
+        if ( $screen->base === 'user' ) {
+            $this->handle_user_add( $screen );
         }
-    }
 
-    function handle_block_editor() {
-
-        // @TODO handle block editor location output.
-
-    }
-
-    function handle_post_editor() {
-
-        /* @TODO remove reliance on Metabox so it can be removed.
-        $mb = new Metabox();
-        $form = new \stdClass;
-        $form->id = 100;
-        $form->title = 'Test Form 1';
-        $form->location_post_type = 'classic';
-        $mb->form_meta_box( $form );
-        */
+        if ( $screen->base === 'user-edit' ) {
+            $this->handle_user_edit( $screen );
+        }
 
     }
 
-    /* Taxonomy and Terms Locations. */
+    function handle_block_editor( $screen ) {
 
-    function handle_taxonomy_editor( $screen ) {
+        $post_type = $screen->post_type;
 
-        add_action( $screen->taxonomy.'_add_form_fields', function() {
-            echo '<div class="f3-form" style="margin-bottom: 100px; border-bottom:solid 10px red;"></div>';
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'post_type',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        foreach( $form_posts as $form_post ) {
+
+            add_action('add_meta_boxes', function($post_type) use ($form_post) {
+
+                add_meta_box( 
+                    'f3_metabox_form_' . $form_post->ID, 
+                    $form_post->post_title, 
+                    function( $post, $box ) {
+                        $form_id = $box['args']['form_id'];
+                        echo '<div class="f3-form" data-form="'.$form_id.'"></div>';
+                    }, 
+                    $post_type, 
+                    'advanced', 
+                    'default',
+                    [ 'form_id' => $form_post->ID ],
+                );
+            });
+
+        }
+
+    }
+
+    function handle_post_editor( $screen ) {
+
+        $post_type = $screen->post_type;
+
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'post_type',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        foreach( $form_posts as $form_post ) {
+
+            add_action('add_meta_boxes', function($post_type) use ($form_post) {
+
+                add_meta_box( 
+                    'f3_metabox_form_' . $form_post->ID, 
+                    $form_post->post_title, 
+                    function( $post, $box ) {
+                        $form_id = $box['args']['form_id'];
+                        echo '<div class="f3-form" data-form="'.$form_id.'"></div>';
+                    }, 
+                    $post_type, 
+                    'advanced', 
+                    'default',
+                    [ 'form_id' => $form_post->ID ],
+                );
+            });
+
+        }
+
+    }
+
+    /* Taxonomy Locations. */
+
+    function handle_term_add( $screen ) {
+
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'taxonomy',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        add_action( $screen->taxonomy.'_add_form_fields', function( $taxonomy ) use ($form_posts) {
+
+            foreach( $form_posts as $form_post ) {
+
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+
+            }
+
         });
 
     }
 
-    function handle_term_editor( $screen ) {
+    function handle_term_edit( $screen ) {
 
-        add_action( $screen->taxonomy.'_edit_form_fields', function() {
-            echo '<tr>';
-            echo '<td>';
-            echo '<div class="f3-form" style="margin-bottom: 100px; border-bottom:solid 10px red;"></div>';
-            echo '</td>';
-            echo '</tr>';
-        }, 50);
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'taxonomy',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        add_action( $screen->taxonomy.'_edit_form_fields', function( $taxonomy ) use ($form_posts) {
+
+            foreach( $form_posts as $form_post ) {
+                echo '
+                    <tr class="form-field term-description-wrap">
+                        <th scope="row"></th>
+                        <td>
+                            <div class="f3-form" data-form="'.$form_post->ID.'"></div>
+                        </td>
+                    </tr>
+                ';
+            }
+
+        });
 
     }
 
-    function handle_user_form() {
-        // @TODO handle user form location output.
+    function handle_user_add( $screen ) {
+    
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'user',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        add_action( 'user_new_form', function( $user ) use ($form_posts) {
+
+            error_log('Doing edit_user_profile hook...');
+
+            foreach( $form_posts as $form_post ) {
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+            }
+
+        });
+
+    }
+
+    function handle_user_edit( $screen ) {
+    
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'user',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        add_action( 'edit_user_profile', function( $user ) use ( $form_posts ) {
+
+            foreach( $form_posts as $form_post ) {
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+            }
+
+        });
+
+    }
+
+    function handle_options_page( $screen ) {
+
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'options_page',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        if( empty( $form_posts )) { return; }
+
+        add_action( 'f3_options_page_render', function( $options_page_id ) use ( $form_posts ) {
+
+            foreach( $form_posts as $form_post ) {
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+            }
+
+        });
+
     }
 
 }

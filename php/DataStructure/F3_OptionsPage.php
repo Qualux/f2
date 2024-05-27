@@ -46,23 +46,7 @@ class F3_OptionsPage {
                 $slug, 
                 function() use ($p) {
 
-                    $fgs = get_posts([
-                        'post_type'   => 'field-group',
-                        'numberposts' => -1,
-                        'meta_query' => [
-                            [
-                                'key'     => 'storage_options_page',
-                                'value'   => $p->ID,
-                                'compare' => '=',
-                            ]
-                        ]
-                    ]);
-        
-                    if( empty( $fgs )) { return; }
-
-                    foreach( $fgs as $fg ) {
-                        echo '<div id="f3-options-fields" data-field-group="'.$fg->ID.'"></div>';
-                    }
+                    do_action('f3_options_page_render', $p->ID);
                     
                 },
                 $icon_url,

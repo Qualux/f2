@@ -33,9 +33,6 @@ class Plugin {
         require_once( F3_PATH . '/php/Enqueue.php' );
         $e = new Enqueue();
 
-        require_once( F3_PATH . '/php/Metabox/Metabox.php' );
-        $m = new Metabox\Metabox();
-
         /*
          * Form internal SDO.
          */

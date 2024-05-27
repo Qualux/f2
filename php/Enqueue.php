@@ -33,16 +33,7 @@ class Enqueue {
                 'all' 
             );
 
-            wp_localize_script( 
-                'f3-admin', 
-                'f3Settings', 
-                array( 
-                    'apiRoot'        => esc_url_raw( rest_url() ),
-                    'apiF3Root'      => esc_url_raw( rest_url() ) . 'f3/v1/',
-                    'nonce'          => wp_create_nonce( 'wp_rest' ),
-                    'apiCorePrefix'  => rest_get_url_prefix(),
-                ) 
-            );
+            $this->localize_f3_settings( 'f3-admin' );
 
         });
 
@@ -59,6 +50,8 @@ class Enqueue {
                     'in_footer' => true,
                 ]      
             );
+
+            $this->localize_f3_settings( 'f3-render' );
         
         });
 
@@ -75,6 +68,8 @@ class Enqueue {
                 ]      
             );
 
+            $this->localize_f3_settings( 'f3-render' );
+
         });
 
         // Enqueue render app front. 
@@ -89,9 +84,26 @@ class Enqueue {
                     'in_footer' => true,
                 ]      
             );
+
+            $this->localize_f3_settings( 'f3-render' );
             
         });
         
+    }
+
+    function localize_f3_settings( $script_id ) {
+
+        wp_localize_script( 
+            $script_id, 
+            'f3Settings', 
+            array( 
+                'apiRoot'        => esc_url_raw( rest_url() ),
+                'apiF3Root'      => esc_url_raw( rest_url() ) . 'f3/v1/',
+                'nonce'          => wp_create_nonce( 'wp_rest' ),
+                'apiCorePrefix'  => rest_get_url_prefix(),
+            ) 
+        );
+
     }
 
 }
