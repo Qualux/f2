@@ -2850,10 +2850,10 @@ function useFormManager() {
         return;
       }
       if (!formData.record?.id) {
-        formData.api.create(data);
+        formData.API.create(data);
         setFormStatus('complete');
       } else {
-        formData.api.edit(formData.record.id, data);
+        formData.API.edit(formData.record.id, data);
         setFormStatus('complete');
       }
     };
