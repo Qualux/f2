@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from 'react';
-import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
+import { useRecordRelate } from 'shared';
 import fieldSDO from '../../../../../../../data/sdo/field.json';
 
 const FieldGroupRecordRelateContext = createContext();

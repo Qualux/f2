@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useFieldCollection } from '../../../../lib/useFieldCollection';
-import { NavLink } from "react-router-dom";
+import { useFieldCollection } from 'shared';
 import useChildFieldContext from './useChildFieldContext';
 
 function EmptyMessage() {
@@ -13,7 +12,7 @@ function EmptyMessage() {
 
 function Field({field, index, setOpen}) {
 
-    const { selectedChildIds, handleSelectChild, handleDeselectChild } = useChildFieldContext();
+    const { handleSelectChild } = useChildFieldContext();
 
     return(
         <li className="w-full flex justify-between gap-6 items-center bg-zinc-100 rounded py-1 px-2">
@@ -41,7 +40,7 @@ function Field({field, index, setOpen}) {
 export default function FieldSelectionList({setOpen}) {
 
     const { fields, isLoaded } = useFieldCollection();
-    const [ selectionId, setSelectionId ] = useState(0);
+    const [ setSelectionId ] = useState(0);
 
     if( !isLoaded ) {
         return <main>Loading fields....</main>
