@@ -1,7 +1,7 @@
 import {
     useQuery
 } from '@tanstack/react-query';
-import { useCrudible } from './useCrudible';
+import { useCrudible } from 'shared';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
 import { useStandardAPI } from 'shared';
 

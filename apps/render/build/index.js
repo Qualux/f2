@@ -1661,6 +1661,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Modal: () => (/* reexport safe */ _components_global_Modal__WEBPACK_IMPORTED_MODULE_2__["default"]),
 /* harmony export */   ScreenWrap: () => (/* reexport safe */ _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   SkeletonList: () => (/* reexport safe */ _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   useCrudible: () => (/* reexport safe */ _lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_6__.useCrudible),
 /* harmony export */   useFormManager: () => (/* reexport safe */ _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_0__.useFormManager),
 /* harmony export */   useStandardAPI: () => (/* reexport safe */ _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_5__.useStandardAPI)
 /* harmony export */ });
@@ -1670,6 +1671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
 /* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/global/SkeletonList */ "../shared/components/global/SkeletonList.js");
 /* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+/* harmony import */ var _lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/useCrudible/useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
 
 
 
@@ -1677,6 +1679,909 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/AppForm.js":
+/*!********************************************!*\
+  !*** ../shared/lib/useCrudible/AppForm.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AppForm)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/useQuery.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+
+
+
+
+
+function AppForm({
+  recordId = 0
+}) {
+  const {
+    useSDO
+  } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+  const {
+    FormProvider,
+    Form,
+    Fields,
+    SubmitButton
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const API = (0,_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_3__.useStandardAPI)(sdo.route_base);
+  const {
+    data
+  } = (0,_tanstack_react_query__WEBPACK_IMPORTED_MODULE_4__.useQuery)({
+    queryKey: ['record', recordId],
+    queryFn: () => API.getOne(recordId),
+    enabled: !!recordId // Only run query if recordId is available
+  });
+  let record = {};
+  if (data) {
+    record = data.record;
+  }
+  const formData = {
+    form: {
+      field_groups: sdo.field_groups
+    },
+    record,
+    API
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormProvider, {
+    formData: formData
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/Crudible.js":
+/*!*********************************************!*\
+  !*** ../shared/lib/useCrudible/Crudible.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Crudible)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/query-core/build/modern/queryClient.js");
+/* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js");
+/* harmony import */ var _SDO_Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SDO_Context */ "../shared/lib/useCrudible/SDO_Context.js");
+
+
+
+function Crudible({
+  children,
+  sdo
+}) {
+  const queryClient = new _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__.QueryClient();
+
+  /* Generate the route data from the SDO route_base. */
+  const sdoRoutes = {
+    dashboard: '/' + sdo.route_base,
+    create: '/' + sdo.route_base + '/create',
+    edit: '/' + sdo.route_base + '/edit',
+    delete: '/' + sdo.route_base + '/delete',
+    view: '/' + sdo.route_base + '/view'
+  };
+  sdo.routes = sdoRoutes;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SDO_Context__WEBPACK_IMPORTED_MODULE_1__.SDO_Context.Provider, {
+    value: sdo
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__.QueryClientProvider, {
+    client: queryClient
+  }, children));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/DeleteButton.js":
+/*!*************************************************!*\
+  !*** ../shared/lib/useCrudible/DeleteButton.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DeleteButton)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function DeleteButton({
+  deleteLink
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, deleteLink);
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/DeleteScreen.js":
+/*!*************************************************!*\
+  !*** ../shared/lib/useCrudible/DeleteScreen.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DeleteScreen)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
+
+
+
+
+
+function DeleteScreen({
+  id
+}) {
+  const [status, setStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('ready');
+  const {
+    Header,
+    useSDO
+  } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+
+  // Setup API.
+  const API = (0,_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__.useStandardAPI)(sdo.route_base);
+  const deleteHandler = async e => {
+    try {
+      await API.delete(id);
+      setStatus('done');
+    } catch (error) {
+      console.error('Delete failed:', error.message);
+    }
+  };
+  if (status === 'done') {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Record deleted.")));
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "text-2xl font-bold mb-6"
+  }, "Confirm Deletion"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "bg-neutral-700 text-neutral-100 font-bold text-lg",
+    onClick: deleteHandler
+  }, "Delete")));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/Filters.js":
+/*!********************************************!*\
+  !*** ../shared/lib/useCrudible/Filters.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Filters)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Filters({
+  filters,
+  filterValues,
+  setFilterValues
+}) {
+  const setFilterValue = (key, value) => {
+    setFilterValues(prevValues => ({
+      ...prevValues,
+      [key]: value
+    }));
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-8 bg-neutral-50 py-3 px-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-8 flex-wrap"
+  }, filters.map(filter => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: filter.key,
+    className: "basis-1/4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Filter, {
+    filter: filter,
+    value: filterValues[filter.key],
+    onChange: value => setFilterValue(filter.key, value)
+  })))));
+}
+
+// Define TextFilter and SelectFilter components
+const TextFilter = ({
+  label,
+  placeholder,
+  value,
+  onChange
+}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+  className: "text-neutral-400 text-xs text-medium"
+}, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  className: "w-full max-w-52 border border-neutral-800 border-solid py-1 px-1 text-sm text-medium placeholder:text-neutral-300",
+  type: "text",
+  value: value,
+  onChange: e => onChange(e.target.value),
+  placeholder: placeholder
+}));
+const SelectFilter = ({
+  label,
+  value,
+  options,
+  onChange
+}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+  className: "text-neutral-400 text-xs text-medium"
+}, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+  className: "w-full max-w-52 border border-neutral-800 border-solid py-1 px-1",
+  value: value,
+  onChange: e => onChange(e.target.value)
+}, options.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  key: option.value,
+  value: option.value
+}, option.label))));
+const Filter = ({
+  filter,
+  value,
+  onChange
+}) => {
+  if (filter.type === 'text') {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextFilter, {
+      label: filter.label,
+      placeholder: filter.placeholder,
+      value: value,
+      onChange: onChange
+    });
+  } else if (filter.type === 'select') {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectFilter, {
+      label: filter.label,
+      value: value,
+      options: filter.options,
+      onChange: onChange
+    });
+  }
+  return null;
+};
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/Footer.js":
+/*!*******************************************!*\
+  !*** ../shared/lib/useCrudible/Footer.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Footer)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Footer({
+  data
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-6 text-xs text-neutral-400"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Pages Found: ", data.max_num_pages), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Total Records: ", data.found_posts));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/Header.js":
+/*!*******************************************!*\
+  !*** ../shared/lib/useCrudible/Header.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Header)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+
+
+function Header({
+  routeType,
+  returnLink,
+  createLink
+}) {
+  const {
+    useSDO
+  } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+  function leftCol() {
+    if (routeType === 'create') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex gap-5 items-center"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+        className: "text-neutral-300 font-semibold text-lg"
+      }, "CREATE"), returnLink);
+    }
+    if (routeType === 'edit') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex gap-5 items-center"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+        className: "text-neutral-300 font-semibold text-lg"
+      }, "EDIT"), returnLink);
+    }
+    if (routeType === 'view') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex gap-5 items-center"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+        className: "text-neutral-300 font-semibold text-lg"
+      }, "VIEW"), returnLink);
+    }
+    if (routeType === 'delete') {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex gap-5 items-center"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+        className: "text-neutral-300 font-semibold text-lg"
+      }, "DELETE"), returnLink);
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex gap-5 items-center"
+    }, createLink);
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex mb-6 items-center justify-between"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, leftCol()), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-1 items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    className: "w-5 h-5 stroke-neutral-300",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.5
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    d: "M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "text-neutral-300 font-semibold text-sm"
+  }, sdo.displayTitle)));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/Manager.js":
+/*!********************************************!*\
+  !*** ../shared/lib/useCrudible/Manager.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Manager)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/useQuery.js");
+/* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/query-core/build/modern/utils.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
+/* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/global/SkeletonList */ "../shared/components/global/SkeletonList.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+
+
+
+
+
+
+
+function Manager() {
+  const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
+  const [sortColumn, setSortColumn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('ID');
+  const [sortOrder, setSortOrder] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('DESC');
+  const [filterValues, setFilterValues] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const {
+    Header,
+    Grid,
+    Footer,
+    useSDO
+  } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+  const API = (0,_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_4__.useStandardAPI)(sdo.route_base);
+  const {
+    isLoading,
+    data
+  } = (0,_tanstack_react_query__WEBPACK_IMPORTED_MODULE_5__.useQuery)({
+    queryKey: ['f3_sdo_query_' + sdo.route_base, page, sortColumn, sortOrder, filterValues],
+    queryFn: () => API.get(page, sortColumn, sortOrder, filterValues),
+    placeholderData: _tanstack_react_query__WEBPACK_IMPORTED_MODULE_6__.keepPreviousData
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const initialFilterValues = Object.fromEntries(sdo.filters.map(filter => [filter.key, ''])); // Initialize all filters to empty string
+    setFilterValues(initialFilterValues);
+  }, []);
+  if (isLoading && !data) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+  }
+  if (data === undefined) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Grid, {
+    routes: sdo.routes,
+    data: data,
+    columns: sdo.columns,
+    page: page,
+    setPage: setPage,
+    sortColumn: sortColumn,
+    setSortColumn: setSortColumn,
+    sortOrder: sortOrder,
+    setSortOrder: setSortOrder,
+    filters: sdo.filters,
+    filterValues: filterValues,
+    setFilterValues: setFilterValues
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Footer, {
+    data: data
+  })));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/Pager.js":
+/*!******************************************!*\
+  !*** ../shared/lib/useCrudible/Pager.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Pager)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _PagerLink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PagerLink */ "../shared/lib/useCrudible/PagerLink.js");
+
+
+function Pager({
+  pageCount,
+  page,
+  setPage
+}) {
+  const handleClick = pageNum => {
+    setPage(pageNum);
+  };
+
+  // Generate dynamic page links up to the pageCount
+  const pageLinks = [];
+  for (let i = 1; i <= pageCount; i++) {
+    pageLinks.push((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PagerLink__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: i,
+      pageNum: i,
+      handleClick: handleClick,
+      active: i === page
+    }));
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", {
+    className: "my-8 bg-neutral-100 p-6 flex justify-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "flex items-center gap-1"
+  }, pageLinks));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/PagerLink.js":
+/*!**********************************************!*\
+  !*** ../shared/lib/useCrudible/PagerLink.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PagerLink)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function PagerLink({
+  pageNum,
+  handleClick,
+  active
+}) {
+  let classes = 'px-2 py-1 rounded-sm';
+  if (active) {
+    classes += ' bg-sky-200';
+  } else {
+    classes += ' cursor-pointer bg-neutral-200';
+  }
+  const handleClickWrapper = () => {
+    handleClick(pageNum);
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    className: classes,
+    onClick: handleClickWrapper
+  }, pageNum);
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/SDO_Context.js":
+/*!************************************************!*\
+  !*** ../shared/lib/useCrudible/SDO_Context.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SDO_Context: () => (/* binding */ SDO_Context)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const SDO_Context = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/SortableHeader.js":
+/*!***************************************************!*\
+  !*** ../shared/lib/useCrudible/SortableHeader.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SortableHeader)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function SortableHeader({
+  label,
+  columnKey,
+  defaultSortOrder,
+  sortColumn,
+  setSortColumn,
+  sortOrder,
+  setSortOrder
+}) {
+  const handleSortClick = () => {
+    if (sortColumn === columnKey) {
+      // Toggle sort order if the same column is clicked
+      setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
+    } else {
+      // Set new sort column and default to ASC
+      setSortColumn(columnKey);
+      setSortOrder(defaultSortOrder);
+    }
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `cursor-pointer font-bold text-sm text-neutral-800 px-2 py-1 ${sortColumn === columnKey ? 'text-blue-500' : ''}`,
+    onClick: handleSortClick
+  }, label, sortColumn === columnKey && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "ml-1"
+  }, sortOrder === 'ASC' ? '▲' : '▼'));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/ViewScreen.js":
+/*!***********************************************!*\
+  !*** ../shared/lib/useCrudible/ViewScreen.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ViewScreen)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+
+
+
+
+function ViewScreen({
+  id
+}) {
+  const [record, setRecord] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const {
+    useSDO
+  } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+  const API = (0,_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__.useStandardAPI)(sdo.route_base);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    async function fetchData(id, API) {
+      const data = await API.getOne(id);
+      setRecord(data.record);
+    }
+    fetchData(id, API);
+  }, []);
+  if (!record) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, "Record ", id, " loading...");
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "grid"
+  }, sdo.field_groups.map(fieldGroup => fieldGroup.fields.map(field => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: field.name
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, field.title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, record[field.name]))))));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/grid/Controls.js":
+/*!**************************************************!*\
+  !*** ../shared/lib/useCrudible/grid/Controls.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Controls)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/lib/useCrudible/DeleteButton.js");
+
+
+function Controls({
+  record,
+  routes,
+  viewLink,
+  editLink
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex justify-end grow gap-3 items-center"
+  }, viewLink, editLink, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DeleteButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    field: record,
+    route: routes.delete
+  }));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/grid/Grid.js":
+/*!**********************************************!*\
+  !*** ../shared/lib/useCrudible/grid/Grid.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _GridRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GridRow */ "../shared/lib/useCrudible/grid/GridRow.js");
+/* harmony import */ var _SortableHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SortableHeader */ "../shared/lib/useCrudible/SortableHeader.js");
+/* harmony import */ var _Filters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Filters */ "../shared/lib/useCrudible/Filters.js");
+/* harmony import */ var _Pager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Pager */ "../shared/lib/useCrudible/Pager.js");
+
+
+
+
+
+function Grid({
+  routes,
+  data,
+  columns,
+  page,
+  setPage,
+  sortColumn,
+  setSortColumn,
+  sortOrder,
+  setSortOrder,
+  filters,
+  filterValues,
+  setFilterValues
+}) {
+  // Columns length sets the grid-cols-* class.
+  // grid-cols-1, grid-cols-2, grid-cols-3, grid-cols-4, grid-cols-5, grid-cols-6.
+  let gridSizeClass = '';
+  switch (columns.length) {
+    case 2:
+      gridSizeClass = 'grid-cols-2';
+      break;
+    case 3:
+      gridSizeClass = 'grid-cols-3';
+      break;
+    case 4:
+      gridSizeClass = 'grid-cols-4';
+      break;
+    case 5:
+      gridSizeClass = 'grid-cols-5';
+      break;
+    case 6:
+      gridSizeClass = 'grid-cols-6';
+      break;
+  }
+  const gridClasses = `grid ${gridSizeClass} gap-2`;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Filters__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    filters: filters,
+    filterValues: filterValues,
+    setFilterValues: setFilterValues
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: gridClasses
+  }, columns.map(column => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SortableHeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    key: column.columnKey,
+    label: column.label,
+    columnKey: column.columnKey,
+    sortColumn: sortColumn,
+    setSortColumn: setSortColumn,
+    sortOrder: sortOrder,
+    setSortOrder: setSortOrder
+  })), data.records.map((record, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_GridRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    key: index,
+    record: record,
+    routes: routes,
+    columns: columns
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Pager__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    pageCount: data.max_num_pages,
+    page: page,
+    setPage: setPage
+  }));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/grid/GridCol.js":
+/*!*************************************************!*\
+  !*** ../shared/lib/useCrudible/grid/GridCol.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GridCol)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Controls */ "../shared/lib/useCrudible/grid/Controls.js");
+
+
+function GridCol({
+  column,
+  record,
+  routes
+}) {
+  if (column.columnKey === 'controls') {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Controls__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      routes: routes,
+      record: record
+    });
+  }
+  let value = record[column.recordKey];
+  if (typeof value === 'object') {
+    value = '';
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "font-medium text-xs px-2 py-1"
+  }, value);
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/grid/GridRow.js":
+/*!*************************************************!*\
+  !*** ../shared/lib/useCrudible/grid/GridRow.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/lib/useCrudible/DeleteButton.js");
+/* harmony import */ var _GridCol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GridCol */ "../shared/lib/useCrudible/grid/GridCol.js");
+
+
+
+function GridRow({
+  record,
+  index,
+  routes,
+  columns
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, columns.map((column, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_GridCol__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    key: index,
+    column: column,
+    record: record,
+    routes: routes
+  })));
+}
+
+/***/ }),
+
+/***/ "../shared/lib/useCrudible/useCrudible.js":
+/*!************************************************!*\
+  !*** ../shared/lib/useCrudible/useCrudible.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useCrudible: () => (/* binding */ useCrudible)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Crudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Crudible */ "../shared/lib/useCrudible/Crudible.js");
+/* harmony import */ var _Manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Manager */ "../shared/lib/useCrudible/Manager.js");
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "../shared/lib/useCrudible/Header.js");
+/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Footer */ "../shared/lib/useCrudible/Footer.js");
+/* harmony import */ var _DeleteScreen__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DeleteScreen */ "../shared/lib/useCrudible/DeleteScreen.js");
+/* harmony import */ var _ViewScreen__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ViewScreen */ "../shared/lib/useCrudible/ViewScreen.js");
+/* harmony import */ var _grid_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/Grid */ "../shared/lib/useCrudible/grid/Grid.js");
+/* harmony import */ var _AppForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AppForm */ "../shared/lib/useCrudible/AppForm.js");
+/* harmony import */ var _SDO_Context__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SDO_Context */ "../shared/lib/useCrudible/SDO_Context.js");
+
+
+
+
+
+
+
+
+
+
+
+function useCrudible(params = {
+  recordId: 0,
+  api: null
+}) {
+  function useSDO() {
+    const sdo = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_SDO_Context__WEBPACK_IMPORTED_MODULE_9__.SDO_Context);
+    return sdo;
+  }
+  const AppFormComponent = ({
+    recordId
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AppForm__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    recordId: recordId
+  });
+  function HeaderComponent({
+    mode
+  }) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+  }
+  function ViewScreenCompiled() {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ViewScreen__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      id: params.recordId
+    });
+  }
+  return {
+    Crudible: _Crudible__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Manager: _Manager__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Grid: _grid_Grid__WEBPACK_IMPORTED_MODULE_7__["default"],
+    Header: HeaderComponent,
+    Footer: _Footer__WEBPACK_IMPORTED_MODULE_4__["default"],
+    AppForm: AppFormComponent,
+    DeleteScreen: _DeleteScreen__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ViewScreen: ViewScreenCompiled,
+    SDO_Context: _SDO_Context__WEBPACK_IMPORTED_MODULE_9__.SDO_Context,
+    useSDO
+  };
+}
 
 /***/ }),
 

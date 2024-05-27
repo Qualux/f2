@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useCrudible } from './useCrudible';
+import { useCrudible } from 'shared';
 import { NavLink } from "react-router-dom";
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 

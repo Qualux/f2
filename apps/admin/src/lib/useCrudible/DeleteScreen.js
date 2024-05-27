@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useCrudible } from './useCrudible';
+import { useCrudible } from 'shared';
 import { useStandardAPI } from 'shared';
 import { ScreenWrap } from 'shared';
 

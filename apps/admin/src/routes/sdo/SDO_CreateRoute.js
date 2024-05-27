@@ -1,4 +1,4 @@
-import { useCrudible } from '../../lib/useCrudible/useCrudible';
+import { useCrudible } from 'shared';
 import AppTemplate from '../../components/global/AppTemplate';
 import { ScreenWrap } from 'shared';
 

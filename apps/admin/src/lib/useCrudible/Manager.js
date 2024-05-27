@@ -3,7 +3,7 @@ import {
     useQuery,
     keepPreviousData,
 } from '@tanstack/react-query';
-import { useCrudible } from './useCrudible';
+import { useCrudible } from 'shared';
 import { ScreenWrap } from 'shared';
 import { SkeletonList } from 'shared';
 import { useStandardAPI } from 'shared';

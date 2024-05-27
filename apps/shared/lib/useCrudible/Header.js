@@ -1,91 +1,60 @@
-import { useLocation } from "react-router-dom";
 import { useCrudible } from './useCrudible';
-import { NavLink } from "react-router-dom";
-import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 
-export default function Header() {
+export default function Header( { routeType, returnLink, createLink } ) {
 
     const { useSDO } = useCrudible();
-    const location = useLocation();
     const sdo = useSDO();
-    const isCreateRoute = location.pathname === sdo.routes.create;
-    const isEditRoute = location.pathname.startsWith(sdo.routes.edit);
-    const isViewRoute = location.pathname.startsWith(sdo.routes.view);
-    const isDeleteRoute = location.pathname.startsWith(sdo.routes.delete);
 
     function leftCol() {
 
-        if( isCreateRoute ) {
+        if( routeType === 'create' ) {
             return(
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         CREATE
                     </h2>
-                    <NavLink
-                        to={sdo.routes.dashboard}
-                        className="fill-neutral-300 transition-transform hover:scale-125"
-                    >
-                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
-                    </NavLink>
+                    {returnLink}
                 </div>
             )
         }
 
-        if( isEditRoute ) {
+        if( routeType === 'edit' ) {
             return(
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         EDIT
                     </h2>
-                    <NavLink
-                        to={sdo.routes.dashboard}
-                        className="fill-neutral-300 transition-transform hover:scale-125"
-                    >
-                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
-                    </NavLink>
+                    {returnLink}
                 </div>
             )
         }
 
-        if( isViewRoute ) {
+        if( routeType === 'view' ) {
             return(
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         VIEW
                     </h2>
-                    <NavLink
-                        to={sdo.routes.dashboard}
-                        className="fill-neutral-300 transition-transform hover:scale-125"
-                    >
-                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
-                    </NavLink>
+                    {returnLink}
                 </div>
             )
         }
 
-        if( isDeleteRoute ) {
+        if( routeType === 'delete' ) {
             return(
                 <div className="flex gap-5 items-center">
                     <h2 className="text-neutral-300 font-semibold text-lg">
                         DELETE
                     </h2>
-                    <NavLink
-                        to={sdo.routes.dashboard}
-                        className="fill-neutral-300 transition-transform hover:scale-125"
-                    >
-                        <ArrowUturnLeftIcon className="h-4 w-4 text-sky-600" />
-                    </NavLink>
+                    {returnLink}
                 </div>
             )
         }
 
         return(
-            <NavLink
-                to={sdo.routes.create}
-                className="inline-block bg-neutral-700 text-neutral-200 text-sm py-1 px-4 font-medium rounded-sm shadow-md transition-transform hover:scale-110 hover:text-neutral-200"
-            >
-                {sdo.create.button.label}
-            </NavLink>
+            <div className="flex gap-5 items-center">
+                {createLink}
+            </div>
         )
 
     }

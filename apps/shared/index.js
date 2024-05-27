@@ -4,8 +4,10 @@ import Modal from './components/global/Modal';
 import ScreenWrap from './components/global/ScreenWrap';
 import SkeletonList from './components/global/SkeletonList';
 import { useStandardAPI } from './lib/useStandardAPI';
+import { useCrudible } from './lib/useCrudible/useCrudible';
 
 export { 
+    useCrudible,
     useStandardAPI,
     useFormManager,
     Field,

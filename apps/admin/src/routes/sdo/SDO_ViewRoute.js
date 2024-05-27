@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import AppTemplate from '../../components/global/AppTemplate';
-import { useCrudible } from '../../lib/useCrudible/useCrudible';
+import { useCrudible } from 'shared';
 
 export default function SDO_ViewRoute( {sdo} ) {
 
