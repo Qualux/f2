@@ -31092,8 +31092,6 @@ const FormRender = () => {
     FormComplete
   } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
   const validateFormData = () => {
-    // Implement your validation logic here
-    // Return true if validation passes, false otherwise
     return false;
   };
   (0,_utils_interceptTaxonomyFormSubmission__WEBPACK_IMPORTED_MODULE_2__.interceptTaxonomyFormSubmission)(validateFormData);

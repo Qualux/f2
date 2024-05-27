@@ -30,6 +30,14 @@ class Enqueue {
                 time(), //For production use wp_get_theme()->get('Version')    
             );
 
+            wp_enqueue_style( 
+                'f3-admin', 
+                F3_URL . 'apps/admin/build/index.css', 
+                array(), 
+                '1.0.0', 
+                'all' 
+            );
+
             wp_localize_script( 
                 'f3-app-fields', 
                 'f3Settings', 
