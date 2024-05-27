@@ -8,7 +8,7 @@ class Enqueue {
 
         // Render fields app UI for F3 admin. 
 
-        // @TODO render scripts required for Options Pages, Taxonomy and User editing.
+        // @TODO Selectively render scripts required for Options Pages, Taxonomy and User editing only when needed.
 
         add_action( 'admin_enqueue_scripts', function() {
 
@@ -17,17 +17,12 @@ class Enqueue {
                 return;
             }
 
-            $json  = file_get_contents( F3_PATH . '/apps/fields/build/asset-manifest.json'); 
-            $build = json_decode( $json, true); 
-            wp_enqueue_style( 'f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all' );
-            wp_enqueue_script( 'f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', 1 );
-        
             // Enqueue F3 admin. 
             wp_enqueue_script(
                 'f3-admin',
                 F3_URL . '/apps/admin/build/index.js',
-                ['wp-element', 'f3-app-fields'],
-                time(), //For production use wp_get_theme()->get('Version')    
+                ['wp-element'],
+                time(),   
             );
 
             wp_enqueue_style( 
@@ -39,7 +34,7 @@ class Enqueue {
             );
 
             wp_localize_script( 
-                'f3-app-fields', 
+                'f3-admin', 
                 'f3Settings', 
                 array( 
                     'apiRoot'        => esc_url_raw( rest_url() ),
@@ -54,10 +49,17 @@ class Enqueue {
         // Enqueue assets for field rendering in Gutenberg.
 
         add_action('enqueue_block_editor_assets', function() {
-            $json = file_get_contents(F3_PATH . '/apps/fields/build/asset-manifest.json');
-            $build = json_decode($json, true);
-            wp_enqueue_style('f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.css'], array(), '1.0.0', 'all');
-            wp_enqueue_script('f3-app-fields', F3_URL . 'apps/fields/build' . $build['files']['main.js'], array(), '1.0.0', true);
+
+            wp_enqueue_script(
+                'f3-render',
+                F3_URL . '/apps/render/build/index.js',
+                ['wp-element'],
+                time(), //For production use wp_get_theme()->get('Version')  
+                [
+                    'in_footer' => true,
+                ]      
+            );
+        
         });
 
         // Enqueue render app back. 
