@@ -4972,23 +4972,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "../shared/index.js");
 /* harmony import */ var _components_AppTemplate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/AppTemplate */ "./src/components/AppTemplate.js");
 
 
 
 
+
+function CreateHeader() {
+  const {
+    Header,
+    useSDO
+  } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, {
+    routeType: "create",
+    returnLink: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+      to: sdo.routes.dashboard
+    }, "RETURN")
+  });
+}
 function SDO_CreateRoute({
   sdo
 }) {
   const {
     Crudible,
-    Header,
     AppForm
   } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Crudible, {
     sdo: sdo
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_AppTemplate__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(shared__WEBPACK_IMPORTED_MODULE_1__.ScreenWrap, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AppForm, null))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_AppTemplate__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateHeader, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(shared__WEBPACK_IMPORTED_MODULE_1__.ScreenWrap, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AppForm, null))));
 }
 
 /***/ }),
@@ -5081,7 +5095,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "../shared/index.js");
 /* harmony import */ var _components_AppTemplate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/AppTemplate */ "./src/components/AppTemplate.js");
 
@@ -5089,20 +5104,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+function EditHeader() {
+  const {
+    Header,
+    useSDO
+  } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
+  const sdo = useSDO();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, {
+    routeType: "create",
+    returnLink: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+      to: sdo.routes.dashboard
+    }, "RETURN")
+  });
+}
 function SDO_EditRoute({
   sdo
 }) {
   const {
     id
-  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)();
+  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)();
   const {
     Crudible,
-    Header,
     AppForm
   } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Crudible, {
     sdo: sdo
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_AppTemplate__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(shared__WEBPACK_IMPORTED_MODULE_1__.ScreenWrap, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AppForm, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_AppTemplate__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(EditHeader, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(shared__WEBPACK_IMPORTED_MODULE_1__.ScreenWrap, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AppForm, {
     recordId: id
   }))));
 }
@@ -7690,6 +7718,8 @@ function useCrudible(params = {
 }) {
   function useSDO() {
     const sdo = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_SDO_Context__WEBPACK_IMPORTED_MODULE_9__.SDO_Context);
+    console.log('in useSDO, sdo:');
+    console.log(sdo);
     return sdo;
   }
   const AppFormComponent = ({
@@ -7698,9 +7728,15 @@ function useCrudible(params = {
     recordId: recordId
   });
   function HeaderComponent({
-    mode
+    routeType,
+    returnLink,
+    createLink
   }) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      routeType: routeType,
+      returnLink: returnLink,
+      createLink: createLink
+    });
   }
   function ViewScreenCompiled() {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ViewScreen__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -48320,7 +48356,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"field_group","title":"F3 Fiel
   \********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"name":"form","title":"F3 Form SDO","display_title":"F3 Form Manager","route_base":"form","post_type":{"post_type_key":"f3-form","label":"F3 Form"},"create":{"button":{"label":"Make Form"}},"field_groups":[{"name":"field_group_1","post_type":"f3-form","fields":[{"type":"text","name":"title","title":"Title","label":"Title","placeholder":"Admin title..."},{"type":"field_group_collection","name":"field_groups","title":"Field Groups","label":"Field Groups"}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"form","title":"F3 Form SDO","display_title":"F3 Form Manager","route_base":"form","post_type":{"post_type_key":"f3-form","label":"F3 Form"},"create":{"button":{"label":"Make Form"}},"field_groups":[{"name":"field_group_1","post_type":"f3-form","fields":[{"type":"text","name":"title","title":"Title","label":"Title","placeholder":"Admin title..."},{"type":"field_group_collection","name":"field_groups","title":"Field Groups","label":"Field Groups"},{"type":"select","name":"admin_location","title":"Admin Location","label":"Admin Location","choices":[{"value":"post_type","label":"Post Type"},{"value":"taxonomy","label":"Taxonomy"},{"value":"user","label":"User Form"},{"value":"options_page","label":"Options Page"}]}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
 
 /***/ }),
 

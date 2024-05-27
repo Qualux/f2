@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Cog8ToothIcon } from '@heroicons/react/24/solid';
 import Menu from './AppMenu';
 
-export default function AppHeader({title}) {
+export default function AppHeader( { title } ) {
 
     return(
         <header className="flex items-center justify-between bg-neutral-900 font-semibold px-3 py-1">

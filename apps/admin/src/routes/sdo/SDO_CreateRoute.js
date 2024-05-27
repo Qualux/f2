@@ -1,15 +1,30 @@
+import { NavLink } from 'react-router-dom';
 import { useCrudible } from 'shared';
 import AppTemplate from '../../components/AppTemplate';
 import { ScreenWrap } from 'shared';
 
-export default function SDO_CreateRoute({sdo}) {
+function CreateHeader() {
 
-    const { Crudible, Header, AppForm } = useCrudible();
+    const { Header, useSDO } = useCrudible();
+    const sdo = useSDO();
+
+    return(
+        <Header 
+            routeType="create"
+            returnLink={<NavLink to={sdo.routes.dashboard}>RETURN</NavLink>}
+        />
+    );
+
+}
+
+export default function SDO_CreateRoute( {sdo} ) {
+
+    const { Crudible, AppForm } = useCrudible();
 
     return(
         <Crudible sdo={sdo}>
             <AppTemplate>
-                <Header />
+                <CreateHeader />
                 <ScreenWrap>
                     <AppForm />
                 </ScreenWrap> 

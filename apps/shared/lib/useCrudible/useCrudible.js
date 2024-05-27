@@ -13,6 +13,10 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
 
     function useSDO() {
         const sdo = useContext(SDO_Context);
+
+        console.log('in useSDO, sdo:')
+        console.log(sdo)
+
         return sdo;
     }
 
@@ -22,10 +26,14 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
         />
     );
 
-    function HeaderComponent({mode}) {
+    function HeaderComponent( { routeType, returnLink, createLink } ) {
 
         return (
-            <Header />
+            <Header 
+                routeType={routeType}
+                returnLink={returnLink}
+                createLink={createLink}
+            />
         );
 
     }

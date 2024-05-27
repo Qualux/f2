@@ -29,6 +29,18 @@
                     "name": "field_groups",
                     "title": "Field Groups",
                     "label": "Field Groups"
+                },
+                {
+                    "type": "select",
+                    "name": "admin_location",
+                    "title": "Admin Location",
+                    "label": "Admin Location",
+                    "choices": [
+                        { "value": "post_type", "label": "Post Type" },
+                        { "value": "taxonomy", "label": "Taxonomy" },
+                        { "value": "user", "label": "User Form" },
+                        { "value": "options_page", "label": "Options Page" }
+                    ]        
                 }
             ]
         }

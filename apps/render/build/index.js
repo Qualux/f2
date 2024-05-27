@@ -2567,6 +2567,8 @@ function useCrudible(params = {
 }) {
   function useSDO() {
     const sdo = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_SDO_Context__WEBPACK_IMPORTED_MODULE_9__.SDO_Context);
+    console.log('in useSDO, sdo:');
+    console.log(sdo);
     return sdo;
   }
   const AppFormComponent = ({
@@ -2575,9 +2577,15 @@ function useCrudible(params = {
     recordId: recordId
   });
   function HeaderComponent({
-    mode
+    routeType,
+    returnLink,
+    createLink
   }) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      routeType: routeType,
+      returnLink: returnLink,
+      createLink: createLink
+    });
   }
   function ViewScreenCompiled() {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ViewScreen__WEBPACK_IMPORTED_MODULE_6__["default"], {
