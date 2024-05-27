@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import AppTemplate from '../../components/global/AppTemplate';
+import AppTemplate from '../../components/AppTemplate';
 import { useCrudible } from 'shared';
 
 export default function SDO_DeleteRoute( {sdo} ) {

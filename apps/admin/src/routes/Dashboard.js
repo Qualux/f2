@@ -1,4 +1,4 @@
-import AppTemplate from '../components/global/AppTemplate';
+import AppTemplate from '../components/AppTemplate';
 import {
     QueryClient,
     QueryClientProvider,

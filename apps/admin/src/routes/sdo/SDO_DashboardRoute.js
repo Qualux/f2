@@ -1,6 +1,6 @@
 import { useLocation, Outlet } from "react-router-dom";
 import { useCrudible } from 'shared';
-import AppTemplate from '../../components/global/AppTemplate';
+import AppTemplate from '../../components/AppTemplate';
 
 export default function SDO_DashboardRoute( {sdo} ) {
 

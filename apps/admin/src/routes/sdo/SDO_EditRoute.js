@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useCrudible } from 'shared';
-import AppTemplate from '../../components/global/AppTemplate';
+import AppTemplate from '../../components/AppTemplate';
 import { ScreenWrap } from 'shared';
 
 export default function SDO_EditRoute( {sdo} ) {

@@ -1,4 +1,4 @@
-import AppHeader from './components/global/AppHeader';
+import AppHeader from './components/AppHeader';
 import {
   Outlet,
 } from "react-router-dom";
