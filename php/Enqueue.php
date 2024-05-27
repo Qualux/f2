@@ -50,6 +50,7 @@ class Enqueue {
 
         add_action('enqueue_block_editor_assets', function() {
 
+            /*
             wp_enqueue_script(
                 'f3-render',
                 F3_URL . '/apps/render/build/index.js',
@@ -59,11 +60,14 @@ class Enqueue {
                     'in_footer' => true,
                 ]      
             );
+            */
         
         });
 
         // Enqueue render app back. 
         add_action( 'admin_enqueue_scripts', function() {
+
+            /*
             wp_enqueue_script(
                 'f3-render',
                 F3_URL . '/apps/render/build/index.js',
@@ -73,10 +77,14 @@ class Enqueue {
                     'in_footer' => true,
                 ]      
             );
+            */
+
         });
 
         // Enqueue render app front. 
         add_action( 'wp_enqueue_scripts', function() {
+
+            /*
             wp_enqueue_script(
                 'f3-render',
                 F3_URL . '/apps/render/build/index.js',
@@ -86,6 +94,8 @@ class Enqueue {
                     'in_footer' => true,
                 ]      
             );
+            */
+            
         });
         
     }

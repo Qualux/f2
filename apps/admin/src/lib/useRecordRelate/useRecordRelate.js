@@ -5,9 +5,8 @@ import {
     useQuery,
     keepPreviousData,
 } from '@tanstack/react-query';
-import ScreenWrap from '../../components/global/ScreenWrap';
-import SkeletonList from '../../components/global/SkeletonList';
-import Sortable from 'sortablejs';
+import { ScreenWrap } from 'shared';
+import { SkeletonList } from 'shared';
 import { useFieldArray } from 'react-hook-form';
 import { useFormManager } from '../../lib/useFormManager/useFormManager';
 import { useFieldGroupRender } from '../../lib/useFieldGroupRender/useFieldGroupRender';

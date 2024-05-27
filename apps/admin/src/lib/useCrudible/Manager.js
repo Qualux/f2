@@ -4,8 +4,8 @@ import {
     keepPreviousData,
 } from '@tanstack/react-query';
 import { useCrudible } from './useCrudible';
-import ScreenWrap from '../../components/global/ScreenWrap';
-import SkeletonList from '../../components/global/SkeletonList';
+import { ScreenWrap } from 'shared';
+import { SkeletonList } from 'shared';
 import { useStandardAPI } from 'shared';
 
 export default function Manager() {

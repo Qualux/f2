@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCrudible } from './useCrudible';
 import { useStandardAPI } from 'shared';
-import ScreenWrap from '../../components/global/ScreenWrap';
+import { ScreenWrap } from 'shared';
 
 
 export default function DeleteScreen( {id} ) {

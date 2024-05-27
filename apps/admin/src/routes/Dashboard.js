@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import AppTemplate from '../components/global/AppTemplate';
 import {
     QueryClient,

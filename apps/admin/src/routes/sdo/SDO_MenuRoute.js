@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import AppTemplate from '../../components/global/AppTemplate';
-import ScreenWrap from '../../components/global/ScreenWrap';
+import { ScreenWrap } from 'shared';
 
 export default function SDO_MenuRoute() {
 

@@ -1,6 +1,6 @@
 import { useCrudible } from '../../lib/useCrudible/useCrudible';
 import AppTemplate from '../../components/global/AppTemplate';
-import ScreenWrap from '../../components/global/ScreenWrap';
+import { ScreenWrap } from 'shared';
 
 export default function SDO_CreateRoute({sdo}) {
 

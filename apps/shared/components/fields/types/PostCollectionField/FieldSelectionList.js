@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useFieldCollection } from '../../../../lib/useFieldCollection';
-import { NavLink } from "react-router-dom";
 import useChildFieldContext from './useChildFieldContext';
 
 function EmptyMessage() {
@@ -41,7 +40,7 @@ function Field({field, index, setOpen}) {
 export default function FieldSelectionList({setOpen}) {
 
     const { fields, isLoaded } = useFieldCollection();
-    const [ selectionId, setSelectionId ] = useState(0);
+    const [ setSelectionId ] = useState(0);
 
     if( !isLoaded ) {
         return <main>Loading fields....</main>

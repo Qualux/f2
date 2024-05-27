@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import Modal from '../../../global/Modal';
+import { Modal } from 'shared';
 import FieldList from './FieldSelectionList';
 import ChildFieldContext from './ChildFieldContext';
 import Label from '../../Label';
