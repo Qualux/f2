@@ -47,7 +47,7 @@ const FormRender = ( { formArgument } ) => {
     }, [])
 
     const { 
-        FormProvider, 
+        FormManagerProvider, 
         Form, 
         Fields, 
         SubmitButton, 
@@ -83,7 +83,7 @@ const FormRender = ( { formArgument } ) => {
     
 
     return(
-        <FormProvider formData={formData}>
+        <FormManagerProvider formData={formData}>
             <Form>
                 <span>formArg: {formArgument}</span>
                 <span>form.id: {form.id}</span>
@@ -91,7 +91,7 @@ const FormRender = ( { formArgument } ) => {
                 <SubmitButton />
             </Form>
             <FormComplete />
-        </FormProvider>
+        </FormManagerProvider>
     );
 
 };

@@ -19,5 +19,8 @@
     "react-hook-form": "^7.51.5",
     "react-select": "^5.8.0",
     "sortablejs": "^1.15.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
   }
 }

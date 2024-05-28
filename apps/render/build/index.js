@@ -32,10 +32,59 @@ function interceptTaxonomyFormSubmission(validationFunction) {
 
 /***/ }),
 
-/***/ "../shared/api/StandardAPI.js":
-/*!************************************!*\
-  !*** ../shared/api/StandardAPI.js ***!
-  \************************************/
+/***/ "../shared/index.js":
+/*!**************************!*\
+  !*** ../shared/index.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Field: () => (/* reexport safe */ _src_components_fields_Field__WEBPACK_IMPORTED_MODULE_10__["default"]),
+/* harmony export */   Label: () => (/* reexport safe */ _src_components_fields_Label__WEBPACK_IMPORTED_MODULE_11__["default"]),
+/* harmony export */   Modal: () => (/* reexport safe */ _src_components_global_Modal__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   ScreenWrap: () => (/* reexport safe */ _src_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   SkeletonList: () => (/* reexport safe */ _src_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   useCrudible: () => (/* reexport safe */ _src_lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_0__.useCrudible),
+/* harmony export */   useFieldCollection: () => (/* reexport safe */ _src_lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_5__.useFieldCollection),
+/* harmony export */   useFieldGroupRender: () => (/* reexport safe */ _src_lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_1__.useFieldGroupRender),
+/* harmony export */   useFieldRender: () => (/* reexport safe */ _src_lib_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_2__.useFieldRender),
+/* harmony export */   useFormManager: () => (/* reexport safe */ _src_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__.useFormManager),
+/* harmony export */   useRecordRelate: () => (/* reexport safe */ _src_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_4__.useRecordRelate),
+/* harmony export */   useStandardAPI: () => (/* reexport safe */ _src_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__.useStandardAPI)
+/* harmony export */ });
+/* harmony import */ var _src_lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/lib/useCrudible/useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _src_lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./src/lib/useFieldGroupRender/useFieldGroupRender */ "../shared/src/lib/useFieldGroupRender/useFieldGroupRender.js");
+/* harmony import */ var _src_lib_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/lib/useFieldRender/useFieldRender */ "../shared/src/lib/useFieldRender/useFieldRender.js");
+/* harmony import */ var _src_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _src_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./src/lib/useRecordRelate/useRecordRelate */ "../shared/src/lib/useRecordRelate/useRecordRelate.js");
+/* harmony import */ var _src_lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/lib/useFieldCollection */ "../shared/src/lib/useFieldCollection.js");
+/* harmony import */ var _src_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./src/lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
+/* harmony import */ var _src_components_global_Modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./src/components/global/Modal */ "../shared/src/components/global/Modal.js");
+/* harmony import */ var _src_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./src/components/global/ScreenWrap */ "../shared/src/components/global/ScreenWrap.js");
+/* harmony import */ var _src_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./src/components/global/SkeletonList */ "../shared/src/components/global/SkeletonList.js");
+/* harmony import */ var _src_components_fields_Field__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./src/components/fields/Field */ "../shared/src/components/fields/Field.js");
+/* harmony import */ var _src_components_fields_Label__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./src/components/fields/Label */ "../shared/src/components/fields/Label.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "../shared/src/api/StandardAPI.js":
+/*!****************************************!*\
+  !*** ../shared/src/api/StandardAPI.js ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -127,10 +176,10 @@ class StandardAPI {
 
 /***/ }),
 
-/***/ "../shared/components/fields/Field.js":
-/*!********************************************!*\
-  !*** ../shared/components/fields/Field.js ***!
-  \********************************************/
+/***/ "../shared/src/components/fields/Field.js":
+/*!************************************************!*\
+  !*** ../shared/src/components/fields/Field.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -139,30 +188,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types_TextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/TextField */ "../shared/components/fields/types/TextField.js");
-/* harmony import */ var _types_TextAreaField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/TextAreaField */ "../shared/components/fields/types/TextAreaField.js");
-/* harmony import */ var _types_SelectField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./types/SelectField */ "../shared/components/fields/types/SelectField.js");
-/* harmony import */ var _types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./types/TrueFalseField/TrueFalseField */ "../shared/components/fields/types/TrueFalseField/TrueFalseField.js");
-/* harmony import */ var _types_EmailField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./types/EmailField */ "../shared/components/fields/types/EmailField.js");
-/* harmony import */ var _types_UrlField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./types/UrlField */ "../shared/components/fields/types/UrlField.js");
-/* harmony import */ var _types_CollectionField_CollectionField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./types/CollectionField/CollectionField */ "../shared/components/fields/types/CollectionField/CollectionField.js");
-/* harmony import */ var _types_NumberField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./types/NumberField */ "../shared/components/fields/types/NumberField.js");
-/* harmony import */ var _types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./types/RangeField/RangeField */ "../shared/components/fields/types/RangeField/RangeField.js");
-/* harmony import */ var _types_PostCollectionField_PostCollectionField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./types/PostCollectionField/PostCollectionField */ "../shared/components/fields/types/PostCollectionField/PostCollectionField.js");
-/* harmony import */ var _types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./types/SearchableSelectField/SearchableSelectField */ "../shared/components/fields/types/SearchableSelectField/SearchableSelectField.js");
-/* harmony import */ var _types_CheckboxField_CheckboxField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./types/CheckboxField/CheckboxField */ "../shared/components/fields/types/CheckboxField/CheckboxField.js");
-/* harmony import */ var _types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./types/RadioGroupField/RadioGroupField */ "../shared/components/fields/types/RadioGroupField/RadioGroupField.js");
-/* harmony import */ var _types_ImageField_ImageField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./types/ImageField/ImageField */ "../shared/components/fields/types/ImageField/ImageField.js");
-/* harmony import */ var _types_FileField_FileField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./types/FileField/FileField */ "../shared/components/fields/types/FileField/FileField.js");
-/* harmony import */ var _types_InlineField_InlineField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./types/InlineField/InlineField */ "../shared/components/fields/types/InlineField/InlineField.js");
-/* harmony import */ var _types_FieldGroupCollectionField_FieldGroupCollectionField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./types/FieldGroupCollectionField/FieldGroupCollectionField */ "../shared/components/fields/types/FieldGroupCollectionField/FieldGroupCollectionField.js");
-/* harmony import */ var _types_FieldCollectionField_FieldCollectionField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./types/FieldCollectionField/FieldCollectionField */ "../shared/components/fields/types/FieldCollectionField/FieldCollectionField.js");
+/* harmony import */ var _types_CheckboxField_CheckboxField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types/CheckboxField/CheckboxField */ "../shared/src/components/fields/types/CheckboxField/CheckboxField.js");
+/* harmony import */ var _types_CollectionField_CollectionField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types/CollectionField/CollectionField */ "../shared/src/components/fields/types/CollectionField/CollectionField.js");
+/* harmony import */ var _types_EmailField_EmailField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./types/EmailField/EmailField */ "../shared/src/components/fields/types/EmailField/EmailField.js");
+/* harmony import */ var _types_FieldCollectionField_FieldCollectionField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./types/FieldCollectionField/FieldCollectionField */ "../shared/src/components/fields/types/FieldCollectionField/FieldCollectionField.js");
+/* harmony import */ var _types_FieldGroupCollectionField_FieldGroupCollectionField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./types/FieldGroupCollectionField/FieldGroupCollectionField */ "../shared/src/components/fields/types/FieldGroupCollectionField/FieldGroupCollectionField.js");
+/* harmony import */ var _types_FileField_FileField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./types/FileField/FileField */ "../shared/src/components/fields/types/FileField/FileField.js");
+/* harmony import */ var _types_ImageField_ImageField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./types/ImageField/ImageField */ "../shared/src/components/fields/types/ImageField/ImageField.js");
+/* harmony import */ var _types_NumberField_NumberField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./types/NumberField/NumberField */ "../shared/src/components/fields/types/NumberField/NumberField.js");
+/* harmony import */ var _types_PostCollectionField_PostCollectionField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./types/PostCollectionField/PostCollectionField */ "../shared/src/components/fields/types/PostCollectionField/PostCollectionField.js");
+/* harmony import */ var _types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./types/RadioGroupField/RadioGroupField */ "../shared/src/components/fields/types/RadioGroupField/RadioGroupField.js");
+/* harmony import */ var _types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./types/RangeField/RangeField */ "../shared/src/components/fields/types/RangeField/RangeField.js");
+/* harmony import */ var _types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./types/SearchableSelectField/SearchableSelectField */ "../shared/src/components/fields/types/SearchableSelectField/SearchableSelectField.js");
+/* harmony import */ var _types_SelectField_SelectField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./types/SelectField/SelectField */ "../shared/src/components/fields/types/SelectField/SelectField.js");
+/* harmony import */ var _types_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./types/TextAreaField/TextAreaField */ "../shared/src/components/fields/types/TextAreaField/TextAreaField.js");
+/* harmony import */ var _types_TextField_TextField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./types/TextField/TextField */ "../shared/src/components/fields/types/TextField/TextField.js");
+/* harmony import */ var _types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./types/TrueFalseField/TrueFalseField */ "../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js");
+/* harmony import */ var _types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./types/UrlField/UrlField */ "../shared/src/components/fields/types/UrlField/UrlField.js");
 
 /*
  * Field handles rendering of a field. 
  * Field does not check conditions for rendering, it is up to the parent component to use React Hook Form to watch conditional values.
  */
-
 
 
 
@@ -194,7 +241,7 @@ function Field({
 }) {
   switch (field.type) {
     case 'text':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextField_TextField__WEBPACK_IMPORTED_MODULE_15__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -203,28 +250,28 @@ function Field({
       });
       break;
     case 'textarea':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextAreaField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_14__["default"], {
         field: field,
         register: register,
         errors: errors
       });
       break;
     case 'select':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SelectField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SelectField_SelectField__WEBPACK_IMPORTED_MODULE_13__["default"], {
         field: field,
         register: register,
         errors: errors
       });
       break;
     case 'checkbox':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_CheckboxField_CheckboxField__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_CheckboxField_CheckboxField__WEBPACK_IMPORTED_MODULE_1__["default"], {
         field: field,
         register: register,
         errors: errors
       });
       break;
     case 'true_false':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_16__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -235,7 +282,7 @@ function Field({
       });
       break;
     case 'searchable_select':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_12__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -243,7 +290,7 @@ function Field({
       });
       break;
     case 'number':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_NumberField__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_NumberField_NumberField__WEBPACK_IMPORTED_MODULE_8__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -251,28 +298,28 @@ function Field({
       });
       break;
     case 'range':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_11__["default"], {
         field: field,
         register: register,
         errors: errors
       });
       break;
     case 'email':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_EmailField__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_EmailField_EmailField__WEBPACK_IMPORTED_MODULE_3__["default"], {
         field: field,
         register: register,
         errors: errors
       });
       break;
     case 'url':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_UrlField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_17__["default"], {
         field: field,
         register: register,
         errors: errors
       });
       break;
     case 'collection':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_CollectionField_CollectionField__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_CollectionField_CollectionField__WEBPACK_IMPORTED_MODULE_2__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -282,7 +329,7 @@ function Field({
       });
       break;
     case 'post_collection':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_PostCollectionField_PostCollectionField__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_PostCollectionField_PostCollectionField__WEBPACK_IMPORTED_MODULE_9__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -293,7 +340,7 @@ function Field({
       });
       break;
     case 'radio_group':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_10__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -304,7 +351,7 @@ function Field({
       });
       break;
     case 'image':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_ImageField_ImageField__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_ImageField_ImageField__WEBPACK_IMPORTED_MODULE_7__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -314,7 +361,7 @@ function Field({
       });
       break;
     case 'file':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FileField_FileField__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FileField_FileField__WEBPACK_IMPORTED_MODULE_6__["default"], {
         field: field,
         register: register,
         errors: errors,
@@ -323,16 +370,13 @@ function Field({
         valuesInit: valuesInit
       });
       break;
-    case 'inline':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_InlineField_InlineField__WEBPACK_IMPORTED_MODULE_16__["default"], null);
-      break;
     case 'field_group_collection':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FieldGroupCollectionField_FieldGroupCollectionField__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FieldGroupCollectionField_FieldGroupCollectionField__WEBPACK_IMPORTED_MODULE_5__["default"], {
         field: field
       });
       break;
     case 'field_collection':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FieldCollectionField_FieldCollectionField__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FieldCollectionField_FieldCollectionField__WEBPACK_IMPORTED_MODULE_4__["default"], {
         field: field
       });
       break;
@@ -346,10 +390,10 @@ function Field({
 
 /***/ }),
 
-/***/ "../shared/components/fields/Label.js":
-/*!********************************************!*\
-  !*** ../shared/components/fields/Label.js ***!
-  \********************************************/
+/***/ "../shared/src/components/fields/Label.js":
+/*!************************************************!*\
+  !*** ../shared/src/components/fields/Label.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -371,10 +415,10 @@ function Label({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/CheckboxField/CheckboxField.js":
-/*!************************************************************************!*\
-  !*** ../shared/components/fields/types/CheckboxField/CheckboxField.js ***!
-  \************************************************************************/
+/***/ "../shared/src/components/fields/types/CheckboxField/CheckboxField.js":
+/*!****************************************************************************!*\
+  !*** ../shared/src/components/fields/types/CheckboxField/CheckboxField.js ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -383,7 +427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function ChoicesList({
@@ -420,10 +464,10 @@ function SelectField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/CollectionField/AddScreen.js":
-/*!**********************************************************************!*\
-  !*** ../shared/components/fields/types/CollectionField/AddScreen.js ***!
-  \**********************************************************************/
+/***/ "../shared/src/components/fields/types/CollectionField/AddScreen.js":
+/*!**************************************************************************!*\
+  !*** ../shared/src/components/fields/types/CollectionField/AddScreen.js ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -466,10 +510,10 @@ function AddScreen({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/CollectionField/CollectionField.js":
-/*!****************************************************************************!*\
-  !*** ../shared/components/fields/types/CollectionField/CollectionField.js ***!
-  \****************************************************************************/
+/***/ "../shared/src/components/fields/types/CollectionField/CollectionField.js":
+/*!********************************************************************************!*\
+  !*** ../shared/src/components/fields/types/CollectionField/CollectionField.js ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -478,8 +522,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ItemsList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemsList */ "../shared/components/fields/types/CollectionField/ItemsList.js");
-/* harmony import */ var _AddScreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddScreen */ "../shared/components/fields/types/CollectionField/AddScreen.js");
+/* harmony import */ var _ItemsList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemsList */ "../shared/src/components/fields/types/CollectionField/ItemsList.js");
+/* harmony import */ var _AddScreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddScreen */ "../shared/src/components/fields/types/CollectionField/AddScreen.js");
 
 
 
@@ -544,10 +588,10 @@ function CollectionField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/CollectionField/ItemsList.js":
-/*!**********************************************************************!*\
-  !*** ../shared/components/fields/types/CollectionField/ItemsList.js ***!
-  \**********************************************************************/
+/***/ "../shared/src/components/fields/types/CollectionField/ItemsList.js":
+/*!**************************************************************************!*\
+  !*** ../shared/src/components/fields/types/CollectionField/ItemsList.js ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -576,10 +620,10 @@ function ItemsList({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/EmailField.js":
-/*!*******************************************************!*\
-  !*** ../shared/components/fields/types/EmailField.js ***!
-  \*******************************************************/
+/***/ "../shared/src/components/fields/types/EmailField/EmailField.js":
+/*!**********************************************************************!*\
+  !*** ../shared/src/components/fields/types/EmailField/EmailField.js ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -588,7 +632,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function EmailField({
@@ -614,10 +658,10 @@ function EmailField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/FieldCollectionField/FieldCollectionField.js":
-/*!**************************************************************************************!*\
-  !*** ../shared/components/fields/types/FieldCollectionField/FieldCollectionField.js ***!
-  \**************************************************************************************/
+/***/ "../shared/src/components/fields/types/FieldCollectionField/FieldCollectionField.js":
+/*!******************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/FieldCollectionField/FieldCollectionField.js ***!
+  \******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -626,8 +670,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useRecordRelate/useRecordRelate */ "../shared/lib/useRecordRelate/useRecordRelate.js");
-/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../data/sdo/field.json */ "../../data/sdo/field.json");
+/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useRecordRelate/useRecordRelate */ "../shared/src/lib/useRecordRelate/useRecordRelate.js");
+/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../data/sdo/field.json */ "../../data/sdo/field.json");
 
 
 
@@ -655,10 +699,10 @@ function FieldCollectionField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/FieldGroupCollectionField/FieldGroupCollectionField.js":
-/*!************************************************************************************************!*\
-  !*** ../shared/components/fields/types/FieldGroupCollectionField/FieldGroupCollectionField.js ***!
-  \************************************************************************************************/
+/***/ "../shared/src/components/fields/types/FieldGroupCollectionField/FieldGroupCollectionField.js":
+/*!****************************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/FieldGroupCollectionField/FieldGroupCollectionField.js ***!
+  \****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -667,8 +711,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useRecordRelate/useRecordRelate */ "../shared/lib/useRecordRelate/useRecordRelate.js");
-/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
+/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useRecordRelate/useRecordRelate */ "../shared/src/lib/useRecordRelate/useRecordRelate.js");
+/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
 
 
 
@@ -696,10 +740,10 @@ function FieldGroupCollectionField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/FileField/FileField.js":
-/*!****************************************************************!*\
-  !*** ../shared/components/fields/types/FileField/FileField.js ***!
-  \****************************************************************/
+/***/ "../shared/src/components/fields/types/FileField/FileField.js":
+/*!********************************************************************!*\
+  !*** ../shared/src/components/fields/types/FileField/FileField.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -708,7 +752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function FileField({
@@ -734,10 +778,10 @@ function FileField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/ImageField/ImageField.js":
-/*!******************************************************************!*\
-  !*** ../shared/components/fields/types/ImageField/ImageField.js ***!
-  \******************************************************************/
+/***/ "../shared/src/components/fields/types/ImageField/ImageField.js":
+/*!**********************************************************************!*\
+  !*** ../shared/src/components/fields/types/ImageField/ImageField.js ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -746,7 +790,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function ImageField({
@@ -772,88 +816,10 @@ function ImageField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/InlineField/InlineField.js":
-/*!********************************************************************!*\
-  !*** ../shared/components/fields/types/InlineField/InlineField.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ InlineField)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
-
-
-
-
-function InlineField() {
-  const [modalOpen, setModalOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: {
-      errors
-    }
-  } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useForm)();
-  const onSubmit = data => {};
-  if (modalOpen) {
-    window.F3_NESTED_FORM_SUBMISSION = true;
-  } else {
-    window.F3_NESTED_FORM_SUBMISSION = false;
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: openModal,
-    className: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-  }, "Open Modal")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Modal, {
-    isOpen: modalOpen,
-    onClose: closeModal
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
-    onSubmit: handleSubmit(onSubmit)
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    defaultValue: "test",
-    ...register("example")
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    ...register("exampleRequired", {
-      required: true
-    })
-  }), errors.exampleRequired && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "This field is required"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "submit"
-  }))));
-}
-function Modal({
-  isOpen,
-  onClose,
-  children
-}) {
-  if (!isOpen) return null;
-  return react_dom__WEBPACK_IMPORTED_MODULE_1___default().createPortal((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "bg-white rounded-lg p-8 max-w-sm w-full"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "text-xl font-bold mb-4"
-  }, "Modal Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, children), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: onClose,
-    className: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-  }, "Close")))), document.body);
-}
-
-/***/ }),
-
-/***/ "../shared/components/fields/types/NumberField.js":
-/*!********************************************************!*\
-  !*** ../shared/components/fields/types/NumberField.js ***!
-  \********************************************************/
+/***/ "../shared/src/components/fields/types/NumberField/NumberField.js":
+/*!************************************************************************!*\
+  !*** ../shared/src/components/fields/types/NumberField/NumberField.js ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -862,15 +828,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function NumberField({
   field,
-  register,
-  errors,
   fieldRegisterPrefix
 }) {
+  const {
+    makeValidationObject,
+    useFormContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
   const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
@@ -880,20 +856,18 @@ function NumberField({
     className: "block w-full bg-neutral-100 rounded-md border-0 py-1.5 px-1 text-gray-900 placeholder:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-neutral-600 sm:text-sm sm:leading-6",
     type: "text",
     placeholder: field.placeholder,
-    ...register(registerName, {
-      required: true
-    })
-  }), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    ...register(registerName, validators)
+  }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/PostCollectionField/ChildFieldContext.js":
-/*!**********************************************************************************!*\
-  !*** ../shared/components/fields/types/PostCollectionField/ChildFieldContext.js ***!
-  \**********************************************************************************/
+/***/ "../shared/src/components/fields/types/PostCollectionField/ChildFieldContext.js":
+/*!**************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/PostCollectionField/ChildFieldContext.js ***!
+  \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -908,10 +882,10 @@ const ChildFieldContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)()
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/PostCollectionField/FieldSelectionList.js":
-/*!***********************************************************************************!*\
-  !*** ../shared/components/fields/types/PostCollectionField/FieldSelectionList.js ***!
-  \***********************************************************************************/
+/***/ "../shared/src/components/fields/types/PostCollectionField/FieldSelectionList.js":
+/*!***************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/PostCollectionField/FieldSelectionList.js ***!
+  \***************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -920,8 +894,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useFieldCollection */ "../shared/lib/useFieldCollection.js");
-/* harmony import */ var _useChildFieldContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useChildFieldContext */ "../shared/components/fields/types/PostCollectionField/useChildFieldContext.js");
+/* harmony import */ var _lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useFieldCollection */ "../shared/src/lib/useFieldCollection.js");
+/* harmony import */ var _useChildFieldContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useChildFieldContext */ "../shared/src/components/fields/types/PostCollectionField/useChildFieldContext.js");
 
 
 
@@ -980,10 +954,10 @@ function FieldSelectionList({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/PostCollectionField/PostCollectionField.js":
-/*!************************************************************************************!*\
-  !*** ../shared/components/fields/types/PostCollectionField/PostCollectionField.js ***!
-  \************************************************************************************/
+/***/ "../shared/src/components/fields/types/PostCollectionField/PostCollectionField.js":
+/*!****************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/PostCollectionField/PostCollectionField.js ***!
+  \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -992,10 +966,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _global_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../global/Modal */ "../shared/components/global/Modal.js");
-/* harmony import */ var _FieldSelectionList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FieldSelectionList */ "../shared/components/fields/types/PostCollectionField/FieldSelectionList.js");
-/* harmony import */ var _ChildFieldContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChildFieldContext */ "../shared/components/fields/types/PostCollectionField/ChildFieldContext.js");
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _global_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../global/Modal */ "../shared/src/components/global/Modal.js");
+/* harmony import */ var _FieldSelectionList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FieldSelectionList */ "../shared/src/components/fields/types/PostCollectionField/FieldSelectionList.js");
+/* harmony import */ var _ChildFieldContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChildFieldContext */ "../shared/src/components/fields/types/PostCollectionField/ChildFieldContext.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 
@@ -1071,10 +1045,10 @@ function PostCollectionField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/PostCollectionField/useChildFieldContext.js":
-/*!*************************************************************************************!*\
-  !*** ../shared/components/fields/types/PostCollectionField/useChildFieldContext.js ***!
-  \*************************************************************************************/
+/***/ "../shared/src/components/fields/types/PostCollectionField/useChildFieldContext.js":
+/*!*****************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/PostCollectionField/useChildFieldContext.js ***!
+  \*****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1083,7 +1057,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ChildFieldContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildFieldContext */ "../shared/components/fields/types/PostCollectionField/ChildFieldContext.js");
+/* harmony import */ var _ChildFieldContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildFieldContext */ "../shared/src/components/fields/types/PostCollectionField/ChildFieldContext.js");
 
 
 function useChildFieldContext() {
@@ -1092,10 +1066,10 @@ function useChildFieldContext() {
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/RadioGroupField/RadioGroupField.js":
-/*!****************************************************************************!*\
-  !*** ../shared/components/fields/types/RadioGroupField/RadioGroupField.js ***!
-  \****************************************************************************/
+/***/ "../shared/src/components/fields/types/RadioGroupField/RadioGroupField.js":
+/*!********************************************************************************!*\
+  !*** ../shared/src/components/fields/types/RadioGroupField/RadioGroupField.js ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1104,7 +1078,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function ChoicesList({
@@ -1141,10 +1115,10 @@ function RadioGroupField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/RangeField/RangeField.js":
-/*!******************************************************************!*\
-  !*** ../shared/components/fields/types/RangeField/RangeField.js ***!
-  \******************************************************************/
+/***/ "../shared/src/components/fields/types/RangeField/RangeField.js":
+/*!**********************************************************************!*\
+  !*** ../shared/src/components/fields/types/RangeField/RangeField.js ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1153,7 +1127,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function RangeField({
@@ -1179,10 +1153,10 @@ function RangeField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/SearchableSelectField/SearchableSelectField.js":
-/*!****************************************************************************************!*\
-  !*** ../shared/components/fields/types/SearchableSelectField/SearchableSelectField.js ***!
-  \****************************************************************************************/
+/***/ "../shared/src/components/fields/types/SearchableSelectField/SearchableSelectField.js":
+/*!********************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/SearchableSelectField/SearchableSelectField.js ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1191,43 +1165,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "../shared/node_modules/react-select/dist/react-select.esm.js");
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "../shared/node_modules/react-select/dist/react-select.esm.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
+
 
 
 
 
 function SearchableSelectField({
   field,
-  register,
-  errors,
-  control
+  fieldRegisterPrefix
 }) {
+  const {
+    makeValidationObject,
+    useFormContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    control,
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
     text: field.label
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_hook_form__WEBPACK_IMPORTED_MODULE_2__.Controller, {
-    name: field.name,
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_hook_form__WEBPACK_IMPORTED_MODULE_3__.Controller, {
+    name: registerName,
     control: control,
     render: ({
       field: selectField
-    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
       ...selectField,
       options: field.choices
     })
-  }), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/SelectField.js":
-/*!********************************************************!*\
-  !*** ../shared/components/fields/types/SelectField.js ***!
-  \********************************************************/
+/***/ "../shared/src/components/fields/types/SelectField/SelectField.js":
+/*!************************************************************************!*\
+  !*** ../shared/src/components/fields/types/SelectField/SelectField.js ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1236,7 +1222,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function ChoicesList({
@@ -1254,31 +1242,39 @@ function ChoicesList({
 }
 function SelectField({
   field,
-  register,
-  errors
+  fieldRegisterPrefix
 }) {
+  const {
+    makeValidationObject,
+    useFormContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
     text: field.label
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
-    ...register(field.name, {
-      required: true
-    })
+    ...register(registerName, validators)
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ChoicesList, {
     field: field
-  })), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  })), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field title is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/TextAreaField.js":
-/*!**********************************************************!*\
-  !*** ../shared/components/fields/types/TextAreaField.js ***!
-  \**********************************************************/
+/***/ "../shared/src/components/fields/types/TextAreaField/TextAreaField.js":
+/*!****************************************************************************!*\
+  !*** ../shared/src/components/fields/types/TextAreaField/TextAreaField.js ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1287,7 +1283,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function TextAreaField({
@@ -1312,10 +1308,10 @@ function TextAreaField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/TextField.js":
-/*!******************************************************!*\
-  !*** ../shared/components/fields/types/TextField.js ***!
-  \******************************************************/
+/***/ "../shared/src/components/fields/types/TextField/TextField.js":
+/*!********************************************************************!*\
+  !*** ../shared/src/components/fields/types/TextField/TextField.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1324,8 +1320,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Label */ "../shared/components/fields/Label.js");
-/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
 
 
 
@@ -1360,10 +1356,10 @@ function TextField({
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/TrueFalseField/TrueFalseField.js":
-/*!**************************************************************************!*\
-  !*** ../shared/components/fields/types/TrueFalseField/TrueFalseField.js ***!
-  \**************************************************************************/
+/***/ "../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js":
+/*!******************************************************************************!*\
+  !*** ../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1372,8 +1368,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @headlessui/react */ "../shared/node_modules/@headlessui/react/dist/components/switch/switch.js");
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @headlessui/react */ "../shared/node_modules/@headlessui/react/dist/components/switch/switch.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 
@@ -1384,24 +1382,33 @@ function classNames(...classes) {
 function TrueFalseField({
   field,
   value,
-  register,
-  errors,
-  setValue
+  fieldRegisterPrefix
 }) {
   const [enabled, setEnabled] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const {
+    makeValidationObject,
+    useFormContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    setValue,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const initialEnabled = value !== undefined ? value : field.default_value;
     setEnabled(initialEnabled);
   }, [value]);
   const handleChange = newValue => {
     setEnabled(newValue);
-    setValue(field.name, newValue);
+    setValue(registerName, newValue);
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
     text: field.label
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_headlessui_react__WEBPACK_IMPORTED_MODULE_2__.Switch, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_headlessui_react__WEBPACK_IMPORTED_MODULE_3__.Switch, {
     checked: enabled,
     onChange: handleChange,
     className: classNames(enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2')
@@ -1410,17 +1417,17 @@ function TrueFalseField({
   }, "Use setting"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     "aria-hidden": "true",
     className: classNames(enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out')
-  })), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  })), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field title is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
 
-/***/ "../shared/components/fields/types/UrlField.js":
-/*!*****************************************************!*\
-  !*** ../shared/components/fields/types/UrlField.js ***!
-  \*****************************************************/
+/***/ "../shared/src/components/fields/types/UrlField/UrlField.js":
+/*!******************************************************************!*\
+  !*** ../shared/src/components/fields/types/UrlField/UrlField.js ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1429,7 +1436,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Label */ "../shared/components/fields/Label.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
 
 
 function UrlField({
@@ -1455,10 +1462,10 @@ function UrlField({
 
 /***/ }),
 
-/***/ "../shared/components/global/Modal.js":
-/*!********************************************!*\
-  !*** ../shared/components/global/Modal.js ***!
-  \********************************************/
+/***/ "../shared/src/components/global/Modal.js":
+/*!************************************************!*\
+  !*** ../shared/src/components/global/Modal.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1532,10 +1539,10 @@ function Example({
 
 /***/ }),
 
-/***/ "../shared/components/global/ScreenWrap.js":
-/*!*************************************************!*\
-  !*** ../shared/components/global/ScreenWrap.js ***!
-  \*************************************************/
+/***/ "../shared/src/components/global/ScreenWrap.js":
+/*!*****************************************************!*\
+  !*** ../shared/src/components/global/ScreenWrap.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1555,10 +1562,10 @@ function ScreenWrap({
 
 /***/ }),
 
-/***/ "../shared/components/global/SkeletonList.js":
-/*!***************************************************!*\
-  !*** ../shared/components/global/SkeletonList.js ***!
-  \***************************************************/
+/***/ "../shared/src/components/global/SkeletonList.js":
+/*!*******************************************************!*\
+  !*** ../shared/src/components/global/SkeletonList.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1619,59 +1626,10 @@ function SkeletonList() {
 
 /***/ }),
 
-/***/ "../shared/index.js":
-/*!**************************!*\
-  !*** ../shared/index.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Field: () => (/* reexport safe */ _components_fields_Field__WEBPACK_IMPORTED_MODULE_10__["default"]),
-/* harmony export */   Label: () => (/* reexport safe */ _components_fields_Label__WEBPACK_IMPORTED_MODULE_11__["default"]),
-/* harmony export */   Modal: () => (/* reexport safe */ _components_global_Modal__WEBPACK_IMPORTED_MODULE_7__["default"]),
-/* harmony export */   ScreenWrap: () => (/* reexport safe */ _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_8__["default"]),
-/* harmony export */   SkeletonList: () => (/* reexport safe */ _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_9__["default"]),
-/* harmony export */   useCrudible: () => (/* reexport safe */ _lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_0__.useCrudible),
-/* harmony export */   useFieldCollection: () => (/* reexport safe */ _lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_5__.useFieldCollection),
-/* harmony export */   useFieldGroupRender: () => (/* reexport safe */ _lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_1__.useFieldGroupRender),
-/* harmony export */   useFieldRender: () => (/* reexport safe */ _lib_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_2__.useFieldRender),
-/* harmony export */   useFormManager: () => (/* reexport safe */ _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__.useFormManager),
-/* harmony export */   useRecordRelate: () => (/* reexport safe */ _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_4__.useRecordRelate),
-/* harmony export */   useStandardAPI: () => (/* reexport safe */ _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__.useStandardAPI)
-/* harmony export */ });
-/* harmony import */ var _lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/useCrudible/useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
-/* harmony import */ var _lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/useFieldGroupRender/useFieldGroupRender */ "../shared/lib/useFieldGroupRender/useFieldGroupRender.js");
-/* harmony import */ var _lib_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/useFieldRender/useFieldRender */ "../shared/lib/useFieldRender/useFieldRender.js");
-/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
-/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/useRecordRelate/useRecordRelate */ "../shared/lib/useRecordRelate/useRecordRelate.js");
-/* harmony import */ var _lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/useFieldCollection */ "../shared/lib/useFieldCollection.js");
-/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
-/* harmony import */ var _components_global_Modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/global/Modal */ "../shared/components/global/Modal.js");
-/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
-/* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/global/SkeletonList */ "../shared/components/global/SkeletonList.js");
-/* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/fields/Field */ "../shared/components/fields/Field.js");
-/* harmony import */ var _components_fields_Label__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/fields/Label */ "../shared/components/fields/Label.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "../shared/lib/useCrudible/AppForm.js":
-/*!********************************************!*\
-  !*** ../shared/lib/useCrudible/AppForm.js ***!
-  \********************************************/
+/***/ "../shared/src/lib/useCrudible/AppForm.js":
+/*!************************************************!*\
+  !*** ../shared/src/lib/useCrudible/AppForm.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1681,9 +1639,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/useQuery.js");
-/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
-/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
-/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
 
 
 
@@ -1697,7 +1655,7 @@ function AppForm({
   } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
   const sdo = useSDO();
   const {
-    FormProvider,
+    FormManagerProvider,
     Form,
     Fields,
     SubmitButton
@@ -1721,17 +1679,17 @@ function AppForm({
     record,
     API
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormProvider, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerProvider, {
     formData: formData
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)));
 }
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/Crudible.js":
-/*!*********************************************!*\
-  !*** ../shared/lib/useCrudible/Crudible.js ***!
-  \*********************************************/
+/***/ "../shared/src/lib/useCrudible/Crudible.js":
+/*!*************************************************!*\
+  !*** ../shared/src/lib/useCrudible/Crudible.js ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1742,7 +1700,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/query-core/build/modern/queryClient.js");
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js");
-/* harmony import */ var _SDO_Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SDO_Context */ "../shared/lib/useCrudible/SDO_Context.js");
+/* harmony import */ var _SDO_Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SDO_Context */ "../shared/src/lib/useCrudible/SDO_Context.js");
 
 
 
@@ -1770,10 +1728,10 @@ function Crudible({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/DeleteButton.js":
-/*!*************************************************!*\
-  !*** ../shared/lib/useCrudible/DeleteButton.js ***!
-  \*************************************************/
+/***/ "../shared/src/lib/useCrudible/DeleteButton.js":
+/*!*****************************************************!*\
+  !*** ../shared/src/lib/useCrudible/DeleteButton.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1791,10 +1749,10 @@ function DeleteButton({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/DeleteScreen.js":
-/*!*************************************************!*\
-  !*** ../shared/lib/useCrudible/DeleteScreen.js ***!
-  \*************************************************/
+/***/ "../shared/src/lib/useCrudible/DeleteScreen.js":
+/*!*****************************************************!*\
+  !*** ../shared/src/lib/useCrudible/DeleteScreen.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1803,9 +1761,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
-/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
-/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
+/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/src/components/global/ScreenWrap.js");
 
 
 
@@ -1844,10 +1802,10 @@ function DeleteScreen({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/Filters.js":
-/*!********************************************!*\
-  !*** ../shared/lib/useCrudible/Filters.js ***!
-  \********************************************/
+/***/ "../shared/src/lib/useCrudible/Filters.js":
+/*!************************************************!*\
+  !*** ../shared/src/lib/useCrudible/Filters.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1937,10 +1895,10 @@ const Filter = ({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/Footer.js":
-/*!*******************************************!*\
-  !*** ../shared/lib/useCrudible/Footer.js ***!
-  \*******************************************/
+/***/ "../shared/src/lib/useCrudible/Footer.js":
+/*!***********************************************!*\
+  !*** ../shared/src/lib/useCrudible/Footer.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1960,10 +1918,10 @@ function Footer({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/Header.js":
-/*!*******************************************!*\
-  !*** ../shared/lib/useCrudible/Header.js ***!
-  \*******************************************/
+/***/ "../shared/src/lib/useCrudible/Header.js":
+/*!***********************************************!*\
+  !*** ../shared/src/lib/useCrudible/Header.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1972,7 +1930,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
 
 
 function Header({
@@ -2037,10 +1995,10 @@ function Header({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/Manager.js":
-/*!********************************************!*\
-  !*** ../shared/lib/useCrudible/Manager.js ***!
-  \********************************************/
+/***/ "../shared/src/lib/useCrudible/Manager.js":
+/*!************************************************!*\
+  !*** ../shared/src/lib/useCrudible/Manager.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2051,10 +2009,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/useQuery.js");
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/query-core/build/modern/utils.js");
-/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
-/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
-/* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/global/SkeletonList */ "../shared/components/global/SkeletonList.js");
-/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/src/components/global/ScreenWrap.js");
+/* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/global/SkeletonList */ "../shared/src/components/global/SkeletonList.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
 
 
 
@@ -2113,10 +2071,10 @@ function Manager() {
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/Pager.js":
-/*!******************************************!*\
-  !*** ../shared/lib/useCrudible/Pager.js ***!
-  \******************************************/
+/***/ "../shared/src/lib/useCrudible/Pager.js":
+/*!**********************************************!*\
+  !*** ../shared/src/lib/useCrudible/Pager.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2125,7 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _PagerLink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PagerLink */ "../shared/lib/useCrudible/PagerLink.js");
+/* harmony import */ var _PagerLink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PagerLink */ "../shared/src/lib/useCrudible/PagerLink.js");
 
 
 function Pager({
@@ -2156,10 +2114,10 @@ function Pager({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/PagerLink.js":
-/*!**********************************************!*\
-  !*** ../shared/lib/useCrudible/PagerLink.js ***!
-  \**********************************************/
+/***/ "../shared/src/lib/useCrudible/PagerLink.js":
+/*!**************************************************!*\
+  !*** ../shared/src/lib/useCrudible/PagerLink.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2191,10 +2149,10 @@ function PagerLink({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/SDO_Context.js":
-/*!************************************************!*\
-  !*** ../shared/lib/useCrudible/SDO_Context.js ***!
-  \************************************************/
+/***/ "../shared/src/lib/useCrudible/SDO_Context.js":
+/*!****************************************************!*\
+  !*** ../shared/src/lib/useCrudible/SDO_Context.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2208,10 +2166,10 @@ const SDO_Context = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/SortableHeader.js":
-/*!***************************************************!*\
-  !*** ../shared/lib/useCrudible/SortableHeader.js ***!
-  \***************************************************/
+/***/ "../shared/src/lib/useCrudible/SortableHeader.js":
+/*!*******************************************************!*\
+  !*** ../shared/src/lib/useCrudible/SortableHeader.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2250,10 +2208,10 @@ function SortableHeader({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/ViewScreen.js":
-/*!***********************************************!*\
-  !*** ../shared/lib/useCrudible/ViewScreen.js ***!
-  \***********************************************/
+/***/ "../shared/src/lib/useCrudible/ViewScreen.js":
+/*!***************************************************!*\
+  !*** ../shared/src/lib/useCrudible/ViewScreen.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2262,8 +2220,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/lib/useCrudible/useCrudible.js");
-/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
 
 
 
@@ -2296,10 +2254,10 @@ function ViewScreen({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/grid/Controls.js":
-/*!**************************************************!*\
-  !*** ../shared/lib/useCrudible/grid/Controls.js ***!
-  \**************************************************/
+/***/ "../shared/src/lib/useCrudible/grid/Controls.js":
+/*!******************************************************!*\
+  !*** ../shared/src/lib/useCrudible/grid/Controls.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2308,7 +2266,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/lib/useCrudible/DeleteButton.js");
+/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/src/lib/useCrudible/DeleteButton.js");
 
 
 function Controls({
@@ -2327,10 +2285,10 @@ function Controls({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/grid/Grid.js":
-/*!**********************************************!*\
-  !*** ../shared/lib/useCrudible/grid/Grid.js ***!
-  \**********************************************/
+/***/ "../shared/src/lib/useCrudible/grid/Grid.js":
+/*!**************************************************!*\
+  !*** ../shared/src/lib/useCrudible/grid/Grid.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2339,10 +2297,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _GridRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GridRow */ "../shared/lib/useCrudible/grid/GridRow.js");
-/* harmony import */ var _SortableHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SortableHeader */ "../shared/lib/useCrudible/SortableHeader.js");
-/* harmony import */ var _Filters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Filters */ "../shared/lib/useCrudible/Filters.js");
-/* harmony import */ var _Pager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Pager */ "../shared/lib/useCrudible/Pager.js");
+/* harmony import */ var _GridRow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GridRow */ "../shared/src/lib/useCrudible/grid/GridRow.js");
+/* harmony import */ var _SortableHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SortableHeader */ "../shared/src/lib/useCrudible/SortableHeader.js");
+/* harmony import */ var _Filters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Filters */ "../shared/src/lib/useCrudible/Filters.js");
+/* harmony import */ var _Pager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Pager */ "../shared/src/lib/useCrudible/Pager.js");
 
 
 
@@ -2411,10 +2369,10 @@ function Grid({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/grid/GridCol.js":
-/*!*************************************************!*\
-  !*** ../shared/lib/useCrudible/grid/GridCol.js ***!
-  \*************************************************/
+/***/ "../shared/src/lib/useCrudible/grid/GridCol.js":
+/*!*****************************************************!*\
+  !*** ../shared/src/lib/useCrudible/grid/GridCol.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2423,7 +2381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Controls */ "../shared/lib/useCrudible/grid/Controls.js");
+/* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Controls */ "../shared/src/lib/useCrudible/grid/Controls.js");
 
 
 function GridCol({
@@ -2448,10 +2406,10 @@ function GridCol({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/grid/GridRow.js":
-/*!*************************************************!*\
-  !*** ../shared/lib/useCrudible/grid/GridRow.js ***!
-  \*************************************************/
+/***/ "../shared/src/lib/useCrudible/grid/GridRow.js":
+/*!*****************************************************!*\
+  !*** ../shared/src/lib/useCrudible/grid/GridRow.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2460,8 +2418,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/lib/useCrudible/DeleteButton.js");
-/* harmony import */ var _GridCol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GridCol */ "../shared/lib/useCrudible/grid/GridCol.js");
+/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/src/lib/useCrudible/DeleteButton.js");
+/* harmony import */ var _GridCol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GridCol */ "../shared/src/lib/useCrudible/grid/GridCol.js");
 
 
 
@@ -2481,10 +2439,10 @@ function GridRow({
 
 /***/ }),
 
-/***/ "../shared/lib/useCrudible/useCrudible.js":
-/*!************************************************!*\
-  !*** ../shared/lib/useCrudible/useCrudible.js ***!
-  \************************************************/
+/***/ "../shared/src/lib/useCrudible/useCrudible.js":
+/*!****************************************************!*\
+  !*** ../shared/src/lib/useCrudible/useCrudible.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2493,15 +2451,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Crudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Crudible */ "../shared/lib/useCrudible/Crudible.js");
-/* harmony import */ var _Manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Manager */ "../shared/lib/useCrudible/Manager.js");
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "../shared/lib/useCrudible/Header.js");
-/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Footer */ "../shared/lib/useCrudible/Footer.js");
-/* harmony import */ var _DeleteScreen__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DeleteScreen */ "../shared/lib/useCrudible/DeleteScreen.js");
-/* harmony import */ var _ViewScreen__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ViewScreen */ "../shared/lib/useCrudible/ViewScreen.js");
-/* harmony import */ var _grid_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/Grid */ "../shared/lib/useCrudible/grid/Grid.js");
-/* harmony import */ var _AppForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AppForm */ "../shared/lib/useCrudible/AppForm.js");
-/* harmony import */ var _SDO_Context__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SDO_Context */ "../shared/lib/useCrudible/SDO_Context.js");
+/* harmony import */ var _Crudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Crudible */ "../shared/src/lib/useCrudible/Crudible.js");
+/* harmony import */ var _Manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Manager */ "../shared/src/lib/useCrudible/Manager.js");
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "../shared/src/lib/useCrudible/Header.js");
+/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Footer */ "../shared/src/lib/useCrudible/Footer.js");
+/* harmony import */ var _DeleteScreen__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DeleteScreen */ "../shared/src/lib/useCrudible/DeleteScreen.js");
+/* harmony import */ var _ViewScreen__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ViewScreen */ "../shared/src/lib/useCrudible/ViewScreen.js");
+/* harmony import */ var _grid_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./grid/Grid */ "../shared/src/lib/useCrudible/grid/Grid.js");
+/* harmony import */ var _AppForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AppForm */ "../shared/src/lib/useCrudible/AppForm.js");
+/* harmony import */ var _SDO_Context__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SDO_Context */ "../shared/src/lib/useCrudible/SDO_Context.js");
 
 
 
@@ -2560,10 +2518,10 @@ function useCrudible(params = {
 
 /***/ }),
 
-/***/ "../shared/lib/useFieldCollection.js":
-/*!*******************************************!*\
-  !*** ../shared/lib/useFieldCollection.js ***!
-  \*******************************************/
+/***/ "../shared/src/lib/useFieldCollection.js":
+/*!***********************************************!*\
+  !*** ../shared/src/lib/useFieldCollection.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2597,10 +2555,10 @@ function useFieldCollection() {
 
 /***/ }),
 
-/***/ "../shared/lib/useFieldGroupRender/useFieldGroupRender.js":
-/*!****************************************************************!*\
-  !*** ../shared/lib/useFieldGroupRender/useFieldGroupRender.js ***!
-  \****************************************************************/
+/***/ "../shared/src/lib/useFieldGroupRender/useFieldGroupRender.js":
+/*!********************************************************************!*\
+  !*** ../shared/src/lib/useFieldGroupRender/useFieldGroupRender.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2609,7 +2567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../useFieldRender/useFieldRender */ "../shared/lib/useFieldRender/useFieldRender.js");
+/* harmony import */ var _useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../useFieldRender/useFieldRender */ "../shared/src/lib/useFieldRender/useFieldRender.js");
 
 
 function useFieldGroupRender() {
@@ -2633,10 +2591,10 @@ function useFieldGroupRender() {
 
 /***/ }),
 
-/***/ "../shared/lib/useFieldRender/useFieldRender.js":
-/*!******************************************************!*\
-  !*** ../shared/lib/useFieldRender/useFieldRender.js ***!
-  \******************************************************/
+/***/ "../shared/src/lib/useFieldRender/useFieldRender.js":
+/*!**********************************************************!*\
+  !*** ../shared/src/lib/useFieldRender/useFieldRender.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2645,7 +2603,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
 
 
 function useFieldRender() {
@@ -2687,10 +2645,10 @@ function useFieldRender() {
 
 /***/ }),
 
-/***/ "../shared/lib/useFormManager/conditionsChecker.js":
-/*!*********************************************************!*\
-  !*** ../shared/lib/useFormManager/conditionsChecker.js ***!
-  \*********************************************************/
+/***/ "../shared/src/lib/useFormManager/conditionsChecker.js":
+/*!*************************************************************!*\
+  !*** ../shared/src/lib/useFormManager/conditionsChecker.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2718,10 +2676,10 @@ function checkConditions(field, watch) {
 
 /***/ }),
 
-/***/ "../shared/lib/useFormManager/defaultValues.js":
-/*!*****************************************************!*\
-  !*** ../shared/lib/useFormManager/defaultValues.js ***!
-  \*****************************************************/
+/***/ "../shared/src/lib/useFormManager/defaultValues.js":
+/*!*********************************************************!*\
+  !*** ../shared/src/lib/useFormManager/defaultValues.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2742,10 +2700,10 @@ function makeDefaultFieldValues(fieldGroups) {
 
 /***/ }),
 
-/***/ "../shared/lib/useFormManager/useFormManager.js":
-/*!******************************************************!*\
-  !*** ../shared/lib/useFormManager/useFormManager.js ***!
-  \******************************************************/
+/***/ "../shared/src/lib/useFormManager/useFormManager.js":
+/*!**********************************************************!*\
+  !*** ../shared/src/lib/useFormManager/useFormManager.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2755,46 +2713,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
-/* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/fields/Field */ "../shared/components/fields/Field.js");
-/* harmony import */ var _conditionsChecker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./conditionsChecker */ "../shared/lib/useFormManager/conditionsChecker.js");
-/* harmony import */ var _defaultValues__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defaultValues */ "../shared/lib/useFormManager/defaultValues.js");
+/* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/fields/Field */ "../shared/src/components/fields/Field.js");
+/* harmony import */ var _conditionsChecker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./conditionsChecker */ "../shared/src/lib/useFormManager/conditionsChecker.js");
+/* harmony import */ var _defaultValues__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defaultValues */ "../shared/src/lib/useFormManager/defaultValues.js");
 
 
 
 
 
 
-const FormContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
+const FormManagerContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
+const FieldRenderContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  registerPrefix: null
+});
 function useFormManager() {
-  function FormProvider({
+  function FormManagerProvider({
     formData,
     children
   }) {
     const [formStatus, setFormStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('loading');
-    let defaultValues = {};
-    if (formData.record) {
-      defaultValues = formData.record;
-    } else {
-      defaultValues = (0,_defaultValues__WEBPACK_IMPORTED_MODULE_3__.makeDefaultFieldValues)(formData.form.field_groups);
-    }
-    const {
-      register,
-      handleSubmit,
-      formState: {
-        errors
-      },
-      setValue,
-      reset,
-      watch,
-      control,
-      getFieldState
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useForm)({
+    let defaultValues = formData.record || (0,_defaultValues__WEBPACK_IMPORTED_MODULE_3__.makeDefaultFieldValues)(formData.form.field_groups);
+    const methods = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useForm)({
       defaultValues
     });
     const formSubmitHandler = data => {
-      if (window.F3_NESTED_FORM_SUBMISSION) {
-        return;
-      }
       if (!formData.record?.id) {
         formData.API.create(data);
         setFormStatus('complete');
@@ -2803,38 +2745,36 @@ function useFormManager() {
         setFormStatus('complete');
       }
     };
-    const contextValues = {
-      register,
-      handleSubmit,
-      errors,
-      setValue,
-      reset,
-      watch,
-      control,
-      formSubmitHandler,
-      formData,
-      formStatus,
-      setFormStatus,
-      getFieldState
-    };
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormContext.Provider, {
-      value: contextValues
-    }, children);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerContext.Provider, {
+      value: {
+        formStatus,
+        setFormStatus,
+        formData,
+        formSubmitHandler
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.FormProvider, {
+      ...methods
+    }, children));
   }
-  const useFormContext = () => {
-    const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(FormContext);
+  const useFormManagerContext = () => {
+    const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(FormManagerContext);
     if (!context) {
-      throw new Error('useFormContext must be used within a FormProvider');
+      throw new Error('useFormManagerContext must be used within a FormManagerProvider');
     }
     return context;
+  };
+  const useFieldRenderContext = () => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(FieldRenderContext);
   };
   function Form({
     children
   }) {
     const {
-      handleSubmit,
+      handleSubmit
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext)();
+    const {
       formSubmitHandler
-    } = useFormContext();
+    } = useFormManagerContext();
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
       onSubmit: handleSubmit(formSubmitHandler)
     }, children);
@@ -2847,9 +2787,9 @@ function useFormManager() {
   function Fields() {
     const {
       formData
-    } = useFormContext();
+    } = useFormManagerContext();
     function render(fieldGroup, index) {
-      if (fieldGroup.repeat) {
+      if (fieldGroup?.repeat) {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRepeatRender, {
           key: index,
           fieldGroup: fieldGroup
@@ -2875,7 +2815,7 @@ function useFormManager() {
   }) {
     const {
       control
-    } = useFormContext();
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext)();
     const {
       fields,
       append,
@@ -2944,13 +2884,15 @@ function useFormManager() {
   function FieldRenderer({
     field
   }) {
+    console.log('FieldRenderer for field:');
+    console.log(field);
     const {
       watch,
       register,
       errors,
       setValue,
       control
-    } = useFormContext();
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext)();
     const conditionsCheckPassed = (0,_conditionsChecker__WEBPACK_IMPORTED_MODULE_2__.checkConditions)(field, watch);
     if (!conditionsCheckPassed) {
       return null;
@@ -2962,7 +2904,8 @@ function useFormManager() {
       register: register,
       errors: errors,
       setValue: setValue,
-      control: control
+      control: control,
+      value: null
     }));
   }
   function makeValidationObject(field) {
@@ -2975,31 +2918,33 @@ function useFormManager() {
   function FormComplete() {
     const {
       formStatus
-    } = useFormContext();
+    } = useFormManagerContext();
     if (formStatus !== 'complete') {
       return null;
     }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, "Form submission complete.");
   }
   return {
-    useFormContext,
-    FormProvider,
+    FormManagerProvider,
+    useFormManagerContext,
+    useFieldRenderContext,
+    useFormContext: react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext,
     Form,
     Fields,
     Field: _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__["default"],
     SubmitButton,
-    makeValidationObject,
     FormComplete,
+    makeValidationObject,
     checkConditions: _conditionsChecker__WEBPACK_IMPORTED_MODULE_2__.checkConditions
   };
 }
 
 /***/ }),
 
-/***/ "../shared/lib/useRecordRelate/useRecordRelate.js":
-/*!********************************************************!*\
-  !*** ../shared/lib/useRecordRelate/useRecordRelate.js ***!
-  \********************************************************/
+/***/ "../shared/src/lib/useRecordRelate/useRecordRelate.js":
+/*!************************************************************!*\
+  !*** ../shared/src/lib/useRecordRelate/useRecordRelate.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3012,13 +2957,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js");
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/react-query/build/modern/useQuery.js");
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tanstack/react-query */ "../shared/node_modules/@tanstack/query-core/build/modern/utils.js");
-/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/components/global/ScreenWrap.js");
-/* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/global/SkeletonList */ "../shared/components/global/SkeletonList.js");
+/* harmony import */ var _components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/global/ScreenWrap */ "../shared/src/components/global/ScreenWrap.js");
+/* harmony import */ var _components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/global/SkeletonList */ "../shared/src/components/global/SkeletonList.js");
 /* harmony import */ var sortablejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sortablejs */ "../shared/node_modules/sortablejs/modular/sortable.esm.js");
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
-/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/lib/useFormManager/useFormManager.js");
-/* harmony import */ var _lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/useFieldGroupRender/useFieldGroupRender */ "../shared/lib/useFieldGroupRender/useFieldGroupRender.js");
-/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/lib/useStandardAPI.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/useFieldGroupRender/useFieldGroupRender */ "../shared/src/lib/useFieldGroupRender/useFieldGroupRender.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
 
 
 
@@ -3071,8 +3016,6 @@ function useRecordRelate(RecordRelateContext) {
     const {
       fieldName
     } = useRecordRelateContext();
-    console.log("setting fieldName useFieldArray:");
-    console.log(fieldName);
     const {
       fields,
       append,
@@ -3192,10 +3135,10 @@ function useRecordRelate(RecordRelateContext) {
 
 /***/ }),
 
-/***/ "../shared/lib/useStandardAPI.js":
-/*!***************************************!*\
-  !*** ../shared/lib/useStandardAPI.js ***!
-  \***************************************/
+/***/ "../shared/src/lib/useStandardAPI.js":
+/*!*******************************************!*\
+  !*** ../shared/src/lib/useStandardAPI.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3204,7 +3147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api_StandardAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/StandardAPI */ "../shared/api/StandardAPI.js");
+/* harmony import */ var _api_StandardAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/StandardAPI */ "../shared/src/api/StandardAPI.js");
 
 
 function useStandardAPI(route_base) {
@@ -31337,7 +31280,7 @@ const FormRender = ({
     fetchData(formArgument, API);
   }, []);
   const {
-    FormProvider,
+    FormManagerProvider,
     Form,
     Fields,
     SubmitButton,
@@ -31360,7 +31303,7 @@ const FormRender = ({
   formData.form.field_groups = fieldGroups;
   console.log(form);
   console.log(formData);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormProvider, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerProvider, {
     formData: formData
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "formArg: ", formArgument), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "form.id: ", form.id), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormComplete, null));
 };
