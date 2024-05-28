@@ -1,30 +1,54 @@
 import { useEffect, createContext, useContext } from 'react';
-import { useForm, FormProvider, useFormContext, useFieldArray } from "react-hook-form";
+import { useFormManager } from 'shared';
 
 const NestedFieldContext = createContext({registerPrefix: null});
 
 export default function Test() {
 
-    const methods = useForm()
-
-    const onSubmit = (data) => console.log(data)
+    const { 
+        FormManagerProvider, 
+        Form, 
+        Fields,
+        SubmitButton, 
+    } = useFormManager();
 
     return(
         <main className="p-10">
-            <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    <div className="grid gap-8">
-                        <Field name="first_name" />
-                        <NestedField name="hobbies" />
-                        <div>
-                            <input 
-                                className="text-neutral-200 bg-neutral-800"
-                                type="submit" 
-                            />
-                        </div>
-                    </div>
-                </form>
-            </FormProvider>
+            <FormManagerProvider
+                formData={
+                    {
+                        form: {
+                            field_groups: [
+                                {
+                                    fields: [
+                                        {
+                                            label: 'Text 1',
+                                            type: 'text',
+                                            name: 'text1',
+                                            placeholder: 'Text 1 input...'
+                                        },
+                                        {
+                                            label: 'TF1',
+                                            type: 'number',
+                                            name: 'tf1',
+                                            default_value: true,
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        record: {},
+                        API: {
+                            create: (data) => { console.log(data) }
+                        }
+                    }
+                }
+            >
+                <Form>
+                    <Fields />
+                    <SubmitButton />
+                </Form>
+            </FormManagerProvider>
         </main>
     );
 

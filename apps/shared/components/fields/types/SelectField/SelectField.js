@@ -1,4 +1,5 @@
-import Label from '../Label';
+import Label from '../../Label';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
 function ChoicesList({field}) {
 
@@ -19,18 +20,25 @@ function ChoicesList({field}) {
     )
 }
 
-export default function SelectField( {field, register, errors} ) {
+export default function SelectField( { field, fieldRegisterPrefix } ) {
+
+    const { makeValidationObject, useFormContext } = useFormManager();
+    const { register, getFieldState } = useFormContext();
+    const validators = makeValidationObject(field);
+    const fieldState = getFieldState( field.name );
+
+    const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
 
     return(
         <div className="my-4">
             <Label text={field.label} />
             <select
                 className="w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
-                {...register(field.name, { required: true })}
+                {...register(registerName, validators)}
             >
                 <ChoicesList field={field} />
             </select>
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
+            {fieldState.invalid && <span className="text-rose-700 text-sm font-bold">Field has errors</span>}
         </div>
     );
 

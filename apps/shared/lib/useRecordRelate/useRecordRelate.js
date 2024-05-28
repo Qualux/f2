@@ -55,9 +55,6 @@ export function useRecordRelate( RecordRelateContext ) {
         const { control } = useFormContext();
         const { fieldName } = useRecordRelateContext();
 
-        console.log("setting fieldName useFieldArray:")
-        console.log(fieldName)
-
         const { fields, append, remove } = useFieldArray({
             control: control,
             name: fieldName,

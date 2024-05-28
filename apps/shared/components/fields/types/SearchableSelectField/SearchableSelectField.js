@@ -1,14 +1,22 @@
 import Label from '../../Label';
 import Select from 'react-select';
-import { Controller } from "react-hook-form";
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
+import { Controller } from 'react-hook-form';
 
-export default function SearchableSelectField( {field, register, errors, control} ) {
+export default function SearchableSelectField( { field, fieldRegisterPrefix } ) {
+
+    const { makeValidationObject, useFormContext } = useFormManager();
+    const { control, register, getFieldState } = useFormContext();
+    const validators = makeValidationObject( field );
+    const fieldState = getFieldState( field.name ); 
+
+    const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
 
     return(
         <div className="my-4">
             <Label text={field.label} />
             <Controller
-                name={field.name}
+                name={registerName}
                 control={control}
                 render={({ field: selectField }) => 
                     <Select 
@@ -17,7 +25,7 @@ export default function SearchableSelectField( {field, register, errors, control
                     />
                 }
             />
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field is required</span>}
+            {fieldState.invalid && <span className="text-rose-700 text-sm font-bold">Field has errors</span>}
         </div>
     );
 

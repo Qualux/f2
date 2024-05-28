@@ -1,13 +1,13 @@
-import Label from '../Label';
+import Label from '../../Label';
 
-export default function UrlField( {field, register, errors} ) {
+export default function EmailField( {field, register, errors} ) {
 
     return(
         <div className="my-4">
             <Label text={field.label} />
             <input 
                 className="w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
-                type="url"
+                type="email"
                 placeholder={field.placeholder}
                 {...register(field.name, { required: true })}
             />

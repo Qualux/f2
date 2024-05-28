@@ -3,24 +3,23 @@
  * Field does not check conditions for rendering, it is up to the parent component to use React Hook Form to watch conditional values.
  */ 
 
-import TextField from './types/TextField';
-import TextAreaField from './types/TextAreaField';
-import SelectField from './types/SelectField';
-import TrueFalseField from './types/TrueFalseField/TrueFalseField';
-import EmailField from './types/EmailField';
-import UrlField from './types/UrlField';
-import CollectionField from './types/CollectionField/CollectionField';
-import NumberField from './types/NumberField';
-import RangeField from './types/RangeField/RangeField';
-import PostCollectionField from './types/PostCollectionField/PostCollectionField';
-import SearchableSelectField from './types/SearchableSelectField/SearchableSelectField';
 import CheckboxField from './types/CheckboxField/CheckboxField';
-import RadioGroupField from './types/RadioGroupField/RadioGroupField';
-import ImageField from './types/ImageField/ImageField';
-import FileField from './types/FileField/FileField';
-import InlineField from './types/InlineField/InlineField';
-import FieldGroupCollectionField from './types/FieldGroupCollectionField/FieldGroupCollectionField';
+import CollectionField from './types/CollectionField/CollectionField';
+import EmailField from './types/EmailField/EmailField';
 import FieldCollectionField from './types/FieldCollectionField/FieldCollectionField';
+import FieldGroupCollectionField from './types/FieldGroupCollectionField/FieldGroupCollectionField';
+import FileField from './types/FileField/FileField';
+import ImageField from './types/ImageField/ImageField';
+import NumberField from './types/NumberField/NumberField';
+import PostCollectionField from './types/PostCollectionField/PostCollectionField';
+import RadioGroupField from './types/RadioGroupField/RadioGroupField';
+import RangeField from './types/RangeField/RangeField';
+import SearchableSelectField from './types/SearchableSelectField/SearchableSelectField';
+import SelectField from './types/SelectField/SelectField';
+import TextAreaField from './types/TextAreaField/TextAreaField';
+import TextField from './types/TextField/TextField';
+import TrueFalseField from './types/TrueFalseField/TrueFalseField';
+import UrlField from './types/UrlField/UrlField';
 
 export default function Field( 
         {
@@ -98,9 +97,6 @@ export default function Field(
             break;
         case 'file':
             return <FileField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
-            break;
-        case 'inline':
-            return <InlineField />
             break;
         case 'field_group_collection':
             return <FieldGroupCollectionField field={field} />

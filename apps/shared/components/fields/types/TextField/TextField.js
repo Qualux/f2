@@ -1,5 +1,5 @@
-import Label from '../Label';
-import { useFormManager } from '../../../lib/useFormManager/useFormManager';
+import Label from '../../Label';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
 export default function TextField( { field, fieldRegisterPrefix } ) {
 

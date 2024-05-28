@@ -54,7 +54,7 @@ export function useFormManager() {
     function Form( {children} ) {
 
         const { handleSubmit }      = useFormContext();
-        const { formSubmitHandler } = useFormContext();
+        const { formSubmitHandler } = useFormManagerContext();
 
         return(
             <form onSubmit={handleSubmit(formSubmitHandler)}>
@@ -76,11 +76,11 @@ export function useFormManager() {
 
     function Fields() {
 
-        const { formData } = useFormContext();
+        const { formData } = useFormManagerContext();
 
         function render(fieldGroup, index) {
 
-            if( fieldGroup.repeat ) {
+            if( fieldGroup?.repeat ) {
                 return(
                     <FieldGroupRepeatRender
                         key={index}
@@ -202,6 +202,9 @@ export function useFormManager() {
 
     function FieldRenderer( { field } ) {
 
+        console.log('FieldRenderer for field:')
+        console.log(field)
+
         const { watch, register, errors, setValue, control } = useFormContext();
         const conditionsCheckPassed = checkConditions(field, watch);
     
@@ -217,6 +220,7 @@ export function useFormManager() {
                     errors={errors}
                     setValue={setValue}
                     control={control}
+                    value={null}
                 />
             </div>
         );
@@ -233,7 +237,7 @@ export function useFormManager() {
 
     function FormComplete() {
 
-        const { formStatus } = useFormContext();
+        const { formStatus } = useFormManagerContext();
 
         if( formStatus !== 'complete' ) {
             return null;

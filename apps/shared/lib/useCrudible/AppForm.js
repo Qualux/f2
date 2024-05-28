@@ -9,7 +9,7 @@ export default function AppForm( { recordId = 0 } ) {
 
     const { useSDO } = useCrudible();
     const sdo = useSDO();
-    const { FormProvider, Form, Fields, SubmitButton } = useFormManager();
+    const { FormManagerProvider, Form, Fields, SubmitButton } = useFormManager();
     const API = useStandardAPI(sdo.route_base);
 
     const { data } = useQuery({
@@ -32,12 +32,12 @@ export default function AppForm( { recordId = 0 } ) {
     }
 
     return(
-        <FormProvider formData={formData}>
+        <FormManagerProvider formData={formData}>
             <Form>
                 <Fields />
                 <SubmitButton />
             </Form>
-        </FormProvider>
+        </FormManagerProvider>
     );
 
 }

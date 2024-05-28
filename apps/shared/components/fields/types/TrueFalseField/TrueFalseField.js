@@ -1,24 +1,34 @@
 import { useState, useEffect } from 'react';
 import { Switch } from '@headlessui/react';
 import Label from '../../Label';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function TrueFalseField( {field, value, register, errors, setValue} ) {
+export default function TrueFalseField( { field, value, fieldRegisterPrefix } ) {
 
     const [enabled, setEnabled] = useState(false);
 
+    const { makeValidationObject, useFormContext } = useFormManager();
+    const { setValue, getFieldState } = useFormContext();
+    const validators = makeValidationObject(field);
+    const fieldState = getFieldState( field.name );
+
+    const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+
     useEffect(() => {
+
         const initialEnabled = value !== undefined ? value : field.default_value;
         setEnabled(initialEnabled);
+
     }, [value]);
 
     const handleChange = ( newValue ) => {
 
         setEnabled( newValue );
-        setValue( field.name, newValue );
+        setValue( registerName, newValue );
     }
 
     return(
@@ -41,7 +51,7 @@ export default function TrueFalseField( {field, value, register, errors, setValu
                 )}
                 />
             </Switch>
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
+            {fieldState.invalid && <span className="text-rose-700 text-sm font-bold">Field has errors</span>}
          </div>
     );
 

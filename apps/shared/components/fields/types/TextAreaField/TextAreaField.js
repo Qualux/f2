@@ -1,4 +1,4 @@
-import Label from '../Label';
+import Label from '../../Label';
 
 export default function TextAreaField( {field, register, errors} ) {
 

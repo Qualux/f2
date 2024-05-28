@@ -1,10 +1,10 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext } from 'react';
 import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
 import fieldSDO from '../../../../../../data/sdo/field.json';
 
 const FieldGroupRecordRelateContext = createContext();
 
-export default function FieldCollectionField({field}) {
+export default function FieldCollectionField( { field } ) {
 
     const { 
         RecordRelateProviders, 
