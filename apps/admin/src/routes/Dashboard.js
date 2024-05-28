@@ -7,11 +7,12 @@ import {
 import { DashboardAPI } from '../api/DashboardAPI';
 import { NavLink } from "react-router-dom";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { SkeletonList } from 'shared';
 
 function Stat( { label, stat } ) {
 
     return(
-        <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+        <div className="overflow-hidden bg-neutral-100 px-4 py-5 sm:p-6 border-b border-solid border-neutral-400">
             <dt className="truncate text-sm font-medium text-gray-500">{label}</dt>
             <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{stat}</dd>
         </div>
@@ -22,86 +23,32 @@ function Stat( { label, stat } ) {
 function ManageButtons( { labelSingular, labelPlural, manageRoute, createRoute } ) {
 
     return (
-      <span className="isolate inline-flex rounded-md shadow-sm">
+      <span className="isolate inline-flex rounded-md shadow-sm px-2 my-2">
         <NavLink
           to={manageRoute}
-          className="relative inline-flex gap-1 items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          className="relative inline-flex gap-2 items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:z-10"
         >
             <span>
                 Manage {labelPlural}
             </span>
-            <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+            <ArrowUpRightIcon className="h-4 w-4 text-gray-500" />
         </NavLink>
         <NavLink
           to={createRoute}
-          className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          className="relative -ml-px inline-flex gap-2 items-center rounded-r-md bg-white px-3 py-2 text-xs font-semibold text-gray-900 hover:bg-gray-50 focus:z-10"
         >
             <span>
                 Create {labelSingular}
             </span>
-            <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+            <ArrowUpRightIcon className="h-3 w-3 text-gray-500" />
         </NavLink>
       </span>
     )
 }
 
-function FieldGroupCount( {recordCount} ) {
-    return(
-        <Stat 
-            label="FIELD GROUP COUNT"
-            stat={recordCount}
-        />
-    )
-}
-
-function FieldCount( {recordCount} ) {
-    return(
-        <Stat 
-            label="FIELD COUNT"
-            stat={recordCount}
-        />
-    )
-}
-
-function PostTypeCount( {recordCount} ) {
-    return(
-        <Stat 
-            label="CUSTOM POST TYPE COUNT"
-            stat={recordCount}
-        />
-    )
-}
-
-function TaxonomyCount( {recordCount} ) {
-    return(
-        <Stat 
-            label="CUSTOM TAXONOMY COUNT"
-            stat={recordCount}
-        />
-    )
-}
-
-function OptionsPageCount( {recordCount} ) {
-    return(
-        <Stat 
-            label="OPTIONS PAGE COUNT"
-            stat={recordCount}
-        />
-    )
-}
-
-function FormCount( {recordCount} ) {
-    return(
-        <Stat 
-            label="FORM COUNT"
-            stat={recordCount}
-        />
-    )
-}
-
 function DashboardSection({children}) {
     return(
-        <li className="shadow p-6 grid gap-4">
+        <li className="shadow grid gap-0">
             {children}
         </li>
     )
@@ -109,7 +56,7 @@ function DashboardSection({children}) {
 
 function SectionHeader({text}) {
     return(
-        <header className="text-neutral-400 text-sm font-medium">
+        <header className="bg-neutral-700 text-neutral-200 text-sm font-medium py-1 px-2">
             {text}
         </header>
     )
@@ -125,47 +72,45 @@ function DashboardContent() {
     if( isLoading ) {
         return(
             <main>
-                IS LOADING
+                <SkeletonList />
             </main>
         )
     }
 
     return(
-        <div className="max-w-5xl flex flex-col">
-            <section className="text-zinc-800">
-                <h2 className="font-bold text-xl mb-5">
-                    F3 Dashboard
-                </h2>
-            </section>
-            <ul className="w-full grid grid-cols-2 gap-8">
+        <div className="flex flex-col">
+            <ul className="w-full grid grid-cols-3 gap-6">
                 <DashboardSection>
-                        <SectionHeader text="CUSTOM FIELDS" />
-                        <FieldGroupCount 
-                            recordCount={data.sdo_counts.field_groups.publish}
-                        />
-                        <ManageButtons 
-                            manageRoute="/field-group"
-                            createRoute="/field-group/create"
-                            labelPlural="Field Groups"
-                            labelSingular="Field Group"
-                        />
+                    <SectionHeader text="F3 FIELD GROUPS" />
+                    <Stat 
+                        label="FIELD GROUPS"
+                        stat={data.sdo_counts.field_groups.publish}
+                    />
+                    <ManageButtons 
+                        manageRoute="/field-group"
+                        createRoute="/field-group/create"
+                        labelPlural="Field Groups"
+                        labelSingular="Field Group"
+                    />
                 </DashboardSection>
                 <DashboardSection>
-                        <SectionHeader text="CUSTOM FIELDS" />
-                        <FieldCount 
-                            recordCount={data.sdo_counts.fields.publish}
-                        />
-                        <ManageButtons 
-                            manageRoute="/field"
-                            createRoute="/field/create"
-                            labelPlural="Fields"
-                            labelSingular="Field"
-                        />
+                    <SectionHeader text="F3 FIELDS" />
+                    <Stat 
+                        label="FIELDS"
+                        stat={data.sdo_counts.fields.publish}
+                    />
+                    <ManageButtons 
+                        manageRoute="/field"
+                        createRoute="/field/create"
+                        labelPlural="Fields"
+                        labelSingular="Field"
+                    />
                 </DashboardSection>
                 <DashboardSection>
                     <SectionHeader text="CUSTOM POST TYPES" />
-                    <PostTypeCount 
-                        recordCount={data.sdo_counts.post_types.publish}
+                    <Stat 
+                        label="POST TYPES"
+                        stat={data.sdo_counts.post_types.publish}
                     />
                     <ManageButtons 
                         manageRoute="/post-type"
@@ -176,8 +121,9 @@ function DashboardContent() {
                 </DashboardSection>
                 <DashboardSection>
                     <SectionHeader text="CUSTOM TAXONOMIES" />
-                    <TaxonomyCount 
-                        recordCount={data.sdo_counts.taxonomies.publish}
+                    <Stat 
+                        label="TAXONOMIES"
+                        stat={data.sdo_counts.taxonomies.publish}
                     />
                     <ManageButtons 
                         manageRoute="/taxonomy"
@@ -187,9 +133,10 @@ function DashboardContent() {
                     />
                 </DashboardSection>
                 <DashboardSection>
-                    <SectionHeader text="OPTIONS PAGES" />
-                    <OptionsPageCount 
-                        recordCount={data.sdo_counts.options_pages.publish}
+                    <SectionHeader text="F3 OPTIONS PAGES" />
+                    <Stat 
+                        label="OPTIONS PAGES"
+                        stat={data.sdo_counts.options_pages.publish}
                     />
                     <ManageButtons 
                         manageRoute="/options-page"
@@ -199,15 +146,42 @@ function DashboardContent() {
                     />
                 </DashboardSection>
                 <DashboardSection>
-                    <SectionHeader text="FORMS" />
-                    <FormCount 
-                        recordCount={data.sdo_counts.forms.publish}
+                    <SectionHeader text="F3 FORMS" />
+                    <Stat 
+                        label="FORM COUNT"
+                        stat={data.sdo_counts.forms.publish}
                     />
                     <ManageButtons 
                         manageRoute="/form"
                         createRoute="/form/create"
                         labelPlural="Forms"
                         labelSingular="Form"
+                    />
+                </DashboardSection>
+                <DashboardSection>
+                    <SectionHeader text="F3 GRIDS" />
+                    <Stat 
+                        label="GRIDS"
+                        stat={data.sdo_counts.grids.publish}
+                    />
+                    <ManageButtons 
+                        manageRoute="/grid"
+                        createRoute="/grid/create"
+                        labelPlural="Grids"
+                        labelSingular="Grids"
+                    />
+                </DashboardSection>
+                <DashboardSection>
+                    <SectionHeader text="F3 QUERIES" />
+                    <Stat 
+                        label="QUERIES"
+                        stat={data.sdo_counts.queries.publish}
+                    />
+                    <ManageButtons 
+                        manageRoute="/query"
+                        createRoute="/query/create"
+                        labelPlural="Queries"
+                        labelSingular="Queries"
                     />
                 </DashboardSection>
             </ul>
