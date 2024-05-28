@@ -409,7 +409,7 @@ function Label({
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: fieldName,
-    className: "block text-sm font-medium leading-6 text-gray-900"
+    className: "block text-8xl font-medium leading-6 text-gray-900"
   }, text);
 }
 
