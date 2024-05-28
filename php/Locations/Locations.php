@@ -1,14 +1,20 @@
 <?php 
 
 /*
- * Locations 
+ * Locations PHP Class
+ * 
+ * FQCN: F3\Locations\Locations
  * 
  * Detects if F3 Forms are assigned to an admin location.
+ * Refines query to detect if current object type matches F3 form assignment.
+ * Renders .f3-form DOM element to trigger field rendering with F3 React Render App.
+ * Registers metaboxes for post type matches. 
+ * Adds fields through WP core hooks for taxonomy and user forms. 
+ * Handles matching F3 options pages using $screen object provided by WP core admin. 
  * 
  */
 
 namespace F3\Locations;
-use F3\Metabox\Metabox;
 
 class Locations {
 
@@ -23,9 +29,10 @@ class Locations {
         $screen = get_current_screen();
 
         // Check for F3 options page.
-        if (strpos($screen->base, 'toplevel_page_') === 0) {
+        if ( strpos($screen->base, 'toplevel_page_' ) === 0 ) {
 
-            $slug = substr($screen->base, strlen('toplevel_page_'));
+            // Isolate the page slug.
+            $slug = substr( $screen->base, strlen('toplevel_page_' ));
 
             $options_page_posts = get_posts([
                 'post_type'   => 'f3-options-page',
@@ -41,19 +48,17 @@ class Locations {
 
             if( empty( $options_page_posts )) { return; }
 
-            $this->handle_options_page( $screen );
+            $this->handle_options_page( $screen, $slug );
 
         }
 
 
         // Check for post editor or Gutenberg editor
-        if ($screen->is_block_editor) {
-            // This is a post editor screen
+        if ( $screen->is_block_editor ) {
             $this->handle_block_editor( $screen );
         }
 
         if ($screen->base === 'post' || $screen->base === 'edit') {
-            // This is a post editor screen
             $this->handle_post_editor( $screen );
         }
 
@@ -81,36 +86,16 @@ class Locations {
 
         $post_type = $screen->post_type;
 
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'post_type',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_refinement_query( 'post_type', 'admin_location_post_type', $post_type );
 
         if( empty( $form_posts )) { return; }
 
         foreach( $form_posts as $form_post ) {
 
-            add_action('add_meta_boxes', function($post_type) use ($form_post) {
+            add_action('add_meta_boxes', function( $post_type ) use ( $form_post ) {
 
-                add_meta_box( 
-                    'f3_metabox_form_' . $form_post->ID, 
-                    $form_post->post_title, 
-                    function( $post, $box ) {
-                        $form_id = $box['args']['form_id'];
-                        echo '<div class="f3-form" data-form="'.$form_id.'"></div>';
-                    }, 
-                    $post_type, 
-                    'advanced', 
-                    'default',
-                    [ 'form_id' => $form_post->ID ],
-                );
+                $this->metabox( $form_post );
+
             });
 
         }
@@ -121,17 +106,7 @@ class Locations {
 
         $post_type = $screen->post_type;
 
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'post_type',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_refinement_query( 'post_type', 'admin_location_post_type', $post_type );
 
         if( empty( $form_posts )) { return; }
 
@@ -139,18 +114,8 @@ class Locations {
 
             add_action('add_meta_boxes', function($post_type) use ($form_post) {
 
-                add_meta_box( 
-                    'f3_metabox_form_' . $form_post->ID, 
-                    $form_post->post_title, 
-                    function( $post, $box ) {
-                        $form_id = $box['args']['form_id'];
-                        echo '<div class="f3-form" data-form="'.$form_id.'"></div>';
-                    }, 
-                    $post_type, 
-                    'advanced', 
-                    'default',
-                    [ 'form_id' => $form_post->ID ],
-                );
+                $this->metabox( $form_post );
+
             });
 
         }
@@ -161,17 +126,7 @@ class Locations {
 
     function handle_term_add( $screen ) {
 
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'taxonomy',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_refinement_query( 'taxonomy', 'admin_location_taxonomy', $screen->taxonomy );
 
         if( empty( $form_posts )) { return; }
 
@@ -189,17 +144,7 @@ class Locations {
 
     function handle_term_edit( $screen ) {
 
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'taxonomy',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_refinement_query( 'taxonomy', 'admin_location_taxonomy', $screen->taxonomy );
 
         if( empty( $form_posts )) { return; }
 
@@ -222,17 +167,7 @@ class Locations {
 
     function handle_user_add( $screen ) {
     
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'user',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_user_query();
 
         if( empty( $form_posts )) { return; }
 
@@ -250,17 +185,7 @@ class Locations {
 
     function handle_user_edit( $screen ) {
     
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'user',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_user_query();
 
         if( empty( $form_posts )) { return; }
 
@@ -274,19 +199,9 @@ class Locations {
 
     }
 
-    function handle_options_page( $screen ) {
+    function handle_options_page( $screen, $slug ) {
 
-        $form_posts = get_posts([
-            'post_type'   => 'f3-form',
-            'numberposts' => -1,
-            'meta_query' => [
-                [
-                    'key'     => 'admin_location',
-                    'value'   => 'options_page',
-                    'compare' => '=',
-                ]
-            ]
-        ]);
+        $form_posts = $this->forms_refinement_query( 'options_page', 'admin_location_options_page', $slug );
 
         if( empty( $form_posts )) { return; }
 
@@ -297,6 +212,64 @@ class Locations {
             }
 
         });
+
+    }
+
+    function forms_user_query() {
+
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => 'user',
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        return $form_posts;
+
+    }
+
+    function forms_refinement_query( $admin_location, $refinement_field_key, $refinement_field_value ) {
+
+        $form_posts = get_posts([
+            'post_type'   => 'f3-form',
+            'numberposts' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'admin_location',
+                    'value'   => $admin_location,
+                    'compare' => '=',
+                ],
+                [
+                    'key'     => $refinement_field_key,
+                    'value'   => $refinement_field_value,
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        return $form_posts;
+
+    }
+
+    function metabox( $form_post ) {
+
+        add_meta_box( 
+            'f3_metabox_form_' . $form_post->ID, 
+            $form_post->post_title, 
+            function( $post, $box ) {
+                $form_id = $box['args']['form_id'];
+                echo '<div class="f3-form" data-form="' . $form_id . '"></div>';
+            }, 
+            $post_type, 
+            'advanced', 
+            'default',
+            [ 'form_id' => $form_post->ID ],
+        );
 
     }
 

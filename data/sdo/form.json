@@ -33,13 +33,75 @@
                 {
                     "type": "select",
                     "name": "admin_location",
-                    "title": "Admin Location",
-                    "label": "Admin Location",
+                    "title": "Admin Location Type",
+                    "label": "Admin Location Type",
                     "choices": [
+                        { "value": "", "label": "Choose Location Type" },
                         { "value": "post_type", "label": "Post Type" },
                         { "value": "taxonomy", "label": "Taxonomy" },
                         { "value": "user", "label": "User Form" },
                         { "value": "options_page", "label": "Options Page" }
+                    ]        
+                },
+                {
+                    "type": "select",
+                    "name": "admin_location_post_type",
+                    "title": "Post Type",
+                    "label": "Post Type",
+                    "choices": [
+                        { "value": "post", "label": "Posts" },
+                        { "value": "page", "label": "Pages" },
+                        { "value": "l1", "label": "L1" }
+                    ],
+                    "field_conditions": true,
+                    "field_condition_rules": [
+                        [
+                            {
+                                "field": "admin_location",
+                                "operator": "=",
+                                "value": "post_type"
+                            }
+                        ]
+                    ]        
+                },
+                {
+                    "type": "select",
+                    "name": "admin_location_taxonomy",
+                    "title": "Taxonomy",
+                    "label": "Taxonomy",
+                    "choices": [
+                        { "value": "category", "label": "Post Category" },
+                        { "value": "post_tag", "label": "Post Tag" }
+                    ],
+                    "field_conditions": true,
+                    "field_condition_rules": [
+                        [
+                            {
+                                "field": "admin_location",
+                                "operator": "=",
+                                "value": "taxonomy"
+                            }
+                        ]
+                    ]        
+                },
+                {
+                    "type": "select",
+                    "name": "admin_location_options_page",
+                    "title": "Options Page",
+                    "label": "Options Page",
+                    "choices": [
+                        { "value": "opt1", "label": "OP1" },
+                        { "value": "opt2", "label": "OP2" }
+                    ],
+                    "field_conditions": true,
+                    "field_condition_rules": [
+                        [
+                            {
+                                "field": "admin_location",
+                                "operator": "=",
+                                "value": "options_page"
+                            }
+                        ]
                     ]        
                 }
             ]

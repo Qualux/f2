@@ -1,40 +1,23 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFormContext, FormProvider, useFieldArray } from 'react-hook-form';
 import Field from '../../components/fields/Field';
 import { checkConditions } from './conditionsChecker';
 import { makeDefaultFieldValues } from './defaultValues';
 
-const FormContext = createContext();
+const FormManagerContext = createContext();
+const FieldRenderContext = createContext( { registerPrefix: null } );
 
 export function useFormManager() {
 
-    function FormProvider({ formData, children }) {
+    function FormManagerProvider({ formData, children }) {
 
         const [formStatus, setFormStatus] = useState('loading');
 
-        let defaultValues = {}
-        if( formData.record ) {
-            defaultValues = formData.record;
-        } else {
-            defaultValues = makeDefaultFieldValues( formData.form.field_groups );
-        }
+        let defaultValues = formData.record || makeDefaultFieldValues(formData.form.field_groups);
 
-        const {
-            register,
-            handleSubmit,
-            formState: { errors },
-            setValue,
-            reset,
-            watch,
-            control,
-            getFieldState,
-        } = useForm( {defaultValues} );
+        const methods = useForm({ defaultValues });
 
         const formSubmitHandler = (data) => {
-
-            if( window.F3_NESTED_FORM_SUBMISSION ) {
-                return;
-            }
 
             if( !formData.record?.id ) {
                 formData.API.create(data);
@@ -46,54 +29,49 @@ export function useFormManager() {
 
         }
 
-        const contextValues = {
-            register, 
-            handleSubmit, 
-            errors, 
-            setValue, 
-            reset, 
-            watch, 
-            control,
-            formSubmitHandler,
-            formData,
-            formStatus, 
-            setFormStatus,
-            getFieldState,
-        }
-
         return (
-            <FormContext.Provider value={contextValues}>
-                {children}
-            </FormContext.Provider>
+            <FormManagerContext.Provider value={{ formStatus, setFormStatus, formData, formSubmitHandler }}>
+                <FormProvider {...methods}>
+                    {children}
+                </FormProvider>
+            </FormManagerContext.Provider>
         );
 
     }
 
-    const useFormContext = () => {
-        const context = useContext(FormContext);
+    const useFormManagerContext = () => {
+        const context = useContext(FormManagerContext);
         if (!context) {
-            throw new Error('useFormContext must be used within a FormProvider');
+            throw new Error('useFormManagerContext must be used within a FormManagerProvider');
         }
         return context;
+    };
+    
+    const useFieldRenderContext = () => {
+        return useContext(FieldRenderContext);
     };
 
     function Form( {children} ) {
 
-        const { handleSubmit, formSubmitHandler } = useFormContext();
+        const { handleSubmit }      = useFormContext();
+        const { formSubmitHandler } = useFormContext();
 
         return(
             <form onSubmit={handleSubmit(formSubmitHandler)}>
                 {children}
             </form>
-        )
+        );
+
     }
 
     function SubmitButton() {
+        
         return(
             <button className="border border-neutral-700">
                 Submit
             </button>
-        )
+        );
+
     }
 
     function Fields() {
@@ -269,14 +247,16 @@ export function useFormManager() {
     }
 
     return {
+        FormManagerProvider,
+        useFormManagerContext,
+        useFieldRenderContext,
         useFormContext,
-        FormProvider,
         Form,
         Fields,
         Field,
         SubmitButton,
-        makeValidationObject,
         FormComplete,
+        makeValidationObject,
         checkConditions,
     }
 

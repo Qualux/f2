@@ -10,7 +10,7 @@ export function interceptTaxonomyFormSubmission(validationFunction) {
 
         window.ajaxEnabled = false;
         jQuery.ajaxSetup({
-            beforeSend: function(){ 
+            beforeSend: function() { 
                 return window.ajaxEnabled; 
             }
         });
