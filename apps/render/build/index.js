@@ -3156,6 +3156,18 @@ function useStandardAPI(route_base) {
 
 /***/ }),
 
+/***/ "./src/main.css":
+/*!**********************!*\
+  !*** ./src/main.css ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "../shared/node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js":
 /*!*******************************************************************************!*\
   !*** ../shared/node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js ***!
@@ -31235,14 +31247,16 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "../shared/index.js");
-/* harmony import */ var _utils_interceptTaxonomyFormSubmission__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/interceptTaxonomyFormSubmission */ "./src/utils/interceptTaxonomyFormSubmission.js");
+/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.css */ "./src/main.css");
+/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! shared */ "../shared/index.js");
+/* harmony import */ var _utils_interceptTaxonomyFormSubmission__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/interceptTaxonomyFormSubmission */ "./src/utils/interceptTaxonomyFormSubmission.js");
 
 const {
   createRoot,
   useEffect,
   useState
 } = wp.element;
+
 
 
 
@@ -31271,7 +31285,7 @@ const FormRender = ({
   formArgument
 }) => {
   const [form, setForm] = useState(null);
-  const API = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useStandardAPI)('form');
+  const API = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useStandardAPI)('form');
   useEffect(() => {
     async function fetchData(formArgument, API) {
       const data = await API.getOne(formArgument);
@@ -31285,7 +31299,7 @@ const FormRender = ({
     Fields,
     SubmitButton,
     FormComplete
-  } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+  } = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
   const validateFormData = () => {
     return false;
   };

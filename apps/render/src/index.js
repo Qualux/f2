@@ -1,4 +1,5 @@
 const { createRoot, useEffect, useState } = wp.element;
+import './main.css';
 import { useFormManager } from 'shared';
 import { interceptTaxonomyFormSubmission } from './utils/interceptTaxonomyFormSubmission';
 import { useStandardAPI } from 'shared';
