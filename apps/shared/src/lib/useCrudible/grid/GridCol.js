@@ -1,12 +1,10 @@
-import Controls from './Controls';
-
 export default function GridCol( { column, record, controls } ) {
 
     if(column.columnKey === 'controls') {
 
         return (
             <div className="flex items-center gap-2 justify-end">
-                {controls}
+                {controls( record.id )}
             </div>
         );
 

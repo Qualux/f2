@@ -5,9 +5,6 @@ export default function Header( { routeType, primaryLink } ) {
     const { useSDO } = useCrudible();
     const sdo = useSDO();
 
-    console.log('sdo in header:')
-    console.log(sdo)
-
     function leftCol() {
 
         if( routeType === 'create' ) {

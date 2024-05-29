@@ -5,7 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import DeleteScreen from './DeleteScreen';
 import ViewScreen from './ViewScreen';
-import Grid from './grid/Grid';
+import Grid, { useGridRowContext } from './grid/Grid';
 import AppForm from './AppForm';
 import { SDO_Context } from './SDO_Context';
 
@@ -47,6 +47,7 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
         Crudible, 
         Manager, 
         Grid, 
+        useGridRowContext,
         Header: HeaderComponent, 
         Footer, 
         AppForm: AppFormComponent, 

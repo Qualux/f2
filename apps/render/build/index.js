@@ -1728,27 +1728,6 @@ function Crudible({
 
 /***/ }),
 
-/***/ "../shared/src/lib/useCrudible/DeleteButton.js":
-/*!*****************************************************!*\
-  !*** ../shared/src/lib/useCrudible/DeleteButton.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ DeleteButton)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function DeleteButton({
-  deleteLink
-}) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, deleteLink);
-}
-
-/***/ }),
-
 /***/ "../shared/src/lib/useCrudible/DeleteScreen.js":
 /*!*****************************************************!*\
   !*** ../shared/src/lib/useCrudible/DeleteScreen.js ***!
@@ -1941,8 +1920,6 @@ function Header({
     useSDO
   } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
   const sdo = useSDO();
-  console.log('sdo in header:');
-  console.log(sdo);
   function leftCol() {
     if (routeType === 'create') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2257,37 +2234,6 @@ function ViewScreen({
 
 /***/ }),
 
-/***/ "../shared/src/lib/useCrudible/grid/Controls.js":
-/*!******************************************************!*\
-  !*** ../shared/src/lib/useCrudible/grid/Controls.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Controls)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/src/lib/useCrudible/DeleteButton.js");
-
-
-function Controls({
-  record,
-  routes,
-  viewLink,
-  editLink
-}) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex justify-end grow gap-3 items-center"
-  }, viewLink, editLink, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_DeleteButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    field: record,
-    route: routes.delete
-  }));
-}
-
-/***/ }),
-
 /***/ "../shared/src/lib/useCrudible/grid/Grid.js":
 /*!**************************************************!*\
   !*** ../shared/src/lib/useCrudible/grid/Grid.js ***!
@@ -2296,7 +2242,8 @@ function Controls({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Grid)
+/* harmony export */   "default": () => (/* binding */ Grid),
+/* harmony export */   useGridRowContext: () => (/* binding */ useGridRowContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2309,6 +2256,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const GridRowContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  index: null,
+  id: null
+});
+function useGridRowContext() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(GridRowContext);
+}
 function Grid({
   routes,
   data,
@@ -2359,13 +2314,18 @@ function Grid({
     setSortColumn: setSortColumn,
     sortOrder: sortOrder,
     setSortOrder: setSortOrder
-  })), data.records.map((record, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_GridRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  })), data.records.map((record, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(GridRowContext.Provider, {
     key: index,
+    value: {
+      index: index,
+      id: record.id
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_GridRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
     record: record,
     routes: routes,
     columns: columns,
     controls: controls
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Pager__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Pager__WEBPACK_IMPORTED_MODULE_4__["default"], {
     pageCount: data.max_num_pages,
     page: page,
     setPage: setPage
@@ -2386,8 +2346,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Controls */ "../shared/src/lib/useCrudible/grid/Controls.js");
-
 
 function GridCol({
   column,
@@ -2397,7 +2355,7 @@ function GridCol({
   if (column.columnKey === 'controls') {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center gap-2 justify-end"
-    }, controls);
+    }, controls(record.id));
   }
   let value = record[column.recordKey];
   if (typeof value === 'object') {
@@ -2422,7 +2380,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _DeleteButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DeleteButton */ "../shared/src/lib/useCrudible/DeleteButton.js");
+/* harmony import */ var _useCrudible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
 /* harmony import */ var _GridCol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GridCol */ "../shared/src/lib/useCrudible/grid/GridCol.js");
 
 
@@ -2507,6 +2465,7 @@ function useCrudible(params = {
     Crudible: _Crudible__WEBPACK_IMPORTED_MODULE_1__["default"],
     Manager: _Manager__WEBPACK_IMPORTED_MODULE_2__["default"],
     Grid: _grid_Grid__WEBPACK_IMPORTED_MODULE_7__["default"],
+    useGridRowContext: _grid_Grid__WEBPACK_IMPORTED_MODULE_7__.useGridRowContext,
     Header: HeaderComponent,
     Footer: _Footer__WEBPACK_IMPORTED_MODULE_4__["default"],
     AppForm: AppFormComponent,

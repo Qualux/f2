@@ -1,7 +1,14 @@
+import { createContext, useContext } from 'react';
 import GridRow from './GridRow';
 import SortableHeader from '../SortableHeader';
 import Filters from '../Filters';
 import Pager from '../Pager';
+
+const GridRowContext = createContext( { index: null, id: null } );
+
+export function useGridRowContext() {
+    return useContext(GridRowContext);
+}
 
 export default function Grid(
     { 
@@ -64,13 +71,18 @@ export default function Grid(
                     />
                 ))}
                 {data.records.map( ( record, index ) =>
-                    <GridRow 
-                        key={index} 
-                        record={record} 
-                        routes={routes} 
-                        columns={columns}
-                        controls={controls}
-                    />
+                    <GridRowContext.Provider 
+                        key={index}
+                        value={{ index: index, id: record.id }}
+                    >
+                        <GridRow 
+                            record={record} 
+                            routes={routes} 
+                            columns={columns}
+                            controls={controls}
+                        />
+                    </GridRowContext.Provider>
+                    
                 )}
             </ul>
             <Pager 

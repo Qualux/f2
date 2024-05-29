@@ -4,7 +4,7 @@ import { useCrudible } from 'shared';
 import AppTemplate from '../../components/AppTemplate';
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
-function Controls() {
+function Controls( {id} ) {
 
     const { useSDO } = useCrudible();
     const sdo = useSDO();
@@ -12,7 +12,7 @@ function Controls() {
     return(
         <>
             <NavLink 
-                to={sdo.routes.edit}
+                to={`${sdo.routes.edit}/${id}`}
                 className="flex items-center gap-2 no-underline text-xs text-neutral-200 bg-sky-900 py-1.5 px-2 rounded-sm font-semibold transition-colors hover:bg-sky-800 hover:text-neutral-100"
             >
                 <span>
@@ -21,7 +21,7 @@ function Controls() {
                 <ArrowUpRightIcon className="h-4 w-4 text-neutral-200" />
             </NavLink>
             <NavLink 
-                to={sdo.routes.delete}
+                to={`${sdo.routes.delete}/${id}`}
                 className="flex items-center gap-2 no-underline text-xs text-neutral-200 bg-sky-900 py-1.5 px-2 rounded-sm font-semibold transition-colors hover:bg-sky-800 hover:text-neutral-100"
             >
                 <span>
@@ -82,7 +82,11 @@ export default function SDO_DashboardRoute( {sdo} ) {
             <AppTemplate>
                 <DashboardHeader />
                 <Manager 
-                    controls={<Controls />}
+                    controls={( id ) => { 
+                        return(
+                            <Controls id={id} />
+                        );
+                    }}
                 />
             </AppTemplate>
         </Crudible>
