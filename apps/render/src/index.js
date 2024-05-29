@@ -63,6 +63,10 @@ const fieldGroups = [
                 name: 'test_field_6',
                 type: 'range',
             },
+            {
+                name: 'test_field_7',
+                type: 'true_false',
+            },
         ],
         repeat: false,
     }

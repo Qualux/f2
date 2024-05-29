@@ -1517,26 +1517,22 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 function TrueFalseField({
-  field,
-  value,
-  fieldRegisterPrefix
+  field
 }) {
   const [enabled, setEnabled] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const {
     makeValidationObject,
-    useFormContext
+    useFormContext,
+    useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
   const {
-    setValue,
+    register,
     getFieldState
   } = useFormContext();
   const validators = makeValidationObject(field);
   const fieldState = getFieldState(field.name);
-  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const initialEnabled = value !== undefined ? value : field.default_value;
-    setEnabled(initialEnabled);
-  }, [value]);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   const handleChange = newValue => {
     setEnabled(newValue);
     setValue(registerName, newValue);
@@ -34862,6 +34858,9 @@ const fieldGroups = [{
   }, {
     name: 'test_field_6',
     type: 'range'
+  }, {
+    name: 'test_field_7',
+    type: 'true_false'
   }],
   repeat: false
 }];
