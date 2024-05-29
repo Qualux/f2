@@ -16,9 +16,15 @@ export function useFormManager() {
 
         let defaultValues = formData.record || makeDefaultFieldValues(formData.form.field_groups);
 
+        console.log('defaultValues in useFormManager:')
+        console.log(defaultValues)
+
         const methods = useForm({ defaultValues });
 
         const formSubmitHandler = (data) => {
+
+            console.log('formSubmitHandler in useFormManager:')
+            console.log(data)
 
             if( !formData.record?.id ) {
                 formData.API.create(data);

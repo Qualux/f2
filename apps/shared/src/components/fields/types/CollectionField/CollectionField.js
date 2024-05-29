@@ -1,26 +1,43 @@
+/*
+ * Collection Field
+ *
+ * Field Type Key: collection
+ * 
+ * Collection of arbitrary data that is not a specific object record.
+ * Used to assign choices to choice F3 Fields.
+ * 
+ * Refactor Note
+ * 2024-05-29: Should useFieldArray() hook instead of custom handler for adding rows.
+ * 
+ */
+
 import { useState, useEffect } from 'react';
 import ItemsList from './ItemsList';
 import AddScreen from './AddScreen';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
-export default function CollectionField({field, valuesInit, setValue, getValues, register, errors}) {
+export default function CollectionField( { field } ) {
 
     const [mode, setMode] = useState('view');
     const [items, setItems] = useState([]);
 
-    register( field.name, { required: 'Collection field is required.' } );
+    const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
+    const { register, getFieldState, getValues, setValue } = useFormContext();
+    const validators = makeValidationObject(field);
+    const fieldState = getFieldState( field.name );
+    const fieldRenderData = useFieldRenderContext();
+    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+
+    register( registerName, validators );
 
     useEffect(() => {
 
-        if(valuesInit) {
-
-            const collectionList = getValues( field.name );
-            if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
-                setItems( collectionList );
-            }
-
+        const collectionList = getValues( field.name );
+        if( typeof collectionList !== 'undefined' && collectionList !== null && collectionList.length ) {
+            setItems( collectionList );
         }
 
-    }, [valuesInit])
+    }, [])
 
     const addItem = (newItem) => {
         setItems([...items, newItem]);
@@ -56,7 +73,7 @@ export default function CollectionField({field, valuesInit, setValue, getValues,
             </button>
             {mode === 'add' && <AddScreen addItem={addItem} />}
             <ItemsList items={items} removeItem={removeItem} />
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field is required</span>}
+            {fieldState.invalid && <span className="text-rose-700 text-sm font-bold">Field has errors</span>}
         </main>
     )
 }

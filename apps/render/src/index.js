@@ -23,10 +23,46 @@ const fieldGroups = [
             },
             {
                 name: 'test_field_3',
-                type: 'text',
-                placeholder: 'Test field 3...',
-                default_value: 'Seven 33333',
-            }
+                type: 'checkbox',
+                default_value: 'c',
+                choices: [
+                    {
+                        value: 'a',
+                        label: 'A'
+                    },
+                    {
+                        value: 'b',
+                        label: 'B'
+                    },
+                    {
+                        value: 'c',
+                        label: 'C'
+                    }
+                ]
+            },
+            {
+                name: 'test_field_4',
+                type: 'collection',
+                default_value: [
+                    {
+                        value: 123,
+                        label: 'Value 1'
+                    },
+                    {
+                        value: 234,
+                        label: 'Value 2'
+                    }
+                ]
+            },
+            {
+                name: 'test_field_5',
+                type: 'email',
+                placeholder: 'Work email address...'
+            },
+            {
+                name: 'test_field_6',
+                type: 'range',
+            },
         ],
         repeat: false,
     }
@@ -73,8 +109,11 @@ const FormRender = ( { formArgument } ) => {
 
     const formData = {
         form,
-        record: {},
-        api: API,
+        record: false,
+        //record: {
+            // test_field_3: [],
+        //},
+        API: API,
     }
     formData.form.field_groups = fieldGroups;
 

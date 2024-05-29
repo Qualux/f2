@@ -1,10 +1,13 @@
 import { createContext } from 'react';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
 import fieldSDO from '../../../../../../../data/sdo/field.json';
 
 const FieldGroupRecordRelateContext = createContext();
 
 export default function FieldCollectionField( { field } ) {
+
+    const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
 
     const { 
         RecordRelateProviders, 
@@ -35,7 +38,6 @@ export default function FieldCollectionField( { field } ) {
                 </main>
             </RecordRelateProviders>
         </main>
-        
     );
 
 }
