@@ -17,9 +17,9 @@ const fieldGroups = [
             },
             {
                 name: 'test_field_2',
-                type: 'text',
-                placeholder: 'Test field 2...',
-                default_value: 'Seven 7',
+                type: 'url',
+                placeholder: 'https://google.com',
+                required: true,
             },
             {
                 name: 'test_field_3',
@@ -66,6 +66,15 @@ const fieldGroups = [
             {
                 name: 'test_field_7',
                 type: 'true_false',
+            },
+            {
+                name: 'test_field_8',
+                type: 'textarea',
+            },
+            {
+                name: 'test_field_9',
+                type: 'number',
+                placeholder: 10,
             },
         ],
         repeat: false,

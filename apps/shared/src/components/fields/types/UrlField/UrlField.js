@@ -1,6 +1,14 @@
 import Label from '../../Label';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
-export default function UrlField( {field, register, errors} ) {
+export default function UrlField( {field} ) {
+
+    const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
+    const { register, getFieldState } = useFormContext();
+    const validators = makeValidationObject(field);
+    const fieldState = getFieldState( field.name );
+    const fieldRenderData = useFieldRenderContext();
+    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
 
     return(
         <div className="my-4">
@@ -9,9 +17,9 @@ export default function UrlField( {field, register, errors} ) {
                 className="w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg"
                 type="url"
                 placeholder={field.placeholder}
-                {...register(field.name, { required: true })}
+                {...register(registerName, validators)}
             />
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field is required</span>}
+            {fieldState.invalid && <span className="text-rose-700 text-sm font-bold">Field has errors</span>}
         </div>
     );
 

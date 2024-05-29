@@ -20,14 +20,14 @@ function ChoicesList({field}) {
     )
 }
 
-export default function SelectField( { field, fieldRegisterPrefix } ) {
+export default function SelectField( { field } ) {
 
     const { makeValidationObject, useFormContext } = useFormManager();
     const { register, getFieldState } = useFormContext();
     const validators = makeValidationObject(field);
     const fieldState = getFieldState( field.name );
-
-    const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+    const fieldRenderData = useFieldRenderContext();
+    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
 
     return(
         <div className="my-4">

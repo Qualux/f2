@@ -8,6 +8,8 @@ const FieldGroupRecordRelateContext = createContext();
 export default function FieldCollectionField( { field } ) {
 
     const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
+    const fieldRenderData = useFieldRenderContext();
+    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
 
     const { 
         RecordRelateProviders, 
@@ -23,7 +25,7 @@ export default function FieldCollectionField( { field } ) {
                 Fields
             </h2>
             <RecordRelateProviders
-                fieldName={field.name}
+                fieldName={registerName}
                 sdo={fieldSDO}
             >
                 <main>

@@ -21,7 +21,7 @@ class Enqueue {
             wp_enqueue_script(
                 'f3-admin',
                 F3_URL . '/apps/admin/build/index.js',
-                ['wp-element'],
+                ['wp-element', 'wp-mediaelement'],
                 time(),   
             );
 
@@ -66,7 +66,7 @@ class Enqueue {
         wp_enqueue_script(
             'f3-render',
             F3_URL . '/apps/render/build/index.js',
-            ['wp-element'],
+            ['wp-element', 'wp-mediaelement'],
             time(),
             [
                 'in_footer' => true,

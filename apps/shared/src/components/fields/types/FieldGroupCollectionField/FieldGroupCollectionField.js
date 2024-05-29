@@ -1,10 +1,15 @@
 import { createContext, useState, useContext } from 'react';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 import { useRecordRelate } from '../../../../lib/useRecordRelate/useRecordRelate';
 import fieldGroupSDO from '../../../../../../../data/sdo/field_group.json';
 
 const FieldRecordRelateContext = createContext();
 
-export default function FieldGroupCollectionField({field}) {
+export default function FieldGroupCollectionField( { field } ) {
+
+    const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
+    const fieldRenderData = useFieldRenderContext();
+    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
 
     const { 
         RecordRelateProviders, 
@@ -20,7 +25,7 @@ export default function FieldGroupCollectionField({field}) {
                 Field Groups
             </h2>
             <RecordRelateProviders
-                fieldName={field.name}
+                fieldName={registerName}
                 sdo={fieldGroupSDO}
             >
                 <main>

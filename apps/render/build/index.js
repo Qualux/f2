@@ -752,6 +752,8 @@ function FieldCollectionField({
     useFormContext,
     useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   const {
     RecordRelateProviders,
     SelectionList,
@@ -760,7 +762,7 @@ function FieldCollectionField({
     RecordList
   } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)(FieldGroupRecordRelateContext);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Fields"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
-    fieldName: field.name,
+    fieldName: registerName,
     sdo: _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_3__
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-px"
@@ -784,8 +786,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useRecordRelate/useRecordRelate */ "../shared/src/lib/useRecordRelate/useRecordRelate.js");
-/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useRecordRelate/useRecordRelate */ "../shared/src/lib/useRecordRelate/useRecordRelate.js");
+/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
+
 
 
 
@@ -795,15 +799,22 @@ function FieldGroupCollectionField({
   field
 }) {
   const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const {
     RecordRelateProviders,
     SelectionList,
     CreateButton,
     SelectExistingButton,
     RecordList
-  } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_1__.useRecordRelate)(FieldRecordRelateContext);
+  } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)(FieldRecordRelateContext);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Field Groups"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
-    fieldName: field.name,
-    sdo: _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_2__
+    fieldName: registerName,
+    sdo: _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_3__
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-px"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
@@ -827,13 +838,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function FileField({
-  field,
-  register,
-  errors
+  field
 }) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const validators = makeValidationObject(field);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -842,12 +866,10 @@ function FileField({
     className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
     type: "text",
     placeholder: field.placeholder,
-    ...register(field.name, {
-      required: true
-    })
-  }), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    ...register(registerName, validators)
+  }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field is required"));
+  }, fieldState.error?.message || 'Field has errors'));
 }
 
 /***/ }),
@@ -910,12 +932,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function NumberField({
-  field,
-  fieldRegisterPrefix
+  field
 }) {
   const {
     makeValidationObject,
-    useFormContext
+    useFormContext,
+    useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
   const {
     register,
@@ -923,7 +945,8 @@ function NumberField({
   } = useFormContext();
   const validators = makeValidationObject(field);
   const fieldState = getFieldState(field.name);
-  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1160,11 +1183,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function ChoicesList({
   field,
-  register
+  register,
+  registerName,
+  validators
 }) {
   if (!field.choices) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -1173,25 +1200,38 @@ function ChoicesList({
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, field.choices.map((choice, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    ...register(field.name),
-    value: choice.value
+    value: choice.value,
+    ...register(registerName, validators)
   }), choice.label)));
 }
 function RadioGroupField({
-  field,
-  register,
-  errors
+  field
 }) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
     text: field.label
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ChoicesList, {
     field: field,
-    register: register
-  })), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    register: register,
+    registerName: registerName,
+    validators: validators
+  })), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field title is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
@@ -1306,12 +1346,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SearchableSelectField({
-  field,
-  fieldRegisterPrefix
+  field
 }) {
   const {
     makeValidationObject,
-    useFormContext
+    useFormContext,
+    useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
   const {
     control,
@@ -1319,8 +1359,9 @@ function SearchableSelectField({
     getFieldState
   } = useFormContext();
   const validators = makeValidationObject(field);
-  const fieldState = getFieldState(field.name);
-  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const fieldState = getFieldState(registerName);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1373,8 +1414,7 @@ function ChoicesList({
   }, choice.label)));
 }
 function SelectField({
-  field,
-  fieldRegisterPrefix
+  field
 }) {
   const {
     makeValidationObject,
@@ -1386,7 +1426,8 @@ function SelectField({
   } = useFormContext();
   const validators = makeValidationObject(field);
   const fieldState = getFieldState(field.name);
-  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1417,13 +1458,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function TextAreaField({
-  field,
-  register,
-  errors
+  field
 }) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1431,12 +1485,10 @@ function TextAreaField({
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
     placeholder: field.placeholder,
-    ...register(field.name, {
-      required: true
-    })
-  }), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    ...register(registerName, validators)
+  }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field is required"));
+  }, fieldState.error?.message || 'Field has errors'));
 }
 
 /***/ }),
@@ -1460,8 +1512,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function TextField({
-  field,
-  fieldRegisterPrefix
+  field
 }) {
   const {
     makeValidationObject,
@@ -1571,13 +1622,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function UrlField({
-  field,
-  register,
-  errors
+  field
 }) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1586,12 +1650,10 @@ function UrlField({
     className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
     type: "url",
     placeholder: field.placeholder,
-    ...register(field.name, {
-      required: true
-    })
-  }), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    ...register(registerName, validators)
+  }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
@@ -34824,9 +34886,9 @@ const fieldGroups = [{
     required: true
   }, {
     name: 'test_field_2',
-    type: 'text',
-    placeholder: 'Test field 2...',
-    default_value: 'Seven 7'
+    type: 'url',
+    placeholder: 'https://google.com',
+    required: true
   }, {
     name: 'test_field_3',
     type: 'checkbox',
@@ -34861,6 +34923,13 @@ const fieldGroups = [{
   }, {
     name: 'test_field_7',
     type: 'true_false'
+  }, {
+    name: 'test_field_8',
+    type: 'textarea'
+  }, {
+    name: 'test_field_9',
+    type: 'number',
+    placeholder: 10
   }],
   repeat: false
 }];

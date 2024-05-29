@@ -3,14 +3,14 @@ import Select from 'react-select';
 import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 import { Controller } from 'react-hook-form';
 
-export default function SearchableSelectField( { field, fieldRegisterPrefix } ) {
+export default function SearchableSelectField( { field } ) {
 
-    const { makeValidationObject, useFormContext } = useFormManager();
+    const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
     const { control, register, getFieldState } = useFormContext();
     const validators = makeValidationObject( field );
-    const fieldState = getFieldState( field.name ); 
-
-    const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
+    const fieldRenderData = useFieldRenderContext();
+    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+    const fieldState = getFieldState( registerName ); 
 
     return(
         <div className="my-4">
