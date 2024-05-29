@@ -7,7 +7,6 @@ export default function TextField( { field, fieldRegisterPrefix } ) {
     const { register, getFieldState } = useFormContext();
     const validators = makeValidationObject(field);
     const fieldState = getFieldState( field.name );
-
     const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
 
     return(

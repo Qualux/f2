@@ -1,8 +1,9 @@
 import Label from '../../Label';
+import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
-function ChoicesList({field, register}) {
+function ChoicesList( { field, register, registerName, validators } ) {
 
-    if( !field.choices ) {
+    if( ! field.choices ) {
         return(
             <option value="0">No choices</option>
         );
@@ -11,8 +12,13 @@ function ChoicesList({field, register}) {
     return(
         <>
             {field.choices.map((choice, index) => (
-                <label>
-                    <input type="checkbox" {...register(field.name)} value={choice.value} />
+                <label
+                    key={index}
+                >
+                    <input type="checkbox" 
+                        value={choice.value}
+                        {...register(registerName, validators)}  
+                    />
                     {choice.label}
                 </label>
             ))}
@@ -20,15 +26,26 @@ function ChoicesList({field, register}) {
     )
 }
 
-export default function SelectField( {field, register, errors} ) {
+export default function CheckboxField( { field } ) {
+
+    const { makeValidationObject, useFormContext } = useFormManager();
+    const { register, getFieldState } = useFormContext();
+    const validators = makeValidationObject(field);
+    const fieldState = getFieldState( field.name );
+    const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
 
     return(
         <div className="my-4">
             <Label text={field.label} />
             <div>
-                <ChoicesList field={field} register={register} />
+                <ChoicesList 
+                    field={field} 
+                    register={register} 
+                    registerName={registerName}
+                    validators={validators}
+                />
             </div>
-            {errors[field.name] && <span className="text-rose-700 text-sm font-bold">Field title is required</span>}
+            {fieldState.invalid && <span className="text-rose-700 text-sm font-bold">Field has errors</span>}
         </div>
     );
 

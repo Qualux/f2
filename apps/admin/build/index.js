@@ -5805,43 +5805,60 @@ function Label({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SelectField)
+/* harmony export */   "default": () => (/* binding */ CheckboxField)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
 
 
 function ChoicesList({
   field,
-  register
+  register,
+  registerName,
+  validators
 }) {
   if (!field.choices) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       value: "0"
     }, "No choices");
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, field.choices.map((choice, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, field.choices.map((choice, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    key: index
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    ...register(field.name),
-    value: choice.value
+    value: choice.value,
+    ...register(registerName, validators)
   }), choice.label)));
 }
-function SelectField({
-  field,
-  register,
-  errors
+function CheckboxField({
+  field
 }) {
+  const {
+    makeValidationObject,
+    useFormContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const registerName = fieldRegisterPrefix ? `${fieldRegisterPrefix}.${field.name}` : field.name;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
     text: field.label
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ChoicesList, {
     field: field,
-    register: register
-  })), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    register: register,
+    registerName: registerName,
+    validators: validators
+  })), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Field title is required"));
+  }, "Field has errors"));
 }
 
 /***/ }),
