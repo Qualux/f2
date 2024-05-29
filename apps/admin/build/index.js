@@ -6235,7 +6235,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
-/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _global_MediaUploader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../global/MediaUploader */ "../shared/src/components/global/MediaUploader.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
+
 
 
 
@@ -6246,15 +6249,21 @@ function FileField({
     makeValidationObject,
     useFormContext,
     useFieldRenderContext
-  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__.useFormManager)();
   const {
     register,
+    setValue,
     getFieldState
   } = useFormContext();
   const fieldState = getFieldState(field.name);
   const fieldRenderData = useFieldRenderContext();
   const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   const validators = makeValidationObject(field);
+  const handleSelect = url => {
+    setValue(registerName, url, {
+      shouldValidate: true
+    });
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -6264,6 +6273,8 @@ function FileField({
     type: "text",
     placeholder: field.placeholder,
     ...register(registerName, validators)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_MediaUploader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onSelect: handleSelect
   }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
   }, fieldState.error?.message || 'Field has errors'));
@@ -6285,13 +6296,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _global_MediaUploader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../global/MediaUploader */ "../shared/src/components/global/MediaUploader.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+
+
+
 
 
 function ImageField({
-  field,
-  register,
-  errors
+  field
 }) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__.useFormManager)();
+  const {
+    register,
+    setValue,
+    getFieldState
+  } = useFormContext();
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const validators = makeValidationObject(field);
+  const handleSelect = url => {
+    setValue(registerName, url, {
+      shouldValidate: true
+    });
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -6300,12 +6333,12 @@ function ImageField({
     className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
     type: "text",
     placeholder: field.placeholder,
-    ...register(field.name, {
-      required: true
-    })
-  }), errors[field.name] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    ...register(registerName, validators)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_global_MediaUploader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onSelect: handleSelect
+  }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
-  }, "Image field is required"));
+  }, fieldState.error?.message || 'Field has errors'));
 }
 
 /***/ }),
@@ -7052,6 +7085,46 @@ function UrlField({
     className: "text-rose-700 text-sm font-bold"
   }, "Field has errors"));
 }
+
+/***/ }),
+
+/***/ "../shared/src/components/global/MediaUploader.js":
+/*!********************************************************!*\
+  !*** ../shared/src/components/global/MediaUploader.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const MediaUploader = ({
+  onSelect
+}) => {
+  const openMediaLibrary = () => {
+    const media = window.wp.media({
+      title: 'Select or Upload Media',
+      button: {
+        text: 'Use this media'
+      },
+      multiple: false
+    });
+    media.on('select', () => {
+      const attachment = media.state().get('selection').first().toJSON();
+      onSelect(attachment.id);
+    });
+    media.open();
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    onClick: openMediaLibrary
+  }, "Open Media Library"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MediaUploader);
 
 /***/ }),
 

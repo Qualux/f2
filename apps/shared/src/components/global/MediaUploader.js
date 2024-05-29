@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
-const MediaUploader = () => {
-
-    const [fileUrl, setFileUrl] = useState('');
+const MediaUploader = ( { onSelect } ) => {
 
     const openMediaLibrary = () => {
 
@@ -11,12 +7,12 @@ const MediaUploader = () => {
             button: {
                 text: 'Use this media'
             },
-            multiple: false // Set to true to allow multiple files to be selected
+            multiple: false
         });
 
         media.on('select', () => {
             const attachment = media.state().get('selection').first().toJSON();
-            setFileUrl(attachment.url);
+            onSelect(attachment.id);
         });
 
         media.open();
@@ -25,13 +21,7 @@ const MediaUploader = () => {
 
     return (
         <div>
-            <button onClick={openMediaLibrary}>Open Media Library</button>
-            {fileUrl && (
-                <div>
-                    <h3>Selected Image:</h3>
-                    <img src={fileUrl} alt="Selected" style={{ maxWidth: '100%' }} />
-                </div>
-            )}
+            <button type="button" onClick={openMediaLibrary}>Open Media Library</button>
         </div>
     );
 

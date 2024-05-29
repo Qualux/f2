@@ -76,6 +76,10 @@ const fieldGroups = [
                 type: 'number',
                 placeholder: 10,
             },
+            {
+                name: 'test_field_10',
+                type: 'file',
+            },
         ],
         repeat: false,
     }
