@@ -3,6 +3,7 @@ import { useForm, useFormContext, FormProvider, useFieldArray } from 'react-hook
 import Field from '../../components/fields/Field';
 import { checkConditions } from './conditionsChecker';
 import { makeDefaultFieldValues } from './defaultValues';
+import { useFieldRender } from '../useFieldRender/useFieldRender';
 
 const FormManagerContext = createContext();
 const FieldRenderContext = createContext( { registerPrefix: null } );
@@ -109,10 +110,12 @@ export function useFormManager() {
 
     function FieldGroupRender( { fieldGroup } ) {
 
+        const { FieldRender } = useFieldRender();
+
         return(
             <div>
                 {fieldGroup.fields.map((field, index) => (
-                    <FieldRenderer key={index} field={field} />
+                    <FieldRender key={index} field={field} />
                 ))}
             </div>
         );
@@ -153,12 +156,14 @@ export function useFormManager() {
 
     function RepeatRow( { fieldGroup, rhfFieldIndex, append, remove, move } ) { 
 
+        const { FieldRender } = useFieldRender();
+
         function render( field, fieldIndex, rhfFieldIndex ) {
 
             const repeatField = { ...field, name: `${fieldGroup.name}.${rhfFieldIndex}.${field.name}` };
 
             return(
-                <FieldRenderer 
+                <FieldRender
                     key={fieldIndex}
                     field={repeatField} 
                 />
@@ -200,36 +205,14 @@ export function useFormManager() {
 
     }
 
-    function FieldRenderer( { field } ) {
-
-        const { watch, register, errors, setValue, control } = useFormContext();
-        const conditionsCheckPassed = checkConditions(field, watch);
-    
-        if (!conditionsCheckPassed) {
-            return null;
-        }
-    
-        return (
-            <div className="my-6">
-                <Field
-                    field={field}
-                    register={register}
-                    errors={errors}
-                    setValue={setValue}
-                    control={control}
-                    value={null}
-                />
-            </div>
-        );
-
-    }
-
     function makeValidationObject( field ) {
+
         let validators = {}
         if( field.field_required ) {
             validators.required = true; 
         }
         return validators;
+
     }
 
     function FormComplete() {

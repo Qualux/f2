@@ -2672,10 +2672,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/fields/Field */ "../shared/src/components/fields/Field.js");
 /* harmony import */ var _conditionsChecker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./conditionsChecker */ "../shared/src/lib/useFormManager/conditionsChecker.js");
 /* harmony import */ var _defaultValues__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defaultValues */ "../shared/src/lib/useFormManager/defaultValues.js");
+/* harmony import */ var _useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../useFieldRender/useFieldRender */ "../shared/src/lib/useFieldRender/useFieldRender.js");
+
 
 
 
@@ -2693,7 +2695,7 @@ function useFormManager() {
   }) {
     const [formStatus, setFormStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('loading');
     let defaultValues = formData.record || (0,_defaultValues__WEBPACK_IMPORTED_MODULE_3__.makeDefaultFieldValues)(formData.form.field_groups);
-    const methods = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useForm)({
+    const methods = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       defaultValues
     });
     const formSubmitHandler = data => {
@@ -2712,7 +2714,7 @@ function useFormManager() {
         formData,
         formSubmitHandler
       }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_hook_form__WEBPACK_IMPORTED_MODULE_4__.FormProvider, {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.FormProvider, {
       ...methods
     }, children));
   }
@@ -2731,7 +2733,7 @@ function useFormManager() {
   }) {
     const {
       handleSubmit
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext)();
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormContext)();
     const {
       formSubmitHandler
     } = useFormManagerContext();
@@ -2765,7 +2767,10 @@ function useFormManager() {
   function FieldGroupRender({
     fieldGroup
   }) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, fieldGroup.fields.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRenderer, {
+    const {
+      FieldRender
+    } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_4__.useFieldRender)();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, fieldGroup.fields.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
       key: index,
       field: field
     })));
@@ -2775,13 +2780,13 @@ function useFormManager() {
   }) {
     const {
       control
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext)();
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormContext)();
     const {
       fields,
       append,
       remove,
       move
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFieldArray)({
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFieldArray)({
       control,
       name: fieldGroup.name
     });
@@ -2807,12 +2812,15 @@ function useFormManager() {
     remove,
     move
   }) {
+    const {
+      FieldRender
+    } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_4__.useFieldRender)();
     function render(field, fieldIndex, rhfFieldIndex) {
       const repeatField = {
         ...field,
         name: `${fieldGroup.name}.${rhfFieldIndex}.${field.name}`
       };
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRenderer, {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
         key: fieldIndex,
         field: repeatField
       });
@@ -2841,31 +2849,6 @@ function useFormManager() {
       }
     }, "REMOVE"));
   }
-  function FieldRenderer({
-    field
-  }) {
-    const {
-      watch,
-      register,
-      errors,
-      setValue,
-      control
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext)();
-    const conditionsCheckPassed = (0,_conditionsChecker__WEBPACK_IMPORTED_MODULE_2__.checkConditions)(field, watch);
-    if (!conditionsCheckPassed) {
-      return null;
-    }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "my-6"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_fields_Field__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      field: field,
-      register: register,
-      errors: errors,
-      setValue: setValue,
-      control: control,
-      value: null
-    }));
-  }
   function makeValidationObject(field) {
     let validators = {};
     if (field.field_required) {
@@ -2886,7 +2869,7 @@ function useFormManager() {
     FormManagerProvider,
     useFormManagerContext,
     useFieldRenderContext,
-    useFormContext: react_hook_form__WEBPACK_IMPORTED_MODULE_4__.useFormContext,
+    useFormContext: react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormContext,
     Form,
     Fields,
     Field: _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__["default"],
