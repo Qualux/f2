@@ -2527,7 +2527,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "../shared/node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var _useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../useFieldRender/useFieldRender */ "../shared/src/lib/useFieldRender/useFieldRender.js");
+
 
 
 function useFieldGroupRender() {
@@ -2538,11 +2540,91 @@ function useFieldGroupRender() {
     const {
       FieldRender
     } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__.useFieldRender)();
+    if (fieldGroup?.repeat) {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRepeatRender, {
+        key: index,
+        fieldGroup: fieldGroup
+      });
+    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, fieldGroup.fields.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
       key: index,
       field: field,
       fieldRegisterPrefix: fieldRegisterPrefix
     })));
+  }
+  function FieldGroupRepeatRender({
+    fieldGroup
+  }) {
+    const {
+      control
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useFormContext)();
+    const {
+      fields,
+      append,
+      remove,
+      move
+    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useFieldArray)({
+      control,
+      name: fieldGroup.name
+    });
+    useEffect(() => {
+      if (fields.length === 0) {
+        append({});
+      }
+    }, [fields, append]);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, fields.map((rhfField, rhfFieldIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RepeatRow, {
+      key: rhfField.id,
+      fieldGroup: fieldGroup,
+      rhfField: rhfField,
+      rhfFieldIndex: rhfFieldIndex,
+      append: append,
+      remove: remove,
+      move: move
+    })));
+  }
+  function RepeatRow({
+    fieldGroup,
+    rhfFieldIndex,
+    append,
+    remove,
+    move
+  }) {
+    const {
+      FieldRender
+    } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__.useFieldRender)();
+    function render(field, fieldIndex, rhfFieldIndex) {
+      const repeatField = {
+        ...field,
+        name: `${fieldGroup.name}.${rhfFieldIndex}.${field.name}`
+      };
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
+        key: fieldIndex,
+        field: repeatField
+      });
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex gap-10"
+    }, fieldGroup.fields.map((field, fieldIndex) => render(field, fieldIndex, rhfFieldIndex)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      type: "button",
+      onClick: () => {
+        move(rhfFieldIndex, rhfFieldIndex - 1);
+      }
+    }, "UP"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      type: "button",
+      onClick: () => {
+        move(rhfFieldIndex, rhfFieldIndex + 1);
+      }
+    }, "DOWN"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      type: "button",
+      onClick: () => {
+        append();
+      }
+    }, "ADD"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      type: "button",
+      onClick: () => {
+        remove(rhfFieldIndex);
+      }
+    }, "REMOVE"));
   }
   return {
     FieldGroupRender
@@ -2676,7 +2758,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_fields_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/fields/Field */ "../shared/src/components/fields/Field.js");
 /* harmony import */ var _conditionsChecker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./conditionsChecker */ "../shared/src/lib/useFormManager/conditionsChecker.js");
 /* harmony import */ var _defaultValues__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defaultValues */ "../shared/src/lib/useFormManager/defaultValues.js");
-/* harmony import */ var _useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../useFieldRender/useFieldRender */ "../shared/src/lib/useFieldRender/useFieldRender.js");
+/* harmony import */ var _useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../useFieldGroupRender/useFieldGroupRender */ "../shared/src/lib/useFieldGroupRender/useFieldGroupRender.js");
 
 
 
@@ -2750,104 +2832,13 @@ function useFormManager() {
     const {
       formData
     } = useFormManagerContext();
-    function render(fieldGroup, index) {
-      if (fieldGroup?.repeat) {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRepeatRender, {
-          key: index,
-          fieldGroup: fieldGroup
-        });
-      }
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRender, {
-        key: index,
-        fieldGroup: fieldGroup
-      });
-    }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", null, formData.form.field_groups.map((fieldGroup, index) => render(fieldGroup, index)));
-  }
-  function FieldGroupRender({
-    fieldGroup
-  }) {
     const {
-      FieldRender
-    } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_4__.useFieldRender)();
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, fieldGroup.fields.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
+      FieldGroupRender
+    } = (0,_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_4__.useFieldGroupRender)();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", null, formData.form.field_groups.map((fieldGroup, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRender, {
       key: index,
-      field: field
+      fieldGroup: fieldGroup
     })));
-  }
-  function FieldGroupRepeatRender({
-    fieldGroup
-  }) {
-    const {
-      control
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormContext)();
-    const {
-      fields,
-      append,
-      remove,
-      move
-    } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFieldArray)({
-      control,
-      name: fieldGroup.name
-    });
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      if (fields.length === 0) {
-        append({}); // You can customize this with your default field structure
-      }
-    }, [fields, append]);
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, fields.map((rhfField, rhfFieldIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RepeatRow, {
-      key: rhfField.id,
-      fieldGroup: fieldGroup,
-      rhfField: rhfField,
-      rhfFieldIndex: rhfFieldIndex,
-      append: append,
-      remove: remove,
-      move: move
-    })));
-  }
-  function RepeatRow({
-    fieldGroup,
-    rhfFieldIndex,
-    append,
-    remove,
-    move
-  }) {
-    const {
-      FieldRender
-    } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_4__.useFieldRender)();
-    function render(field, fieldIndex, rhfFieldIndex) {
-      const repeatField = {
-        ...field,
-        name: `${fieldGroup.name}.${rhfFieldIndex}.${field.name}`
-      };
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
-        key: fieldIndex,
-        field: repeatField
-      });
-    }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex gap-10"
-    }, fieldGroup.fields.map((field, fieldIndex) => render(field, fieldIndex, rhfFieldIndex)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      type: "button",
-      onClick: () => {
-        move(rhfFieldIndex, rhfFieldIndex - 1);
-      }
-    }, "UP"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      type: "button",
-      onClick: () => {
-        move(rhfFieldIndex, rhfFieldIndex + 1);
-      }
-    }, "DOWN"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      type: "button",
-      onClick: () => {
-        append();
-      }
-    }, "ADD"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      type: "button",
-      onClick: () => {
-        remove(rhfFieldIndex);
-      }
-    }, "REMOVE"));
   }
   function makeValidationObject(field) {
     let validators = {};
