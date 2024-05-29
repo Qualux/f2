@@ -409,7 +409,7 @@ function Label({
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: fieldName,
-    className: "block text-8xl font-medium leading-6 text-gray-900"
+    className: "block text-sm font-medium leading-6 text-neutral-600"
   }, text);
 }
 
@@ -2021,7 +2021,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Manager() {
+function Manager({
+  controls
+}) {
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
   const [sortColumn, setSortColumn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('ID');
   const [sortOrder, setSortOrder] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('DESC');
@@ -2063,7 +2065,8 @@ function Manager() {
     setSortOrder: setSortOrder,
     filters: sdo.filters,
     filterValues: filterValues,
-    setFilterValues: setFilterValues
+    setFilterValues: setFilterValues,
+    controls: controls
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Footer, {
     data: data
   }));
@@ -2318,7 +2321,8 @@ function Grid({
   setSortOrder,
   filters,
   filterValues,
-  setFilterValues
+  setFilterValues,
+  controls
 }) {
   // Columns length sets the grid-cols-* class.
   // grid-cols-1, grid-cols-2, grid-cols-3, grid-cols-4, grid-cols-5, grid-cols-6.
@@ -2359,7 +2363,8 @@ function Grid({
     key: index,
     record: record,
     routes: routes,
-    columns: columns
+    columns: columns,
+    controls: controls
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Pager__WEBPACK_IMPORTED_MODULE_4__["default"], {
     pageCount: data.max_num_pages,
     page: page,
@@ -2387,13 +2392,12 @@ __webpack_require__.r(__webpack_exports__);
 function GridCol({
   column,
   record,
-  routes
+  controls
 }) {
   if (column.columnKey === 'controls') {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Controls__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      routes: routes,
-      record: record
-    });
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex items-center gap-2 justify-end"
+    }, controls);
   }
   let value = record[column.recordKey];
   if (typeof value === 'object') {
@@ -2425,15 +2429,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function GridRow({
   record,
-  index,
   routes,
-  columns
+  columns,
+  controls
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, columns.map((column, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_GridCol__WEBPACK_IMPORTED_MODULE_2__["default"], {
     key: index,
     column: column,
     record: record,
-    routes: routes
+    routes: routes,
+    controls: controls
   })));
 }
 

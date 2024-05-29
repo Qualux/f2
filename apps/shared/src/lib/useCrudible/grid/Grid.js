@@ -16,7 +16,8 @@ export default function Grid(
         setSortOrder, 
         filters, 
         filterValues, 
-        setFilterValues
+        setFilterValues,
+        controls,
     }
 ) {
 
@@ -68,6 +69,7 @@ export default function Grid(
                         record={record} 
                         routes={routes} 
                         columns={columns}
+                        controls={controls}
                     />
                 )}
             </ul>

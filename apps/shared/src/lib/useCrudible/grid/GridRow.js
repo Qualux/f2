@@ -1,7 +1,7 @@
 import DeleteButton from '../DeleteButton';
 import GridCol from './GridCol';
 
-export default function GridRow({record, index, routes, columns}) {
+export default function GridRow({record, routes, columns, controls}) {
 
     return(
         <>
@@ -11,6 +11,7 @@ export default function GridRow({record, index, routes, columns}) {
                     column={column}
                     record={record}
                     routes={routes}
+                    controls={controls}
                 />
             )}            
         </>

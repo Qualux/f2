@@ -693,6 +693,11 @@
   color: rgb(229 229 229 / var(--tw-text-opacity))
 }
 
+.text-neutral-600 {
+  --tw-text-opacity: 1;
+  color: rgb(82 82 82 / var(--tw-text-opacity))
+}
+
 .opacity-0 {
   opacity: 0
 }
@@ -1267,6 +1272,10 @@
     font-size: 0.75rem;
     line-height: 1rem
 }
+.text-5xl{
+    font-size: 3rem;
+    line-height: 1
+}
 .font-bold{
     font-weight: 700
 }
@@ -1275,6 +1284,9 @@
 }
 .font-semibold{
     font-weight: 600
+}
+.font-black{
+    font-weight: 900
 }
 .leading-none{
     line-height: 1
@@ -1309,6 +1321,10 @@
 .text-neutral-600{
     --tw-text-opacity: 1;
     color: rgb(82 82 82 / var(--tw-text-opacity))
+}
+.text-red-800{
+    --tw-text-opacity: 1;
+    color: rgb(153 27 27 / var(--tw-text-opacity))
 }
 .text-sky-900{
     --tw-text-opacity: 1;
@@ -1451,15 +1467,6 @@
 }
 .active\:text-neutral-500:active{
     --tw-text-opacity: 1;
-    color: rgb(115 115 115 / var(--tw-text-opacity))
-}
-@media (min-width: 640px){
-    .sm\:p-6{
-        padding: 1.5rem
-    }
-}
-
-/*# sourceMappingURL=index.css.map*/-text-opacity: 1;
     color: rgb(115 115 115 / var(--tw-text-opacity))
 }
 @media (min-width: 640px){

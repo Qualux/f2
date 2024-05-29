@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import {
     useQuery,
     keepPreviousData,
@@ -8,7 +8,7 @@ import ScreenWrap from '../../components/global/ScreenWrap';
 import SkeletonList from '../../components/global/SkeletonList';
 import { useStandardAPI } from '../../lib/useStandardAPI';
 
-export default function Manager() {
+export default function Manager( {controls} ) {
 
     const [page, setPage] = useState(1);
     const [sortColumn, setSortColumn] = useState('ID');
@@ -63,6 +63,7 @@ export default function Manager() {
                 filters={sdo.filters}
                 filterValues={filterValues}
                 setFilterValues={setFilterValues}
+                controls={controls}
             />
             <Footer data={data} />
         </ScreenWrap>

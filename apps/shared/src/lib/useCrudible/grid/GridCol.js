@@ -1,14 +1,13 @@
 import Controls from './Controls';
 
-export default function GridCol( { column, record, routes } ) {
+export default function GridCol( { column, record, controls } ) {
 
     if(column.columnKey === 'controls') {
 
         return (
-            <Controls 
-                routes={routes} 
-                record={record}
-            />
+            <div className="flex items-center gap-2 justify-end">
+                {controls}
+            </div>
         );
 
     }
