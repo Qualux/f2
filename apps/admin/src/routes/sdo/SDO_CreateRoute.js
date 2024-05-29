@@ -11,7 +11,7 @@ function CreateHeader() {
     return(
         <Header 
             routeType="create"
-            returnLink={<NavLink to={sdo.routes.dashboard}>RETURN</NavLink>}
+            primaryLink={<NavLink to={sdo.routes.dashboard}>RETURN</NavLink>}
         />
     );
 

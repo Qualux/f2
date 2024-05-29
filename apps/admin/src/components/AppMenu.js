@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 const itemClasses = ({ isActive, isPending }) => {
 
-    const base  = "grow py-0.5 px-3 font-semibold text-sm"
-    const extra = isActive ? "text-neutral-500 border border-solid border-neutral-500" : "!text-neutral-100 hover:!text-neutral-300"
+    const base  = "no-underline grow py-0.5 px-3 font-semibold text-sm focus:shadow-none focus:outline-none focus:text-neutral-500"
+    const extra = isActive ? "text-neutral-500" : "!text-neutral-100 hover:!text-neutral-300"
     return base + ' ' + extra;
 }
 

@@ -1935,48 +1935,49 @@ __webpack_require__.r(__webpack_exports__);
 
 function Header({
   routeType,
-  returnLink,
-  createLink
+  primaryLink
 }) {
   const {
     useSDO
   } = (0,_useCrudible__WEBPACK_IMPORTED_MODULE_1__.useCrudible)();
   const sdo = useSDO();
+  console.log('sdo in header:');
+  console.log(sdo);
   function leftCol() {
     if (routeType === 'create') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
         className: "text-neutral-300 font-semibold text-lg"
-      }, "CREATE"), returnLink);
+      }, "CREATE"), primaryLink);
     }
     if (routeType === 'edit') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
         className: "text-neutral-300 font-semibold text-lg"
-      }, "EDIT"), returnLink);
+      }, "EDIT"), primaryLink);
     }
     if (routeType === 'view') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
         className: "text-neutral-300 font-semibold text-lg"
-      }, "VIEW"), returnLink);
+      }, "VIEW"), primaryLink);
     }
     if (routeType === 'delete') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
         className: "text-neutral-300 font-semibold text-lg"
-      }, "DELETE"), returnLink);
+      }, "DELETE"), primaryLink);
     }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex gap-5 items-center"
-    }, createLink);
+    }, primaryLink);
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mb-6 items-center justify-between"
+    className: "flex mb-6 items-center justify-between bg-neutral-700 text-neutral-200 py-3 px-3 shadow-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, leftCol()), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-1 items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -1989,8 +1990,8 @@ function Header({
     strokeLinejoin: "round",
     d: "M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "text-neutral-300 font-semibold text-sm"
-  }, sdo.displayTitle)));
+    className: "my-0 text-neutral-300 font-semibold text-sm"
+  }, sdo.display_title)));
 }
 
 /***/ }),
@@ -2026,7 +2027,6 @@ function Manager() {
   const [sortOrder, setSortOrder] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('DESC');
   const [filterValues, setFilterValues] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const {
-    Header,
     Grid,
     Footer,
     useSDO
@@ -2046,12 +2046,12 @@ function Manager() {
     setFilterValues(initialFilterValues);
   }, []);
   if (isLoading && !data) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   }
   if (data === undefined) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Header, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Grid, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Grid, {
     routes: sdo.routes,
     data: data,
     columns: sdo.columns,
@@ -2066,7 +2066,7 @@ function Manager() {
     setFilterValues: setFilterValues
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Footer, {
     data: data
-  })));
+  }));
 }
 
 /***/ }),
@@ -2477,8 +2477,6 @@ function useCrudible(params = {
 }) {
   function useSDO() {
     const sdo = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_SDO_Context__WEBPACK_IMPORTED_MODULE_9__.SDO_Context);
-    console.log('in useSDO, sdo:');
-    console.log(sdo);
     return sdo;
   }
   const AppFormComponent = ({
@@ -2488,13 +2486,11 @@ function useCrudible(params = {
   });
   function HeaderComponent({
     routeType,
-    returnLink,
-    createLink
+    primaryLink
   }) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
       routeType: routeType,
-      returnLink: returnLink,
-      createLink: createLink
+      primaryLink: primaryLink
     });
   }
   function ViewScreenCompiled() {
@@ -2884,8 +2880,6 @@ function useFormManager() {
   function FieldRenderer({
     field
   }) {
-    console.log('FieldRenderer for field:');
-    console.log(field);
     const {
       watch,
       register,

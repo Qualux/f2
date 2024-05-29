@@ -11,8 +11,8 @@ function EditHeader() {
 
     return(
         <Header 
-            routeType="create"
-            returnLink={<NavLink to={sdo.routes.dashboard}>RETURN</NavLink>}
+            routeType="edit"
+            primaryLink={<NavLink to={sdo.routes.dashboard}>RETURN</NavLink>}
         />
     );
 

@@ -6,7 +6,7 @@ import Menu from './AppMenu';
 export default function AppHeader( { title } ) {
 
     return(
-        <header className="flex items-center justify-between bg-neutral-900 font-semibold px-3 py-1">
+        <header className="flex items-center justify-between bg-neutral-800 font-semibold px-3 py-1">
             <div className="flex items-center gap-2">
                 <AppLogo />
                 <div>

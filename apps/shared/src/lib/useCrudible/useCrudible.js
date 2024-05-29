@@ -12,12 +12,10 @@ import { SDO_Context } from './SDO_Context';
 export function useCrudible( params = { recordId: 0, api: null } ) {
 
     function useSDO() {
+
         const sdo = useContext(SDO_Context);
-
-        console.log('in useSDO, sdo:')
-        console.log(sdo)
-
         return sdo;
+        
     }
 
     const AppFormComponent = ( { recordId } ) => (
@@ -26,13 +24,12 @@ export function useCrudible( params = { recordId: 0, api: null } ) {
         />
     );
 
-    function HeaderComponent( { routeType, returnLink, createLink } ) {
+    function HeaderComponent( { routeType, primaryLink } ) {
 
         return (
             <Header 
                 routeType={routeType}
-                returnLink={returnLink}
-                createLink={createLink}
+                primaryLink={primaryLink}
             />
         );
 

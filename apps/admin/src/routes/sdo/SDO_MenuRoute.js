@@ -19,7 +19,7 @@ export default function SDO_MenuRoute() {
                 <section className="grid grid-cols-2 gap-6">
                     <NavLink 
                         to="/post-type"
-                        className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                         <span>
                             Manage Post Types
                         </span>
@@ -27,7 +27,7 @@ export default function SDO_MenuRoute() {
                     </NavLink>
                     <NavLink 
                         to="/taxonomy"
-                        className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                         <span>
                             Manage Taxonomies
                         </span>
@@ -35,7 +35,7 @@ export default function SDO_MenuRoute() {
                     </NavLink>
                     <NavLink 
                         to="/options-page"
-                        className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                         <span>
                             Manage Options Pages
                         </span>
@@ -43,7 +43,7 @@ export default function SDO_MenuRoute() {
                     </NavLink>
                     <NavLink 
                         to="/query"
-                        className="flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
                         <span>
                             Manage Queries
                         </span>

@@ -14,7 +14,7 @@ export default function Manager() {
     const [sortColumn, setSortColumn] = useState('ID');
     const [sortOrder, setSortOrder] = useState('DESC');
     const [filterValues, setFilterValues] = useState(null);
-    const { Header, Grid, Footer, useSDO } = useCrudible();
+    const { Grid, Footer, useSDO } = useCrudible();
     const sdo = useSDO();
     const API = useStandardAPI(sdo.route_base);
 
@@ -34,47 +34,38 @@ export default function Manager() {
 
     if (isLoading && !data) {
         return(
-            <>
-                <Header />
-                <ScreenWrap>
-                    <SkeletonList />
-                </ScreenWrap>
-            </>
+            <ScreenWrap>
+                <SkeletonList />
+            </ScreenWrap>
         )
     }
 
     if( data === undefined ) {
         return(
-            <>
-                <Header />
-                <ScreenWrap>
-                    <SkeletonList />
-                </ScreenWrap>
-            </>
+            <ScreenWrap>
+                <SkeletonList />
+            </ScreenWrap>
         );
     }
 
     return(
-        <>
-            <Header />
-            <ScreenWrap>
-                <Grid 
-                    routes={sdo.routes}
-                    data={data} 
-                    columns={sdo.columns}
-                    page={page}
-                    setPage={setPage}
-                    sortColumn={sortColumn}
-                    setSortColumn={setSortColumn}
-                    sortOrder={sortOrder}
-                    setSortOrder={setSortOrder}
-                    filters={sdo.filters}
-                    filterValues={filterValues}
-                    setFilterValues={setFilterValues}
-                />
-                <Footer data={data} />
-            </ScreenWrap>
-        </>
+        <ScreenWrap>
+            <Grid 
+                routes={sdo.routes}
+                data={data} 
+                columns={sdo.columns}
+                page={page}
+                setPage={setPage}
+                sortColumn={sortColumn}
+                setSortColumn={setSortColumn}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+                filters={sdo.filters}
+                filterValues={filterValues}
+                setFilterValues={setFilterValues}
+            />
+            <Footer data={data} />
+        </ScreenWrap>
     );
 
 }

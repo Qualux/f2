@@ -202,9 +202,6 @@ export function useFormManager() {
 
     function FieldRenderer( { field } ) {
 
-        console.log('FieldRenderer for field:')
-        console.log(field)
-
         const { watch, register, errors, setValue, control } = useFormContext();
         const conditionsCheckPassed = checkConditions(field, watch);
     
