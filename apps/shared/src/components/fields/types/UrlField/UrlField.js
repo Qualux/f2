@@ -1,7 +1,7 @@
 import Label from '../../Label';
 import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
-export default function UrlField( {field} ) {
+export default function UrlField( { field } ) {
 
     const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
     const { register, getFieldState } = useFormContext();

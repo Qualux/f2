@@ -12,6 +12,7 @@ import FileField from './types/FileField/FileField';
 import ImageField from './types/ImageField/ImageField';
 import NumberField from './types/NumberField/NumberField';
 import PostCollectionField from './types/PostCollectionField/PostCollectionField';
+import PostTypeSelectField from './types/PostTypeSelectField/PostTypeSelectField';
 import RadioGroupField from './types/RadioGroupField/RadioGroupField';
 import RangeField from './types/RangeField/RangeField';
 import SearchableSelectField from './types/SearchableSelectField/SearchableSelectField';
@@ -23,80 +24,57 @@ import UrlField from './types/UrlField/UrlField';
 
 export default function Field( 
         {
-            field, 
-            register, 
-            errors, 
-            getValues, 
-            setValue, 
-            valuesInit, 
-            control, 
-            value,
-            fieldRegisterPrefix = ''
+            field
         }) {
 
     switch( field.type ) {
         case 'text': 
-            return (
-                <TextField 
-                    field={field} 
-                    register={register} 
-                    errors={errors} 
-                    value={value}
-                    fieldRegisterPrefix={fieldRegisterPrefix}
-                /> 
-            )
+            return <TextField field={field}/> 
             break
         case 'textarea': 
-            return <TextAreaField field={field} register={register} errors={errors} /> 
+            return <TextAreaField field={field}/> 
             break
         case 'select':
-            return <SelectField field={field} register={register} errors={errors} />
+            return <SelectField field={field}/>
             break;
         case 'checkbox':
-            return <CheckboxField field={field} register={register} errors={errors} />
+            return <CheckboxField field={field}/>
             break;
         case 'true_false':
-            return(
-                <TrueFalseField 
-                    field={field} 
-                    register={register} 
-                    errors={errors} 
-                    setValue={setValue} 
-                    getValues={getValues} 
-                    valuesInit={valuesInit} 
-                    value={value}
-                />
-            )
+            return <TrueFalseField field={field}/>
             break;
         case 'searchable_select':
-            return <SearchableSelectField field={field} register={register} errors={errors} control={control} />
+            return <SearchableSelectField field={field}/>
             break;
         case 'number':
-            return <NumberField field={field} register={register} errors={errors} fieldRegisterPrefix={fieldRegisterPrefix} />;
+            return <NumberField field={field}/>;
             break;
         case 'range':
-            return <RangeField field={field} register={register} errors={errors} />;
+            return <RangeField field={field}/>;
             break;
         case 'email':
-            return <EmailField field={field} register={register} errors={errors} />
+            return <EmailField field={field}/>
             break;
         case 'url':
-            return <UrlField field={field} register={register} errors={errors} />
+            return <UrlField field={field}/>
             break;
         case 'collection':
-            return <CollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            return <CollectionField field={field}/>
             break;
         case 'post_collection':
-            return <PostCollectionField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} fieldRegisterPrefix={fieldRegisterPrefix} />
+            return <PostCollectionField field={field}/>
+            break;
+        case 'post_type_select':
+            return <PostTypeSelectField field={field}/>
             break;
         case 'radio_group':
-            return <RadioGroupField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} fieldRegisterPrefix={fieldRegisterPrefix} />
+            return <RadioGroupField field={field}/>
             break;
         case 'image':
-            return <ImageField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            return <ImageField field={field}/>
             break;
         case 'file':
-            return <FileField field={field} register={register} errors={errors} setValue={setValue} getValues={getValues} valuesInit={valuesInit} />
+            return <FileField field={field}/>
             break;
         case 'field_group_collection':
             return <FieldGroupCollectionField field={field} />

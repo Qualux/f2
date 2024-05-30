@@ -80,6 +80,14 @@ const fieldGroups = [
                 name: 'test_field_10',
                 type: 'file',
             },
+            {
+                name: 'test_field_11',
+                type: 'image',
+            },
+            {
+                name: 'test_field_12',
+                type: 'post_type_select',
+            },
         ],
         repeat: false,
     }

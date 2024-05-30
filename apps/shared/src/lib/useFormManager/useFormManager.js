@@ -102,7 +102,7 @@ export function useFormManager() {
     function makeValidationObject( field ) {
 
         let validators = {}
-        if( field.field_required ) {
+        if( field?.required ) {
             validators.required = true; 
         }
         return validators;

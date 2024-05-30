@@ -178,6 +178,68 @@ class StandardAPI {
 
 /***/ }),
 
+/***/ "../shared/src/api/WordPressAPI.js":
+/*!*****************************************!*\
+  !*** ../shared/src/api/WordPressAPI.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "../shared/node_modules/axios/lib/axios.js");
+
+class WordPressAPI {
+  async getPostTypes() {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${window.f3Settings.apiRoot}wp/v2/types?context=edit`, {
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'X-WP-Nonce': window.f3Settings.nonce
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch post types.');
+    }
+  }
+  async getPosts(postType, params = {}) {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${window.f3Settings.apiRoot}wp/v2/${postType}`, {
+        params,
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'X-WP-Nonce': window.f3Settings.nonce
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch posts.');
+    }
+  }
+  async getPost(postType, id) {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${window.f3Settings.apiRoot}wp/v2/${postType}/${id}`, {
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'X-WP-Nonce': window.f3Settings.nonce
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch post.');
+    }
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WordPressAPI);
+
+/***/ }),
+
 /***/ "../shared/src/components/fields/Field.js":
 /*!************************************************!*\
   !*** ../shared/src/components/fields/Field.js ***!
@@ -200,14 +262,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_ImageField_ImageField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./types/ImageField/ImageField */ "../shared/src/components/fields/types/ImageField/ImageField.js");
 /* harmony import */ var _types_NumberField_NumberField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./types/NumberField/NumberField */ "../shared/src/components/fields/types/NumberField/NumberField.js");
 /* harmony import */ var _types_PostCollectionField_PostCollectionField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./types/PostCollectionField/PostCollectionField */ "../shared/src/components/fields/types/PostCollectionField/PostCollectionField.js");
-/* harmony import */ var _types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./types/RadioGroupField/RadioGroupField */ "../shared/src/components/fields/types/RadioGroupField/RadioGroupField.js");
-/* harmony import */ var _types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./types/RangeField/RangeField */ "../shared/src/components/fields/types/RangeField/RangeField.js");
-/* harmony import */ var _types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./types/SearchableSelectField/SearchableSelectField */ "../shared/src/components/fields/types/SearchableSelectField/SearchableSelectField.js");
-/* harmony import */ var _types_SelectField_SelectField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./types/SelectField/SelectField */ "../shared/src/components/fields/types/SelectField/SelectField.js");
-/* harmony import */ var _types_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./types/TextAreaField/TextAreaField */ "../shared/src/components/fields/types/TextAreaField/TextAreaField.js");
-/* harmony import */ var _types_TextField_TextField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./types/TextField/TextField */ "../shared/src/components/fields/types/TextField/TextField.js");
-/* harmony import */ var _types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./types/TrueFalseField/TrueFalseField */ "../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js");
-/* harmony import */ var _types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./types/UrlField/UrlField */ "../shared/src/components/fields/types/UrlField/UrlField.js");
+/* harmony import */ var _types_PostTypeSelectField_PostTypeSelectField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./types/PostTypeSelectField/PostTypeSelectField */ "../shared/src/components/fields/types/PostTypeSelectField/PostTypeSelectField.js");
+/* harmony import */ var _types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./types/RadioGroupField/RadioGroupField */ "../shared/src/components/fields/types/RadioGroupField/RadioGroupField.js");
+/* harmony import */ var _types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./types/RangeField/RangeField */ "../shared/src/components/fields/types/RangeField/RangeField.js");
+/* harmony import */ var _types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./types/SearchableSelectField/SearchableSelectField */ "../shared/src/components/fields/types/SearchableSelectField/SearchableSelectField.js");
+/* harmony import */ var _types_SelectField_SelectField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./types/SelectField/SelectField */ "../shared/src/components/fields/types/SelectField/SelectField.js");
+/* harmony import */ var _types_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./types/TextAreaField/TextAreaField */ "../shared/src/components/fields/types/TextAreaField/TextAreaField.js");
+/* harmony import */ var _types_TextField_TextField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./types/TextField/TextField */ "../shared/src/components/fields/types/TextField/TextField.js");
+/* harmony import */ var _types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./types/TrueFalseField/TrueFalseField */ "../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js");
+/* harmony import */ var _types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./types/UrlField/UrlField */ "../shared/src/components/fields/types/UrlField/UrlField.js");
 
 /*
  * Field handles rendering of a field. 
@@ -231,146 +294,89 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function Field({
-  field,
-  register,
-  errors,
-  getValues,
-  setValue,
-  valuesInit,
-  control,
-  value,
-  fieldRegisterPrefix = ''
+  field
 }) {
   switch (field.type) {
     case 'text':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextField_TextField__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        value: value,
-        fieldRegisterPrefix: fieldRegisterPrefix
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextField_TextField__WEBPACK_IMPORTED_MODULE_16__["default"], {
+        field: field
       });
       break;
     case 'textarea':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        field: field,
-        register: register,
-        errors: errors
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_15__["default"], {
+        field: field
       });
       break;
     case 'select':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SelectField_SelectField__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        field: field,
-        register: register,
-        errors: errors
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SelectField_SelectField__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        field: field
       });
       break;
     case 'checkbox':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_CheckboxField_CheckboxField__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        field: field,
-        register: register,
-        errors: errors
+        field: field
       });
       break;
     case 'true_false':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_16__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        setValue: setValue,
-        getValues: getValues,
-        valuesInit: valuesInit,
-        value: value
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_17__["default"], {
+        field: field
       });
       break;
     case 'searchable_select':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        control: control
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_SearchableSelectField_SearchableSelectField__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        field: field
       });
       break;
     case 'number':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_NumberField_NumberField__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        fieldRegisterPrefix: fieldRegisterPrefix
+        field: field
       });
       break;
     case 'range':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        field: field,
-        register: register,
-        errors: errors
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RangeField_RangeField__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        field: field
       });
       break;
     case 'email':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_EmailField_EmailField__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        field: field,
-        register: register,
-        errors: errors
+        field: field
       });
       break;
     case 'url':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_17__["default"], {
-        field: field,
-        register: register,
-        errors: errors
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_18__["default"], {
+        field: field
       });
       break;
     case 'collection':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_CollectionField_CollectionField__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        setValue: setValue,
-        getValues: getValues,
-        valuesInit: valuesInit
+        field: field
       });
       break;
     case 'post_collection':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_PostCollectionField_PostCollectionField__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        setValue: setValue,
-        getValues: getValues,
-        valuesInit: valuesInit,
-        fieldRegisterPrefix: fieldRegisterPrefix
+        field: field
+      });
+      break;
+    case 'post_type_select':
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_PostTypeSelectField_PostTypeSelectField__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        field: field
       });
       break;
     case 'radio_group':
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        setValue: setValue,
-        getValues: getValues,
-        valuesInit: valuesInit,
-        fieldRegisterPrefix: fieldRegisterPrefix
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_RadioGroupField_RadioGroupField__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        field: field
       });
       break;
     case 'image':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_ImageField_ImageField__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        setValue: setValue,
-        getValues: getValues,
-        valuesInit: valuesInit
+        field: field
       });
       break;
     case 'file':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FileField_FileField__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        field: field,
-        register: register,
-        errors: errors,
-        setValue: setValue,
-        getValues: getValues,
-        valuesInit: valuesInit
+        field: field
       });
       break;
     case 'field_group_collection':
@@ -1198,6 +1204,91 @@ __webpack_require__.r(__webpack_exports__);
 
 function useChildFieldContext() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_ChildFieldContext__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}
+
+/***/ }),
+
+/***/ "../shared/src/components/fields/types/PostTypeSelectField/PostTypeSelectField.js":
+/*!****************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/PostTypeSelectField/PostTypeSelectField.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PostTypeSelectField)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _api_WordPressAPI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../api/WordPressAPI */ "../shared/src/api/WordPressAPI.js");
+
+/*
+ *
+ * Post Type Select Field
+ * 
+ * Renders an HTML5 select. Populates with list of all public WP post types.
+ *
+ */
+
+const {
+  useEffect,
+  useState
+} = wp.element;
+
+
+
+function PostTypeSelectField({
+  field
+}) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const [postTypes, setPostTypes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const wpAPI = new _api_WordPressAPI__WEBPACK_IMPORTED_MODULE_3__["default"]();
+    wpAPI.getPostTypes().then(types => {
+      const typesArray = Object.entries(types).map(([key, value]) => ({
+        slug: key,
+        name: value.name
+      }));
+      console.log(typesArray);
+      setPostTypes(typesArray);
+      setLoading(false);
+    }).catch(error => {
+      console.error('Error fetching post types:', error);
+      setLoading(false);
+    });
+  }, []);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    text: field.label
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    id: field.name,
+    name: field.name,
+    disabled: loading,
+    className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
+    ...register(registerName, validators)
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", null, "Loading...") : postTypes.map(type => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: type.slug,
+    value: type.slug
+  }, type.name))), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-rose-700 text-sm font-bold"
+  }, fieldState.error?.message || 'Field has errors'));
 }
 
 /***/ }),
@@ -3142,7 +3233,7 @@ function useFormManager() {
   }
   function makeValidationObject(field) {
     let validators = {};
-    if (field.field_required) {
+    if (field?.required) {
       validators.required = true;
     }
     return validators;
@@ -35006,6 +35097,12 @@ const fieldGroups = [{
   }, {
     name: 'test_field_10',
     type: 'file'
+  }, {
+    name: 'test_field_11',
+    type: 'image'
+  }, {
+    name: 'test_field_12',
+    type: 'post_type_select'
   }],
   repeat: false
 }];
