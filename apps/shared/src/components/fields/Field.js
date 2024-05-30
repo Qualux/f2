@@ -22,6 +22,7 @@ import TextField from './types/TextField/TextField';
 import TrueFalseField from './types/TrueFalseField/TrueFalseField';
 import UrlField from './types/UrlField/UrlField';
 import TaxonomySelectField from './types/TaxonomySelectField/TaxonomySelectField';
+import OptionsPageSelectField from './types/OptionsPageSelectField/OptionsPageSelectField';
 
 export default function Field( 
         {
@@ -86,6 +87,9 @@ export default function Field(
         case 'taxonomy_select':
             return <TaxonomySelectField field={field} />
             break; 
+        case 'options_page_select':
+            return <OptionsPageSelectField field={field} />
+            break;
         default:
             return(
                 <p className="my-8">

@@ -92,6 +92,10 @@ const fieldGroups = [
                 name: 'test_field_13',
                 type: 'taxonomy_select',
             },
+            {
+                name: 'test_field_14',
+                type: 'options_page_select',
+            },
         ],
         repeat: false,
     }

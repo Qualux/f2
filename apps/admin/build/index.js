@@ -5683,11 +5683,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./types/TrueFalseField/TrueFalseField */ "../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js");
 /* harmony import */ var _types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./types/UrlField/UrlField */ "../shared/src/components/fields/types/UrlField/UrlField.js");
 /* harmony import */ var _types_TaxonomySelectField_TaxonomySelectField__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./types/TaxonomySelectField/TaxonomySelectField */ "../shared/src/components/fields/types/TaxonomySelectField/TaxonomySelectField.js");
+/* harmony import */ var _types_OptionsPageSelectField_OptionsPageSelectField__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./types/OptionsPageSelectField/OptionsPageSelectField */ "../shared/src/components/fields/types/OptionsPageSelectField/OptionsPageSelectField.js");
 
 /*
  * Field handles rendering of a field. 
  * Field does not check conditions for rendering, it is up to the parent component to use React Hook Form to watch conditional values.
  */
+
 
 
 
@@ -5804,6 +5806,11 @@ function Field({
       break;
     case 'taxonomy_select':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TaxonomySelectField_TaxonomySelectField__WEBPACK_IMPORTED_MODULE_19__["default"], {
+        field: field
+      });
+      break;
+    case 'options_page_select':
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_OptionsPageSelectField_OptionsPageSelectField__WEBPACK_IMPORTED_MODULE_20__["default"], {
         field: field
       });
       break;
@@ -6416,6 +6423,90 @@ function NumberField({
   }), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
   }, "Field has errors"));
+}
+
+/***/ }),
+
+/***/ "../shared/src/components/fields/types/OptionsPageSelectField/OptionsPageSelectField.js":
+/*!**********************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/OptionsPageSelectField/OptionsPageSelectField.js ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ OptionsPageSelectField)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
+
+/*
+ *
+ * Options Page Select Field
+ * 
+ * Renders an HTML5 select. Populates with list of all F3 Options Pages.
+ *
+ */
+
+const {
+  useEffect,
+  useState
+} = wp.element;
+
+
+
+function OptionsPageSelectField({
+  field
+}) {
+  const API = (0,_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_3__.useStandardAPI)('options-page');
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    API.get().then(queryResult => {
+      const optionsArray = Object.entries(queryResult.records).map(([key, record]) => ({
+        value: record.id,
+        label: record.title
+      }));
+      setOptions(optionsArray);
+      setLoading(false);
+    }).catch(error => {
+      console.error('Error fetching options pages:', error);
+      setLoading(false);
+    });
+  }, [API]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    text: field.label
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    id: field.name,
+    name: field.name,
+    disabled: loading,
+    className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
+    ...register(registerName, validators)
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", null, "Loading...") : options.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: option.value,
+    value: option.value
+  }, option.label))), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-rose-700 text-sm font-bold"
+  }, fieldState.error?.message || 'Field has errors'));
 }
 
 /***/ }),
