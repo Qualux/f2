@@ -21,6 +21,7 @@ import TextAreaField from './types/TextAreaField/TextAreaField';
 import TextField from './types/TextField/TextField';
 import TrueFalseField from './types/TrueFalseField/TrueFalseField';
 import UrlField from './types/UrlField/UrlField';
+import TaxonomySelectField from './types/TaxonomySelectField/TaxonomySelectField';
 
 export default function Field( 
         {
@@ -82,6 +83,9 @@ export default function Field(
         case 'field_collection':
             return <FieldCollectionField field={field} />
             break;
+        case 'taxonomy_select':
+            return <TaxonomySelectField field={field} />
+            break; 
         default:
             return(
                 <p className="my-8">

@@ -5632,6 +5632,20 @@ class WordPressAPI {
       throw new Error('Failed to fetch post.');
     }
   }
+  async getTaxonomies() {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(`${window.f3Settings.apiRoot}wp/v2/taxonomies`, {
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'X-WP-Nonce': window.f3Settings.nonce
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch taxonomies.');
+    }
+  }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WordPressAPI);
 
@@ -5668,11 +5682,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_TextField_TextField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./types/TextField/TextField */ "../shared/src/components/fields/types/TextField/TextField.js");
 /* harmony import */ var _types_TrueFalseField_TrueFalseField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./types/TrueFalseField/TrueFalseField */ "../shared/src/components/fields/types/TrueFalseField/TrueFalseField.js");
 /* harmony import */ var _types_UrlField_UrlField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./types/UrlField/UrlField */ "../shared/src/components/fields/types/UrlField/UrlField.js");
+/* harmony import */ var _types_TaxonomySelectField_TaxonomySelectField__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./types/TaxonomySelectField/TaxonomySelectField */ "../shared/src/components/fields/types/TaxonomySelectField/TaxonomySelectField.js");
 
 /*
  * Field handles rendering of a field. 
  * Field does not check conditions for rendering, it is up to the parent component to use React Hook Form to watch conditional values.
  */
+
 
 
 
@@ -5783,6 +5799,11 @@ function Field({
       break;
     case 'field_collection':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_FieldCollectionField_FieldCollectionField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        field: field
+      });
+      break;
+    case 'taxonomy_select':
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TaxonomySelectField_TaxonomySelectField__WEBPACK_IMPORTED_MODULE_19__["default"], {
         field: field
       });
       break;
@@ -6662,7 +6683,6 @@ function PostTypeSelectField({
         slug: key,
         name: value.name
       }));
-      console.log(typesArray);
       setPostTypes(typesArray);
       setLoading(false);
     }).catch(error => {
@@ -6961,6 +6981,90 @@ function SelectField({
   })), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-rose-700 text-sm font-bold"
   }, "Field has errors"));
+}
+
+/***/ }),
+
+/***/ "../shared/src/components/fields/types/TaxonomySelectField/TaxonomySelectField.js":
+/*!****************************************************************************************!*\
+  !*** ../shared/src/components/fields/types/TaxonomySelectField/TaxonomySelectField.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TaxonomySelectField)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/useFormManager/useFormManager */ "../shared/src/lib/useFormManager/useFormManager.js");
+/* harmony import */ var _api_WordPressAPI__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../api/WordPressAPI */ "../shared/src/api/WordPressAPI.js");
+
+/*
+ *
+ * Taxonomy Select Field
+ * 
+ * Renders an HTML5 select. Populates with list of all public WP post types.
+ *
+ */
+
+const {
+  useEffect,
+  useState
+} = wp.element;
+
+
+
+function TaxonomySelectField({
+  field
+}) {
+  const {
+    makeValidationObject,
+    useFormContext,
+    useFieldRenderContext
+  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const {
+    register,
+    getFieldState
+  } = useFormContext();
+  const validators = makeValidationObject(field);
+  const fieldState = getFieldState(field.name);
+  const fieldRenderData = useFieldRenderContext();
+  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const wpAPI = new _api_WordPressAPI__WEBPACK_IMPORTED_MODULE_3__["default"]();
+    wpAPI.getTaxonomies().then(taxonomies => {
+      const optionsArray = Object.entries(taxonomies).map(([key, record]) => ({
+        value: key,
+        label: record.name
+      }));
+      setOptions(optionsArray);
+      setLoading(false);
+    }).catch(error => {
+      console.error('Error fetching post types:', error);
+      setLoading(false);
+    });
+  }, []);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    text: field.label
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    id: field.name,
+    name: field.name,
+    disabled: loading,
+    className: "w-full border border-solid border-zinc-300 rounded py-2 px-1 font-semibold text-lg",
+    ...register(registerName, validators)
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", null, "Loading...") : options.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: option.value,
+    value: option.value
+  }, option.label))), fieldState.invalid && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-rose-700 text-sm font-bold"
+  }, fieldState.error?.message || 'Field has errors'));
 }
 
 /***/ }),

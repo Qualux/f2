@@ -1,6 +1,6 @@
 /*
  *
- * Post Type Select Field
+ * Taxonomy Select Field
  * 
  * Renders an HTML5 select. Populates with list of all public WP post types.
  *
@@ -11,7 +11,7 @@ import Label from '../../Label';
 import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 import WordPressAPI from '../../../../api/WordPressAPI';
 
-export default function PostTypeSelectField({ field }) {
+export default function TaxonomySelectField({ field }) {
 
     const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
     const { register, getFieldState } = useFormContext();
@@ -20,18 +20,18 @@ export default function PostTypeSelectField({ field }) {
     const fieldRenderData = useFieldRenderContext();
     const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
 
-    const [postTypes, setPostTypes] = useState([]);
+    const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
         const wpAPI = new WordPressAPI();
 
-        wpAPI.getPostTypes()
-            .then(types => {
+        wpAPI.getTaxonomies()
+            .then(taxonomies => {
 
-                const typesArray = Object.entries(types).map(([key, value]) => ({ slug: key, name: value.name }));
-                setPostTypes(typesArray);
+                const optionsArray = Object.entries(taxonomies).map(([key, record]) => ({ value: key, label: record.name }));
+                setOptions(optionsArray);
                 setLoading(false);
 
             })
@@ -55,8 +55,8 @@ export default function PostTypeSelectField({ field }) {
                 {loading ? (
                     <option>Loading...</option>
                 ) : (
-                    postTypes.map(type => (
-                        <option key={type.slug} value={type.slug}>{type.name}</option>
+                    options.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
                     ))
                 )}
             </select>

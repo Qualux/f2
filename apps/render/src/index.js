@@ -88,6 +88,10 @@ const fieldGroups = [
                 name: 'test_field_12',
                 type: 'post_type_select',
             },
+            {
+                name: 'test_field_13',
+                type: 'taxonomy_select',
+            },
         ],
         repeat: false,
     }
