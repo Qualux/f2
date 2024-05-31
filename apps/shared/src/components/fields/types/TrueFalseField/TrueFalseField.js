@@ -12,7 +12,7 @@ export default function TrueFalseField( { field } ) {
     const [enabled, setEnabled] = useState(false);
 
     const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
-    const { register, getFieldState } = useFormContext();
+    const { register, getFieldState, setValue } = useFormContext();
     const validators = makeValidationObject(field);
     const fieldState = getFieldState( field.name );
     const fieldRenderData = useFieldRenderContext();

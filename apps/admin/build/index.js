@@ -6179,16 +6179,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const FieldGroupRecordRelateContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 function FieldCollectionField({
   field
 }) {
   const {
-    makeValidationObject,
-    useFormContext,
     useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
   const fieldRenderData = useFieldRenderContext();
+  console.log('FieldCollectionField: fieldRenderData from useFieldRenderContext:', fieldRenderData);
   const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   const {
     RecordRelateProviders,
@@ -6199,11 +6197,13 @@ function FieldCollectionField({
     ModeButtons,
     Container,
     Body
-  } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)(FieldGroupRecordRelateContext);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Fields"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
+  } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
     fieldName: registerName,
     sdo: _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_3__
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ModeButtons, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Body, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "text-neutral-500 font-medium text-base"
+  }, "Fields")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Body, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ModeButtons, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)))));
 }
 
 /***/ }),
@@ -6229,16 +6229,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const FieldRecordRelateContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 function FieldGroupCollectionField({
   field
 }) {
   const {
-    makeValidationObject,
-    useFormContext,
     useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
   const fieldRenderData = useFieldRenderContext();
+  console.log('FieldGroupCollectionField: fieldRenderData from useFieldRenderContext:', fieldRenderData);
   const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
   const {
     RecordRelateProviders,
@@ -6249,11 +6247,13 @@ function FieldGroupCollectionField({
     ModeButtons,
     Container,
     Body
-  } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)(FieldRecordRelateContext);
+  } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Field Groups"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
     fieldName: registerName,
     sdo: _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_3__
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ModeButtons, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Body, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "text-neutral-500 font-medium text-base"
+  }, "Field Groups")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Body, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ModeButtons, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)))));
 }
 
 /***/ }),
@@ -7298,7 +7298,8 @@ function TrueFalseField({
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
   const {
     register,
-    getFieldState
+    getFieldState,
+    setValue
   } = useFormContext();
   const validators = makeValidationObject(field);
   const fieldState = getFieldState(field.name);
@@ -8835,6 +8836,7 @@ function useFormManager() {
   return {
     FormManagerProvider,
     useFormManagerContext,
+    FieldRenderContext,
     useFieldRenderContext,
     useFormContext: react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormContext,
     Form,
@@ -8885,7 +8887,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const FieldArrayContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 const queryClient = new _tanstack_react_query__WEBPACK_IMPORTED_MODULE_7__.QueryClient();
-function useRecordRelate(RecordRelateContext) {
+function useRecordRelate() {
   const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('create');
   const [activeRow, setActiveRow] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   function RecordRelateProviders({
@@ -8893,33 +8895,17 @@ function useRecordRelate(RecordRelateContext) {
     fieldName,
     sdo
   }) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProvider, {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__.QueryClientProvider, {
+      client: queryClient
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldArrayProvider, {
       fieldName: fieldName,
       sdo: sdo
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__.QueryClientProvider, {
-      client: queryClient
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldArrayProvider, null, children)));
+    }, children));
   }
-  function RecordRelateProvider({
+  function FieldArrayProvider({
     children,
     fieldName,
     sdo
-  }) {
-    console.log('RecordRelateProvider: fieldName:');
-    console.log('sdo', sdo);
-    console.log(fieldName);
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateContext.Provider, {
-      value: {
-        fieldName,
-        sdo
-      }
-    }, children);
-  }
-  function useRecordRelateContext() {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(RecordRelateContext);
-  }
-  function FieldArrayProvider({
-    children
   }) {
     const {
       useFormContext
@@ -8927,9 +8913,6 @@ function useRecordRelate(RecordRelateContext) {
     const {
       control
     } = useFormContext();
-    const {
-      fieldName
-    } = useRecordRelateContext();
     const {
       fields,
       append,
@@ -8950,7 +8933,9 @@ function useRecordRelate(RecordRelateContext) {
         fields,
         append,
         remove,
-        addRecord
+        addRecord,
+        fieldName,
+        sdo
       }
     }, children);
   }
@@ -8963,7 +8948,7 @@ function useRecordRelate(RecordRelateContext) {
     } = useFieldArrayContext();
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       type: "button",
-      className: "cursor-pointer bg-neutral-700 border border-solid border-neutral-400 py-1 px-4 text-sm text-neutral-400 font-medium rounded-lg",
+      className: "bg-transparent border-0 cursor-pointer text-sm text-neutral-300 font-medium transition-colors hover:text-neutral-100",
       onClick: () => {
         addRecord({
           recordId: 0,
@@ -8976,7 +8961,7 @@ function useRecordRelate(RecordRelateContext) {
   function SelectExistingButton() {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       type: "button",
-      className: "cursor-pointer bg-neutral-700 border border-solid border-neutral-400 py-1 px-4 text-sm text-neutral-400 font-medium rounded-lg",
+      className: "bg-transparent border-0 cursor-pointer text-sm text-neutral-300 font-medium transition-colors hover:text-neutral-100",
       onClick: () => {
         setMode('select');
       }
@@ -8988,7 +8973,7 @@ function useRecordRelate(RecordRelateContext) {
     }
     const {
       sdo
-    } = useRecordRelateContext();
+    } = useFieldArrayContext();
     const API = (0,_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__.useStandardAPI)(sdo.route_base);
     const {
       isLoading,
@@ -9051,31 +9036,38 @@ function useRecordRelate(RecordRelateContext) {
   }) {
     const {
       sdo
-    } = useRecordRelateContext();
+    } = useFieldArrayContext();
     const {
       FieldGroupRender
     } = (0,_lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_5__.useFieldGroupRender)();
+    const {
+      FieldRenderContext,
+      useFieldRenderContext
+    } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_4__.useFormManager)();
+    const {
+      fieldName
+    } = useFieldArrayContext();
+    const fieldRenderData = useFieldRenderContext();
+    const newRegisterPrefix = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${fieldName}.${index}` : `${fieldName}.${index}`;
     if (activeRow !== index) {
       return null;
     }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRenderContext.Provider, {
+      value: {
+        registerPrefix: newRegisterPrefix
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex gap-3 mb-2"
     }, sdo.field_groups.map((fieldGroup, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRender, {
       key: index,
       fieldGroup: fieldGroup
-    })));
+    }))));
   }
   function RecordListItem({
     fieldName,
     index,
     field
   }) {
-    console.log('RecordListItem:');
-    console.log('field from useFieldArrayContext:');
-    console.log(field);
-    console.log('active row:');
-    console.log(activeRow);
-
     // Render existing item.
     if (field.recordId && activeRow === index) {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordListHeader, {
@@ -9108,10 +9100,8 @@ function useRecordRelate(RecordRelateContext) {
       useFieldArrayContext
     } = useRecordRelate();
     const {
+      fields,
       fieldName
-    } = useRecordRelateContext();
-    const {
-      fields
     } = useFieldArrayContext();
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "p-6 grid gap-2"
@@ -9126,14 +9116,14 @@ function useRecordRelate(RecordRelateContext) {
     children
   }) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center gap-4 m-6"
+      className: "flex items-center justify-end gap-4 m-6"
     }, children);
   }
   function Container({
     children
   }) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "bg-neutral-800 grid gap-2"
+      className: "grid gap-2 p-4"
     }, children);
   }
   function Body({
@@ -9152,7 +9142,6 @@ function useRecordRelate(RecordRelateContext) {
     SelectExistingButton,
     RecordList,
     useFieldArrayContext,
-    useRecordRelateContext,
     ModeButtons
   };
 }

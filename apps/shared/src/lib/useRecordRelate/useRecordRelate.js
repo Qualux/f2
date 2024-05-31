@@ -16,7 +16,7 @@ import { useStandardAPI } from '../../lib/useStandardAPI';
 const FieldArrayContext = createContext();
 const queryClient = new QueryClient();
 
-export function useRecordRelate( RecordRelateContext ) {
+export function useRecordRelate() {
 
     const [mode, setMode]           = useState('create');
     const [activeRow, setActiveRow] = useState(null);
@@ -24,43 +24,22 @@ export function useRecordRelate( RecordRelateContext ) {
     function RecordRelateProviders({children, fieldName, sdo}) {
 
         return (
-            <RecordRelateProvider
-                fieldName={fieldName}
-                sdo={sdo}
-            >
-                <QueryClientProvider client={queryClient}>
-                    <FieldArrayProvider>
-                        {children}
-                    </FieldArrayProvider>
-                </QueryClientProvider>
-            </RecordRelateProvider>
+            <QueryClientProvider client={queryClient}>
+                <FieldArrayProvider
+                    fieldName={fieldName}
+                    sdo={sdo}
+                >
+                    {children}
+                </FieldArrayProvider>
+            </QueryClientProvider>
         );
 
     }
 
-    function RecordRelateProvider({children, fieldName, sdo}) {
-
-        console.log('RecordRelateProvider: fieldName:')
-        console.log('sdo', sdo)
-        console.log(fieldName)
-
-        return (
-            <RecordRelateContext.Provider value={{ fieldName, sdo }}>
-                {children}
-            </RecordRelateContext.Provider>
-        );
-
-    }
-
-    function useRecordRelateContext() {
-        return useContext(RecordRelateContext);
-    }
-
-    function FieldArrayProvider({ children }) {
+    function FieldArrayProvider({ children, fieldName, sdo }) {
 
         const { useFormContext } = useFormManager();
         const { control } = useFormContext();
-        const { fieldName } = useRecordRelateContext();
 
         const { fields, append, remove } = useFieldArray({
             control: control,
@@ -79,7 +58,7 @@ export function useRecordRelate( RecordRelateContext ) {
         }
 
         return (
-            <FieldArrayContext.Provider value={{ fields, append, remove, addRecord }}>
+            <FieldArrayContext.Provider value={{ fields, append, remove, addRecord, fieldName, sdo }}>
                 {children}
             </FieldArrayContext.Provider>
         );
@@ -97,7 +76,7 @@ export function useRecordRelate( RecordRelateContext ) {
         return (
             <button 
                 type="button" 
-                className="cursor-pointer bg-neutral-700 border border-solid border-neutral-400 py-1 px-4 text-sm text-neutral-400 font-medium rounded-lg"
+                className="bg-transparent border-0 cursor-pointer text-sm text-neutral-300 font-medium transition-colors hover:text-neutral-100"
                 onClick={() => { 
                     addRecord(
                         { 
@@ -119,7 +98,7 @@ export function useRecordRelate( RecordRelateContext ) {
         return (
             <button 
                 type="button" 
-                className="cursor-pointer bg-neutral-700 border border-solid border-neutral-400 py-1 px-4 text-sm text-neutral-400 font-medium rounded-lg"
+                className="bg-transparent border-0 cursor-pointer text-sm text-neutral-300 font-medium transition-colors hover:text-neutral-100"
                 onClick={() => {
                     setMode('select');
                 }}
@@ -135,7 +114,7 @@ export function useRecordRelate( RecordRelateContext ) {
             return null;
         }
 
-        const { sdo } = useRecordRelateContext();
+        const { sdo } = useFieldArrayContext();
         const API = useStandardAPI(sdo.route_base);
 
         const { isLoading, data } = useQuery({
@@ -214,8 +193,13 @@ export function useRecordRelate( RecordRelateContext ) {
 
     function InlineCreateForm( { field, index  } ) {
         
-        const { sdo } = useRecordRelateContext();
+        const { sdo } = useFieldArrayContext();
         const { FieldGroupRender } = useFieldGroupRender();
+        const { FieldRenderContext, useFieldRenderContext } = useFormManager();
+        const { fieldName } = useFieldArrayContext();
+
+        const fieldRenderData = useFieldRenderContext();
+        const newRegisterPrefix = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${fieldName}.${index}` : `${fieldName}.${index}`;
 
         if( activeRow !== index ) {
 
@@ -224,26 +208,21 @@ export function useRecordRelate( RecordRelateContext ) {
         }
 
         return(
-            <div className="flex gap-3 mb-2">
-                {sdo.field_groups.map((fieldGroup, index) => (
-                    <FieldGroupRender 
-                        key={index}
-                        fieldGroup={fieldGroup}
-                    />
-                ))}
-            </div>
+            <FieldRenderContext.Provider value={{registerPrefix: newRegisterPrefix}}>
+                <div className="flex gap-3 mb-2">
+                    {sdo.field_groups.map((fieldGroup, index) => (
+                        <FieldGroupRender 
+                            key={index}
+                            fieldGroup={fieldGroup}
+                        />
+                    ))}
+                </div>
+            </FieldRenderContext.Provider>
         );
 
     }
 
     function RecordListItem( { fieldName, index, field } ) {
-
-        console.log('RecordListItem:')
-        console.log('field from useFieldArrayContext:')
-        console.log(field)
-
-        console.log('active row:')
-        console.log(activeRow)
 
         // Render existing item.
         if( field.recordId && activeRow === index ) {
@@ -299,8 +278,7 @@ export function useRecordRelate( RecordRelateContext ) {
     function RecordList() {
 
         const { useFieldArrayContext } = useRecordRelate();
-        const { fieldName } = useRecordRelateContext();
-        const { fields } = useFieldArrayContext();
+        const { fields, fieldName } = useFieldArrayContext();
     
         return(
             <div className="p-6 grid gap-2"> 
@@ -320,7 +298,7 @@ export function useRecordRelate( RecordRelateContext ) {
     function ModeButtons( {children} ) {
 
         return(
-            <div className="flex items-center gap-4 m-6">
+            <div className="flex items-center justify-end gap-4 m-6">
                 {children}
             </div>
         );
@@ -330,7 +308,7 @@ export function useRecordRelate( RecordRelateContext ) {
     function Container( {children} ) {
 
         return(
-            <div className="bg-neutral-800 grid gap-2">
+            <div className="grid gap-2 p-4">
                 {children}
             </div>
         );
@@ -356,7 +334,6 @@ export function useRecordRelate( RecordRelateContext ) {
         SelectExistingButton,
         RecordList,
         useFieldArrayContext,
-        useRecordRelateContext, 
         ModeButtons,
     };
 }

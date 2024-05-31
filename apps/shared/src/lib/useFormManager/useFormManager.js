@@ -122,6 +122,7 @@ export function useFormManager() {
     return {
         FormManagerProvider,
         useFormManagerContext,
+        FieldRenderContext,
         useFieldRenderContext,
         useFormContext,
         Form,
