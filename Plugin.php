@@ -54,6 +54,10 @@ class Plugin {
         require_once( F3_PATH . '/php/Locations/Locations.php' );
         new Locations\Locations();
 
+        /* Save Handler */
+        require_once( F3_PATH . '/php/Save.php' );
+        new Save();
+
     }
 
     public static function activate() {

@@ -5,13 +5,6 @@ import fieldGroupSDO from '../../../../../../../data/sdo/field_group.json';
 
 export default function FieldGroupCollectionField( { field } ) {
 
-    const { useFieldRenderContext } = useFormManager();
-    const fieldRenderData = useFieldRenderContext();
-
-    console.log('FieldGroupCollectionField: fieldRenderData from useFieldRenderContext:', fieldRenderData)
-
-    const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
-
     const { 
         RecordRelateProviders, 
         SelectionList, 
@@ -29,7 +22,7 @@ export default function FieldGroupCollectionField( { field } ) {
                 Field Groups
             </h2>
             <RecordRelateProviders
-                fieldName={registerName}
+                fieldName={field.name}
                 sdo={fieldGroupSDO}
             >
                 <Container>

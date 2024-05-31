@@ -38,12 +38,16 @@ export function useRecordRelate() {
 
     function FieldArrayProvider({ children, fieldName, sdo }) {
 
-        const { useFormContext } = useFormManager();
+        const { useFormContext, useFieldRenderContext } = useFormManager();
         const { control } = useFormContext();
+
+        const fieldRenderData = useFieldRenderContext();
+        console.log('FieldArrayProvider:fieldName:', fieldName)
+        const registerPrefix = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${fieldName}` : `${fieldName}`;
 
         const { fields, append, remove } = useFieldArray({
             control: control,
-            name: fieldName,
+            name: registerPrefix,
           });
 
         function addRecord(record) {
@@ -197,9 +201,16 @@ export function useRecordRelate() {
         const { FieldGroupRender } = useFieldGroupRender();
         const { FieldRenderContext, useFieldRenderContext } = useFormManager();
         const { fieldName } = useFieldArrayContext();
-
         const fieldRenderData = useFieldRenderContext();
+
+        console.log('InlineCreateForm: fieldName from useFieldArrayContext()', fieldName)
+        console.log('fieldRenderData.registerPrefix:', fieldRenderData.registerPrefix)
+
+        
         const newRegisterPrefix = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${fieldName}.${index}` : `${fieldName}.${index}`;
+
+        console.log('Setting newRegisterPrefix:', newRegisterPrefix)
+
 
         if( activeRow !== index ) {
 

@@ -781,12 +781,6 @@ function FieldCollectionField({
   field
 }) {
   const {
-    useFieldRenderContext
-  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
-  const fieldRenderData = useFieldRenderContext();
-  console.log('FieldCollectionField: fieldRenderData from useFieldRenderContext:', fieldRenderData);
-  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
-  const {
     RecordRelateProviders,
     SelectionList,
     CreateButton,
@@ -797,7 +791,7 @@ function FieldCollectionField({
     Body
   } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
-    fieldName: registerName,
+    fieldName: field.name,
     sdo: _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_3__
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "text-neutral-500 font-medium text-base"
@@ -831,12 +825,6 @@ function FieldGroupCollectionField({
   field
 }) {
   const {
-    useFieldRenderContext
-  } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
-  const fieldRenderData = useFieldRenderContext();
-  console.log('FieldGroupCollectionField: fieldRenderData from useFieldRenderContext:', fieldRenderData);
-  const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
-  const {
     RecordRelateProviders,
     SelectionList,
     CreateButton,
@@ -847,7 +835,7 @@ function FieldGroupCollectionField({
     Body
   } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Field Groups"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
-    fieldName: registerName,
+    fieldName: field.name,
     sdo: _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_3__
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "text-neutral-500 font-medium text-base"
@@ -3506,18 +3494,22 @@ function useRecordRelate() {
     sdo
   }) {
     const {
-      useFormContext
+      useFormContext,
+      useFieldRenderContext
     } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_4__.useFormManager)();
     const {
       control
     } = useFormContext();
+    const fieldRenderData = useFieldRenderContext();
+    console.log('FieldArrayProvider:fieldName:', fieldName);
+    const registerPrefix = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${fieldName}` : `${fieldName}`;
     const {
       fields,
       append,
       remove
     } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useFieldArray)({
       control: control,
-      name: fieldName
+      name: registerPrefix
     });
     function addRecord(record) {
       append({
@@ -3646,7 +3638,10 @@ function useRecordRelate() {
       fieldName
     } = useFieldArrayContext();
     const fieldRenderData = useFieldRenderContext();
+    console.log('InlineCreateForm: fieldName from useFieldArrayContext()', fieldName);
+    console.log('fieldRenderData.registerPrefix:', fieldRenderData.registerPrefix);
     const newRegisterPrefix = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${fieldName}.${index}` : `${fieldName}.${index}`;
+    console.log('Setting newRegisterPrefix:', newRegisterPrefix);
     if (activeRow !== index) {
       return null;
     }
