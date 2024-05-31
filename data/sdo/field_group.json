@@ -20,35 +20,21 @@
                 {
                     "type": "text",
                     "name": "title",
-                    "title": "Field Group Title",
-                    "label": "Field Group Title",
+                    "title": "Admin Title",
+                    "label": "Admin Title",
                     "placeholder": "Enter title for display..."
-                },
-                {
-                    "type": "field_collection",
-                    "name": "fields",
-                    "title": "Fields",
-                    "label": "Fields"
-                },
-                {
-                    "type": "text",
-                    "name": "location_post_type",
-                    "title": "Post Type",
-                    "label": "Post Type",
-                    "placeholder": "Enter post type to assign field group..."
-                },
-                {
-                    "type": "number",
-                    "name": "location_options_page",
-                    "title": "Options Page",
-                    "label": "Options Page",
-                    "placeholder": "Options page ID to assign field group..."
                 },
                 {
                     "type": "true_false",
                     "name": "repeat",
                     "title": "Repeat Fields",
                     "label": "Repeat Fields"
+                },
+                {
+                    "type": "field_collection",
+                    "name": "fields",
+                    "title": "Fields",
+                    "label": "Fields"
                 }
             ]
         }

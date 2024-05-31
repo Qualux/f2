@@ -6,7 +6,7 @@ import {
 function App() {
 
   return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen bg-admin-dark flex flex-col">
         <AppHeader />
         <div className="flex gap-0">
           <Outlet />

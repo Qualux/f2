@@ -13,12 +13,7 @@ export function useFormManager() {
     function FormManagerProvider({ formData, children }) {
 
         const [formStatus, setFormStatus] = useState('loading');
-
         let defaultValues = formData.record || makeDefaultFieldValues(formData.form.field_groups);
-
-        console.log('defaultValues in useFormManager:')
-        console.log(defaultValues)
-
         const methods = useForm({ defaultValues });
 
         const formSubmitHandler = (data) => {

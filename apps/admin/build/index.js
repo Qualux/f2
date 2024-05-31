@@ -4546,7 +4546,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function App() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "min-h-screen flex flex-col"
+    className: "min-h-screen bg-admin-dark flex flex-col"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_AppHeader__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Outlet, null)));
@@ -4599,8 +4599,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function AppFooter() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("footer", {
-    className: "flex items-center justify-between bg-neutral-900 text-neutral-200 font-medium text-xs px-3 py-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "F3 v1.0.0"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "About"));
+    className: "flex items-center justify-between text-neutral-200 font-light text-sm px-3 mb-3 mt-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "F3 STANDARD EDITION"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "v1.0.0"));
 }
 
 /***/ }),
@@ -4631,10 +4631,10 @@ function AppHeader({
   title
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
-    className: "flex items-center justify-between bg-neutral-800 font-semibold px-3 py-1"
+    className: "flex items-center justify-between font-light px-3 my-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AppLogo__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AppMenu__WEBPACK_IMPORTED_MODULE_2__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+    className: "flex items-center gap-6"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AppLogo__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AppMenu__WEBPACK_IMPORTED_MODULE_2__["default"], null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
     to: "/settings",
     className: "text-neutral-200 transition-colors hover:text-neutral-100"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_heroicons_react_24_solid__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -4662,10 +4662,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function Logo() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "font-bold text-3xl flex items-center"
+    className: "font-semibold text-2xl flex items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
     to: "/",
-    className: "block no-underline py-1 px-3 rounded leading-none text-sky-800 bg-neutral-500/5 transition-colors hover:text-sky-800"
+    className: "block no-underline leading-none text-white transition-colors focus:shadow-none focus:outline-none focus:text-white/20 hover:text-white/20"
   }, "F3"));
 }
 
@@ -4691,7 +4691,7 @@ const itemClasses = ({
   isActive,
   isPending
 }) => {
-  const base = "no-underline grow py-0.5 px-3 font-semibold text-sm focus:shadow-none focus:outline-none focus:text-neutral-500";
+  const base = "no-underline grow py-0.5 font-light text-lg focus:shadow-none focus:outline-none focus:text-neutral-500";
   const extra = isActive ? "text-neutral-500" : "!text-neutral-100 hover:!text-neutral-300";
   return base + ' ' + extra;
 };
@@ -4699,29 +4699,19 @@ function AppMenu() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
-    className: "gap-2 flex"
+    className: "gap-4 flex m-0 p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "flex items-center justify-stretch m-0"
+    className: "flex items-center justify-stretch m-0 p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
     to: "/sdo",
     className: itemClasses
-  }, "SDO")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "flex items-center justify-stretch m-0"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
-    to: "/field",
-    className: itemClasses
-  }, "FIELDS")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "block flex items-center justify-stretch m-0"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
-    to: "/field-group",
-    className: itemClasses
-  }, "FIELD GROUPS")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "flex items-center justify-stretch m-0"
+  }, "REGISTER")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    className: "flex items-center justify-stretch m-0 p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
     to: "/form",
     className: itemClasses
   }, "FORMS")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    className: "flex items-center justify-stretch m-0"
+    className: "flex items-center justify-stretch m-0 p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
     to: "/grid",
     className: itemClasses
@@ -4747,7 +4737,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function AppTemplate({
-  title,
   children
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", {
@@ -6190,16 +6179,15 @@ function FieldCollectionField({
     SelectionList,
     CreateButton,
     SelectExistingButton,
-    RecordList
+    RecordList,
+    ModeButtons,
+    Container,
+    Body
   } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)(FieldGroupRecordRelateContext);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Fields"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
     fieldName: registerName,
     sdo: _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_3__
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-px"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
-    className: "flex gap-px bg-neutral-800 text-neutral-100"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ModeButtons, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Body, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)))));
 }
 
 /***/ }),
@@ -6241,16 +6229,15 @@ function FieldGroupCollectionField({
     SelectionList,
     CreateButton,
     SelectExistingButton,
-    RecordList
+    RecordList,
+    ModeButtons,
+    Container,
+    Body
   } = (0,_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_2__.useRecordRelate)(FieldRecordRelateContext);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Field Groups"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateProviders, {
     fieldName: registerName,
     sdo: _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_3__
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-px"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", {
-    className: "flex gap-px bg-neutral-800 text-neutral-100"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Container, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ModeButtons, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CreateButton, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectExistingButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Body, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectionList, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordList, null)))));
 }
 
 /***/ }),
@@ -7050,7 +7037,8 @@ function SelectField({
 }) {
   const {
     makeValidationObject,
-    useFormContext
+    useFormContext,
+    useFieldRenderContext
   } = (0,_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
   const {
     register,
@@ -8756,8 +8744,6 @@ function useFormManager() {
   }) {
     const [formStatus, setFormStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('loading');
     let defaultValues = formData.record || (0,_defaultValues__WEBPACK_IMPORTED_MODULE_3__.makeDefaultFieldValues)(formData.form.field_groups);
-    console.log('defaultValues in useFormManager:');
-    console.log(defaultValues);
     const methods = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       defaultValues
     });
@@ -8893,6 +8879,8 @@ __webpack_require__.r(__webpack_exports__);
 const FieldArrayContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 const queryClient = new _tanstack_react_query__WEBPACK_IMPORTED_MODULE_7__.QueryClient();
 function useRecordRelate(RecordRelateContext) {
+  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('create');
+  const [activeRow, setActiveRow] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   function RecordRelateProviders({
     children,
     fieldName,
@@ -8910,6 +8898,9 @@ function useRecordRelate(RecordRelateContext) {
     fieldName,
     sdo
   }) {
+    console.log('RecordRelateProvider: fieldName:');
+    console.log('sdo', sdo);
+    console.log(fieldName);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordRelateContext.Provider, {
       value: {
         fieldName,
@@ -8943,6 +8934,7 @@ function useRecordRelate(RecordRelateContext) {
     function addRecord(record) {
       append({
         id: record.id,
+        recordId: record.id,
         title: record?.title
       });
     }
@@ -8964,20 +8956,29 @@ function useRecordRelate(RecordRelateContext) {
     } = useFieldArrayContext();
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       type: "button",
-      className: "bg-neutral-800 py-4 px-12 text-neutral-100 font-semibold",
-      onClick: () => addRecord({
-        id: 0,
-        title: 'New record...'
-      })
-    }, "CREATE");
+      className: "cursor-pointer bg-neutral-700 border border-solid border-neutral-400 py-1 px-4 text-sm text-neutral-400 font-medium rounded-lg",
+      onClick: () => {
+        addRecord({
+          recordId: 0,
+          title: 'New record...'
+        });
+        setMode('create');
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "CREATE"));
   }
   function SelectExistingButton() {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       type: "button",
-      className: "bg-neutral-800 py-4 px-12 text-neutral-100 font-semibold"
+      className: "cursor-pointer bg-neutral-700 border border-solid border-neutral-400 py-1 px-4 text-sm text-neutral-400 font-medium rounded-lg",
+      onClick: () => {
+        setMode('select');
+      }
     }, "SELECT EXISTING");
   }
   function SelectionList() {
+    if (mode === 'create') {
+      return null;
+    }
     const {
       sdo
     } = useRecordRelateContext();
@@ -8996,14 +8997,50 @@ function useRecordRelate(RecordRelateContext) {
     if (isLoading && !data || data === undefined) {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_1__["default"], null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Selection List ", sdo.route_base, " ", API.route_base), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, data.records.map((record, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-      key: index
-    }, record.id, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      onClick: () => addRecord(record)
-    }, "Add")))));
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "h-[400px] z-50 absolute left-0 top-0 right-0 bottom-0 p-6 bg-neutral-800/90"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
+      className: "flex items-center justify-between bg-neutral-700 py-3 px-4"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+      className: "m-0 font-medium text-sm leading-snug text-neutral-200"
+    }, "Selection List"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      onClick: () => {
+        setMode('create');
+      },
+      className: "cursor-pointer py-2 px-4 text-neutral-400 transition-colors hover:text-neutral-200"
+    }, "CLOSE")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "h-[300px]"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+      className: "overflow-auto h-full"
+    }, data.records.map((record, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+      key: index,
+      onClick: () => {
+        addRecord(record);
+        setMode('create');
+      },
+      className: "cursor-pointer bg-neutral-800 rounded py-2 px-4 mb-2"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "text-xl font-bold"
+    }, "#", record.id))))));
+  }
+  function RecordListHeader({
+    field,
+    index
+  }) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
+      className: "cursor-pointer flex items-center gap-3 text-neutral-300 bg-white/10 px-4 py-2",
+      onClick: () => {
+        setActiveRow(activeRow === index ? null : index);
+      }
+    }, field.recordId && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "font-medium text-xs text-neutral-300"
+    }, field.recordId), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+      className: "font-medium text-xs text-neutral-300"
+    }, field.title));
   }
   function InlineCreateForm({
-    fieldRegisterPrefix
+    field,
+    index
   }) {
     const {
       sdo
@@ -9011,13 +9048,53 @@ function useRecordRelate(RecordRelateContext) {
     const {
       FieldGroupRender
     } = (0,_lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_5__.useFieldGroupRender)();
+    if (activeRow !== index) {
+      return null;
+    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex gap-3 mb-2"
     }, sdo.field_groups.map((fieldGroup, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRender, {
       key: index,
-      fieldGroup: fieldGroup,
-      fieldRegisterPrefix: fieldRegisterPrefix
+      fieldGroup: fieldGroup
     })));
+  }
+  function RecordListItem({
+    fieldName,
+    index,
+    field
+  }) {
+    console.log('RecordListItem:');
+    console.log('field from useFieldArrayContext:');
+    console.log(field);
+    console.log('active row:');
+    console.log(activeRow);
+
+    // Render existing item.
+    if (field.recordId && activeRow === index) {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordListHeader, {
+        field: field,
+        index: index
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", {
+        className: "my-8 text-white"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
+        className: "font-bold text-xs text-white"
+      }, "EXISTING RECORD"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+        className: "font-bold text-xl text-white"
+      }, field.recordId)));
+    }
+    if (field.recordId) {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordListHeader, {
+        field: field,
+        index: index
+      });
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordListHeader, {
+      field: field,
+      index: index
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InlineCreateForm, {
+      field: field,
+      index: index
+    }));
   }
   function RecordList() {
     const {
@@ -9029,23 +9106,47 @@ function useRecordRelate(RecordRelateContext) {
     const {
       fields
     } = useFieldArrayContext();
-    console.log('RecordList fields from useFieldArrayContext:');
-    console.log(fields);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "p-6"
-    }, fields.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InlineCreateForm, {
+      className: "p-6 grid gap-2"
+    }, fields.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RecordListItem, {
       key: field.id,
-      fieldRegisterPrefix: `${fieldName}.${index}`
+      fieldName: fieldName,
+      index: index,
+      field: field
     })));
+  }
+  function ModeButtons({
+    children
+  }) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex items-center gap-4 m-6"
+    }, children);
+  }
+  function Container({
+    children
+  }) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "bg-neutral-800 grid gap-2"
+    }, children);
+  }
+  function Body({
+    children
+  }) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "relative"
+    }, children);
   }
   return {
     RecordRelateProviders,
+    Container,
+    Body,
     SelectionList,
     CreateButton,
     SelectExistingButton,
     RecordList,
     useFieldArrayContext,
-    useRecordRelateContext
+    useRecordRelateContext,
+    ModeButtons
   };
 }
 
@@ -52476,7 +52577,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"field","title":"F3 Field SDO"
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"field_group","title":"F3 Field Group SDO","display_title":"F3 Field Group Manager","route_base":"field-group","post_type":{"post_type_key":"f3-field-group","label":"F3 Field Group"},"create":{"button":{"label":"Create Field Group"}},"field_groups":[{"name":"field_group_1","post_type":"f3-field-group","fields":[{"type":"text","name":"title","title":"Field Group Title","label":"Field Group Title","placeholder":"Enter title for display..."},{"type":"field_collection","name":"fields","title":"Fields","label":"Fields"},{"type":"text","name":"location_post_type","title":"Post Type","label":"Post Type","placeholder":"Enter post type to assign field group..."},{"type":"number","name":"location_options_page","title":"Options Page","label":"Options Page","placeholder":"Options page ID to assign field group..."},{"type":"true_false","name":"repeat","title":"Repeat Fields","label":"Repeat Fields"}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"field_group","title":"F3 Field Group SDO","display_title":"F3 Field Group Manager","route_base":"field-group","post_type":{"post_type_key":"f3-field-group","label":"F3 Field Group"},"create":{"button":{"label":"Create Field Group"}},"field_groups":[{"name":"field_group_1","post_type":"f3-field-group","fields":[{"type":"text","name":"title","title":"Admin Title","label":"Admin Title","placeholder":"Enter title for display..."},{"type":"true_false","name":"repeat","title":"Repeat Fields","label":"Repeat Fields"},{"type":"field_collection","name":"fields","title":"Fields","label":"Fields"}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
 
 /***/ }),
 

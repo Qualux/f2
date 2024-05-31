@@ -17,6 +17,9 @@ export default function FieldGroupCollectionField( { field } ) {
         CreateButton,
         SelectExistingButton,
         RecordList,
+        ModeButtons,
+        Container,
+        Body,
     } = useRecordRelate( FieldRecordRelateContext );
 
     return(
@@ -28,16 +31,16 @@ export default function FieldGroupCollectionField( { field } ) {
                 fieldName={registerName}
                 sdo={fieldGroupSDO}
             >
-                <main>
-                    <div className="flex items-center gap-px">
+                <Container>
+                    <ModeButtons>
                         <CreateButton />
                         <SelectExistingButton />
-                    </div>
-                    <section className="flex gap-px bg-neutral-800 text-neutral-100">
+                    </ModeButtons>
+                    <Body>
                         <SelectionList />
                         <RecordList />
-                    </section>
-                </main>
+                    </Body>
+                </Container>
             </RecordRelateProviders>
         </main>
         

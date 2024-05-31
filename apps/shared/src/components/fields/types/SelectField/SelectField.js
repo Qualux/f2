@@ -22,7 +22,7 @@ function ChoicesList({field}) {
 
 export default function SelectField( { field } ) {
 
-    const { makeValidationObject, useFormContext } = useFormManager();
+    const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
     const { register, getFieldState } = useFormContext();
     const validators = makeValidationObject(field);
     const fieldState = getFieldState( field.name );

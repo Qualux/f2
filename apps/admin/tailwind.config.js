@@ -4,7 +4,11 @@ module.exports = {
   },
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'admin-dark': '#1D2327',
+      },
+    },
   },
   plugins: [],
-}
+};

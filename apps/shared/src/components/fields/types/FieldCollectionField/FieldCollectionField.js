@@ -9,6 +9,9 @@ export default function FieldCollectionField( { field } ) {
 
     const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
     const fieldRenderData = useFieldRenderContext();
+
+
+
     const registerName = fieldRenderData.registerPrefix ? `${fieldRenderData.registerPrefix}.${field.name}` : field.name;
 
     const { 
@@ -17,6 +20,9 @@ export default function FieldCollectionField( { field } ) {
         CreateButton,
         SelectExistingButton,
         RecordList,
+        ModeButtons,
+        Container,
+        Body,
     } = useRecordRelate( FieldGroupRecordRelateContext );
 
     return(
@@ -28,16 +34,16 @@ export default function FieldCollectionField( { field } ) {
                 fieldName={registerName}
                 sdo={fieldSDO}
             >
-                <main>
-                    <div className="flex items-center gap-px">
+                <Container>
+                    <ModeButtons>
                         <CreateButton />
                         <SelectExistingButton />
-                    </div>
-                    <section className="flex gap-px bg-neutral-800 text-neutral-100">
+                    </ModeButtons>
+                    <Body>
                         <SelectionList />
                         <RecordList />
-                    </section>
-                </main>
+                    </Body>
+                </Container>
             </RecordRelateProviders>
         </main>
     );
