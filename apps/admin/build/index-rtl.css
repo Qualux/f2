@@ -1226,6 +1226,9 @@
 .mt-12{
     margin-top: 3rem
 }
+.mt-auto{
+    margin-top: auto
+}
 .block{
     display: block
 }
@@ -1270,6 +1273,15 @@
 }
 .w-full{
     width: 100%
+}
+.w-48{
+    width: 12rem
+}
+.w-52{
+    width: 13rem
+}
+.w-56{
+    width: 14rem
 }
 .grow{
     flex-grow: 1
@@ -1338,8 +1350,20 @@
 .border{
     border-width: 1px
 }
+.border-0{
+    border-width: 0px
+}
 .border-b{
     border-bottom-width: 1px
+}
+.border-l{
+    border-right-width: 1px
+}
+.\!border-l{
+    border-right-width: 1px !important
+}
+.\!border-l-2{
+    border-right-width: 2px !important
 }
 .border-solid{
     border-style: solid
@@ -1351,6 +1375,31 @@
 .border-neutral-800{
     --tw-border-opacity: 1;
     border-color: rgb(38 38 38 / var(--tw-border-opacity))
+}
+.border-neutral-600{
+    --tw-border-opacity: 1;
+    border-color: rgb(82 82 82 / var(--tw-border-opacity))
+}
+.border-neutral-700{
+    --tw-border-opacity: 1;
+    border-color: rgb(64 64 64 / var(--tw-border-opacity))
+}
+.\!border-neutral-700{
+    --tw-border-opacity: 1 !important;
+    border-color: rgb(64 64 64 / var(--tw-border-opacity)) !important
+}
+.\!border-white\/10{
+    border-color: rgb(255 255 255 / 0.1) !important
+}
+.\!border-white{
+    --tw-border-opacity: 1 !important;
+    border-color: rgb(255 255 255 / var(--tw-border-opacity)) !important
+}
+.\!border-white\/5{
+    border-color: rgb(255 255 255 / 0.05) !important
+}
+.border-white\/10{
+    border-color: rgb(255 255 255 / 0.1)
 }
 .bg-admin-dark{
     --tw-bg-opacity: 1;
@@ -1382,6 +1431,9 @@
 .bg-white{
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+.bg-white\/5{
+    background-color: rgb(255 255 255 / 0.05)
 }
 .p-10{
     padding: 2.5rem
@@ -1428,8 +1480,27 @@
     padding-top: 1.25rem;
     padding-bottom: 1.25rem
 }
+.px-5{
+    padding-right: 1.25rem;
+    padding-left: 1.25rem
+}
 .pt-10{
     padding-top: 2.5rem
+}
+.pl-6{
+    padding-right: 1.5rem
+}
+.pl-4{
+    padding-right: 1rem
+}
+.pl-3{
+    padding-right: 0.75rem
+}
+.pt-6{
+    padding-top: 1.5rem
+}
+.text-right{
+    text-align: left
 }
 .text-3xl{
     font-size: 1.875rem;
@@ -1544,6 +1615,9 @@
     --tw-bg-opacity: 1;
     background-color: rgb(7 89 133 / var(--tw-bg-opacity))
 }
+.hover\:bg-white\/10:hover{
+    background-color: rgb(255 255 255 / 0.1)
+}
 .hover\:\!text-neutral-300:hover{
     --tw-text-opacity: 1 !important;
     color: rgb(212 212 212 / var(--tw-text-opacity)) !important
@@ -1558,6 +1632,10 @@
 }
 .hover\:text-white\/20:hover{
     color: rgb(255 255 255 / 0.2)
+}
+.hover\:text-neutral-300:hover{
+    --tw-text-opacity: 1;
+    color: rgb(212 212 212 / var(--tw-text-opacity))
 }
 .focus\:z-10:focus{
     z-index: 10

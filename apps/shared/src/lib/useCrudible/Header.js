@@ -10,9 +10,9 @@ export default function Header( { routeType, primaryLink } ) {
         if( routeType === 'create' ) {
             return(
                 <div className="flex gap-5 items-center">
-                    <h2 className="text-neutral-300 font-semibold text-lg">
+                    <h5 className="text-neutral-300 font-semibold text-lg m-0 p-0">
                         CREATE
-                    </h2>
+                    </h5>
                     {primaryLink}
                 </div>
             )
@@ -21,9 +21,9 @@ export default function Header( { routeType, primaryLink } ) {
         if( routeType === 'edit' ) {
             return(
                 <div className="flex gap-5 items-center">
-                    <h2 className="text-neutral-300 font-semibold text-lg">
+                    <h5 className="text-neutral-300 font-semibold text-lg m-0 p-0">
                         EDIT
-                    </h2>
+                    </h5>
                     {primaryLink}
                 </div>
             )
@@ -32,9 +32,9 @@ export default function Header( { routeType, primaryLink } ) {
         if( routeType === 'view' ) {
             return(
                 <div className="flex gap-5 items-center">
-                    <h2 className="text-neutral-300 font-semibold text-lg">
+                    <h5 className="text-neutral-300 font-semibold text-lg m-0 p-0">
                         VIEW
-                    </h2>
+                    </h5>
                     {primaryLink}
                 </div>
             )
@@ -43,7 +43,7 @@ export default function Header( { routeType, primaryLink } ) {
         if( routeType === 'delete' ) {
             return(
                 <div className="flex gap-5 items-center">
-                    <h2 className="text-neutral-300 font-semibold text-lg">
+                    <h2 className="text-neutral-300 font-semibold text-lg m-0 p-0">
                         DELETE
                     </h2>
                     {primaryLink}
@@ -60,7 +60,7 @@ export default function Header( { routeType, primaryLink } ) {
     }
 
     return(
-        <div className="flex mb-6 items-center justify-between bg-neutral-700 text-neutral-200 py-3 px-3 shadow-sm">
+        <div className="flex mb-6 items-center justify-between text-neutral-200 py-3 px-3 shadow-sm">
             <div>
                 {leftCol()}
             </div>

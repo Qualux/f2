@@ -7,11 +7,11 @@ export default function SDO_MenuRoute() {
 
     return(
         <AppTemplate>
-            <header className="flex items-center justify-between mt-4 mb-8">
-                <h1 className="text-xl font-semibold text-neutral-500">
-                    Structured Data Objects
+            <header className="flex items-center gap-6 mt-4 mb-8">
+                <h1 className="text-xl font-light text-neutral-300">
+                    Register WordPress Objects
                 </h1>
-                <p className="text-neutral-300 text-sm w-64">
+                <p className="text-neutral-500 font-light text-sm w-56 border-0 border-solid !border-l-2 border-white/10 pl-4">
                     Manage WordPress object registrations and F3 structured data.
                 </p>
             </header>
@@ -19,35 +19,51 @@ export default function SDO_MenuRoute() {
                 <section className="grid grid-cols-2 gap-6">
                     <NavLink 
                         to="/post-type"
-                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="bg-white/5 no-underline flex gap-4 items-center p-8 pt-6 text-neutral-300 font-semibold hover:text-neutral-300 hover:bg-white/10">
                         <span>
                             Manage Post Types
                         </span>
-                        <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+                        <ArrowUpRightIcon className="h-6 w-6 text-neutral-300" />
                     </NavLink>
                     <NavLink 
                         to="/taxonomy"
-                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="bg-white/5 no-underline flex gap-4 items-center p-8 pt-6 text-neutral-300 font-semibold hover:text-neutral-300 hover:bg-white/10">
                         <span>
                             Manage Taxonomies
                         </span>
-                        <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+                        <ArrowUpRightIcon className="h-6 w-6 text-neutral-300" />
                     </NavLink>
                     <NavLink 
                         to="/options-page"
-                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="bg-white/5 no-underline flex gap-4 items-center p-8 pt-6 text-neutral-300 font-semibold hover:text-neutral-300 hover:bg-white/10">
                         <span>
                             Manage Options Pages
                         </span>
-                        <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+                        <ArrowUpRightIcon className="h-6 w-6 text-neutral-300" />
                     </NavLink>
                     <NavLink 
                         to="/query"
-                        className="no-underline flex gap-4 items-center shadow-xl p-8 pt-10 text-neutral-600 font-semibold">
+                        className="bg-white/5 no-underline flex gap-4 items-center p-8 pt-6 text-neutral-300 font-semibold hover:text-neutral-300 hover:bg-white/10">
                         <span>
                             Manage Queries
                         </span>
-                        <ArrowUpRightIcon className="h-6 w-6 text-gray-500" />
+                        <ArrowUpRightIcon className="h-6 w-6 text-neutral-300" />
+                    </NavLink>
+                    <NavLink 
+                        to="/field-group"
+                        className="bg-white/5 no-underline flex gap-4 items-center p-8 pt-6 text-neutral-300 font-semibold hover:text-neutral-300 hover:bg-white/10">
+                        <span>
+                            Manage Global Field Groups
+                        </span>
+                        <ArrowUpRightIcon className="h-6 w-6 text-neutral-300" />
+                    </NavLink>
+                    <NavLink 
+                        to="/field"
+                        className="bg-white/5 no-underline flex gap-4 items-center p-8 pt-6 text-neutral-300 font-semibold hover:text-neutral-300 hover:bg-white/10">
+                        <span>
+                            Manage Global Fields
+                        </span>
+                        <ArrowUpRightIcon className="h-6 w-6 text-neutral-300" />
                     </NavLink>
                 </section>
             </ScreenWrap>

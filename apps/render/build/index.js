@@ -2112,7 +2112,7 @@ function ScreenWrap({
   children
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-6 py-8 px-4 shadow-xl sm:mx-auto sm:max-w-3xl "
+    className: "my-6 py-8 sm:max-w-3xl "
   }, children);
 }
 
@@ -2487,29 +2487,29 @@ function Header({
     if (routeType === 'create') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-        className: "text-neutral-300 font-semibold text-lg"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
+        className: "text-neutral-300 font-semibold text-lg m-0 p-0"
       }, "CREATE"), primaryLink);
     }
     if (routeType === 'edit') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-        className: "text-neutral-300 font-semibold text-lg"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
+        className: "text-neutral-300 font-semibold text-lg m-0 p-0"
       }, "EDIT"), primaryLink);
     }
     if (routeType === 'view') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-        className: "text-neutral-300 font-semibold text-lg"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
+        className: "text-neutral-300 font-semibold text-lg m-0 p-0"
       }, "VIEW"), primaryLink);
     }
     if (routeType === 'delete') {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex gap-5 items-center"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-        className: "text-neutral-300 font-semibold text-lg"
+        className: "text-neutral-300 font-semibold text-lg m-0 p-0"
       }, "DELETE"), primaryLink);
     }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2517,7 +2517,7 @@ function Header({
     }, primaryLink);
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mb-6 items-center justify-between bg-neutral-700 text-neutral-200 py-3 px-3 shadow-sm"
+    className: "flex mb-6 items-center justify-between text-neutral-200 py-3 px-3 shadow-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, leftCol()), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-1 items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
