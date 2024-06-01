@@ -5443,17 +5443,18 @@ function SDO_ViewRoute({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Field: () => (/* reexport safe */ _src_components_fields_Field__WEBPACK_IMPORTED_MODULE_10__["default"]),
-/* harmony export */   Label: () => (/* reexport safe */ _src_components_fields_Label__WEBPACK_IMPORTED_MODULE_11__["default"]),
-/* harmony export */   Modal: () => (/* reexport safe */ _src_components_global_Modal__WEBPACK_IMPORTED_MODULE_7__["default"]),
-/* harmony export */   ScreenWrap: () => (/* reexport safe */ _src_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_8__["default"]),
-/* harmony export */   SkeletonList: () => (/* reexport safe */ _src_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   Field: () => (/* reexport safe */ _src_components_fields_Field__WEBPACK_IMPORTED_MODULE_11__["default"]),
+/* harmony export */   Label: () => (/* reexport safe */ _src_components_fields_Label__WEBPACK_IMPORTED_MODULE_12__["default"]),
+/* harmony export */   Modal: () => (/* reexport safe */ _src_components_global_Modal__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   ScreenWrap: () => (/* reexport safe */ _src_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   SkeletonList: () => (/* reexport safe */ _src_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_10__["default"]),
 /* harmony export */   useCrudible: () => (/* reexport safe */ _src_lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_0__.useCrudible),
 /* harmony export */   useFieldCollection: () => (/* reexport safe */ _src_lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_5__.useFieldCollection),
 /* harmony export */   useFieldGroupRender: () => (/* reexport safe */ _src_lib_useFieldGroupRender_useFieldGroupRender__WEBPACK_IMPORTED_MODULE_1__.useFieldGroupRender),
 /* harmony export */   useFieldRender: () => (/* reexport safe */ _src_lib_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_2__.useFieldRender),
 /* harmony export */   useFormManager: () => (/* reexport safe */ _src_lib_useFormManager_useFormManager__WEBPACK_IMPORTED_MODULE_3__.useFormManager),
 /* harmony export */   useRecordRelate: () => (/* reexport safe */ _src_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_4__.useRecordRelate),
+/* harmony export */   useSaveAPI: () => (/* reexport safe */ _src_lib_useSaveAPI__WEBPACK_IMPORTED_MODULE_7__.useSaveAPI),
 /* harmony export */   useStandardAPI: () => (/* reexport safe */ _src_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__.useStandardAPI)
 /* harmony export */ });
 /* harmony import */ var _src_lib_useCrudible_useCrudible__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/lib/useCrudible/useCrudible */ "../shared/src/lib/useCrudible/useCrudible.js");
@@ -5463,11 +5464,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_lib_useRecordRelate_useRecordRelate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./src/lib/useRecordRelate/useRecordRelate */ "../shared/src/lib/useRecordRelate/useRecordRelate.js");
 /* harmony import */ var _src_lib_useFieldCollection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/lib/useFieldCollection */ "../shared/src/lib/useFieldCollection.js");
 /* harmony import */ var _src_lib_useStandardAPI__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./src/lib/useStandardAPI */ "../shared/src/lib/useStandardAPI.js");
-/* harmony import */ var _src_components_global_Modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./src/components/global/Modal */ "../shared/src/components/global/Modal.js");
-/* harmony import */ var _src_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./src/components/global/ScreenWrap */ "../shared/src/components/global/ScreenWrap.js");
-/* harmony import */ var _src_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./src/components/global/SkeletonList */ "../shared/src/components/global/SkeletonList.js");
-/* harmony import */ var _src_components_fields_Field__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./src/components/fields/Field */ "../shared/src/components/fields/Field.js");
-/* harmony import */ var _src_components_fields_Label__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./src/components/fields/Label */ "../shared/src/components/fields/Label.js");
+/* harmony import */ var _src_lib_useSaveAPI__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./src/lib/useSaveAPI */ "../shared/src/lib/useSaveAPI.js");
+/* harmony import */ var _src_components_global_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./src/components/global/Modal */ "../shared/src/components/global/Modal.js");
+/* harmony import */ var _src_components_global_ScreenWrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./src/components/global/ScreenWrap */ "../shared/src/components/global/ScreenWrap.js");
+/* harmony import */ var _src_components_global_SkeletonList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./src/components/global/SkeletonList */ "../shared/src/components/global/SkeletonList.js");
+/* harmony import */ var _src_components_fields_Field__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./src/components/fields/Field */ "../shared/src/components/fields/Field.js");
+/* harmony import */ var _src_components_fields_Label__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./src/components/fields/Label */ "../shared/src/components/fields/Label.js");
 
 
 
@@ -5481,6 +5483,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/***/ }),
+
+/***/ "../shared/src/api/SaveAPI.js":
+/*!************************************!*\
+  !*** ../shared/src/api/SaveAPI.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "../shared/node_modules/axios/lib/axios.js");
+
+class SaveAPI {
+  async save(location, record, form, values) {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${window.f3Settings.apiF3Root}${this.route_base}`, {
+        location,
+        record,
+        form,
+        values
+      }, {
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'X-WP-Nonce': window.f3Settings.nonce
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to create item.');
+    }
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StandardAPI);
 
 /***/ }),
 
@@ -9139,6 +9180,25 @@ function useRecordRelate() {
     useFieldArrayContext,
     ModeButtons
   };
+}
+
+/***/ }),
+
+/***/ "../shared/src/lib/useSaveAPI.js":
+/*!***************************************!*\
+  !*** ../shared/src/lib/useSaveAPI.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useSaveAPI: () => (/* binding */ useSaveAPI)
+/* harmony export */ });
+/* harmony import */ var _api_SaveAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/SaveAPI */ "../shared/src/api/SaveAPI.js");
+
+function useSaveAPI() {
+  return new _api_SaveAPI__WEBPACK_IMPORTED_MODULE_0__["default"]();
 }
 
 /***/ }),

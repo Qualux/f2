@@ -6,6 +6,7 @@ import { useFormManager } from './src/lib/useFormManager/useFormManager';
 import { useRecordRelate } from './src/lib/useRecordRelate/useRecordRelate';
 import { useFieldCollection } from './src/lib/useFieldCollection';
 import { useStandardAPI } from './src/lib/useStandardAPI';
+import { useSaveAPI } from './src/lib/useSaveAPI';
 import Modal from './src/components/global/Modal';
 import ScreenWrap from './src/components/global/ScreenWrap';
 import SkeletonList from './src/components/global/SkeletonList';
@@ -20,6 +21,7 @@ export {
     useRecordRelate,
     useFieldCollection,
     useStandardAPI,
+    useSaveAPI,
     Modal,
     ScreenWrap,
     SkeletonList,
