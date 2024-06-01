@@ -29,6 +29,9 @@ import SDO_EditRoute from './routes/sdo/SDO_EditRoute';
 import SDO_DeleteRoute from './routes/sdo/SDO_DeleteRoute';
 import SDO_ViewRoute from './routes/sdo/SDO_ViewRoute';
 
+// Settings Route.
+import SettingsRoute from './routes/SettingsRoute';
+
 import Test from './routes/Test';
 
 /* Make SDO Route Set. */
@@ -87,6 +90,10 @@ const router = createHashRouter([
       {
         path: "test",
         element: <Test />
+      },
+      {
+        path: "settings",
+        element: <SettingsRoute />
       },
       queryRoutes,
       postTypeRoutes,

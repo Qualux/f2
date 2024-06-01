@@ -1173,6 +1173,14 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem
 }
+.my-0{
+    margin-top: 0px;
+    margin-bottom: 0px
+}
+.mx-0{
+    margin-left: 0px;
+    margin-right: 0px
+}
 .-ml-px{
     margin-left: -1px
 }
@@ -1196,6 +1204,9 @@
 }
 .mt-auto{
     margin-top: auto
+}
+.ml-px{
+    margin-left: 1px
 }
 .block{
     display: block
@@ -1263,8 +1274,14 @@
 .flex-col{
     flex-direction: column
 }
+.items-start{
+    align-items: flex-start
+}
 .items-center{
     align-items: center
+}
+.items-stretch{
+    align-items: stretch
 }
 .justify-between{
     justify-content: space-between
@@ -1289,6 +1306,9 @@
 }
 .gap-3{
     gap: 0.75rem
+}
+.gap-8{
+    gap: 2rem
 }
 .overflow-hidden{
     overflow: hidden
@@ -1369,6 +1389,9 @@
 .border-white\/10{
     border-color: rgb(255 255 255 / 0.1)
 }
+.border-white\/5{
+    border-color: rgb(255 255 255 / 0.05)
+}
 .bg-admin-dark{
     --tw-bg-opacity: 1;
     background-color: rgb(29 35 39 / var(--tw-bg-opacity))
@@ -1402,6 +1425,15 @@
 }
 .bg-white\/5{
     background-color: rgb(255 255 255 / 0.05)
+}
+.bg-white\/90{
+    background-color: rgb(255 255 255 / 0.9)
+}
+.bg-white\/10{
+    background-color: rgb(255 255 255 / 0.1)
+}
+.bg-white\/20{
+    background-color: rgb(255 255 255 / 0.2)
 }
 .p-10{
     padding: 2.5rem
@@ -1451,6 +1483,14 @@
 .px-5{
     padding-left: 1.25rem;
     padding-right: 1.25rem
+}
+.px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
+}
+.py-3{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem
 }
 .pt-10{
     padding-top: 2.5rem
@@ -1510,6 +1550,9 @@
 .font-light{
     font-weight: 300
 }
+.font-normal{
+    font-weight: 400
+}
 .leading-none{
     line-height: 1
 }
@@ -1552,6 +1595,10 @@
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))
 }
+.text-neutral-400{
+    --tw-text-opacity: 1;
+    color: rgb(163 163 163 / var(--tw-text-opacity))
+}
 .no-underline{
     text-decoration-line: none
 }
@@ -1570,6 +1617,10 @@
     --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
+.shadow-white{
+    --tw-shadow-color: #fff;
+    --tw-shadow: var(--tw-shadow-colored)
+}
 .transition-colors{
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1585,6 +1636,12 @@
 }
 .hover\:bg-white\/10:hover{
     background-color: rgb(255 255 255 / 0.1)
+}
+.hover\:bg-white\/20:hover{
+    background-color: rgb(255 255 255 / 0.2)
+}
+.hover\:bg-white\/5:hover{
+    background-color: rgb(255 255 255 / 0.05)
 }
 .hover\:\!text-neutral-300:hover{
     --tw-text-opacity: 1 !important;
@@ -1605,6 +1662,12 @@
     --tw-text-opacity: 1;
     color: rgb(212 212 212 / var(--tw-text-opacity))
 }
+.hover\:text-white\/90:hover{
+    color: rgb(255 255 255 / 0.9)
+}
+.hover\:text-white\/50:hover{
+    color: rgb(255 255 255 / 0.5)
+}
 .focus\:z-10:focus{
     z-index: 10
 }
@@ -1619,6 +1682,10 @@
 .focus\:text-white\/20:focus{
     color: rgb(255 255 255 / 0.2)
 }
+.focus\:text-white:focus{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
 .focus\:shadow-none:focus{
     --tw-shadow: 0 0 #0000;
     --tw-shadow-colored: 0 0 #0000;
@@ -1627,6 +1694,10 @@
 .focus\:outline-none:focus{
     outline: 2px solid transparent;
     outline-offset: 2px
+}
+.active\:text-white:active{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 @media (min-width: 640px){
     .sm\:p-6{
