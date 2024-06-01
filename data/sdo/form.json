@@ -44,15 +44,10 @@
                     ]        
                 },
                 {
-                    "type": "select",
+                    "type": "post_type_select",
                     "name": "admin_location_post_type",
                     "title": "Post Type",
                     "label": "Post Type",
-                    "choices": [
-                        { "value": "post", "label": "Posts" },
-                        { "value": "page", "label": "Pages" },
-                        { "value": "l1", "label": "L1" }
-                    ],
                     "field_conditions": true,
                     "field_condition_rules": [
                         [
@@ -65,14 +60,10 @@
                     ]        
                 },
                 {
-                    "type": "select",
+                    "type": "taxonomy_select",
                     "name": "admin_location_taxonomy",
                     "title": "Taxonomy",
                     "label": "Taxonomy",
-                    "choices": [
-                        { "value": "category", "label": "Post Category" },
-                        { "value": "post_tag", "label": "Post Tag" }
-                    ],
                     "field_conditions": true,
                     "field_condition_rules": [
                         [
@@ -85,14 +76,10 @@
                     ]        
                 },
                 {
-                    "type": "select",
+                    "type": "options_page_select",
                     "name": "admin_location_options_page",
                     "title": "Options Page",
                     "label": "Options Page",
-                    "choices": [
-                        { "value": "opt1", "label": "OP1" },
-                        { "value": "opt2", "label": "OP2" }
-                    ],
                     "field_conditions": true,
                     "field_condition_rules": [
                         [

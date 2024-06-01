@@ -10,23 +10,29 @@ const FieldRenderContext = createContext( { registerPrefix: null } );
 
 export function useFormManager() {
 
-    function FormManagerProvider({ formData, children }) {
+    function FormManagerProvider({ formData, formSubmitHandler, children }) {
 
         const [formStatus, setFormStatus] = useState('loading');
         let defaultValues = formData.record || makeDefaultFieldValues(formData.form.field_groups);
         const methods = useForm({ defaultValues });
 
-        const formSubmitHandler = (data) => {
+        // Make this the default formSubmitHandler, and provide option to load from params. 
+        // Might be better for all usage to pass the formSubmitHandler. 
+        if( ! formSubmitHandler ) {
 
-            console.log('formSubmitHandler in useFormManager:')
-            console.log(data)
+            formSubmitHandler = (data) => {
 
-            if( !formData.record?.id ) {
-                formData.API.create(data);
-                setFormStatus('complete');
-            } else {
-                formData.API.edit(formData.record.id, data);
-                setFormStatus('complete');
+                console.log('formSubmitHandler in useFormManager:')
+                console.log(data)
+    
+                if( !formData.record?.id ) {
+                    formData.API.create(data);
+                    setFormStatus('complete');
+                } else {
+                    formData.API.edit(formData.record.id, data);
+                    setFormStatus('complete');
+                }
+    
             }
 
         }

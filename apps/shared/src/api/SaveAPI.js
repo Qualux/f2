@@ -4,7 +4,7 @@ class SaveAPI {
 
     async save( location, record, form, values ) {
         try {
-            const response = await axios.post(`${window.f3Settings.apiF3Root}${this.route_base}`, { location, record, form, values }, {
+            const response = await axios.post(`${window.f3Settings.apiF3Root}save`, { location, record, form, values }, {
                 withCredentials: true,
                 headers: {
                     'content-type': 'application/json',
@@ -19,4 +19,4 @@ class SaveAPI {
 
 }
 
-export default StandardAPI;
+export default SaveAPI;

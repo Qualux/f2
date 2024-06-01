@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 class SaveAPI {
   async save(location, record, form, values) {
     try {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${window.f3Settings.apiF3Root}${this.route_base}`, {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${window.f3Settings.apiF3Root}save`, {
         location,
         record,
         form,
@@ -119,7 +119,7 @@ class SaveAPI {
     }
   }
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StandardAPI);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SaveAPI);
 
 /***/ }),
 
@@ -3375,6 +3375,7 @@ const FieldRenderContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(
 function useFormManager() {
   function FormManagerProvider({
     formData,
+    formSubmitHandler,
     children
   }) {
     const [formStatus, setFormStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('loading');
@@ -3382,17 +3383,22 @@ function useFormManager() {
     const methods = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       defaultValues
     });
-    const formSubmitHandler = data => {
-      console.log('formSubmitHandler in useFormManager:');
-      console.log(data);
-      if (!formData.record?.id) {
-        formData.API.create(data);
-        setFormStatus('complete');
-      } else {
-        formData.API.edit(formData.record.id, data);
-        setFormStatus('complete');
-      }
-    };
+
+    // Make this the default formSubmitHandler, and provide option to load from params. 
+    // Might be better for all usage to pass the formSubmitHandler. 
+    if (!formSubmitHandler) {
+      formSubmitHandler = data => {
+        console.log('formSubmitHandler in useFormManager:');
+        console.log(data);
+        if (!formData.record?.id) {
+          formData.API.create(data);
+          setFormStatus('complete');
+        } else {
+          formData.API.edit(formData.record.id, data);
+          setFormStatus('complete');
+        }
+      };
+    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerContext.Provider, {
       value: {
         formStatus,
@@ -35393,16 +35399,18 @@ const fieldGroups = [{
   repeat: false
 }];
 const FormRender = ({
-  formArgument
+  formArgument,
+  locationArgument
 }) => {
   const [form, setForm] = useState(null);
-  const API = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useSaveAPI)();
+  const standardAPI = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useStandardAPI)('form');
+  const saveAPI = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useSaveAPI)();
   useEffect(() => {
     async function fetchData(formArgument, API) {
-      const data = await API.getOne(formArgument);
+      const data = await standardAPI.getOne(formArgument);
       setForm(data.record);
     }
-    fetchData(formArgument, API);
+    fetchData(formArgument, standardAPI);
   }, []);
   const {
     FormManagerProvider,
@@ -35423,19 +35431,26 @@ const FormRender = ({
   const formData = {
     form,
     record: false,
-    API
+    saveAPI
   };
   formData.form.field_groups = fieldGroups;
   console.log(form);
   console.log(formData);
+  const formSubmitHandler = data => {
+    console.log('Render formSubmitHandler.', data);
+    saveAPI.save(locationArgument, null, formData.form, data);
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerProvider, {
-    formData: formData
+    formData: formData,
+    formSubmitHandler: formSubmitHandler
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "formArg: ", formArgument), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "form.id: ", form.id), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fields, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormComplete, null));
 };
 document.querySelectorAll('.f3-form').forEach(element => {
   const formArgument = element.getAttribute('data-form');
+  const locationArgument = element.getAttribute('data-location');
   createRoot(element).render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormRender, {
-    formArgument: formArgument
+    formArgument: formArgument,
+    locationArgument: locationArgument
   }));
 });
 })();

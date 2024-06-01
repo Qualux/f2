@@ -48,7 +48,7 @@ class Locations {
 
             if( empty( $options_page_posts )) { return; }
 
-            $this->handle_options_page( $screen, $slug );
+            $this->handle_options_page( $screen, $options_page_posts[0]->ID );
 
         }
 
@@ -134,7 +134,7 @@ class Locations {
 
             foreach( $form_posts as $form_post ) {
 
-                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'" data-location="term"></div>';
 
             }
 
@@ -155,7 +155,7 @@ class Locations {
                     <tr class="form-field term-description-wrap">
                         <th scope="row"></th>
                         <td>
-                            <div class="f3-form" data-form="'.$form_post->ID.'"></div>
+                            <div class="f3-form" data-form="'.$form_post->ID.'" data-location="term"></div>
                         </td>
                     </tr>
                 ';
@@ -176,7 +176,7 @@ class Locations {
             error_log('Doing edit_user_profile hook...');
 
             foreach( $form_posts as $form_post ) {
-                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'" data-location="user"></div>';
             }
 
         });
@@ -192,23 +192,23 @@ class Locations {
         add_action( 'edit_user_profile', function( $user ) use ( $form_posts ) {
 
             foreach( $form_posts as $form_post ) {
-                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'" data-location="user"></div>';
             }
 
         });
 
     }
 
-    function handle_options_page( $screen, $slug ) {
+    function handle_options_page( $screen, $options_page_id ) {
 
-        $form_posts = $this->forms_refinement_query( 'options_page', 'admin_location_options_page', $slug );
+        $form_posts = $this->forms_refinement_query( 'options_page', 'admin_location_options_page', $options_page_id );
 
         if( empty( $form_posts )) { return; }
 
         add_action( 'f3_options_page_render', function( $options_page_id ) use ( $form_posts ) {
 
             foreach( $form_posts as $form_post ) {
-                echo '<div class="f3-form" data-form="'.$form_post->ID.'"></div>';
+                echo '<div class="f3-form" data-form="'.$form_post->ID.'" data-location="option"></div>';
             }
 
         });
@@ -263,7 +263,7 @@ class Locations {
             $form_post->post_title, 
             function( $post, $box ) {
                 $form_id = $box['args']['form_id'];
-                echo '<div class="f3-form" data-form="' . $form_id . '"></div>';
+                echo '<div class="f3-form" data-form="' . $form_id . '" data-location="post"></div>';
             }, 
             $post_type, 
             'advanced', 

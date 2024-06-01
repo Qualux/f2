@@ -5503,7 +5503,7 @@ __webpack_require__.r(__webpack_exports__);
 class SaveAPI {
   async save(location, record, form, values) {
     try {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${window.f3Settings.apiF3Root}${this.route_base}`, {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(`${window.f3Settings.apiF3Root}save`, {
         location,
         record,
         form,
@@ -5521,7 +5521,7 @@ class SaveAPI {
     }
   }
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StandardAPI);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SaveAPI);
 
 /***/ }),
 
@@ -8777,6 +8777,7 @@ const FieldRenderContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(
 function useFormManager() {
   function FormManagerProvider({
     formData,
+    formSubmitHandler,
     children
   }) {
     const [formStatus, setFormStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('loading');
@@ -8784,17 +8785,22 @@ function useFormManager() {
     const methods = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       defaultValues
     });
-    const formSubmitHandler = data => {
-      console.log('formSubmitHandler in useFormManager:');
-      console.log(data);
-      if (!formData.record?.id) {
-        formData.API.create(data);
-        setFormStatus('complete');
-      } else {
-        formData.API.edit(formData.record.id, data);
-        setFormStatus('complete');
-      }
-    };
+
+    // Make this the default formSubmitHandler, and provide option to load from params. 
+    // Might be better for all usage to pass the formSubmitHandler. 
+    if (!formSubmitHandler) {
+      formSubmitHandler = data => {
+        console.log('formSubmitHandler in useFormManager:');
+        console.log(data);
+        if (!formData.record?.id) {
+          formData.API.create(data);
+          setFormStatus('complete');
+        } else {
+          formData.API.edit(formData.record.id, data);
+          setFormStatus('complete');
+        }
+      };
+    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerContext.Provider, {
       value: {
         formStatus,
@@ -52600,7 +52606,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"field_group","title":"F3 Fiel
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"form","title":"F3 Form SDO","display_title":"F3 Form Manager","route_base":"form","post_type":{"post_type_key":"f3-form","label":"F3 Form"},"create":{"button":{"label":"Make Form"}},"field_groups":[{"name":"field_group_1","post_type":"f3-form","fields":[{"type":"text","name":"title","title":"Title","label":"Title","placeholder":"Admin title..."},{"type":"field_group_collection","name":"field_groups","title":"Field Groups","label":"Field Groups"},{"type":"select","name":"admin_location","title":"Admin Location Type","label":"Admin Location Type","choices":[{"value":"","label":"Choose Location Type"},{"value":"post_type","label":"Post Type"},{"value":"taxonomy","label":"Taxonomy"},{"value":"user","label":"User Form"},{"value":"options_page","label":"Options Page"}]},{"type":"select","name":"admin_location_post_type","title":"Post Type","label":"Post Type","choices":[{"value":"post","label":"Posts"},{"value":"page","label":"Pages"},{"value":"l1","label":"L1"}],"field_conditions":true,"field_condition_rules":[[{"field":"admin_location","operator":"=","value":"post_type"}]]},{"type":"select","name":"admin_location_taxonomy","title":"Taxonomy","label":"Taxonomy","choices":[{"value":"category","label":"Post Category"},{"value":"post_tag","label":"Post Tag"}],"field_conditions":true,"field_condition_rules":[[{"field":"admin_location","operator":"=","value":"taxonomy"}]]},{"type":"select","name":"admin_location_options_page","title":"Options Page","label":"Options Page","choices":[{"value":"opt1","label":"OP1"},{"value":"opt2","label":"OP2"}],"field_conditions":true,"field_condition_rules":[[{"field":"admin_location","operator":"=","value":"options_page"}]]}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"form","title":"F3 Form SDO","display_title":"F3 Form Manager","route_base":"form","post_type":{"post_type_key":"f3-form","label":"F3 Form"},"create":{"button":{"label":"Make Form"}},"field_groups":[{"name":"field_group_1","post_type":"f3-form","fields":[{"type":"text","name":"title","title":"Title","label":"Title","placeholder":"Admin title..."},{"type":"field_group_collection","name":"field_groups","title":"Field Groups","label":"Field Groups"},{"type":"select","name":"admin_location","title":"Admin Location Type","label":"Admin Location Type","choices":[{"value":"","label":"Choose Location Type"},{"value":"post_type","label":"Post Type"},{"value":"taxonomy","label":"Taxonomy"},{"value":"user","label":"User Form"},{"value":"options_page","label":"Options Page"}]},{"type":"post_type_select","name":"admin_location_post_type","title":"Post Type","label":"Post Type","field_conditions":true,"field_condition_rules":[[{"field":"admin_location","operator":"=","value":"post_type"}]]},{"type":"taxonomy_select","name":"admin_location_taxonomy","title":"Taxonomy","label":"Taxonomy","field_conditions":true,"field_condition_rules":[[{"field":"admin_location","operator":"=","value":"taxonomy"}]]},{"type":"options_page_select","name":"admin_location_options_page","title":"Options Page","label":"Options Page","field_conditions":true,"field_condition_rules":[[{"field":"admin_location","operator":"=","value":"options_page"}]]}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
 
 /***/ }),
 

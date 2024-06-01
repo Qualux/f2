@@ -2,7 +2,7 @@ const { createRoot, useEffect, useState } = wp.element;
 import './main.css';
 import { useFormManager } from 'shared';
 import { interceptTaxonomyFormSubmission } from './utils/interceptTaxonomyFormSubmission';
-import { useSaveAPI } from 'shared';
+import { useStandardAPI, useSaveAPI } from 'shared';
 
 const fieldGroups = [
     {
@@ -19,18 +19,19 @@ const fieldGroups = [
     }
 ]
 
-const FormRender = ( { formArgument } ) => {
+const FormRender = ( { formArgument, locationArgument } ) => {
 
     const [form, setForm] = useState(null);
-    const API = useSaveAPI();
+    const standardAPI = useStandardAPI('form');
+    const saveAPI = useSaveAPI();
 
     useEffect( () => {
        
         async function fetchData( formArgument, API ) {  
-            const data = await API.getOne(formArgument);
+            const data = await standardAPI.getOne(formArgument);
             setForm(data.record);
         }
-        fetchData( formArgument, API );
+        fetchData( formArgument, standardAPI );
 
     }, [])
 
@@ -61,17 +62,25 @@ const FormRender = ( { formArgument } ) => {
     const formData = {
         form,
         record: false,
-        API,
+        saveAPI,
     }
     formData.form.field_groups = fieldGroups;
 
     console.log(form)
     console.log(formData)
 
-    
+    const formSubmitHandler = (data) => {
+
+        console.log('Render formSubmitHandler.', data)
+        saveAPI.save( locationArgument, null, formData.form, data );
+
+    }
 
     return(
-        <FormManagerProvider formData={formData}>
+        <FormManagerProvider 
+            formData={formData}
+            formSubmitHandler={formSubmitHandler}
+        >
             <Form>
                 <span>formArg: {formArgument}</span>
                 <span>form.id: {form.id}</span>
@@ -85,6 +94,7 @@ const FormRender = ( { formArgument } ) => {
 };
 
 document.querySelectorAll('.f3-form').forEach(element => {
-    const formArgument = element.getAttribute('data-form');
-    createRoot(element).render(<FormRender formArgument={formArgument} />);
+    const formArgument     = element.getAttribute('data-form');
+    const locationArgument = element.getAttribute('data-location');
+    createRoot(element).render(<FormRender formArgument={formArgument} locationArgument={locationArgument} />);
 });
