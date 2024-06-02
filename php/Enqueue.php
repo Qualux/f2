@@ -21,7 +21,7 @@ class Enqueue {
             wp_enqueue_script(
                 'f3-admin',
                 F3_URL . '/apps/admin/build/index.js',
-                ['wp-element', 'wp-mediaelement'],
+                ['wp-element', 'wp-mediaelement', 'wp-blocks', 'wp-i18n', 'wp-editor'],
                 time(),   
             );
 
@@ -42,6 +42,22 @@ class Enqueue {
         add_action('enqueue_block_editor_assets', function() {
 
             $this->enqueue_render_app();
+
+            // Enqueue F3 admin. TESTING GB BLOCKS.
+            wp_enqueue_script(
+                'f3-admin',
+                F3_URL . '/apps/admin/build/index.js',
+                ['wp-element', 'wp-mediaelement', 'wp-blocks', 'wp-i18n', 'wp-editor'],
+                time(),   
+            );
+
+            wp_enqueue_style( 
+                'f3-admin', 
+                F3_URL . 'apps/admin/build/index.css', 
+                array(), 
+                time(),
+                'all' 
+            );
         
         });
 

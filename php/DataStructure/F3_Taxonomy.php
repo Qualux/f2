@@ -27,6 +27,14 @@ class F3_Taxonomy {
             $public              = get_post_meta( $tax->ID, 'public', 1 );
             $publicly_queryable  = get_post_meta( $tax->ID, 'publicly_queryable', 1 );
 
+            if( $public ) {
+                $public = true;
+            }
+
+            if( $publicly_queryable ) {
+                $publicly_queryable = true;
+            }
+
             $labels = array(
                 'name'                       => __( $name, 'f3' ),
                 'singular_name'              => __( 'Custom Taxonomy', 'f3' ),
@@ -49,6 +57,7 @@ class F3_Taxonomy {
                 'hierarchical'               => true,
                 'show_ui'                    => true,
                 'show_admin_column'          => true,
+                'show_in_rest'               => true,
                 'query_var'                  => true,
                 'rewrite'                    => array( 'slug' => $taxonomy_key ),
             );

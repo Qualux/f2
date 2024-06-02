@@ -23,6 +23,12 @@
                     "title": "Title",
                     "label": "Title",
                     "placeholder": "Admin title..."
+                },
+                {
+                    "type": "post_type_select",
+                    "name": "query_post_type",
+                    "title": "Post Type",
+                    "label": "Post Type"
                 }
             ]
         }

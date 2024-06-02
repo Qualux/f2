@@ -58,6 +58,10 @@ class Plugin {
         require_once( F3_PATH . '/php/Save.php' );
         new Save();
 
+        /* Save Handler */
+        require_once( F3_PATH . '/php/Block/BlockRegister.php' );
+        new Block\BlockRegister();
+
     }
 
     public static function activate() {

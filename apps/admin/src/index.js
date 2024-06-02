@@ -7,6 +7,10 @@ import {
   Outlet,
 } from "react-router-dom";
 
+/* Gutenberg Blocks. */
+import './blocks/dynamic-text-field';
+import './blocks/dynamic-image-field';
+
 /* Standard App. */
 
 import Dashboard from './routes/Dashboard';

@@ -33,6 +33,18 @@ class F3_PostType {
             $show_in_menu  = get_post_meta( $p->ID, 'show_in_menu', 1 );
             $show_in_rest  = get_post_meta( $p->ID, 'show_in_rest', 1 );
 
+            if( $public ) {
+                $public = true;
+            }
+
+            if( $show_ui ) {
+                $show_ui = true;
+            }
+
+            if( $show_in_menu ) {
+                $show_in_menu = true;
+            }
+
             $labels = array(
                 'name'               => __( $name_plural, 'f3' ),
                 'singular_name'      => __( $singular_name, 'f3' ),
@@ -66,6 +78,9 @@ class F3_PostType {
                 'menu_position'      => $position,
                 'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
             );
+
+            //echo $post_type_key;
+            //var_dump($args);
         
             register_post_type( $post_type_key, $args );
     
