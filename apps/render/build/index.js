@@ -357,6 +357,8 @@ __webpack_require__.r(__webpack_exports__);
 function Field({
   field
 }) {
+  console.log('Rendering Field c...');
+  console.log('field.type:', field.type);
   switch (field.type) {
     case 'text':
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_types_TextField_TextField__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -486,6 +488,7 @@ function Label({
   text,
   fieldName
 }) {
+  console.log('Rendering Label component...');
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: fieldName,
     className: "block text-sm font-medium leading-6 text-neutral-600"
@@ -1861,6 +1864,7 @@ __webpack_require__.r(__webpack_exports__);
 function TextField({
   field
 }) {
+  console.log('Rendering TextField c...');
   const {
     makeValidationObject,
     useFormContext,
@@ -2397,7 +2401,7 @@ function Filters({
     }));
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-8 bg-neutral-50 py-3 px-2"
+    className: "my-0 bg-neutral-600/10 py-6 px-5 rounded-t-md"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-8 flex-wrap"
   }, filters.map(filter => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2417,9 +2421,9 @@ const TextFilter = ({
   value,
   onChange
 }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
-  className: "text-neutral-400 text-xs text-medium"
+  className: "mt-0 mb-1 p-0 text-neutral-500 text-sm font-light"
 }, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-  className: "w-full max-w-52 border border-neutral-800 border-solid py-1 px-1 text-sm text-medium placeholder:text-neutral-300",
+  className: "w-full max-w-52 !bg-white/10 border border-white/20 border-solid py-1 px-1 !text-neutral-300 text-sm placeholder:text-neutral-500",
   type: "text",
   value: value,
   onChange: e => onChange(e.target.value),
@@ -2431,9 +2435,9 @@ const SelectFilter = ({
   options,
   onChange
 }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
-  className: "text-neutral-400 text-xs text-medium"
+  className: "mt-0 mb-1 p-0 text-neutral-500 text-sm font-light"
 }, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-  className: "w-full max-w-52 border border-neutral-800 border-solid py-1 px-1",
+  className: "w-full max-w-52 !bg-white/10 border border-white/20 border-solid py-1 px-1 !text-neutral-500 hover:!text-neutral-500",
   value: value,
   onChange: e => onChange(e.target.value)
 }, options.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -2483,7 +2487,7 @@ function Footer({
   data
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex gap-6 text-xs text-neutral-400"
+    className: "flex justify-center gap-6 text-xs text-neutral-600 px-5 py-6 bg-neutral-600/10"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Pages Found: ", data.max_num_pages), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Total Records: ", data.found_posts));
 }
 
@@ -2672,9 +2676,9 @@ function Pager({
     }));
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", {
-    className: "my-8 bg-neutral-100 p-6 flex justify-center"
+    className: "m-0 p-6 flex justify-center bg-neutral-700/10"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
-    className: "flex items-center gap-1"
+    className: "flex items-center gap-1.5"
   }, pageLinks));
 }
 
@@ -2701,9 +2705,9 @@ function PagerLink({
 }) {
   let classes = 'px-2 py-1 rounded-sm';
   if (active) {
-    classes += ' bg-sky-200';
+    classes += ' text-white/30 bg-white/10';
   } else {
-    classes += ' cursor-pointer bg-neutral-200';
+    classes += ' cursor-pointer bg-admin-blue text-neutral-100 transition-transform hover:scale-110';
   }
   const handleClickWrapper = () => {
     handleClick(pageNum);
@@ -2768,7 +2772,7 @@ function SortableHeader({
     }
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `cursor-pointer font-bold text-sm text-neutral-800 px-2 py-1 ${sortColumn === columnKey ? 'text-blue-500' : ''}`,
+    className: `cursor-pointer font-light text-sm text-neutral-400 px-2 py-1 ${sortColumn === columnKey ? 'text-blue-500' : ''}`,
     onClick: handleSortClick
   }, label, sortColumn === columnKey && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "ml-1"
@@ -2890,12 +2894,12 @@ function Grid({
       gridSizeClass = 'grid-cols-6';
       break;
   }
-  const gridClasses = `grid ${gridSizeClass} gap-2`;
+  const gridClasses = `grid ${gridSizeClass} gap-3 bg-neutral-700/10 py-6 px-4`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Filters__WEBPACK_IMPORTED_MODULE_3__["default"], {
     filters: filters,
     filterValues: filterValues,
     setFilterValues: setFilterValues
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: gridClasses
   }, columns.map(column => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SortableHeader__WEBPACK_IMPORTED_MODULE_2__["default"], {
     key: column.columnKey,
@@ -2954,7 +2958,7 @@ function GridCol({
     value = '';
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "font-medium text-xs px-2 py-1"
+    className: "text-sm px-2 py-1 text-neutral-300"
   }, value);
 }
 
@@ -3133,6 +3137,7 @@ function useFieldGroupRender() {
     fieldGroup,
     fieldRegisterPrefix = ''
   }) {
+    console.log('Rendering FieldGroupRender component...');
     const {
       FieldRender
     } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__.useFieldRender)();
@@ -3151,6 +3156,7 @@ function useFieldGroupRender() {
   function FieldGroupRepeatRender({
     fieldGroup
   }) {
+    console.log('Rendering FieldGroupRepeatRender component...');
     const {
       control
     } = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useFormContext)();
@@ -3250,6 +3256,7 @@ function useFieldRender() {
     field,
     fieldRegisterPrefix = ''
   }) {
+    console.log('Rendering FieldRender c...');
     const {
       useFormContext,
       checkConditions,
@@ -3429,6 +3436,7 @@ function useFormManager() {
     const {
       formSubmitHandler
     } = useFormManagerContext();
+    console.log('Rendering Form component....');
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
       onSubmit: handleSubmit(formSubmitHandler)
     }, children);
@@ -35240,7 +35248,7 @@ function combine (array, callback) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"field","title":"F3 Field SDO","display_title":"F3 Field Manager","route_base":"field","post_type":{"post_type_key":"f3-field","label":"F3 Field"},"create":{"button":{"label":"Create Field"}},"field_groups":[{"name":"field_group_1","post_type":"f3-field","fields":[{"type":"searchable_select","name":"type","title":"Field Type","label":"Field Type","choices":[{"label":"Basic Fields","options":[{"value":"text","label":"Text"},{"value":"textarea","label":"Text Area"},{"value":"number","label":"Number"},{"value":"range","label":"Range"},{"value":"email","label":"Email"},{"value":"url","label":"URL"}]},{"label":"Content Fields","options":[{"value":"image","label":"Image"},{"value":"file","label":"File"},{"value":"wysiwyg","label":"WYSIWYG"},{"value":"oembed","label":"oEmbed"},{"value":"gallery","label":"Gallery"}]},{"label":"Choice Fields","options":[{"value":"select","label":"Select"},{"value":"searchable_select","label":"Searchable Select"},{"value":"checkbox","label":"Checkbox"},{"value":"radio_group","label":"Radio Group"},{"value":"button_group","label":"Button Group"},{"value":"true_false","label":"True/False"}]},{"label":"Relational Fields","options":[{"value":"link","label":"Link"},{"value":"post","label":"Post"},{"value":"page_link","label":"Page Link"},{"value":"relationship","label":"Relationship"},{"value":"taxonomy","label":"Taxonomy"},{"value":"user","label":"User"}]},{"label":"Advanced Fields","options":[{"value":"google_map","label":"Google Map"},{"value":"date_picker","label":"Date Picker"},{"value":"date_time_picker","label":"Date Time Picker"},{"value":"time_picker","label":"Time Picker"},{"value":"color_picker","label":"Color Picker"}]}]},{"type":"text","name":"title","title":"Field Title","label":"Field Title","placeholder":"Enter title for display..."},{"type":"text","name":"label","title":"Field Label","label":"Field Label","placeholder":"Enter label for display, leave blank to turn off label rendering..."},{"type":"text","name":"name","title":"Field Name","label":"Field Name","placeholder":"Unique lowercase system name..."},{"type":"true_false","name":"field_conditions","title":"Render Conditionally","label":"Render Conditionally","placeholder":"Unique lowercase system name..."},{"type":"text","name":"field_condition_rules","title":"Configure Condition Rules","label":"Configure Condition Rules","placeholder":"Condition rules...","field_conditions":true,"field_condition_rules":[[{"field":"field_conditions","operator":"=","value":true}]]},{"type":"text","name":"placeholder","title":"Field Placeholder","label":"Field Placeholder","placeholder":"Enter placeholder text..."},{"type":"text","name":"field_default_value","title":"Default Value","label":"Default Value"}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"field","title":"F3 Field SDO","display_title":"F3 Field Manager","route_base":"field","post_type":{"post_type_key":"f3-field","label":"F3 Field"},"create":{"button":{"label":"Create Field"}},"field_groups":[{"name":"field_group_1","post_type":"f3-field","fields":[{"type":"searchable_select","name":"type","title":"Field Type","label":"Field Type","choices":[{"label":"Basic Fields","options":[{"value":"text","label":"Text"},{"value":"textarea","label":"Text Area"},{"value":"number","label":"Number"},{"value":"range","label":"Range"},{"value":"email","label":"Email"},{"value":"url","label":"URL"}]},{"label":"Content Fields","options":[{"value":"image","label":"Image"},{"value":"file","label":"File"},{"value":"wysiwyg","label":"WYSIWYG"},{"value":"oembed","label":"oEmbed"},{"value":"gallery","label":"Gallery"}]},{"label":"Choice Fields","options":[{"value":"select","label":"Select"},{"value":"searchable_select","label":"Searchable Select"},{"value":"checkbox","label":"Checkbox"},{"value":"radio_group","label":"Radio Group"},{"value":"button_group","label":"Button Group"},{"value":"true_false","label":"True/False"}]},{"label":"Relational Fields","options":[{"value":"link","label":"Link"},{"value":"post","label":"Post"},{"value":"page_link","label":"Page Link"},{"value":"relationship","label":"Relationship"},{"value":"taxonomy","label":"Taxonomy"},{"value":"user","label":"User"}]},{"label":"Advanced Fields","options":[{"value":"google_map","label":"Google Map"},{"value":"date_picker","label":"Date Picker"},{"value":"date_time_picker","label":"Date Time Picker"},{"value":"time_picker","label":"Time Picker"},{"value":"color_picker","label":"Color Picker"}]}]},{"type":"text","name":"title","title":"Field Title","label":"Field Title","placeholder":"Enter title for display..."},{"type":"text","name":"label","title":"Field Label","label":"Field Label","placeholder":"Enter label for display, leave blank to turn off label rendering..."},{"type":"text","name":"name","title":"Field Name","label":"Field Name","placeholder":"Unique lowercase system name..."},{"type":"true_false","name":"field_conditions","title":"Render Conditionally","label":"Render Conditionally","placeholder":"Unique lowercase system name..."},{"type":"text","name":"field_condition_rules","title":"Configure Condition Rules","label":"Configure Condition Rules","placeholder":"Condition rules...","field_conditions":true,"field_condition_rules":[[{"field":"field_conditions","operator":"=","value":true}]]},{"type":"text","name":"placeholder","title":"Field Placeholder","label":"Field Placeholder","placeholder":"Enter placeholder text..."},{"type":"text","name":"field_value","title":"Default Value","label":"Default Value"}]}],"columns":[{"label":"ID","columnKey":"ID","recordKey":"id"},{"label":"Title","columnKey":"title","recordKey":"title"},{"label":"","columnKey":"controls"}],"filters":[{"key":"search","label":"SEARCH","placeholder":"Search by field title...","type":"text"},{"key":"records_per_page","label":"RECORDS PER PAGE","type":"select","options":[{"value":"10","label":"10"},{"value":"25","label":"25"},{"value":"50","label":"50"},{"value":"100","label":"100"}]}]}');
 
 /***/ }),
 
@@ -35433,7 +35441,10 @@ const FormRender = ({
     record: false,
     saveAPI
   };
-  formData.form.field_groups = fieldGroups;
+
+  // Override field groups for testing.
+  //formData.form.field_groups = fieldGroups;
+
   console.log(form);
   console.log(formData);
   const formSubmitHandler = data => {

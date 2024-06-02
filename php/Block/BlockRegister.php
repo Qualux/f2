@@ -66,6 +66,7 @@ class BlockRegister {
     }
 
     function render_query_block( $attributes, $content, $block ) {
+
         $wrapper_attributes = \get_block_wrapper_attributes();
         $query_post_id = isset($attributes['queryPostId']) ? $attributes['queryPostId'] : '';
     
@@ -82,14 +83,21 @@ class BlockRegister {
         \ob_start(); ?>
     
         <div <?php echo $wrapper_attributes; ?>>
-            QUERY BLOCK RENDER TEST 123 <?php echo $query_post_id; ?>
+            QUERY BLOCK RENDER TEST<?php echo $query_post_id; ?>
             <ul>
                 <?php if ($query->have_posts()) : ?>
                     <?php while ($query->have_posts()) : $query->the_post(); ?>
+
                         <?php
                         // Set up post data for the current post
                         global $post;
                         $post = get_post();
+
+                        echo 'POST: ' . $post->ID . ' /// ';
+                        echo '<pre>';
+                        var_dump( $block );
+                        echo '</pre>';
+
                         setup_postdata($post);
     
                         // Prepare context for inner blocks

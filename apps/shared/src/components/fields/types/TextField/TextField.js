@@ -3,6 +3,8 @@ import { useFormManager } from '../../../../lib/useFormManager/useFormManager';
 
 export default function TextField( { field } ) {
 
+    console.log('Rendering TextField c...')
+
     const { makeValidationObject, useFormContext, useFieldRenderContext } = useFormManager();
     const { register, getFieldState } = useFormContext();
     const validators = makeValidationObject(field);

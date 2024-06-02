@@ -14,7 +14,7 @@ export default function SortableHeader({ label, columnKey, defaultSortOrder, sor
 
     return (
         <div
-            className={`cursor-pointer font-bold text-sm text-neutral-800 px-2 py-1 ${
+            className={`cursor-pointer font-light text-sm text-neutral-400 px-2 py-1 ${
                 sortColumn === columnKey ? 'text-blue-500' : ''
             }`}
             onClick={handleSortClick}

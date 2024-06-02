@@ -21,8 +21,8 @@ export default function Pager({ pageCount, page, setPage }) {
     }
 
     return (
-        <main className="my-8 bg-neutral-100 p-6 flex justify-center">
-            <ul className="flex items-center gap-1">
+        <main className="m-0 p-6 flex justify-center bg-neutral-700/10">
+            <ul className="flex items-center gap-1.5">
                 {pageLinks}
             </ul>
         </main>

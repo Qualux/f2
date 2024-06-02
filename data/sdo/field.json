@@ -133,7 +133,7 @@
                 },
                 {
                     "type": "text",
-                    "name": "field_default_value",
+                    "name": "field_value",
                     "title": "Default Value",
                     "label": "Default Value"
                 }

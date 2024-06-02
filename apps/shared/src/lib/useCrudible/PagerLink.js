@@ -2,9 +2,9 @@ export default function PagerLink({ pageNum, handleClick, active }) {
 
     let classes = 'px-2 py-1 rounded-sm';
     if(active) {
-        classes += ' bg-sky-200';
+        classes += ' text-white/30 bg-white/10';
     } else {
-        classes += ' cursor-pointer bg-neutral-200';
+        classes += ' cursor-pointer bg-admin-blue text-neutral-100 transition-transform hover:scale-110';
     }
     
     const handleClickWrapper = () => {

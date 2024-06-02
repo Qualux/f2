@@ -14,6 +14,7 @@ export function useFormManager() {
 
         const [formStatus, setFormStatus] = useState('loading');
         let defaultValues = formData.record || makeDefaultFieldValues(formData.form.field_groups);
+
         const methods = useForm({ defaultValues });
 
         // Make this the default formSubmitHandler, and provide option to load from params. 
@@ -63,6 +64,8 @@ export function useFormManager() {
 
         const { handleSubmit }      = useFormContext();
         const { formSubmitHandler } = useFormManagerContext();
+
+        console.log('Rendering Form component....')
 
         return(
             <form onSubmit={handleSubmit(formSubmitHandler)}>

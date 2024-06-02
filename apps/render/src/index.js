@@ -64,7 +64,9 @@ const FormRender = ( { formArgument, locationArgument } ) => {
         record: false,
         saveAPI,
     }
-    formData.form.field_groups = fieldGroups;
+    
+    // Override field groups for testing.
+    //formData.form.field_groups = fieldGroups;
 
     console.log(form)
     console.log(formData)

@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         'admin-dark': '#1D2327',
+        'admin-blue': '#2271B1',
       },
     },
   },

@@ -4,6 +4,8 @@ export function useFieldRender() {
 
     function FieldRender( { field, fieldRegisterPrefix = '' } ) {
 
+        console.log('Rendering FieldRender c...')
+
         const { useFormContext, checkConditions, Field } = useFormManager();
         const { watch, register, errors, setValue, control } = useFormContext();
         const conditionsCheckPassed = checkConditions(field, watch);

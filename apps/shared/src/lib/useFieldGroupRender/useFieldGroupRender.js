@@ -5,6 +5,8 @@ export function useFieldGroupRender() {
 
     function FieldGroupRender( { fieldGroup, fieldRegisterPrefix = '' } ) {
 
+        console.log('Rendering FieldGroupRender component...')
+
         const { FieldRender } = useFieldRender();
 
         if( fieldGroup?.repeat ) {
@@ -31,6 +33,8 @@ export function useFieldGroupRender() {
     }
 
     function FieldGroupRepeatRender( { fieldGroup } ) {
+
+        console.log('Rendering FieldGroupRepeatRender component...')
 
         const { control } = useFormContext();
         const { fields, append, remove, move } = useFieldArray({

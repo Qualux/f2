@@ -29,6 +29,10 @@ export default function Field(
             field
         }) {
 
+    console.log('Rendering Field c...')
+
+    console.log('field.type:', field.type)
+
     switch( field.type ) {
         case 'text': 
             return <TextField field={field}/> 

@@ -49,7 +49,7 @@ export default function Grid(
             gridSizeClass = 'grid-cols-6';
             break;
     }
-    const gridClasses = `grid ${gridSizeClass} gap-2`;
+    const gridClasses = `grid ${gridSizeClass} gap-3 bg-neutral-700/10 py-6 px-4`;
 
     return(
         <main>
@@ -58,7 +58,7 @@ export default function Grid(
                 filterValues={filterValues}
                 setFilterValues={setFilterValues}
             />
-            <ul className={gridClasses}>
+            <div className={gridClasses}>
                 {columns.map(column => (
                     <SortableHeader
                         key={column.columnKey}
@@ -84,7 +84,7 @@ export default function Grid(
                     </GridRowContext.Provider>
                     
                 )}
-            </ul>
+            </div>
             <Pager 
                 pageCount={data.max_num_pages}
                 page={page}

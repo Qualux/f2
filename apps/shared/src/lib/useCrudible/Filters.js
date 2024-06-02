@@ -8,7 +8,7 @@ export default function Filters({filters, filterValues, setFilterValues}) {
     };
 
     return(
-        <div className="my-8 bg-neutral-50 py-3 px-2">
+        <div className="my-0 bg-neutral-600/10 py-6 px-5 rounded-t-md">
             <div className="flex items-center gap-8 flex-wrap">
                 {filters.map(filter => (
                     <div 
@@ -32,9 +32,9 @@ export default function Filters({filters, filterValues, setFilterValues}) {
 // Define TextFilter and SelectFilter components
 const TextFilter = ({ label, placeholder, value, onChange }) => (
     <div>
-        <h4 className="text-neutral-400 text-xs text-medium">{label}</h4>
+        <h4 className="mt-0 mb-1 p-0 text-neutral-500 text-sm font-light">{label}</h4>
         <input
-            className="w-full max-w-52 border border-neutral-800 border-solid py-1 px-1 text-sm text-medium placeholder:text-neutral-300"
+            className="w-full max-w-52 !bg-white/10 border border-white/20 border-solid py-1 px-1 !text-neutral-300 text-sm placeholder:text-neutral-500"
             type="text"
             value={value}
             onChange={e => onChange(e.target.value)}
@@ -45,9 +45,9 @@ const TextFilter = ({ label, placeholder, value, onChange }) => (
 
 const SelectFilter = ({ label, value, options, onChange }) => (
     <div>
-        <h4 className="text-neutral-400 text-xs text-medium">{label}</h4>
+        <h4 className="mt-0 mb-1 p-0 text-neutral-500 text-sm font-light">{label}</h4>
         <select
-            className="w-full max-w-52 border border-neutral-800 border-solid py-1 px-1"
+            className="w-full max-w-52 !bg-white/10 border border-white/20 border-solid py-1 px-1 !text-neutral-500 hover:!text-neutral-500"
             value={value}
             onChange={e => onChange(e.target.value)}
         >

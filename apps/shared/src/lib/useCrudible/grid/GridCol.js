@@ -17,7 +17,7 @@ export default function GridCol( { column, record, controls } ) {
     }
     
     return(
-        <div className="font-medium text-xs px-2 py-1">
+        <div className="text-sm px-2 py-1 text-neutral-300">
             {value}
         </div>
     );
