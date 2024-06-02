@@ -10,6 +10,7 @@ import {
 /* Gutenberg Blocks. */
 import './blocks/dynamic-text-field';
 import './blocks/dynamic-image-field';
+import './blocks/query';
 
 /* Standard App. */
 

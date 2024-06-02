@@ -53,52 +53,75 @@ class BlockRegister {
             ),
         ));
 
+        \register_block_type('f3/query', array(
+            //'editor_script' => 'f3-dynamic-text-field-block',
+            'render_callback' => [ $this, 'render_query_block' ],
+            'attributes' => array(
+                'queryPostId' => array(
+                    'type' => 'string',
+                ),
+            ),
+        ));
+
     }
 
-    function render_dynamic_text_field_block( $attributes, $content ) {
-
+    function render_query_block( $attributes, $content, $block ) {
         $wrapper_attributes = \get_block_wrapper_attributes();
-        $selected_field = isset($attributes['selectedField']) ? $attributes['selectedField'] : 'test_field_1';
-        $content = isset($attributes['content']) ? $attributes['content'] : '';
+        $query_post_id = isset($attributes['queryPostId']) ? $attributes['queryPostId'] : '';
     
-        // Fetch dynamic value from post meta or any other source
-        $dynamic_value = \get_post_meta(get_the_ID(), $selected_field, true);
+        // Define WP_Query arguments
+        $args = array(
+            'post_type' => 'ticket',
+            'posts_per_page' => 10,
+        );
     
-        if (!$dynamic_value) {
-            $dynamic_value = 'Default value or message if field is empty';
-        }
+        // Perform the query
+        $query = new \WP_Query($args);
     
+        // Start the output buffer
         \ob_start(); ?>
-
+    
         <div <?php echo $wrapper_attributes; ?>>
-            <?php echo \esc_html($dynamic_value); ?>
+            QUERY BLOCK RENDER TEST 123 <?php echo $query_post_id; ?>
+            <ul>
+                <?php if ($query->have_posts()) : ?>
+                    <?php while ($query->have_posts()) : $query->the_post(); ?>
+                        <?php
+                        // Set up post data for the current post
+                        global $post;
+                        $post = get_post();
+                        setup_postdata($post);
+    
+                        // Prepare context for inner blocks
+                        $context = array(
+                            'postId' => $post->ID,
+                            'postType' => $post->post_type,
+                        );
+    
+                        // Loop through the inner blocks and render them
+                        if ( ! empty( $block->parsed_block['innerBlocks'] ) ) {
+
+                            foreach ( $block->parsed_block['innerBlocks'] as $inner_block ) {
+
+
+                                // Manually render the inner block using its attributes and context
+                                $inner_block_instance = new \WP_Block( $inner_block, $context );
+
+
+                                echo $inner_block_instance->render();
+                            }
+                        }
+                        ?>
+                    <?php endwhile; ?>
+                    <?php \wp_reset_postdata(); ?>
+                <?php else : ?>
+                    <li><?php _e('No posts found', 'f3'); ?></li>
+                <?php endif; ?>
+            </ul>
         </div>
-
+    
         <?php return \ob_get_clean();
-
     }    
-    
-    function render_dynamic_image_field_block( $attributes, $content ) {
-
-        $wrapper_attributes = \get_block_wrapper_attributes();
-        $selected_field = isset($attributes['selectedField']) ? $attributes['selectedField'] : 'test_field_1';
-        $content = isset($attributes['content']) ? $attributes['content'] : '';
-    
-        // Fetch dynamic value from post meta or any other source
-        $dynamic_value = \get_post_meta(get_the_ID(), $selected_field, true);
-    
-        if (!$dynamic_value) {
-            $dynamic_value = 'Default value or message if field is empty';
-        }
-    
-        \ob_start(); ?>
-
-        <div <?php echo $wrapper_attributes; ?>>
-            <?php echo \esc_html($dynamic_value); ?>
-        </div>
-
-        <?php return \ob_get_clean();
-
-    } 
+      
 
 }
