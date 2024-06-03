@@ -80,6 +80,10 @@ class FieldType {
                 $ft_handler = new FieldGroupCollection();
                 $value = $ft_handler->format_load_value( $value );
                 break;
+            case 'field_collection':
+                $ft_handler = new FieldCollection();
+                $value = $ft_handler->format_load_value( $value );
+                break;
             case 'true_false':
                 $ft_handler = new TrueFalse();
                 $value = $ft_handler->format_load_value( $value );
