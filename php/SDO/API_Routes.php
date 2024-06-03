@@ -207,7 +207,17 @@ class API_Routes {
 
                     foreach( $sdo['field_groups'] as $fg ) {
                         foreach( $fg['fields'] as $f ) {
-                            $m->{$f['name']} = $params[$f['name']];
+
+                            $ft = new \F3\FieldType\FieldType();
+                            $ft->set_field( $f );
+                            $value_exists = $ft->value_in_params( $params );
+                            if( ! $value_exists ) {
+                                continue;
+                            }
+                            $ft->parse_value_from_params( $params );
+                            $ft->format_value();
+                            $m->{$f['name']} = $ft->get_value();
+
                         }
                     }
 
@@ -215,11 +225,10 @@ class API_Routes {
                     
                     return new \WP_REST_Response(
                         array(
-                            'status'   => 200,
-                            'message'  => __( 'Saved.', 'f3' ),
-                            'params'   => $params,
-                            'model'    => $m,
-                            'sdo'      => $sdo,
+                            'status'    => 200,
+                            'message'   => __( 'Saved SDO record.', 'f3' ),
+                            'record_id' => $id,
+                            'model'     => $m,
                         )
                     );
     

@@ -5,8 +5,38 @@
  */
 
 namespace F3\FieldType;
+use F3\SDO\Model;
 
 class FieldGroupCollection {
+
+    function format_load_value( $value ) {
+
+        error_log('FieldGroupCollection value in format_load_value:');
+        error_log(print_r($value,1));
+
+        if( empty( $value ) || ! is_array( $value ) ) {
+            error('value was not array??');
+            return $value; // If empty or not array, then just return the value.
+        }
+
+        $sdo_json = file_get_contents( F3_PATH . '/data/sdo/field_group.json' );
+        $sdo      = json_decode( $sdo_json, 1 );
+
+        $fgs = array();
+        foreach( $value as $fg_id ) {
+            $fg_model            = new Model();
+            $fg_model->post_type = 'f3-field-group';
+            $fg_model->sdo       = $sdo;
+            $fg_model->load( $fg_id );
+            $fgs[]               = $fg_model;
+        }
+
+        error_log('FieldGroupCollection value after loading records:');
+        error_log(print_r($fgs,1));
+
+        return $fgs;
+
+    }
 
     /* Expect array value. */
     function format_value( $value_array ) {

@@ -3132,6 +3132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function useFieldGroupRender() {
   function FieldGroupRender({
     fieldGroup,
@@ -3143,7 +3144,6 @@ function useFieldGroupRender() {
     } = (0,_useFieldRender_useFieldRender__WEBPACK_IMPORTED_MODULE_1__.useFieldRender)();
     if (fieldGroup?.repeat) {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroupRepeatRender, {
-        key: index,
         fieldGroup: fieldGroup
       });
     }
@@ -3169,7 +3169,7 @@ function useFieldGroupRender() {
       control,
       name: fieldGroup.name
     });
-    useEffect(() => {
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
       if (fields.length === 0) {
         append({});
       }

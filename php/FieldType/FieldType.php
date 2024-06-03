@@ -68,6 +68,27 @@ class FieldType {
     function get_value() {
         return $this->value;
     }
+
+    function load_value_post_meta( $record_id ) {
+
+        $value = get_post_meta( $record_id, $this->field['name'], 1 );
+
+
+
+        switch( $this->field['type'] ) {
+            case 'field_group_collection':
+                $ft_handler = new FieldGroupCollection();
+                $value = $ft_handler->format_load_value( $value );
+                break;
+            case 'true_false':
+                $ft_handler = new TrueFalse();
+                $value = $ft_handler->format_load_value( $value );
+                break;
+        }
+
+        $this->value = $value;
+
+    }
     
 
 }

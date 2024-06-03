@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { useFieldRender } from '../useFieldRender/useFieldRender';
 
@@ -12,7 +13,6 @@ export function useFieldGroupRender() {
         if( fieldGroup?.repeat ) {
             return(
                 <FieldGroupRepeatRender
-                    key={index}
                     fieldGroup={fieldGroup}
                 />
             );

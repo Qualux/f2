@@ -17,23 +17,23 @@ class Model {
 
     }
 
+    /*
+     * @TODO we need to know the "type" of meta (post/user/term), or if it's options. 
+     * ---- Currently we're presuming it's post meta data. Which is fine for SDO. 
+     * ---- Won't work in Record, and maybe that's a good reason to keep Record separate from this Model.
+     */
     public function load_meta() {
 
-        // @TODO refactor to safely check for values.
         foreach( $this->sdo['field_groups'] as $fg ) {
             foreach( $fg['fields'] as $f ) {
-                
-                if( $f['type'] === 'true_false' ) {
-                    $value = get_post_meta( $this->id, $f['name'], 1 );
-                    if( $value === "1" ) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
-                    $this->{$f['name']} = $value;
-                } else {
-                    $this->{$f['name']} = get_post_meta( $this->id, $f['name'], 1 );
-                }
+
+                // Use FieldType to load value and format value using field type classes if needed.
+                $ft = new \F3\FieldType\FieldType();
+                $ft->set_field( $f );
+                $ft->load_value_post_meta( $this->id );   
+
+                // Set model property with loaded field value.
+                $this->{$f['name']} = $ft->get_value();
 
             }
         }
@@ -59,7 +59,7 @@ class Model {
 
             wp_update_post(
                 [
-                    'ID'           => $id,
+                    'ID'           => $this->id,
                     'post_title'   => $this->title,
                 ]
             );

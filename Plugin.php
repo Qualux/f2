@@ -60,6 +60,7 @@ class Plugin {
         require_once( F3_PATH . '/php/FieldType/FieldType.php' );
         require_once( F3_PATH . '/php/FieldType/SearchableSelect.php' );
         require_once( F3_PATH . '/php/FieldType/FieldGroupCollection.php' );
+        require_once( F3_PATH . '/php/FieldType/TrueFalse.php' );
 
         /* Block Type Register */
         require_once( F3_PATH . '/php/Block/BlockRegister.php' );
