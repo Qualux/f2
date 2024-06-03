@@ -57,8 +57,11 @@ class Plugin {
         /* Save Handler */
         require_once( F3_PATH . '/php/Save.php' );
         new Save();
+        require_once( F3_PATH . '/php/FieldType/FieldType.php' );
+        require_once( F3_PATH . '/php/FieldType/SearchableSelect.php' );
+        require_once( F3_PATH . '/php/FieldType/FieldGroupCollection.php' );
 
-        /* Save Handler */
+        /* Block Type Register */
         require_once( F3_PATH . '/php/Block/BlockRegister.php' );
         new Block\BlockRegister();
 

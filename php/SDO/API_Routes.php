@@ -155,9 +155,22 @@ class API_Routes {
 
                     foreach( $sdo['field_groups'] as $fg ) {
                         foreach( $fg['fields'] as $f ) {
-                            $m->{$f['name']} = $params[$f['name']];
+
+                            $ft = new \F3\FieldType\FieldType();
+                            $ft->set_field( $f );
+                            $value_exists = $ft->value_in_params( $params );
+                            if( ! $value_exists ) {
+                                continue;
+                            }
+                            $ft->parse_value_from_params( $params );
+                            $ft->format_value();
+                            $m->{$f['name']} = $ft->get_value();
+
                         }
                     }
+
+                    error_log('M before save()');
+                    error_log(print_r($m, 1));
 
                     $m->save();
                     

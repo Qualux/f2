@@ -35448,6 +35448,8 @@ const FormRender = ({
   console.log(form);
   console.log(formData);
   const formSubmitHandler = data => {
+    console.log('locationArgument:', locationArgument);
+    if (locationArgument === 'post') {}
     console.log('Render formSubmitHandler.', data);
     saveAPI.save(locationArgument, null, formData.form, data);
   };
