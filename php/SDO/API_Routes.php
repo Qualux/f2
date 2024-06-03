@@ -169,9 +169,6 @@ class API_Routes {
                         }
                     }
 
-                    error_log('M before save()');
-                    error_log(print_r($m, 1));
-
                     $m->save();
                     
                     return new \WP_REST_Response(

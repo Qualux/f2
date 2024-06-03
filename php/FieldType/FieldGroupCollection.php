@@ -11,9 +11,6 @@ class FieldGroupCollection {
 
     function format_load_value( $value ) {
 
-        error_log('FieldGroupCollection value in format_load_value:');
-        error_log(print_r($value,1));
-
         if( empty( $value ) || ! is_array( $value ) ) {
             error('value was not array??');
             return $value; // If empty or not array, then just return the value.
@@ -31,9 +28,6 @@ class FieldGroupCollection {
             $fgs[]               = $fg_model;
         }
 
-        error_log('FieldGroupCollection value after loading records:');
-        error_log(print_r($fgs,1));
-
         return $fgs;
 
     }
@@ -44,11 +38,7 @@ class FieldGroupCollection {
         $fgs = array();
 
         foreach( $value_array as $single_value ) {
-
-            error_log('SINGLE RECORD:');
-            error_log( print_r( $single_value, 1 ));
-
-            
+ 
             if( isset( $single_value['recordId'] ) && $single_value['recordId'] > 0 ) {
                 $fgs[] = $single_value['recordId'];
             } else {
@@ -59,9 +49,6 @@ class FieldGroupCollection {
                 }
                 $save_result = $this->do_save( $single_value );
 
-                error_log('SAVE RESULT:');
-                error_log( print_r($save_result ,1));
-
                 if( ! $save_result ) {
                     continue; // Save failed.
                 }
@@ -70,11 +57,7 @@ class FieldGroupCollection {
 
         }
 
-        error_log('Running FG Collection handler:');
-        error_log(print_r($fgs, 1));
-
         return $fgs;
-
 
     }
 

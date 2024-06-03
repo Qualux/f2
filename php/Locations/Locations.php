@@ -173,8 +173,6 @@ class Locations {
 
         add_action( 'user_new_form', function( $user ) use ($form_posts) {
 
-            error_log('Doing edit_user_profile hook...');
-
             foreach( $form_posts as $form_post ) {
                 echo '<div class="f3-form" data-form="'.$form_post->ID.'" data-location="user"></div>';
             }

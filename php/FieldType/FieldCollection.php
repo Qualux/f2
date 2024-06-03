@@ -11,9 +11,6 @@ class FieldCollection {
 
     function format_load_value( $value ) {
 
-        error_log('FieldCollection value in format_load_value:');
-        error_log(print_r($value,1));
-
         if( empty( $value ) || ! is_array( $value ) ) {
             error('value was not array??');
             return $value; // If empty or not array, then just return the value.
@@ -30,9 +27,6 @@ class FieldCollection {
             $model->load( $fid );
             $fs[]             = $model;
         }
-
-        error_log('FieldCollection value after loading records:');
-        error_log(print_r($fs,1));
 
         return $fs;
 
