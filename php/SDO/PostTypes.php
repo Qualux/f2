@@ -30,15 +30,15 @@ class PostTypes {
             'menu_name'          => __( $settings['label'], 'f3' ),
             'name_admin_bar'     => __( $settings['label'], 'f3' ),
             'add_new'            => __( 'Add New', 'f3' ),
-            'add_new_item'       => __( 'Add New F3 Options Page', 'f3' ),
-            'new_item'           => __( 'New F3 Options Page', 'f3' ),
-            'edit_item'          => __( 'Edit F3 Options Page', 'f3' ),
-            'view_item'          => __( 'View F3 Options Page', 'f3' ),
-            'all_items'          => __( 'All F3 Options Pages', 'f3' ),
-            'search_items'       => __( 'Search F3 Options Pages', 'f3' ),
-            'parent_item_colon'  => __( 'Parent F3 Options Pages:', 'f3' ),
-            'not_found'          => __( 'No F3 Options Pages found.', 'f3' ),
-            'not_found_in_trash' => __( 'No F3 Options Pages found in Trash.', 'f3' )
+            'add_new_item'       => __( 'Add New ' . $settings['label'] . '', 'f3' ),
+            'new_item'           => __( 'New ' . $settings['label'] . '', 'f3' ),
+            'edit_item'          => __( 'Edit ' . $settings['label'] . '', 'f3' ),
+            'view_item'          => __( 'View ' . $settings['label'] . '', 'f3' ),
+            'all_items'          => __( 'All ' . $settings['label'] . 's', 'f3' ),
+            'search_items'       => __( 'Search ' . $settings['label'] . 's', 'f3' ),
+            'parent_item_colon'  => __( 'Parent ' . $settings['label'] . 's:', 'f3' ),
+            'not_found'          => __( 'No ' . $settings['label'] . 's found.', 'f3' ),
+            'not_found_in_trash' => __( 'No ' . $settings['label'] . 's found in Trash.', 'f3' )
         );
 
         $show_ui = false;

@@ -114,25 +114,18 @@ document.querySelectorAll('.f3-form').forEach(element => {
  *
  */
 
-function Paragraph({ attributes }) {
-    const { content, textColor, backgroundColor } = attributes;
-    const className = `wp-block-paragraph ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
-
-    return <p className={className}>{content}</p>;
-}
-
-function Heading({ attributes }) {
-    const { content, level, textColor, backgroundColor } = attributes;
-    const Tag = `h${level || 2}`; // Default to h2 if level is not specified
-    const className = `wp-block-heading ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
-
-    return <Tag className={className}>{content}</Tag>;
-}
-
 function Field({ attributes }) {
 
     return(
         <input type="text" placeholder={attributes.name} />
+    );
+
+}
+
+function Label({ attributes }) {
+
+    return(
+        <label>{attributes.text}</label>
     );
 
 }
@@ -157,12 +150,10 @@ function TemplateApp({ childBlocks }) {
             </ul>
             {childBlocks.map((block, index) => {
                 switch (block.name) {
-                    case 'core/paragraph':
-                        return <Paragraph key={index} attributes={block.attributes} />;
-                    case 'core/heading':
-                        return <Heading key={index} attributes={block.attributes} />;
                     case 'f3/field':
                         return <Field key={index} attributes={block.attributes} />;
+                    case 'f3/label':
+                        return <Label key={index} attributes={block.attributes} />;
                     default:
                         return null;
                 }
@@ -172,7 +163,7 @@ function TemplateApp({ childBlocks }) {
 }
 
 
-const templateRenderEl = document.getElementById('f3-template');
+const templateRenderEl = document.getElementById('f3-field-template');
 if (templateRenderEl) {
     const childBlocksData = JSON.parse(templateRenderEl.getAttribute('data-child-blocks'));
     render(<TemplateApp childBlocks={childBlocksData} />, templateRenderEl);

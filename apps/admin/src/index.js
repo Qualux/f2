@@ -11,8 +11,9 @@ import {
 import './blocks/dynamic-text-field';
 import './blocks/dynamic-image-field';
 import './blocks/query';
-import './blocks/template';
+import './blocks/field-template';
 import './blocks/field';
+import './blocks/label';
 
 /* Standard App. */
 

@@ -35473,34 +35473,6 @@ document.querySelectorAll('.f3-form').forEach(element => {
  *
  */
 
-function Paragraph({
-  attributes
-}) {
-  const {
-    content,
-    textColor,
-    backgroundColor
-  } = attributes;
-  const className = `wp-block-paragraph ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: className
-  }, content);
-}
-function Heading({
-  attributes
-}) {
-  const {
-    content,
-    level,
-    textColor,
-    backgroundColor
-  } = attributes;
-  const Tag = `h${level || 2}`; // Default to h2 if level is not specified
-  const className = `wp-block-heading ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Tag, {
-    className: className
-  }, content);
-}
 function Field({
   attributes
 }) {
@@ -35508,6 +35480,11 @@ function Field({
     type: "text",
     placeholder: attributes.name
   });
+}
+function Label({
+  attributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, attributes.text);
 }
 function TemplateApp({
   childBlocks
@@ -35523,18 +35500,13 @@ function TemplateApp({
     key: attrName
   }, `${attrName}: ${attrValue}`)))))), childBlocks.map((block, index) => {
     switch (block.name) {
-      case 'core/paragraph':
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Paragraph, {
-          key: index,
-          attributes: block.attributes
-        });
-      case 'core/heading':
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Heading, {
-          key: index,
-          attributes: block.attributes
-        });
       case 'f3/field':
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Field, {
+          key: index,
+          attributes: block.attributes
+        });
+      case 'f3/label':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Label, {
           key: index,
           attributes: block.attributes
         });
@@ -35543,7 +35515,7 @@ function TemplateApp({
     }
   }));
 }
-const templateRenderEl = document.getElementById('f3-template');
+const templateRenderEl = document.getElementById('f3-field-template');
 if (templateRenderEl) {
   const childBlocksData = JSON.parse(templateRenderEl.getAttribute('data-child-blocks'));
   render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TemplateApp, {
