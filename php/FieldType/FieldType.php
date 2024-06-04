@@ -59,6 +59,10 @@ class FieldType {
                 $ft_handler = new FieldGroupCollection();
                 $this->value = $ft_handler->format_value( $this->value );
                 break;
+            case 'field_collection':
+                $ft_handler = new FieldCollection();
+                $this->value = $ft_handler->format_value( $this->value );
+                break;
             default: 
                 return;
         }

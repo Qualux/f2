@@ -16,8 +16,7 @@ class FieldGroupCollection {
             return $value; // If empty or not array, then just return the value.
         }
 
-        $sdo_json = file_get_contents( F3_PATH . '/data/sdo/field_group.json' );
-        $sdo      = json_decode( $sdo_json, 1 );
+        $sdo = $this->get_sdo();
 
         $fgs = array();
         foreach( $value as $fg_id ) {
@@ -63,22 +62,12 @@ class FieldGroupCollection {
 
     function do_save( $field_group_array ) {
 
-        // Handle fields.
-        $fs = array();
-        foreach( $field_group_array['fields'] as $field_array ) {
-
-            if( isset( $field_array['recordId'] ) && $field_array['recordId'] > 0 ) {
-                $fs[] = $field_array['recordId'];
-            }
-
-        }
-
         // Create new object for saving. 
         // Replace with $m = new F3\SDO\Model(); and this will require SDO def available.
         $m = new \stdClass;
         $m->title  = $field_group_array['title'];
         $m->repeat = $field_group_array['repeat'];
-        $m->fields = $fs;
+        $m->fields = $field_group_array['fields'];
         $fg_id     = \wp_insert_post(
             [
                 'post_type'    => 'f3-field-group',
@@ -90,10 +79,33 @@ class FieldGroupCollection {
         if( ! $fg_id ) {
             return false;
         }
-        \update_post_meta( $fg_id, 'repeat', $m->repeat );
-        \update_post_meta( $fg_id, 'fields', $m->fields );
+
+        // Save field group meta data including fields (FieldCollection field type).
+        $sdo = $this->get_sdo();
+        foreach( $sdo['field_groups'] as $fg ) {
+            foreach( $fg['fields'] as $f ) {
+                
+                switch( $f['type'] ) {
+                    case 'field_collection':
+                        $fc = new FieldCollection();
+                        $value = $fc->inline_create( $m->{$f['name']} );
+                        update_post_meta( $fg_id, $f['name'], $value );
+                        break;
+                    default:
+                        update_post_meta( $fg_id, $f['name'], $m->{$f['name']} );
+                        break;
+                }
+
+            }
+        }
+
         return $fg_id;
 
+    }
+
+    private function get_sdo() {
+        $sdo_json = file_get_contents( F3_PATH . '/data/sdo/field_group.json' );
+        return json_decode( $sdo_json, 1 );
     }
 
 }
