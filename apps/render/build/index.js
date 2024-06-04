@@ -35389,6 +35389,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const {
   createRoot,
+  render,
   useEffect,
   useState
 } = wp.element;
@@ -35466,6 +35467,89 @@ document.querySelectorAll('.f3-form').forEach(element => {
     locationArgument: locationArgument
   }));
 });
+
+/* 
+ * Block Template Render Experiment 
+ *
+ */
+
+function Paragraph({
+  attributes
+}) {
+  const {
+    content,
+    textColor,
+    backgroundColor
+  } = attributes;
+  const className = `wp-block-paragraph ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: className
+  }, content);
+}
+function Heading({
+  attributes
+}) {
+  const {
+    content,
+    level,
+    textColor,
+    backgroundColor
+  } = attributes;
+  const Tag = `h${level || 2}`; // Default to h2 if level is not specified
+  const className = `wp-block-heading ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Tag, {
+    className: className
+  }, content);
+}
+function Field({
+  attributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    placeholder: attributes.name
+  });
+}
+function TemplateApp({
+  childBlocks
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    style: {
+      fontSize: '2rem',
+      fontWeight: 600
+    }
+  }, "Attribute List"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, childBlocks.map((block, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    key: index
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, block.name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, Object.entries(block.attributes).map(([attrName, attrValue]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    key: attrName
+  }, `${attrName}: ${attrValue}`)))))), childBlocks.map((block, index) => {
+    switch (block.name) {
+      case 'core/paragraph':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Paragraph, {
+          key: index,
+          attributes: block.attributes
+        });
+      case 'core/heading':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Heading, {
+          key: index,
+          attributes: block.attributes
+        });
+      case 'f3/field':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Field, {
+          key: index,
+          attributes: block.attributes
+        });
+      default:
+        return null;
+    }
+  }));
+}
+const templateRenderEl = document.getElementById('f3-template');
+if (templateRenderEl) {
+  const childBlocksData = JSON.parse(templateRenderEl.getAttribute('data-child-blocks'));
+  render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TemplateApp, {
+    childBlocks: childBlocksData
+  }), templateRenderEl);
+}
 })();
 
 /******/ })()

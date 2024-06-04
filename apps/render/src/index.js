@@ -1,4 +1,4 @@
-const { createRoot, useEffect, useState } = wp.element;
+const { createRoot, render, useEffect, useState } = wp.element;
 import './main.css';
 import { useFormManager } from 'shared';
 import { interceptTaxonomyFormSubmission } from './utils/interceptTaxonomyFormSubmission';
@@ -106,3 +106,74 @@ document.querySelectorAll('.f3-form').forEach(element => {
     const locationArgument = element.getAttribute('data-location');
     createRoot(element).render(<FormRender formArgument={formArgument} locationArgument={locationArgument} />);
 });
+
+
+
+/* 
+ * Block Template Render Experiment 
+ *
+ */
+
+function Paragraph({ attributes }) {
+    const { content, textColor, backgroundColor } = attributes;
+    const className = `wp-block-paragraph ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
+
+    return <p className={className}>{content}</p>;
+}
+
+function Heading({ attributes }) {
+    const { content, level, textColor, backgroundColor } = attributes;
+    const Tag = `h${level || 2}`; // Default to h2 if level is not specified
+    const className = `wp-block-heading ${textColor ? `has-${textColor}-color has-text-color` : ''} ${backgroundColor ? `has-${backgroundColor}-background-color has-background` : ''}`;
+
+    return <Tag className={className}>{content}</Tag>;
+}
+
+function Field({ attributes }) {
+
+    return(
+        <input type="text" placeholder={attributes.name} />
+    );
+
+}
+
+function TemplateApp({ childBlocks }) {
+    return (
+        <div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 600 }}>
+                Attribute List
+            </h2>
+            <ul>
+                {childBlocks.map((block, index) => (
+                    <li key={index}>
+                        <strong>{block.name}</strong>
+                        <ul>
+                            {Object.entries(block.attributes).map(([attrName, attrValue]) => (
+                                <li key={attrName}>{`${attrName}: ${attrValue}`}</li>
+                            ))}
+                        </ul>
+                    </li>
+                ))}
+            </ul>
+            {childBlocks.map((block, index) => {
+                switch (block.name) {
+                    case 'core/paragraph':
+                        return <Paragraph key={index} attributes={block.attributes} />;
+                    case 'core/heading':
+                        return <Heading key={index} attributes={block.attributes} />;
+                    case 'f3/field':
+                        return <Field key={index} attributes={block.attributes} />;
+                    default:
+                        return null;
+                }
+            })}
+        </div>
+    );
+}
+
+
+const templateRenderEl = document.getElementById('f3-template');
+if (templateRenderEl) {
+    const childBlocksData = JSON.parse(templateRenderEl.getAttribute('data-child-blocks'));
+    render(<TemplateApp childBlocks={childBlocksData} />, templateRenderEl);
+}

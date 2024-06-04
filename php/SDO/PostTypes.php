@@ -40,13 +40,23 @@ class PostTypes {
             'not_found'          => __( 'No F3 Options Pages found.', 'f3' ),
             'not_found_in_trash' => __( 'No F3 Options Pages found in Trash.', 'f3' )
         );
+
+        $show_ui = false;
+        if( isset( $settings['show_ui' ] ) ) {
+            $show_ui = $settings['show_ui' ];
+        }
+
+        $show_in_menu = false;
+        if( isset( $settings['show_in_menu' ] ) ) {
+            $show_in_menu = $settings['show_in_menu' ];
+        }
     
         $args = array(
             'labels'             => $labels,
             'public'             => true,
             'publicly_queryable' => true,
-            'show_ui'            => false,
-            'show_in_menu'       => false,
+            'show_ui'            => $show_ui,
+            'show_in_menu'       => $show_in_menu,
             'show_in_rest'       => true,
             'query_var'          => true,
             'capability_type'    => 'post',
@@ -55,6 +65,23 @@ class PostTypes {
             'menu_position'      => 20,
             'supports'           => array( 'title', 'author')
         );
+
+        if( isset( $settings['supports_editor' ] ) && $settings['supports_editor'] ) {
+            $args['supports'][] = 'editor';
+        }
+
+        // Add support for template and template_lock based on settings
+        $template_args = array();
+        if( isset( $settings['template' ] ) ) {
+            $template_args['template'] = $settings['template' ];
+        }
+
+        if( isset( $settings['template_lock' ] ) ) {
+            $template_args['template_lock'] = $settings['template_lock' ];
+        }
+
+        // Merge template arguments with $args
+        $args = array_merge($args, $template_args);
     
         register_post_type( $settings['post_type_key'], $args );
     }

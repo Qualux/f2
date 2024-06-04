@@ -1,0 +1,56 @@
+{
+    "name": "field_template",
+    "title": "F3 Field Template SDO",
+    "display_title": "F3 Field Template Manager",
+    "route_base": "field",
+    "post_type": {
+        "post_type_key": "f3-field-template",
+        "label": "F3 Field Template",
+        "show_ui": true,
+        "show_in_menu": true,
+        "supports_editor": true,
+        "template": [
+            [
+                "f3/field"
+            ]
+        ],
+        "template_lock": "insert"
+    },
+    "create": {
+        "button": {
+            "label": "Create Field Template"
+        }
+    },
+    "field_groups": [
+        {
+            "name": "field_group_1",
+            "post_type": "f3-field",
+            "fields": [
+                {
+                    "type": "text",
+                    "label": "Admin Title",
+                    "placeholder": "Enter admin title for display..."
+                }     
+            ]
+        }
+    ],
+    "columns": [
+        { "label": "ID", "columnKey": "ID", "recordKey": "id" },
+        { "label": "Title", "columnKey": "title", "recordKey": "title" },
+        { "label": "", "columnKey": "controls" }
+    ],
+    "filters": [
+        { "key": "search", "label": "SEARCH", "placeholder": "Search by field title...", "type": "text" },
+        { 
+            "key": "records_per_page", 
+            "label": "RECORDS PER PAGE", 
+            "type": "select", 
+            "options": [
+                { "value": "10", "label": "10" },
+                { "value": "25", "label": "25" },
+                { "value": "50", "label": "50" },
+                { "value": "100", "label": "100" }
+            ]
+        }
+    ]
+}

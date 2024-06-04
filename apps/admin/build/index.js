@@ -4743,6 +4743,72 @@ registerBlockType('f3/dynamic-text-field', {
 
 /***/ }),
 
+/***/ "./src/blocks/field.js":
+/*!*****************************!*\
+  !*** ./src/blocks/field.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InspectorControls
+} = wp.blockEditor;
+const {
+  PanelBody,
+  TextControl
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+registerBlockType('f3/field', {
+  title: __('F3 Field', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    name: {
+      type: 'string'
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const {
+      name
+    } = attributes;
+    const onChangeName = newName => {
+      setAttributes({
+        name: newName
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Field Settings', 'f3'),
+      initialOpen: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
+      label: __('Name', 'f3'),
+      value: name,
+      onChange: onChangeName
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: "text",
+      placeholder: name
+    }));
+  },
+  save: ({
+    attributes
+  }) => {
+    return null;
+  }
+});
+
+/***/ }),
+
 /***/ "./src/blocks/query.js":
 /*!*****************************!*\
   !*** ./src/blocks/query.js ***!
@@ -4805,6 +4871,96 @@ registerBlockType('f3/query', {
   },
   save: () => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/template.js":
+/*!********************************!*\
+  !*** ./src/blocks/template.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InnerBlocks,
+  useBlockProps
+} = wp.blockEditor;
+const {
+  __
+} = wp.i18n;
+const {
+  useSelect
+} = wp.data;
+registerBlockType('f3/field-template', {
+  title: __('F3 Field Template', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    childBlocksData: {
+      type: 'array',
+      default: []
+    }
+  },
+  edit: ({
+    clientId,
+    attributes,
+    setAttributes
+  }) => {
+    const blockProps = useBlockProps();
+
+    // Using useSelect to get child blocks during edit
+    const childBlocks = useSelect(select => {
+      const {
+        getBlockOrder,
+        getBlock
+      } = select('core/block-editor');
+      const children = getBlockOrder(clientId).map(innerClientId => {
+        const block = getBlock(innerClientId);
+        return {
+          name: block.name,
+          attributes: block.attributes
+        };
+      });
+      return children;
+    }, [clientId]);
+
+    // Prevent unnecessary updates
+    if (JSON.stringify(childBlocks) !== JSON.stringify(attributes.childBlocksData)) {
+      setAttributes({
+        childBlocksData: childBlocks
+      });
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, null));
+  },
+  save: ({
+    attributes
+  }) => {
+    const blockProps = useBlockProps.save();
+    const {
+      childBlocksData
+    } = attributes;
+    const childBlocksDataJSON = JSON.stringify(childBlocksData);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      style: {
+        display: 'block'
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      id: "f3-field-template",
+      "data-child-blocks": childBlocksDataJSON
+    }, "F3 Template Render DOM Element"));
   }
 });
 
@@ -88847,28 +89003,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.css */ "./src/main.css");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./src/App.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _blocks_dynamic_text_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/dynamic-text-field */ "./src/blocks/dynamic-text-field.js");
 /* harmony import */ var _blocks_dynamic_image_field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/dynamic-image-field */ "./src/blocks/dynamic-image-field.js");
 /* harmony import */ var _blocks_query__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/query */ "./src/blocks/query.js");
-/* harmony import */ var _routes_Dashboard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./routes/Dashboard */ "./src/routes/Dashboard.js");
-/* harmony import */ var _routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./routes/sdo/SDO_MenuRoute */ "./src/routes/sdo/SDO_MenuRoute.js");
-/* harmony import */ var _data_sdo_query_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../data/sdo/query.json */ "../../data/sdo/query.json");
-/* harmony import */ var _data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../data/sdo/post_type.json */ "../../data/sdo/post_type.json");
-/* harmony import */ var _data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../data/sdo/taxonomy.json */ "../../data/sdo/taxonomy.json");
-/* harmony import */ var _data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../data/sdo/options_page.json */ "../../data/sdo/options_page.json");
-/* harmony import */ var _data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../data/sdo/grid.json */ "../../data/sdo/grid.json");
-/* harmony import */ var _data_sdo_form_json__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../data/sdo/form.json */ "../../data/sdo/form.json");
-/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../data/sdo/field.json */ "../../data/sdo/field.json");
-/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
-/* harmony import */ var _routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./routes/sdo/SDO_DashboardRoute */ "./src/routes/sdo/SDO_DashboardRoute.js");
-/* harmony import */ var _routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./routes/sdo/SDO_CreateRoute */ "./src/routes/sdo/SDO_CreateRoute.js");
-/* harmony import */ var _routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./routes/sdo/SDO_EditRoute */ "./src/routes/sdo/SDO_EditRoute.js");
-/* harmony import */ var _routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./routes/sdo/SDO_DeleteRoute */ "./src/routes/sdo/SDO_DeleteRoute.js");
-/* harmony import */ var _routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./routes/sdo/SDO_ViewRoute */ "./src/routes/sdo/SDO_ViewRoute.js");
-/* harmony import */ var _routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./routes/SettingsRoute */ "./src/routes/SettingsRoute.js");
-/* harmony import */ var _routes_Test__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./routes/Test */ "./src/routes/Test.js");
+/* harmony import */ var _blocks_template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./blocks/template */ "./src/blocks/template.js");
+/* harmony import */ var _blocks_field__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/field */ "./src/blocks/field.js");
+/* harmony import */ var _routes_Dashboard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./routes/Dashboard */ "./src/routes/Dashboard.js");
+/* harmony import */ var _routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./routes/sdo/SDO_MenuRoute */ "./src/routes/sdo/SDO_MenuRoute.js");
+/* harmony import */ var _data_sdo_query_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../data/sdo/query.json */ "../../data/sdo/query.json");
+/* harmony import */ var _data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../data/sdo/post_type.json */ "../../data/sdo/post_type.json");
+/* harmony import */ var _data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../data/sdo/taxonomy.json */ "../../data/sdo/taxonomy.json");
+/* harmony import */ var _data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../data/sdo/options_page.json */ "../../data/sdo/options_page.json");
+/* harmony import */ var _data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../data/sdo/grid.json */ "../../data/sdo/grid.json");
+/* harmony import */ var _data_sdo_form_json__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../data/sdo/form.json */ "../../data/sdo/form.json");
+/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../data/sdo/field.json */ "../../data/sdo/field.json");
+/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
+/* harmony import */ var _routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./routes/sdo/SDO_DashboardRoute */ "./src/routes/sdo/SDO_DashboardRoute.js");
+/* harmony import */ var _routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./routes/sdo/SDO_CreateRoute */ "./src/routes/sdo/SDO_CreateRoute.js");
+/* harmony import */ var _routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./routes/sdo/SDO_EditRoute */ "./src/routes/sdo/SDO_EditRoute.js");
+/* harmony import */ var _routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./routes/sdo/SDO_DeleteRoute */ "./src/routes/sdo/SDO_DeleteRoute.js");
+/* harmony import */ var _routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./routes/sdo/SDO_ViewRoute */ "./src/routes/sdo/SDO_ViewRoute.js");
+/* harmony import */ var _routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./routes/SettingsRoute */ "./src/routes/SettingsRoute.js");
+/* harmony import */ var _routes_Test__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./routes/Test */ "./src/routes/Test.js");
 
 const {
   render
@@ -88878,6 +89036,8 @@ const {
 
 
 /* Gutenberg Blocks. */
+
+
 
 
 
@@ -88912,27 +89072,27 @@ const {
 function makeSDO_Routes(sdo) {
   const routes = {
     path: sdo.route_base,
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_18__["default"], {
       sdo: sdo
     }),
     children: [{
       path: "create",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_19__["default"], {
         sdo: sdo
       })
     }, {
       path: "edit/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_20__["default"], {
         sdo: sdo
       })
     }, {
       path: "delete/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_21__["default"], {
         sdo: sdo
       })
     }, {
       path: "view/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_22__["default"], {
         sdo: sdo
       })
     }]
@@ -88941,37 +89101,37 @@ function makeSDO_Routes(sdo) {
 }
 
 /* Query Routes */
-const queryRoutes = makeSDO_Routes(_data_sdo_query_json__WEBPACK_IMPORTED_MODULE_8__);
-const postTypeRoutes = makeSDO_Routes(_data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_9__);
-const taxonomyRoutes = makeSDO_Routes(_data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_10__);
-const optionsPageRoutes = makeSDO_Routes(_data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_11__);
-const gridRoutes = makeSDO_Routes(_data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_12__);
-const formRoutes = makeSDO_Routes(_data_sdo_form_json__WEBPACK_IMPORTED_MODULE_13__);
-const fieldRoutes = makeSDO_Routes(_data_sdo_field_json__WEBPACK_IMPORTED_MODULE_14__);
-const fieldGroupRoutes = makeSDO_Routes(_data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_15__);
-const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_23__.createHashRouter)([{
+const queryRoutes = makeSDO_Routes(_data_sdo_query_json__WEBPACK_IMPORTED_MODULE_10__);
+const postTypeRoutes = makeSDO_Routes(_data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_11__);
+const taxonomyRoutes = makeSDO_Routes(_data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_12__);
+const optionsPageRoutes = makeSDO_Routes(_data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_13__);
+const gridRoutes = makeSDO_Routes(_data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_14__);
+const formRoutes = makeSDO_Routes(_data_sdo_form_json__WEBPACK_IMPORTED_MODULE_15__);
+const fieldRoutes = makeSDO_Routes(_data_sdo_field_json__WEBPACK_IMPORTED_MODULE_16__);
+const fieldGroupRoutes = makeSDO_Routes(_data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_17__);
+const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_25__.createHashRouter)([{
   path: "/",
   element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null),
   children: [{
     index: true,
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Dashboard__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Dashboard__WEBPACK_IMPORTED_MODULE_8__["default"], null)
   }, {
     path: "sdo",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_7__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_9__["default"], null)
   }, {
     path: "test",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Test__WEBPACK_IMPORTED_MODULE_22__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Test__WEBPACK_IMPORTED_MODULE_24__["default"], null)
   }, {
     path: "settings",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_21__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_23__["default"], null)
   }, queryRoutes, postTypeRoutes, taxonomyRoutes, optionsPageRoutes, gridRoutes, formRoutes, fieldRoutes, fieldGroupRoutes]
 }]);
 document.addEventListener('DOMContentLoaded', () => {
   const renderEl = document.getElementById('f3-admin');
   if (renderEl) {
-    render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_23__.RouterProvider, {
+    render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_25__.RouterProvider, {
       router: router
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_24__.Outlet, null)), renderEl);
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_26__.Outlet, null)), renderEl);
   }
 });
 })();

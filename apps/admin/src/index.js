@@ -11,6 +11,8 @@ import {
 import './blocks/dynamic-text-field';
 import './blocks/dynamic-image-field';
 import './blocks/query';
+import './blocks/template';
+import './blocks/field';
 
 /* Standard App. */
 
@@ -113,6 +115,7 @@ const router = createHashRouter([
 ]);
 
 document.addEventListener('DOMContentLoaded', () => {
+
     const renderEl = document.getElementById('f3-admin');
     if (renderEl) {
         render(
@@ -122,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderEl
         );
     }
+
 });
 
 
