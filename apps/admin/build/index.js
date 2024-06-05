@@ -4743,6 +4743,81 @@ registerBlockType('f3/dynamic-text-field', {
 
 /***/ }),
 
+/***/ "./src/blocks/field-group.js":
+/*!***********************************!*\
+  !*** ./src/blocks/field-group.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InspectorControls,
+  InnerBlocks,
+  useBlockProps
+} = wp.blockEditor;
+const {
+  PanelBody,
+  TextControl
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+registerBlockType('f3/field-group', {
+  title: __('F3 Field Group', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    name: {
+      type: 'string'
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const blockProps = useBlockProps();
+    const {
+      name
+    } = attributes;
+    const onChangeName = newName => {
+      setAttributes({
+        name: newName
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Field Group Settings', 'f3'),
+      initialOpen: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
+      label: __('Name', 'f3'),
+      value: name,
+      onChange: onChangeName
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, null)));
+  },
+  save: ({
+    attributes
+  }) => {
+    const blockProps = useBlockProps.save();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      style: {
+        display: 'block'
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null)));
+  }
+});
+
+/***/ }),
+
 /***/ "./src/blocks/field-template.js":
 /*!**************************************!*\
   !*** ./src/blocks/field-template.js ***!
@@ -4783,8 +4858,16 @@ registerBlockType('f3/field-template', {
     setAttributes
   }) => {
     const blockProps = useBlockProps();
-
-    // Using useSelect to get child blocks during edit
+    const buildAttributes = blocks => {
+      return blocks.map(block => {
+        const childBlocks = block.innerBlocks.length > 0 ? buildAttributes(block.innerBlocks) : [];
+        return {
+          name: block.name,
+          attributes: block.attributes,
+          childBlocks: childBlocks
+        };
+      });
+    };
     const childBlocks = useSelect(select => {
       const {
         getBlockOrder,
@@ -4794,10 +4877,11 @@ registerBlockType('f3/field-template', {
         const block = getBlock(innerClientId);
         return {
           name: block.name,
-          attributes: block.attributes
+          attributes: block.attributes,
+          innerBlocks: block.innerBlocks
         };
       });
-      return children;
+      return buildAttributes(children);
     }, [clientId]);
 
     // Prevent unnecessary updates
@@ -4899,6 +4983,148 @@ registerBlockType('f3/field', {
 
 /***/ }),
 
+/***/ "./src/blocks/helper.js":
+/*!******************************!*\
+  !*** ./src/blocks/helper.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InspectorControls,
+  useBlockProps
+} = wp.blockEditor;
+const {
+  PanelBody
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+const {
+  RichText
+} = wp.editor; // Import RichText component
+
+registerBlockType('f3/helper', {
+  title: __('F3 Helper', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    text: {
+      type: 'string',
+      source: 'html',
+      selector: 'h2',
+      default: ''
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const blockProps = useBlockProps();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RichText, {
+      ...blockProps,
+      tagName: "h2",
+      label: __('Text', 'f3'),
+      value: attributes.text,
+      onChange: text => setAttributes({
+        text
+      }),
+      placeholder: "Add helper text for this field..."
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Instruction Settings', 'f3'),
+      initialOpen: true
+    })));
+  },
+  save({
+    attributes
+  }) {
+    const blockProps = useBlockProps.save();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RichText.Content, {
+      ...blockProps,
+      tagName: "h2",
+      value: attributes.text
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/instructions.js":
+/*!************************************!*\
+  !*** ./src/blocks/instructions.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InspectorControls
+} = wp.blockEditor;
+const {
+  PanelBody
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+const {
+  RichText
+} = wp.editor; // Import RichText component
+
+registerBlockType('f3/instructions', {
+  title: __('F3 Instructions', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    text: {
+      type: 'string',
+      source: 'html',
+      selector: 'div',
+      default: ''
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const {
+      text
+    } = attributes;
+    const onChangeText = newText => {
+      setAttributes({
+        text: newText
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RichText, {
+      label: __('Text', 'f3'),
+      value: text,
+      onChange: onChangeText
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Instruction Settings', 'f3'),
+      initialOpen: true
+    })));
+  },
+  save: ({
+    attributes
+  }) => {
+    return null;
+  }
+});
+
+/***/ }),
+
 /***/ "./src/blocks/label.js":
 /*!*****************************!*\
   !*** ./src/blocks/label.js ***!
@@ -4947,6 +5173,69 @@ registerBlockType('f3/label', {
     };
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
       title: __('Label Settings', 'f3'),
+      initialOpen: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
+      label: __('Text', 'f3'),
+      value: text,
+      onChange: onChangeText
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, text));
+  },
+  save: ({
+    attributes
+  }) => {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/prepend.js":
+/*!*******************************!*\
+  !*** ./src/blocks/prepend.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InspectorControls
+} = wp.blockEditor;
+const {
+  PanelBody,
+  TextControl
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+registerBlockType('f3/prepend', {
+  title: __('F3 Field Prepend', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    text: {
+      type: 'string'
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const {
+      text
+    } = attributes;
+    const onChangeText = newText => {
+      setAttributes({
+        text: newText
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Prepend Settings', 'f3'),
       initialOpen: true
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
       label: __('Text', 'f3'),
@@ -5025,6 +5314,62 @@ registerBlockType('f3/query', {
   },
   save: () => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/row.js":
+/*!***************************!*\
+  !*** ./src/blocks/row.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  InspectorControls,
+  InnerBlocks,
+  useBlockProps
+} = wp.blockEditor;
+const {
+  PanelBody,
+  TextControl
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+registerBlockType('f3/row', {
+  title: __('F3 Row', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {},
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const blockProps = useBlockProps();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, null)));
+  },
+  save: ({
+    attributes
+  }) => {
+    const blockProps = useBlockProps.save();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      style: {
+        display: 'block'
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null)));
   }
 });
 
@@ -89067,31 +89412,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.css */ "./src/main.css");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./src/App.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _blocks_dynamic_text_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/dynamic-text-field */ "./src/blocks/dynamic-text-field.js");
 /* harmony import */ var _blocks_dynamic_image_field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/dynamic-image-field */ "./src/blocks/dynamic-image-field.js");
 /* harmony import */ var _blocks_query__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/query */ "./src/blocks/query.js");
 /* harmony import */ var _blocks_field_template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./blocks/field-template */ "./src/blocks/field-template.js");
-/* harmony import */ var _blocks_field__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/field */ "./src/blocks/field.js");
-/* harmony import */ var _blocks_label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./blocks/label */ "./src/blocks/label.js");
-/* harmony import */ var _routes_Dashboard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./routes/Dashboard */ "./src/routes/Dashboard.js");
-/* harmony import */ var _routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./routes/sdo/SDO_MenuRoute */ "./src/routes/sdo/SDO_MenuRoute.js");
-/* harmony import */ var _data_sdo_query_json__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../data/sdo/query.json */ "../../data/sdo/query.json");
-/* harmony import */ var _data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../data/sdo/post_type.json */ "../../data/sdo/post_type.json");
-/* harmony import */ var _data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../data/sdo/taxonomy.json */ "../../data/sdo/taxonomy.json");
-/* harmony import */ var _data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../data/sdo/options_page.json */ "../../data/sdo/options_page.json");
-/* harmony import */ var _data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../data/sdo/grid.json */ "../../data/sdo/grid.json");
-/* harmony import */ var _data_sdo_form_json__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../data/sdo/form.json */ "../../data/sdo/form.json");
-/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../data/sdo/field.json */ "../../data/sdo/field.json");
-/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
-/* harmony import */ var _routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./routes/sdo/SDO_DashboardRoute */ "./src/routes/sdo/SDO_DashboardRoute.js");
-/* harmony import */ var _routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./routes/sdo/SDO_CreateRoute */ "./src/routes/sdo/SDO_CreateRoute.js");
-/* harmony import */ var _routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./routes/sdo/SDO_EditRoute */ "./src/routes/sdo/SDO_EditRoute.js");
-/* harmony import */ var _routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./routes/sdo/SDO_DeleteRoute */ "./src/routes/sdo/SDO_DeleteRoute.js");
-/* harmony import */ var _routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./routes/sdo/SDO_ViewRoute */ "./src/routes/sdo/SDO_ViewRoute.js");
-/* harmony import */ var _routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./routes/SettingsRoute */ "./src/routes/SettingsRoute.js");
-/* harmony import */ var _routes_Test__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./routes/Test */ "./src/routes/Test.js");
+/* harmony import */ var _blocks_field_group__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/field-group */ "./src/blocks/field-group.js");
+/* harmony import */ var _blocks_field__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./blocks/field */ "./src/blocks/field.js");
+/* harmony import */ var _blocks_label__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./blocks/label */ "./src/blocks/label.js");
+/* harmony import */ var _blocks_instructions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./blocks/instructions */ "./src/blocks/instructions.js");
+/* harmony import */ var _blocks_row__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./blocks/row */ "./src/blocks/row.js");
+/* harmony import */ var _blocks_prepend__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./blocks/prepend */ "./src/blocks/prepend.js");
+/* harmony import */ var _blocks_helper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./blocks/helper */ "./src/blocks/helper.js");
+/* harmony import */ var _routes_Dashboard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./routes/Dashboard */ "./src/routes/Dashboard.js");
+/* harmony import */ var _routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./routes/sdo/SDO_MenuRoute */ "./src/routes/sdo/SDO_MenuRoute.js");
+/* harmony import */ var _data_sdo_query_json__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../data/sdo/query.json */ "../../data/sdo/query.json");
+/* harmony import */ var _data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../data/sdo/post_type.json */ "../../data/sdo/post_type.json");
+/* harmony import */ var _data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../data/sdo/taxonomy.json */ "../../data/sdo/taxonomy.json");
+/* harmony import */ var _data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../data/sdo/options_page.json */ "../../data/sdo/options_page.json");
+/* harmony import */ var _data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../data/sdo/grid.json */ "../../data/sdo/grid.json");
+/* harmony import */ var _data_sdo_form_json__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../data/sdo/form.json */ "../../data/sdo/form.json");
+/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../data/sdo/field.json */ "../../data/sdo/field.json");
+/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
+/* harmony import */ var _routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./routes/sdo/SDO_DashboardRoute */ "./src/routes/sdo/SDO_DashboardRoute.js");
+/* harmony import */ var _routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./routes/sdo/SDO_CreateRoute */ "./src/routes/sdo/SDO_CreateRoute.js");
+/* harmony import */ var _routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./routes/sdo/SDO_EditRoute */ "./src/routes/sdo/SDO_EditRoute.js");
+/* harmony import */ var _routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./routes/sdo/SDO_DeleteRoute */ "./src/routes/sdo/SDO_DeleteRoute.js");
+/* harmony import */ var _routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./routes/sdo/SDO_ViewRoute */ "./src/routes/sdo/SDO_ViewRoute.js");
+/* harmony import */ var _routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./routes/SettingsRoute */ "./src/routes/SettingsRoute.js");
+/* harmony import */ var _routes_Test__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./routes/Test */ "./src/routes/Test.js");
 
 const {
   render
@@ -89101,6 +89451,11 @@ const {
 
 
 /* Gutenberg Blocks. */
+
+
+
+
+
 
 
 
@@ -89138,27 +89493,27 @@ const {
 function makeSDO_Routes(sdo) {
   const routes = {
     path: sdo.route_base,
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_24__["default"], {
       sdo: sdo
     }),
     children: [{
       path: "create",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_25__["default"], {
         sdo: sdo
       })
     }, {
       path: "edit/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_26__["default"], {
         sdo: sdo
       })
     }, {
       path: "delete/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_27__["default"], {
         sdo: sdo
       })
     }, {
       path: "view/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_28__["default"], {
         sdo: sdo
       })
     }]
@@ -89167,37 +89522,37 @@ function makeSDO_Routes(sdo) {
 }
 
 /* Query Routes */
-const queryRoutes = makeSDO_Routes(_data_sdo_query_json__WEBPACK_IMPORTED_MODULE_11__);
-const postTypeRoutes = makeSDO_Routes(_data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_12__);
-const taxonomyRoutes = makeSDO_Routes(_data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_13__);
-const optionsPageRoutes = makeSDO_Routes(_data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_14__);
-const gridRoutes = makeSDO_Routes(_data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_15__);
-const formRoutes = makeSDO_Routes(_data_sdo_form_json__WEBPACK_IMPORTED_MODULE_16__);
-const fieldRoutes = makeSDO_Routes(_data_sdo_field_json__WEBPACK_IMPORTED_MODULE_17__);
-const fieldGroupRoutes = makeSDO_Routes(_data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_18__);
-const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_26__.createHashRouter)([{
+const queryRoutes = makeSDO_Routes(_data_sdo_query_json__WEBPACK_IMPORTED_MODULE_16__);
+const postTypeRoutes = makeSDO_Routes(_data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_17__);
+const taxonomyRoutes = makeSDO_Routes(_data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_18__);
+const optionsPageRoutes = makeSDO_Routes(_data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_19__);
+const gridRoutes = makeSDO_Routes(_data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_20__);
+const formRoutes = makeSDO_Routes(_data_sdo_form_json__WEBPACK_IMPORTED_MODULE_21__);
+const fieldRoutes = makeSDO_Routes(_data_sdo_field_json__WEBPACK_IMPORTED_MODULE_22__);
+const fieldGroupRoutes = makeSDO_Routes(_data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_23__);
+const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_31__.createHashRouter)([{
   path: "/",
   element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null),
   children: [{
     index: true,
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Dashboard__WEBPACK_IMPORTED_MODULE_9__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Dashboard__WEBPACK_IMPORTED_MODULE_14__["default"], null)
   }, {
     path: "sdo",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_10__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_15__["default"], null)
   }, {
     path: "test",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Test__WEBPACK_IMPORTED_MODULE_25__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Test__WEBPACK_IMPORTED_MODULE_30__["default"], null)
   }, {
     path: "settings",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_24__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_29__["default"], null)
   }, queryRoutes, postTypeRoutes, taxonomyRoutes, optionsPageRoutes, gridRoutes, formRoutes, fieldRoutes, fieldGroupRoutes]
 }]);
 document.addEventListener('DOMContentLoaded', () => {
   const renderEl = document.getElementById('f3-admin');
   if (renderEl) {
-    render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_26__.RouterProvider, {
+    render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_31__.RouterProvider, {
       router: router
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_27__.Outlet, null)), renderEl);
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_32__.Outlet, null)), renderEl);
   }
 });
 })();

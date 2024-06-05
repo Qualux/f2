@@ -130,37 +130,116 @@ function Label({ attributes }) {
 
 }
 
+function Instructions({ attributes }) {
+
+    return(
+        <div class="f3-field-instructions">{attributes.text}</div>
+    );
+
+}
+
+function Prepend({ attributes }) {
+
+    return(
+        <div class="f3-field-prepend">{attributes.text}</div>
+    );
+
+}
+
+function Helper({ attributes }) {
+
+    return(
+        <div class="f3-helper">{attributes.text}</div>
+    );
+
+}
+
+function FieldGroup({ attributes, childBlocks }) {
+
+    return(
+        <div class="f3-field-group">
+            {renderChildBlocks(childBlocks)}
+        </div>
+    );
+
+}
+
+function Row({ attributes, childBlocks }) {
+
+    return(
+        <div class="f3-row" style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            {renderChildBlocks(childBlocks)}
+        </div>
+    );
+
+}
+
+function CoreGroup({ attributes, childBlocks }) {
+
+    return(
+        <div class="f3-row" style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            {renderChildBlocks(childBlocks)}
+        </div>
+    );
+
+}
+
+function renderChildBlocks(childBlocks) {
+
+    console.log('childBlocks in renderChildBlocks:', childBlocks)
+
+    return childBlocks.map((block, index) => {
+        switch (block.name) {
+            case 'f3/field-group':
+                return <FieldGroup key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
+            case 'f3/field':
+                return <Field key={index} attributes={block.attributes} />;
+            case 'f3/label':
+                return <Label key={index} attributes={block.attributes} />;
+            case 'f3/instructions':
+                return <Instructions key={index} attributes={block.attributes} />;
+            case 'f3/row':
+                return <Row key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
+            case 'f3/prepend':
+                return <Prepend key={index} attributes={block.attributes} />;
+            case 'f3/helper':
+                return <Helper key={index} attributes={block.attributes} />;
+            case 'core/group':
+                return <CoreGroup key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
+            default:
+                return null;
+        }
+    });
+}
+
+const AttributeList = ({ items }) => (
+    <ul>
+        {items.map((item, index) => (
+            <li key={index}>
+                <strong>{item.name}</strong>
+                {item.attributes && Object.entries(item.attributes).length > 0 && (
+                    <ul>
+                        {Object.entries(item.attributes).map(([attrName, attrValue]) => (
+                            <li key={attrName}>{`${attrName}: ${attrValue}`}</li>
+                        ))}
+                    </ul>
+                )}
+                {item.childBlocks && item.childBlocks.length > 0 && <AttributeList items={item.childBlocks} />}
+            </li>
+        ))}
+    </ul>
+);
+
 function TemplateApp({ childBlocks }) {
     return (
         <div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 600 }}>
-                Attribute List
-            </h2>
-            <ul>
-                {childBlocks.map((block, index) => (
-                    <li key={index}>
-                        <strong>{block.name}</strong>
-                        <ul>
-                            {Object.entries(block.attributes).map(([attrName, attrValue]) => (
-                                <li key={attrName}>{`${attrName}: ${attrValue}`}</li>
-                            ))}
-                        </ul>
-                    </li>
-                ))}
-            </ul>
-            {childBlocks.map((block, index) => {
-                switch (block.name) {
-                    case 'f3/field':
-                        return <Field key={index} attributes={block.attributes} />;
-                    case 'f3/label':
-                        return <Label key={index} attributes={block.attributes} />;
-                    default:
-                        return null;
-                }
-            })}
+            <AttributeList items={childBlocks} />
+            {renderChildBlocks(childBlocks)}
         </div>
     );
 }
+
+
 
 
 const templateRenderEl = document.getElementById('f3-field-template');

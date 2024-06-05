@@ -12,8 +12,13 @@ import './blocks/dynamic-text-field';
 import './blocks/dynamic-image-field';
 import './blocks/query';
 import './blocks/field-template';
+import './blocks/field-group';
 import './blocks/field';
 import './blocks/label';
+import './blocks/instructions';
+import './blocks/row';
+import './blocks/prepend';
+import './blocks/helper';
 
 /* Standard App. */
 

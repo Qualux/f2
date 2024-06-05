@@ -35486,20 +35486,71 @@ function Label({
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, attributes.text);
 }
-function TemplateApp({
+function Instructions({
+  attributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-field-instructions"
+  }, attributes.text);
+}
+function Prepend({
+  attributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-field-prepend"
+  }, attributes.text);
+}
+function Helper({
+  attributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-helper"
+  }, attributes.text);
+}
+function FieldGroup({
+  attributes,
   childBlocks
 }) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-field-group"
+  }, renderChildBlocks(childBlocks));
+}
+function Row({
+  attributes,
+  childBlocks
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-row",
     style: {
-      fontSize: '2rem',
-      fontWeight: 600
+      display: 'flex',
+      alignItems: 'center',
+      gap: '2px'
     }
-  }, "Attribute List"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, childBlocks.map((block, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    key: index
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, block.name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, Object.entries(block.attributes).map(([attrName, attrValue]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
-    key: attrName
-  }, `${attrName}: ${attrValue}`)))))), childBlocks.map((block, index) => {
+  }, renderChildBlocks(childBlocks));
+}
+function CoreGroup({
+  attributes,
+  childBlocks
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-row",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '2px'
+    }
+  }, renderChildBlocks(childBlocks));
+}
+function renderChildBlocks(childBlocks) {
+  console.log('childBlocks in renderChildBlocks:', childBlocks);
+  return childBlocks.map((block, index) => {
     switch (block.name) {
+      case 'f3/field-group':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldGroup, {
+          key: index,
+          attributes: block.attributes,
+          childBlocks: block.childBlocks
+        });
       case 'f3/field':
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Field, {
           key: index,
@@ -35510,10 +35561,53 @@ function TemplateApp({
           key: index,
           attributes: block.attributes
         });
+      case 'f3/instructions':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Instructions, {
+          key: index,
+          attributes: block.attributes
+        });
+      case 'f3/row':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Row, {
+          key: index,
+          attributes: block.attributes,
+          childBlocks: block.childBlocks
+        });
+      case 'f3/prepend':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Prepend, {
+          key: index,
+          attributes: block.attributes
+        });
+      case 'f3/helper':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Helper, {
+          key: index,
+          attributes: block.attributes
+        });
+      case 'core/group':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CoreGroup, {
+          key: index,
+          attributes: block.attributes,
+          childBlocks: block.childBlocks
+        });
       default:
         return null;
     }
-  }));
+  });
+}
+const AttributeList = ({
+  items
+}) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, items.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+  key: index
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, item.name), item.attributes && Object.entries(item.attributes).length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, Object.entries(item.attributes).map(([attrName, attrValue]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+  key: attrName
+}, `${attrName}: ${attrValue}`))), item.childBlocks && item.childBlocks.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AttributeList, {
+  items: item.childBlocks
+}))));
+function TemplateApp({
+  childBlocks
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AttributeList, {
+    items: childBlocks
+  }), renderChildBlocks(childBlocks));
 }
 const templateRenderEl = document.getElementById('f3-field-template');
 if (templateRenderEl) {
