@@ -19,6 +19,7 @@ import './blocks/instructions';
 import './blocks/row';
 import './blocks/prepend';
 import './blocks/helper';
+import './blocks/submit-button';
 
 /* Standard App. */
 

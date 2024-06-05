@@ -35541,6 +35541,13 @@ function CoreGroup({
     }
   }, renderChildBlocks(childBlocks));
 }
+function SubmitButton({
+  attributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "f3-submit-button"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", null, "SAVE"));
+}
 function renderChildBlocks(childBlocks) {
   console.log('childBlocks in renderChildBlocks:', childBlocks);
   return childBlocks.map((block, index) => {
@@ -35587,6 +35594,11 @@ function renderChildBlocks(childBlocks) {
           key: index,
           attributes: block.attributes,
           childBlocks: block.childBlocks
+        });
+      case 'f3/submit-button':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SubmitButton, {
+          key: index,
+          attributes: block.attributes
         });
       default:
         return null;

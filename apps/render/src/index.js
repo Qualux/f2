@@ -184,6 +184,18 @@ function CoreGroup({ attributes, childBlocks }) {
 
 }
 
+function SubmitButton({ attributes }) {
+
+    return(
+        <div class="f3-submit-button">
+            <button>
+                SAVE
+            </button>
+        </div>
+    );
+
+}
+
 function renderChildBlocks(childBlocks) {
 
     console.log('childBlocks in renderChildBlocks:', childBlocks)
@@ -206,6 +218,8 @@ function renderChildBlocks(childBlocks) {
                 return <Helper key={index} attributes={block.attributes} />;
             case 'core/group':
                 return <CoreGroup key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
+            case 'f3/submit-button':
+                return <SubmitButton key={index} attributes={block.attributes} />;
             default:
                 return null;
         }
