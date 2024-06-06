@@ -5162,6 +5162,9 @@ registerBlockType('f3/field', {
   }) => {
     let fieldTypeBlock = 'text';
     switch (attributes.fieldType) {
+      case 'text':
+        fieldTypeBlock = 'f3/text-field';
+        break;
       case 'select':
         fieldTypeBlock = 'f3/select-field';
         break;
@@ -5199,7 +5202,7 @@ registerBlockType('f3/field', {
   }
 });
 
-// Register the select field variation
+// Register field type variations.
 registerBlockVariation('f3/field', {
   name: 'select-field',
   // Machine-readable identifier without spaces or special characters
@@ -5207,6 +5210,16 @@ registerBlockVariation('f3/field', {
   // Display name for the block variation
   attributes: {
     fieldType: 'select'
+  },
+  isActive: ['fieldType']
+});
+registerBlockVariation('f3/field', {
+  name: 'text-field',
+  // Machine-readable identifier without spaces or special characters
+  title: __('Text Field', 'f3'),
+  // Display name for the block variation
+  attributes: {
+    fieldType: 'text'
   },
   isActive: ['fieldType']
 });
@@ -5223,6 +5236,7 @@ registerBlockVariation('f3/field', {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "../shared/index.js");
 
 const {
   registerBlockType,
@@ -5233,12 +5247,12 @@ const {
 } = wp.blockEditor;
 const {
   PanelBody,
-  TextControl,
-  SelectControl
+  TextControl
 } = wp.components;
 const {
   __
 } = wp.i18n;
+
 
 // Register the base block
 registerBlockType('f3/select-field', {
@@ -5259,6 +5273,28 @@ registerBlockType('f3/select-field', {
     setAttributes
   }) => {
     const {
+      FieldRender
+    } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFieldRender)();
+    const formData = {
+      form: {
+        field_groups: [{
+          title: 'fg1',
+          fields: [{
+            type: 'text',
+            name: 'field_1'
+          }]
+        }]
+      },
+      recordId: 0,
+      API: {}
+    };
+    const {
+      FormManagerProvider
+    } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+    function formSubmitHandler(data) {
+      console.log('submitted form: ', data);
+    }
+    const {
       name
     } = attributes;
     const onChangeName = newName => {
@@ -5273,10 +5309,22 @@ registerBlockType('f3/select-field', {
       label: __('Name', 'f3'),
       value: name,
       onChange: onChangeName
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      type: "text",
-      placeholder: "SELECT FIELD..."
-    }));
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerProvider, {
+      formData: formData,
+      formSubmitHandler: formSubmitHandler
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
+      field: {
+        type: 'select',
+        name: 'select_1',
+        choices: [{
+          value: 1,
+          label: 'One'
+        }, {
+          value: 2,
+          label: 'Two'
+        }]
+      }
+    })));
   },
   save: ({
     attributes
@@ -5297,6 +5345,7 @@ registerBlockType('f3/select-field', {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "../shared/index.js");
 
 const {
   registerBlockType,
@@ -5313,6 +5362,7 @@ const {
 const {
   __
 } = wp.i18n;
+
 
 // Register the base block
 registerBlockType('f3/text-field', {
@@ -5333,6 +5383,28 @@ registerBlockType('f3/text-field', {
     setAttributes
   }) => {
     const {
+      FieldRender
+    } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFieldRender)();
+    const formData = {
+      form: {
+        field_groups: [{
+          title: 'fg1',
+          fields: [{
+            type: 'text',
+            name: 'field_1'
+          }]
+        }]
+      },
+      recordId: 0,
+      API: {}
+    };
+    const {
+      FormManagerProvider
+    } = (0,shared__WEBPACK_IMPORTED_MODULE_1__.useFormManager)();
+    function formSubmitHandler(data) {
+      console.log('submitted form: ', data);
+    }
+    const {
       name
     } = attributes;
     const onChangeName = newName => {
@@ -5347,10 +5419,15 @@ registerBlockType('f3/text-field', {
       label: __('Name', 'f3'),
       value: name,
       onChange: onChangeName
-    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      type: "text",
-      placeholder: name
-    }));
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerProvider, {
+      formData: formData,
+      formSubmitHandler: formSubmitHandler
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
+      field: {
+        type: 'text',
+        name: 't1'
+      }
+    })));
   },
   save: ({
     attributes

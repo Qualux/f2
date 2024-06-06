@@ -21,6 +21,9 @@ registerBlockType('f3/field', {
 
         let fieldTypeBlock = 'text';
         switch(attributes.fieldType) {
+            case 'text':
+                fieldTypeBlock = 'f3/text-field'
+                break;
             case 'select':
                 fieldTypeBlock = 'f3/select-field'
                 break;
@@ -78,7 +81,7 @@ registerBlockType('f3/field', {
     },
 });
 
-// Register the select field variation
+// Register field type variations.
 registerBlockVariation(
     'f3/field', 
     {
@@ -86,6 +89,18 @@ registerBlockVariation(
         title: __('Select Field', 'f3'), // Display name for the block variation
         attributes: {
             fieldType: 'select'
+        },
+        isActive: ['fieldType']
+    }
+);
+
+registerBlockVariation(
+    'f3/field', 
+    {
+        name: 'text-field', // Machine-readable identifier without spaces or special characters
+        title: __('Text Field', 'f3'), // Display name for the block variation
+        attributes: {
+            fieldType: 'text'
         },
         isActive: ['fieldType']
     }

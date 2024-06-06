@@ -1,7 +1,8 @@
 const { registerBlockType, registerBlockVariation } = wp.blocks;
 const { InspectorControls } = wp.blockEditor;
-const { PanelBody, TextControl, SelectControl } = wp.components;
+const { PanelBody, TextControl } = wp.components;
 const { __ } = wp.i18n;
+import { useFieldRender, useFormManager } from 'shared';
 
 // Register the base block
 registerBlockType('f3/select-field', {
@@ -18,6 +19,35 @@ registerBlockType('f3/select-field', {
         },
     },
     edit: ({attributes, setAttributes}) => {
+
+        const {FieldRender} = useFieldRender();
+
+        const formData = {
+            form: {
+                field_groups: [
+                    {
+                        title: 'fg1',
+                        fields: [
+                            {
+                                type: 'text',
+                                name: 'field_1'
+                            }
+                        ]
+                    }
+                ]
+            },
+            recordId: 0,
+            API: {},
+        }
+
+        const { 
+            FormManagerProvider, 
+        } = useFormManager();
+
+        function formSubmitHandler(data) {
+            console.log('submitted form: ', data)
+        }
+
         const { name } = attributes;
 
         const onChangeName = (newName) => {
@@ -35,7 +65,29 @@ registerBlockType('f3/select-field', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <input type="text" placeholder="SELECT FIELD..." />
+                <FormManagerProvider 
+                    formData={formData}
+                    formSubmitHandler={formSubmitHandler}
+                >
+                    <FieldRender 
+                        field={
+                            {
+                                type: 'select',
+                                name: 'select_1',
+                                choices: [
+                                    {
+                                        value: 1,
+                                        label: 'One',
+                                    },
+                                    {
+                                        value: 2,
+                                        label: 'Two',
+                                    }
+                                ]
+                            }                    
+                        }
+                    />
+                </FormManagerProvider>
             </main>
         );
     },

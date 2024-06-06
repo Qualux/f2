@@ -35474,12 +35474,12 @@ document.querySelectorAll('.f3-form').forEach(element => {
  */
 
 function Field({
-  attributes
+  attributes,
+  childBlocks
 }) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    placeholder: attributes.name
-  });
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "f3-field"
+  }, renderChildBlocks(childBlocks));
 }
 function Label({
   attributes
@@ -35550,6 +35550,9 @@ function SubmitButton({
 }
 function renderChildBlocks(childBlocks) {
   console.log('childBlocks in renderChildBlocks:', childBlocks);
+  const {
+    FieldRender
+  } = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useFieldRender)();
   return childBlocks.map((block, index) => {
     switch (block.name) {
       case 'f3/field-group':
@@ -35561,7 +35564,8 @@ function renderChildBlocks(childBlocks) {
       case 'f3/field':
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Field, {
           key: index,
-          attributes: block.attributes
+          attributes: block.attributes,
+          childBlocks: block.childBlocks
         });
       case 'f3/label':
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Label, {
@@ -35600,6 +35604,27 @@ function renderChildBlocks(childBlocks) {
           key: index,
           attributes: block.attributes
         });
+      case 'f3/select-field':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
+          field: {
+            type: 'select',
+            name: 's1',
+            choices: [{
+              value: 1,
+              label: 'One'
+            }, {
+              value: 2,
+              label: 'Two'
+            }]
+          }
+        });
+      case 'f3/text-field':
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldRender, {
+          field: {
+            type: 'text',
+            name: 't1'
+          }
+        });
       default:
         return null;
     }
@@ -35617,9 +35642,32 @@ const AttributeList = ({
 function TemplateApp({
   childBlocks
 }) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AttributeList, {
+  const saveAPI = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useSaveAPI)();
+  const {
+    FormManagerProvider
+  } = (0,shared__WEBPACK_IMPORTED_MODULE_2__.useFormManager)();
+  const formData = {
+    form: {
+      field_groups: [{
+        title: 'fg1',
+        fields: [{
+          type: 'text',
+          name: 'field_1'
+        }]
+      }]
+    },
+    recordId: 0,
+    API: {}
+  };
+  function formSubmitHandler(data) {
+    console.log('submitted form: ', data);
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FormManagerProvider, {
+    formData: formData,
+    formSubmitHandler: formSubmitHandler
+  }, renderChildBlocks(childBlocks)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(AttributeList, {
     items: childBlocks
-  }), renderChildBlocks(childBlocks));
+  }));
 }
 const templateRenderEl = document.getElementById('f3-field-template');
 if (templateRenderEl) {

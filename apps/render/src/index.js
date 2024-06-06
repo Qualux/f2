@@ -2,7 +2,7 @@ const { createRoot, render, useEffect, useState } = wp.element;
 import './main.css';
 import { useFormManager } from 'shared';
 import { interceptTaxonomyFormSubmission } from './utils/interceptTaxonomyFormSubmission';
-import { useStandardAPI, useSaveAPI } from 'shared';
+import { useStandardAPI, useSaveAPI, useFieldRender } from 'shared';
 
 const fieldGroups = [
     {
@@ -114,10 +114,12 @@ document.querySelectorAll('.f3-form').forEach(element => {
  *
  */
 
-function Field({ attributes }) {
+function Field({ attributes, childBlocks }) {
 
     return(
-        <input type="text" placeholder={attributes.name} />
+        <div className="f3-field">
+            {renderChildBlocks(childBlocks)}
+        </div>
     );
 
 }
@@ -199,13 +201,14 @@ function SubmitButton({ attributes }) {
 function renderChildBlocks(childBlocks) {
 
     console.log('childBlocks in renderChildBlocks:', childBlocks)
+    const {FieldRender} = useFieldRender();
 
     return childBlocks.map((block, index) => {
         switch (block.name) {
             case 'f3/field-group':
                 return <FieldGroup key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
             case 'f3/field':
-                return <Field key={index} attributes={block.attributes} />;
+                return <Field key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
             case 'f3/label':
                 return <Label key={index} attributes={block.attributes} />;
             case 'f3/instructions':
@@ -220,6 +223,19 @@ function renderChildBlocks(childBlocks) {
                 return <CoreGroup key={index} attributes={block.attributes} childBlocks={block.childBlocks} />;
             case 'f3/submit-button':
                 return <SubmitButton key={index} attributes={block.attributes} />;
+            case 'f3/select-field':
+                return <FieldRender field={{ type: 'select', name: 's1', choices: [
+                    {
+                        value: 1,
+                        label: 'One',
+                    },
+                    {
+                        value: 2,
+                        label: 'Two',
+                    }
+                ] }} />;
+            case 'f3/text-field':
+                return <FieldRender field={{ type: 'text', name: 't1' }} />;
             default:
                 return null;
         }
@@ -245,10 +261,44 @@ const AttributeList = ({ items }) => (
 );
 
 function TemplateApp({ childBlocks }) {
+
+    const saveAPI = useSaveAPI();
+
+    const { 
+        FormManagerProvider, 
+    } = useFormManager();
+
+    const formData = {
+        form: {
+            field_groups: [
+                {
+                    title: 'fg1',
+                    fields: [
+                        {
+                            type: 'text',
+                            name: 'field_1'
+                        }
+                    ]
+                }
+            ]
+        },
+        recordId: 0,
+        API: {},
+    }
+
+    function formSubmitHandler(data) {
+        console.log('submitted form: ', data)
+    }
+
     return (
         <div>
+            <FormManagerProvider 
+                formData={formData}
+                formSubmitHandler={formSubmitHandler}
+            >
+                {renderChildBlocks(childBlocks)}
+            </FormManagerProvider>
             <AttributeList items={childBlocks} />
-            {renderChildBlocks(childBlocks)}
         </div>
     );
 }
