@@ -9,8 +9,19 @@ registerBlockType('f3/field-render-logic-group', {
     category: 'common',
     attributes: {},
     edit: ({ attributes, setAttributes }) => {
+
+        const BLOCK_TEMPLATE = [
+            [
+                'f3/field-render-logic-rule'
+            ],
+        ];
+
         return(
-            <InnerBlocks />
+            <div className="bg-neutral-100 p-6">
+                <InnerBlocks
+                    template={BLOCK_TEMPLATE}
+                />
+            </div>
         );
     },
     save: ({ attributes }) => {

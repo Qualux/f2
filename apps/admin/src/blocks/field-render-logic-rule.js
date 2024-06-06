@@ -8,7 +8,7 @@ registerBlockType('f3/field-render-logic-rule', {
     icon: 'edit',
     category: 'common',
     attributes: {
-        text: {
+        field: {
             type: 'string',
             default: '',
         },
@@ -22,10 +22,10 @@ registerBlockType('f3/field-render-logic-rule', {
         },
     },
     edit: ({ attributes, setAttributes }) => {
-        const { text, operator, value } = attributes;
+        const { field, operator, value } = attributes;
 
-        const onChangeTextInput = (newText) => {
-            setAttributes({ text: newText });
+        const onChangeFieldInput = (newField) => {
+            setAttributes({ field: newField });
         };
 
         const onChangeOperatorSelect = (newOperator) => {
@@ -37,11 +37,11 @@ registerBlockType('f3/field-render-logic-rule', {
         };
 
         return (
-            <div className="field-render-logic-group" style={{ display: 'flex', gap: '8px'}}>
+            <div className="field-render-logic-group flex justify-center my-4 bg-neutral-100 rounded" style={{ display: 'flex', gap: '8px'}}>
                 <TextControl
-                    label={__('Text', 'f3')}
-                    value={text}
-                    onChange={onChangeTextInput}
+                    label={__('Field', 'f3')}
+                    value={field}
+                    onChange={onChangeFieldInput}
                 />
                 <SelectControl
                     label={__('Operator', 'f3')}

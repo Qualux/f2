@@ -4810,11 +4810,7 @@ registerBlockType('f3/field-group', {
     const blockProps = useBlockProps.save();
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ...blockProps
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      style: {
-        display: 'block'
-      }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null)));
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null));
   }
 });
 
@@ -4853,7 +4849,12 @@ registerBlockType('f3/field-render-logic-group', {
     attributes,
     setAttributes
   }) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, null);
+    const BLOCK_TEMPLATE = [['f3/field-render-logic-rule']];
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "bg-neutral-100 p-6"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
+      template: BLOCK_TEMPLATE
+    }));
   },
   save: ({
     attributes
@@ -4894,7 +4895,7 @@ registerBlockType('f3/field-render-logic-rule', {
   icon: 'edit',
   category: 'common',
   attributes: {
-    text: {
+    field: {
       type: 'string',
       default: ''
     },
@@ -4912,13 +4913,13 @@ registerBlockType('f3/field-render-logic-rule', {
     setAttributes
   }) => {
     const {
-      text,
+      field,
       operator,
       value
     } = attributes;
-    const onChangeTextInput = newText => {
+    const onChangeFieldInput = newField => {
       setAttributes({
-        text: newText
+        field: newField
       });
     };
     const onChangeOperatorSelect = newOperator => {
@@ -4932,15 +4933,15 @@ registerBlockType('f3/field-render-logic-rule', {
       });
     };
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "field-render-logic-group",
+      className: "field-render-logic-group flex justify-center my-4 bg-neutral-100 rounded",
       style: {
         display: 'flex',
         gap: '8px'
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
-      label: __('Text', 'f3'),
-      value: text,
-      onChange: onChangeTextInput
+      label: __('Field', 'f3'),
+      value: field,
+      onChange: onChangeFieldInput
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
       label: __('Operator', 'f3'),
       value: operator,
@@ -4998,12 +4999,24 @@ registerBlockType('f3/field-render-logic', {
   title: __('Field Render Logic', 'f3'),
   icon: 'edit',
   category: 'common',
+  parent: 'f3/field',
+  supports: {
+    lock: true,
+    // Locks the block, preventing any changes or removal
+    multiple: false // Disallows block duplication
+  },
+  templateLock: 'all',
+  transforms: false,
   attributes: {},
+  lock: true,
   edit: ({
     attributes,
     setAttributes
   }) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, null);
+    const BLOCK_TEMPLATE = [['f3/field-render-logic-group']];
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
+      template: BLOCK_TEMPLATE
+    });
   },
   save: ({
     attributes
@@ -5135,12 +5148,14 @@ const {
 } = wp.blockEditor;
 const {
   PanelBody,
-  TextControl,
-  SelectControl
+  TextControl
 } = wp.components;
 const {
   __
 } = wp.i18n;
+const {
+  useEffect
+} = wp.element;
 
 // Register the base block
 registerBlockType('f3/field', {
@@ -5158,18 +5173,15 @@ registerBlockType('f3/field', {
   },
   edit: ({
     attributes,
-    setAttributes
+    setAttributes,
+    clientId
   }) => {
-    let fieldTypeBlock = 'text';
-    switch (attributes.fieldType) {
-      case 'text':
-        fieldTypeBlock = 'f3/text-field';
-        break;
-      case 'select':
-        fieldTypeBlock = 'f3/select-field';
-        break;
+    let fieldTypeBlock = 'f3/text-field';
+    if (attributes.fieldType === 'select') {
+      fieldTypeBlock = 'f3/select-field';
     }
-    const BLOCK_TEMPLATE = [['f3/label'], [fieldTypeBlock]];
+    const BLOCK_TEMPLATE = [['f3/label'], [fieldTypeBlock], ['f3/field-render-logic']];
+    const ALLOWED_BLOCKS = ['f3/label', 'f3/text-field', 'f3/select-field', 'f3/field-render-logic'];
     const blockProps = useBlockProps();
     const {
       name
@@ -5179,6 +5191,28 @@ registerBlockType('f3/field', {
         name: newName
       });
     };
+    useEffect(() => {
+      const {
+        getBlocks,
+        getBlockOrder
+      } = wp.data.select('core/block-editor');
+      const {
+        insertBlock,
+        removeBlock
+      } = wp.data.dispatch('core/block-editor');
+      const innerBlocks = getBlocks(clientId);
+      const hasFieldRenderLogic = innerBlocks.some(block => block.name === 'f3/field-render-logic');
+      if (!hasFieldRenderLogic) {
+        const block = wp.blocks.createBlock('f3/field-render-logic');
+        insertBlock(block, innerBlocks.length, clientId);
+      }
+      const logicBlocks = innerBlocks.filter(block => block.name === 'f3/field-render-logic');
+      if (logicBlocks.length > 1) {
+        logicBlocks.slice(1).forEach(block => {
+          removeBlock(block.clientId);
+        });
+      }
+    }, [clientId]);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
       title: __('Field Settings', 'f3'),
       initialOpen: true
@@ -5189,7 +5223,10 @@ registerBlockType('f3/field', {
     }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ...blockProps
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
-      template: BLOCK_TEMPLATE
+      template: BLOCK_TEMPLATE,
+      allowedBlocks: ALLOWED_BLOCKS,
+      templateLock: false,
+      renderAppender: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.ButtonBlockAppender, null)
     })));
   },
   save: ({
@@ -5453,23 +5490,33 @@ const {
   registerBlockType
 } = wp.blocks;
 const {
+  InspectorControls,
   InnerBlocks,
   useBlockProps
 } = wp.blockEditor;
 const {
+  PanelBody,
+  SelectControl
+} = wp.components;
+const {
   __
 } = wp.i18n;
-const {
-  useSelect
-} = wp.data;
 registerBlockType('f3/form', {
   title: __('F3 Form', 'f3'),
   icon: 'edit',
   category: 'common',
   attributes: {
+    formType: {
+      type: 'string',
+      default: 'webform'
+    },
     childBlocksData: {
       type: 'array',
       default: []
+    },
+    adminLocation: {
+      type: 'string',
+      default: false
     }
   },
   edit: ({
@@ -5478,41 +5525,54 @@ registerBlockType('f3/form', {
     setAttributes
   }) => {
     const blockProps = useBlockProps();
-    const buildAttributes = blocks => {
-      return blocks.map(block => {
-        const childBlocks = block.innerBlocks.length > 0 ? buildAttributes(block.innerBlocks) : [];
-        return {
-          name: block.name,
-          attributes: block.attributes,
-          childBlocks: childBlocks
-        };
-      });
+    const locationSelectField = {
+      type: "select",
+      name: "admin_location",
+      title: "Admin Location Type",
+      label: "Admin Location Type",
+      choices: [{
+        value: "",
+        label: "Choose Location Type"
+      }, {
+        value: "post_type",
+        label: "Post Type"
+      }, {
+        value: "taxonomy",
+        label: "Taxonomy"
+      }, {
+        value: "user",
+        label: "User Form"
+      }, {
+        value: "options_page",
+        label: "Options Page"
+      }]
     };
-    const childBlocks = useSelect(select => {
-      const {
-        getBlockOrder,
-        getBlock
-      } = select('core/block-editor');
-      const children = getBlockOrder(clientId).map(innerClientId => {
-        const block = getBlock(innerClientId);
-        return {
-          name: block.name,
-          attributes: block.attributes,
-          innerBlocks: block.innerBlocks
-        };
-      });
-      return buildAttributes(children);
-    }, [clientId]);
-
-    // Prevent unnecessary updates
-    if (JSON.stringify(childBlocks) !== JSON.stringify(attributes.childBlocksData)) {
-      setAttributes({
-        childBlocksData: childBlocks
-      });
-    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ...blockProps
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Form Settings', 'f3'),
+      initialOpen: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
+      label: __('Select Form Type', 'f3'),
+      value: attributes.formType,
+      options: [{
+        label: __('Webform', 'f3'),
+        value: 'webform'
+      }, {
+        label: __('Data Form', 'f3'),
+        value: 'dataform'
+      }],
+      onChange: newFormType => setAttributes({
+        formType: newFormType
+      })
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
+      label: locationSelectField.label,
+      value: attributes.adminLocation,
+      options: locationSelectField.choices,
+      onChange: newLocation => setAttributes({
+        adminLocation: newLocation
+      })
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
       template: [['f3/field-group'], ['f3/submit-button']]
     }));
   },

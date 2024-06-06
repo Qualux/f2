@@ -11,19 +11,9 @@
         "supports_editor": true,
         "template": [
             [
-                "f3/field-template",
+                "f3/form",
                 [],
-                [
-                    [
-                        "f3/label"
-                    ],
-                    [
-                        "f3/field"
-                    ],
-                    [
-                        "f3/instructions"
-                    ]
-                ]
+                []
             ]
         ]
     },

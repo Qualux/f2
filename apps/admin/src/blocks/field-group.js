@@ -40,8 +40,7 @@ registerBlockType('f3/field-group', {
                             [
                                 [
                                     'f3/field'
-                                ],
-                                
+                                ], 
                             ]
                         }
                     />
@@ -58,9 +57,7 @@ registerBlockType('f3/field-group', {
         return(
 
             <div {...blockProps}>
-                <div style={{ display: 'block' }}>
-                    <InnerBlocks.Content />
-                </div>
+                <InnerBlocks.Content />
             </div>
 
         )
