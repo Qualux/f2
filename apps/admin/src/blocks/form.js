@@ -3,8 +3,8 @@ const { InnerBlocks, useBlockProps } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { useSelect } = wp.data;
 
-registerBlockType('f3/field-template', {
-    title: __('F3 Field Template', 'f3'),
+registerBlockType('f3/form', {
+    title: __('F3 Form', 'f3'),
     icon: 'edit',
     category: 'common',
     attributes: {
@@ -28,7 +28,6 @@ registerBlockType('f3/field-template', {
                     attributes: block.attributes,
                     childBlocks: childBlocks,
                 };
-                
             });
             
         };
@@ -54,7 +53,19 @@ registerBlockType('f3/field-template', {
 
         return (
             <div {...blockProps}>
-                <InnerBlocks />
+                <InnerBlocks 
+                    template={
+                        [
+                            [
+                                'f3/field-group'
+                            ],
+                            [
+                                'f3/submit-button'
+                            ]
+                            
+                        ]
+                    }
+                />
             </div>
         );
     },

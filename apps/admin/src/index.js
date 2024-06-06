@@ -20,6 +20,10 @@ import './blocks/row';
 import './blocks/prepend';
 import './blocks/helper';
 import './blocks/submit-button';
+import './blocks/field-render-logic.js';
+import './blocks/field-render-logic-group.js';
+import './blocks/field-render-logic-rule.js';
+import './blocks/form.js';
 
 /* Standard App. */
 
