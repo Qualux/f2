@@ -4800,7 +4800,9 @@ registerBlockType('f3/field-group', {
       onChange: onChangeName
     }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ...blockProps
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, null)));
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
+      template: [['f3/field']]
+    })));
   },
   save: ({
     attributes
@@ -5127,7 +5129,9 @@ const {
   registerBlockVariation
 } = wp.blocks;
 const {
-  InspectorControls
+  InspectorControls,
+  InnerBlocks,
+  useBlockProps
 } = wp.blockEditor;
 const {
   PanelBody,
@@ -5141,6 +5145,178 @@ const {
 // Register the base block
 registerBlockType('f3/field', {
   title: __('F3 Field', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    fieldType: {
+      type: 'string',
+      default: 'text'
+    },
+    name: {
+      type: 'string'
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    let fieldTypeBlock = 'text';
+    switch (attributes.fieldType) {
+      case 'select':
+        fieldTypeBlock = 'f3/select-field';
+        break;
+    }
+    const BLOCK_TEMPLATE = [['f3/label'], [fieldTypeBlock]];
+    const blockProps = useBlockProps();
+    const {
+      name
+    } = attributes;
+    const onChangeName = newName => {
+      setAttributes({
+        name: newName
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Field Settings', 'f3'),
+      initialOpen: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
+      label: __('Name', 'f3'),
+      value: name,
+      onChange: onChangeName
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks, {
+      template: BLOCK_TEMPLATE
+    })));
+  },
+  save: ({
+    attributes
+  }) => {
+    const blockProps = useBlockProps.save();
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null));
+  }
+});
+
+// Register the select field variation
+registerBlockVariation('f3/field', {
+  name: 'select-field',
+  // Machine-readable identifier without spaces or special characters
+  title: __('Select Field', 'f3'),
+  // Display name for the block variation
+  attributes: {
+    fieldType: 'select'
+  },
+  isActive: ['fieldType']
+});
+
+/***/ }),
+
+/***/ "./src/blocks/field_types/select_field.js":
+/*!************************************************!*\
+  !*** ./src/blocks/field_types/select_field.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType,
+  registerBlockVariation
+} = wp.blocks;
+const {
+  InspectorControls
+} = wp.blockEditor;
+const {
+  PanelBody,
+  TextControl,
+  SelectControl
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+
+// Register the base block
+registerBlockType('f3/select-field', {
+  title: __('Select Field', 'f3'),
+  icon: 'edit',
+  category: 'common',
+  attributes: {
+    fieldType: {
+      type: 'string',
+      default: 'text'
+    },
+    name: {
+      type: 'string'
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const {
+      name
+    } = attributes;
+    const onChangeName = newName => {
+      setAttributes({
+        name: newName
+      });
+    };
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
+      title: __('Field Settings', 'f3'),
+      initialOpen: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
+      label: __('Name', 'f3'),
+      value: name,
+      onChange: onChangeName
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: "text",
+      placeholder: "SELECT FIELD..."
+    }));
+  },
+  save: ({
+    attributes
+  }) => {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/field_types/text_field.js":
+/*!**********************************************!*\
+  !*** ./src/blocks/field_types/text_field.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  registerBlockType,
+  registerBlockVariation
+} = wp.blocks;
+const {
+  InspectorControls
+} = wp.blockEditor;
+const {
+  PanelBody,
+  TextControl,
+  SelectControl
+} = wp.components;
+const {
+  __
+} = wp.i18n;
+
+// Register the base block
+registerBlockType('f3/text-field', {
+  title: __('Text Field', 'f3'),
   icon: 'edit',
   category: 'common',
   attributes: {
@@ -5181,18 +5357,6 @@ registerBlockType('f3/field', {
   }) => {
     return null;
   }
-});
-
-// Register the select field variation
-registerBlockVariation('f3/field', {
-  name: 'select-field',
-  // Machine-readable identifier without spaces or special characters
-  title: __('Select Field', 'f3'),
-  // Display name for the block variation
-  attributes: {
-    fieldType: 'select'
-  },
-  isActive: ['fieldType']
 });
 
 /***/ }),
@@ -89793,8 +89957,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.css */ "./src/main.css");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./src/App.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _blocks_dynamic_text_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/dynamic-text-field */ "./src/blocks/dynamic-text-field.js");
 /* harmony import */ var _blocks_dynamic_image_field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/dynamic-image-field */ "./src/blocks/dynamic-image-field.js");
 /* harmony import */ var _blocks_query__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/query */ "./src/blocks/query.js");
@@ -89811,23 +89975,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_field_render_logic_group_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./blocks/field-render-logic-group.js */ "./src/blocks/field-render-logic-group.js");
 /* harmony import */ var _blocks_field_render_logic_rule_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./blocks/field-render-logic-rule.js */ "./src/blocks/field-render-logic-rule.js");
 /* harmony import */ var _blocks_form_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./blocks/form.js */ "./src/blocks/form.js");
-/* harmony import */ var _routes_Dashboard__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./routes/Dashboard */ "./src/routes/Dashboard.js");
-/* harmony import */ var _routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./routes/sdo/SDO_MenuRoute */ "./src/routes/sdo/SDO_MenuRoute.js");
-/* harmony import */ var _data_sdo_query_json__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../data/sdo/query.json */ "../../data/sdo/query.json");
-/* harmony import */ var _data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../data/sdo/post_type.json */ "../../data/sdo/post_type.json");
-/* harmony import */ var _data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../data/sdo/taxonomy.json */ "../../data/sdo/taxonomy.json");
-/* harmony import */ var _data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../data/sdo/options_page.json */ "../../data/sdo/options_page.json");
-/* harmony import */ var _data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../data/sdo/grid.json */ "../../data/sdo/grid.json");
-/* harmony import */ var _data_sdo_form_json__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../data/sdo/form.json */ "../../data/sdo/form.json");
-/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../data/sdo/field.json */ "../../data/sdo/field.json");
-/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
-/* harmony import */ var _routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./routes/sdo/SDO_DashboardRoute */ "./src/routes/sdo/SDO_DashboardRoute.js");
-/* harmony import */ var _routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./routes/sdo/SDO_CreateRoute */ "./src/routes/sdo/SDO_CreateRoute.js");
-/* harmony import */ var _routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./routes/sdo/SDO_EditRoute */ "./src/routes/sdo/SDO_EditRoute.js");
-/* harmony import */ var _routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./routes/sdo/SDO_DeleteRoute */ "./src/routes/sdo/SDO_DeleteRoute.js");
-/* harmony import */ var _routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./routes/sdo/SDO_ViewRoute */ "./src/routes/sdo/SDO_ViewRoute.js");
-/* harmony import */ var _routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./routes/SettingsRoute */ "./src/routes/SettingsRoute.js");
-/* harmony import */ var _routes_Test__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./routes/Test */ "./src/routes/Test.js");
+/* harmony import */ var _blocks_field_types_text_field__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./blocks/field_types/text_field */ "./src/blocks/field_types/text_field.js");
+/* harmony import */ var _blocks_field_types_select_field__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./blocks/field_types/select_field */ "./src/blocks/field_types/select_field.js");
+/* harmony import */ var _routes_Dashboard__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./routes/Dashboard */ "./src/routes/Dashboard.js");
+/* harmony import */ var _routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./routes/sdo/SDO_MenuRoute */ "./src/routes/sdo/SDO_MenuRoute.js");
+/* harmony import */ var _data_sdo_query_json__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../data/sdo/query.json */ "../../data/sdo/query.json");
+/* harmony import */ var _data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../data/sdo/post_type.json */ "../../data/sdo/post_type.json");
+/* harmony import */ var _data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../data/sdo/taxonomy.json */ "../../data/sdo/taxonomy.json");
+/* harmony import */ var _data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../data/sdo/options_page.json */ "../../data/sdo/options_page.json");
+/* harmony import */ var _data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../data/sdo/grid.json */ "../../data/sdo/grid.json");
+/* harmony import */ var _data_sdo_form_json__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../data/sdo/form.json */ "../../data/sdo/form.json");
+/* harmony import */ var _data_sdo_field_json__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../data/sdo/field.json */ "../../data/sdo/field.json");
+/* harmony import */ var _data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../data/sdo/field_group.json */ "../../data/sdo/field_group.json");
+/* harmony import */ var _routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./routes/sdo/SDO_DashboardRoute */ "./src/routes/sdo/SDO_DashboardRoute.js");
+/* harmony import */ var _routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./routes/sdo/SDO_CreateRoute */ "./src/routes/sdo/SDO_CreateRoute.js");
+/* harmony import */ var _routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./routes/sdo/SDO_EditRoute */ "./src/routes/sdo/SDO_EditRoute.js");
+/* harmony import */ var _routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./routes/sdo/SDO_DeleteRoute */ "./src/routes/sdo/SDO_DeleteRoute.js");
+/* harmony import */ var _routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./routes/sdo/SDO_ViewRoute */ "./src/routes/sdo/SDO_ViewRoute.js");
+/* harmony import */ var _routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./routes/SettingsRoute */ "./src/routes/SettingsRoute.js");
+/* harmony import */ var _routes_Test__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./routes/Test */ "./src/routes/Test.js");
 
 const {
   render
@@ -89837,6 +90003,8 @@ const {
 
 
 /* Gutenberg Blocks. */
+
+
 
 
 
@@ -89884,27 +90052,27 @@ const {
 function makeSDO_Routes(sdo) {
   const routes = {
     path: sdo.route_base,
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_29__["default"], {
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DashboardRoute__WEBPACK_IMPORTED_MODULE_31__["default"], {
       sdo: sdo
     }),
     children: [{
       path: "create",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_30__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_CreateRoute__WEBPACK_IMPORTED_MODULE_32__["default"], {
         sdo: sdo
       })
     }, {
       path: "edit/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_31__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_EditRoute__WEBPACK_IMPORTED_MODULE_33__["default"], {
         sdo: sdo
       })
     }, {
       path: "delete/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_32__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_DeleteRoute__WEBPACK_IMPORTED_MODULE_34__["default"], {
         sdo: sdo
       })
     }, {
       path: "view/:id",
-      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_ViewRoute__WEBPACK_IMPORTED_MODULE_35__["default"], {
         sdo: sdo
       })
     }]
@@ -89913,37 +90081,37 @@ function makeSDO_Routes(sdo) {
 }
 
 /* Query Routes */
-const queryRoutes = makeSDO_Routes(_data_sdo_query_json__WEBPACK_IMPORTED_MODULE_21__);
-const postTypeRoutes = makeSDO_Routes(_data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_22__);
-const taxonomyRoutes = makeSDO_Routes(_data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_23__);
-const optionsPageRoutes = makeSDO_Routes(_data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_24__);
-const gridRoutes = makeSDO_Routes(_data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_25__);
-const formRoutes = makeSDO_Routes(_data_sdo_form_json__WEBPACK_IMPORTED_MODULE_26__);
-const fieldRoutes = makeSDO_Routes(_data_sdo_field_json__WEBPACK_IMPORTED_MODULE_27__);
-const fieldGroupRoutes = makeSDO_Routes(_data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_28__);
-const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_36__.createHashRouter)([{
+const queryRoutes = makeSDO_Routes(_data_sdo_query_json__WEBPACK_IMPORTED_MODULE_23__);
+const postTypeRoutes = makeSDO_Routes(_data_sdo_post_type_json__WEBPACK_IMPORTED_MODULE_24__);
+const taxonomyRoutes = makeSDO_Routes(_data_sdo_taxonomy_json__WEBPACK_IMPORTED_MODULE_25__);
+const optionsPageRoutes = makeSDO_Routes(_data_sdo_options_page_json__WEBPACK_IMPORTED_MODULE_26__);
+const gridRoutes = makeSDO_Routes(_data_sdo_grid_json__WEBPACK_IMPORTED_MODULE_27__);
+const formRoutes = makeSDO_Routes(_data_sdo_form_json__WEBPACK_IMPORTED_MODULE_28__);
+const fieldRoutes = makeSDO_Routes(_data_sdo_field_json__WEBPACK_IMPORTED_MODULE_29__);
+const fieldGroupRoutes = makeSDO_Routes(_data_sdo_field_group_json__WEBPACK_IMPORTED_MODULE_30__);
+const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_38__.createHashRouter)([{
   path: "/",
   element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null),
   children: [{
     index: true,
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Dashboard__WEBPACK_IMPORTED_MODULE_19__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Dashboard__WEBPACK_IMPORTED_MODULE_21__["default"], null)
   }, {
     path: "sdo",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_20__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_sdo_SDO_MenuRoute__WEBPACK_IMPORTED_MODULE_22__["default"], null)
   }, {
     path: "test",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Test__WEBPACK_IMPORTED_MODULE_35__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_Test__WEBPACK_IMPORTED_MODULE_37__["default"], null)
   }, {
     path: "settings",
-    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_34__["default"], null)
+    element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_routes_SettingsRoute__WEBPACK_IMPORTED_MODULE_36__["default"], null)
   }, queryRoutes, postTypeRoutes, taxonomyRoutes, optionsPageRoutes, gridRoutes, formRoutes, fieldRoutes, fieldGroupRoutes]
 }]);
 document.addEventListener('DOMContentLoaded', () => {
   const renderEl = document.getElementById('f3-admin');
   if (renderEl) {
-    render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_36__.RouterProvider, {
+    render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_38__.RouterProvider, {
       router: router
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_37__.Outlet, null)), renderEl);
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_39__.Outlet, null)), renderEl);
   }
 });
 })();

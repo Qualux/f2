@@ -1,5 +1,5 @@
 const { registerBlockType, registerBlockVariation } = wp.blocks;
-const { InspectorControls } = wp.blockEditor;
+const { InspectorControls, InnerBlocks, useBlockProps } = wp.blockEditor;
 const { PanelBody, TextControl, SelectControl } = wp.components;
 const { __ } = wp.i18n;
 
@@ -18,6 +18,25 @@ registerBlockType('f3/field', {
         },
     },
     edit: ({attributes, setAttributes}) => {
+
+        let fieldTypeBlock = 'text';
+        switch(attributes.fieldType) {
+            case 'select':
+                fieldTypeBlock = 'f3/select-field'
+                break;
+        }
+
+        const BLOCK_TEMPLATE = [
+            [
+                'f3/label'
+            ],
+            [
+                fieldTypeBlock
+            ]
+        ]
+
+        const blockProps = useBlockProps();
+
         const { name } = attributes;
 
         const onChangeName = (newName) => {
@@ -35,12 +54,27 @@ registerBlockType('f3/field', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <input type="text" placeholder={name} />
+                <div {...blockProps}>
+                    <InnerBlocks
+                        template={BLOCK_TEMPLATE}
+                    />
+                </div>
             </main>
         );
     },
     save: ({ attributes }) => {
-        return null;
+
+        const blockProps = useBlockProps.save();
+
+        return(
+
+            <div {...blockProps}>
+                <InnerBlocks.Content />
+            </div>
+
+        )
+        
+
     },
 });
 

@@ -24,6 +24,8 @@ import './blocks/field-render-logic.js';
 import './blocks/field-render-logic-group.js';
 import './blocks/field-render-logic-rule.js';
 import './blocks/form.js';
+import './blocks/field_types/text_field';
+import './blocks/field_types/select_field';
 
 /* Standard App. */
 

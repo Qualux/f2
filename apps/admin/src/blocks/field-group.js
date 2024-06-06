@@ -35,7 +35,16 @@ registerBlockType('f3/field-group', {
                     </PanelBody>
                 </InspectorControls>
                 <div {...blockProps}>
-                    <InnerBlocks />
+                    <InnerBlocks
+                        template={
+                            [
+                                [
+                                    'f3/field'
+                                ],
+                                
+                            ]
+                        }
+                    />
                 </div>
             </main>
 
