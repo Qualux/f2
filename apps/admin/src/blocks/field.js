@@ -1,6 +1,6 @@
 const { registerBlockType, registerBlockVariation } = wp.blocks;
 const { InspectorControls, InnerBlocks, useBlockProps } = wp.blockEditor;
-const { PanelBody, TextControl } = wp.components;
+const { PanelBody, TextControl, ToggleControl, SelectControl } = wp.components;
 const { __ } = wp.i18n;
 const { useEffect } = wp.element;
 
@@ -17,6 +17,18 @@ registerBlockType('f3/field', {
         name: {
             type: 'string',
         },
+        conditionField: {
+            type: 'string',
+            default: '',
+        },
+        conditionOperator: {
+            type: 'string',
+            default: 'equals',
+        },
+        conditionValue: {
+            type: 'string',
+            default: '',
+        },
     },
     edit: ({ attributes, setAttributes, clientId }) => {
         let fieldTypeBlock = 'f3/text-field';
@@ -27,10 +39,9 @@ registerBlockType('f3/field', {
         const BLOCK_TEMPLATE = [
             ['f3/label'],
             [fieldTypeBlock],
-            ['f3/field-render-logic'],
         ];
 
-        const ALLOWED_BLOCKS = ['f3/label', 'f3/text-field', 'f3/select-field', 'f3/field-render-logic'];
+        const ALLOWED_BLOCKS = ['f3/label', 'f3/text-field', 'f3/select-field'];
 
         const blockProps = useBlockProps();
         const { name } = attributes;
@@ -39,25 +50,6 @@ registerBlockType('f3/field', {
             setAttributes({ name: newName });
         };
 
-        useEffect(() => {
-            const { getBlocks, getBlockOrder } = wp.data.select('core/block-editor');
-            const { insertBlock, removeBlock } = wp.data.dispatch('core/block-editor');
-
-            const innerBlocks = getBlocks(clientId);
-            const hasFieldRenderLogic = innerBlocks.some(block => block.name === 'f3/field-render-logic');
-
-            if (!hasFieldRenderLogic) {
-                const block = wp.blocks.createBlock('f3/field-render-logic');
-                insertBlock(block, innerBlocks.length, clientId);
-            }
-
-            const logicBlocks = innerBlocks.filter(block => block.name === 'f3/field-render-logic');
-            if (logicBlocks.length > 1) {
-                logicBlocks.slice(1).forEach(block => {
-                    removeBlock(block.clientId);
-                });
-            }
-        }, [clientId]);
 
         return (
             <main>
@@ -68,6 +60,26 @@ registerBlockType('f3/field', {
                             value={name}
                             onChange={onChangeName}
                         />
+                        <TextControl
+                            label={__('Field', 'f3')}
+                            value={attributes.conditionField}
+                            onChange={(newValue) => setAttributes({ conditionField: newValue })}
+                        />
+                        <SelectControl
+                            label={__('Operator', 'f3')}
+                            value={attributes.conditionOperator}
+                            options={[
+                                { label: __('Equals', 'f3'), value: 'equals' },
+                                { label: __('Greater Than', 'f3'), value: 'greater_than' },
+                                { label: __('Less Than', 'f3'), value: 'less_than' },
+                            ]}
+                            conditionOperator
+                        />
+                        <TextControl
+                            label={__('Value', 'f3')}
+                            value={attributes.conditionValue}
+                            onChange={(newValue) => setAttributes({ conditionValue: newValue })}
+                        />
                     </PanelBody>
                 </InspectorControls>
                 <div {...blockProps}>
@@ -75,7 +87,6 @@ registerBlockType('f3/field', {
                         template={BLOCK_TEMPLATE}
                         allowedBlocks={ALLOWED_BLOCKS}
                         templateLock={false}
-                        renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
                     />
                 </div>
             </main>

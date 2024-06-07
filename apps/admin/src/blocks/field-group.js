@@ -1,6 +1,6 @@
 const { registerBlockType } = wp.blocks;
 const { InspectorControls, InnerBlocks, useBlockProps } = wp.blockEditor;
-const { PanelBody, TextControl } = wp.components;
+const { PanelBody, TextControl, ToggleControl } = wp.components;
 const { __ } = wp.i18n;
 
 registerBlockType('f3/field-group', {
@@ -10,6 +10,10 @@ registerBlockType('f3/field-group', {
     attributes: {
         name: {
             type: 'string',
+        },
+        repeat: {
+            type: 'boolean',
+            default: false,
         },
     },
     edit: ({ attributes, setAttributes }) => {
@@ -31,6 +35,11 @@ registerBlockType('f3/field-group', {
                             label={__('Name', 'f3')}
                             value={name}
                             onChange={onChangeName}
+                        />
+                        <ToggleControl
+                            label={__('Repeat', 'text-domain')}
+                            checked={attributes.repeat}
+                            onChange={(newValue) => setAttributes({ repeat: newValue })}
                         />
                     </PanelBody>
                 </InspectorControls>
